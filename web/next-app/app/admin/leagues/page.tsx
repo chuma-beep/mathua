@@ -4,27 +4,32 @@ import AdminShell from '@/components/admin/AdminShell'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import SectionHeader from '../../../components/SectionHeader'
-import Loading from '../../../components/Loading'
 import Avatar from '../../../components/Avatar'
+import { Badge } from '../../../components/ui/badge'
+import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card'
+import { ScrollArea } from '../../../components/ui/scroll-area'
+import { Sheet, SheetClose, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '../../../components/ui/sheet'
+import { Skeleton } from '../../../components/ui/skeleton'
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '../../../components/ui/table'
 import { dicebearUrl, isDicebearStyle } from '../../../lib/dicebear'
 import { API_BASE, getAdminLeagues, getErrorMessage, type AdminLeague, type AdminLeagueMember } from '../../../lib/api'
 
-// The league pyramid, week by week.
-//
-// The public league page answers one question: where am I. That leaves an owner unable to see a
-// cohort at all, which is how a report saying "my league is broken" becomes unanswerable: there
-// was no screen on which the league existed. This page is that screen.
-//
-// Two reads, deliberately. The pyramid is one grouped query, so opening the page does not load
-// every roster; a roster is fetched when a league is opened. A week can hold dozens of leagues
-// and each holds up to thirty learners, so eager loading would be a page that gets slower as the
-// product succeeds.
-//
-// The week is held as null until the client knows today's date. The site is a static export, so
-// rendering "this week" during the build would bake whichever Monday the build ran on into the
-// HTML and then disagree with the browser on hydration.
+// The league console is a reading surface, not a queue. A week has five tiers,
+// each with zero or more leagues, and a league has up to thirty seats. The page
+// therefore separates the week summary, the tier pyramid and one roster, and
+// reads only the selected roster. Nothing here changes a league: XP decides the
+// seats and the server applies movement when the week closes.
 
-/** The Monday of the league week containing `d`, as the server keys it (UTC). */
+const LEAGUE_SIZE = 30
+const TIER_ORDER = ['bronze', 'silver', 'gold', 'platinum', 'diamond']
+const TIER_CLASS: Record<string, string> = {
+  bronze: 'bg-[var(--chart-2)]',
+  silver: 'bg-[var(--chart-5)]',
+  gold: 'bg-[var(--chart-3)]',
+  platinum: 'bg-[var(--chart-1)]',
+  diamond: 'bg-[var(--chart-4)]',
+}
+
 function weekKeyOf(d: Date): string {
   const day = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()))
   const sinceMonday = (day.getUTCDay() + 6) % 7
@@ -38,13 +43,10 @@ function shiftWeek(week: string, days: number): string {
   return t.toISOString().slice(0, 10)
 }
 
-/** `2026-10-19` as `19 October 2026`. Fixed to UTC so the label matches the key. */
 function weekLabel(week: string): string {
   const t = new Date(`${week}T00:00:00Z`)
-  return t.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })
+  return t.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' })
 }
-
-const TIER_ORDER = ['bronze', 'silver', 'gold', 'platinum', 'diamond']
 
 function tierLabel(tier: string): string {
   return tier.charAt(0).toUpperCase() + tier.slice(1)
@@ -54,14 +56,18 @@ function memberLabel(m: AdminLeagueMember): string {
   return m.name || m.username || m.student_id
 }
 
+function recentWeeks(week: string, count: number): string[] {
+  return Array.from({ length: count }, (_, i) => shiftWeek(week, -7 * i))
+}
+
+type Selected = { tier: string; league: number }
+
+function leagueKey(l: Pick<AdminLeague, 'tier' | 'league_no'> | Selected): string {
+  return 'league_no' in l ? `${l.tier}/${l.league_no}` : `${l.tier}/${l.league}`
+}
+
 function MemberAvatar({ member }: { member: AdminLeagueMember }) {
-  // A custom upload arrives as a public by-id URL, so it wins over the remote
-  // Google photo and the generated pick in the same order the rest of the app
-  // uses. A legacy preset has no URL and becomes the Avatar's initial palette.
   const pick = member.avatar_dicebear
-  // A custom upload comes back as a server-relative path because the API and
-  // the web export are separate origins. A Google photo or any other absolute
-  // URL is already complete.
   const storedURL = member.avatar_url
   const url = storedURL
     ? (storedURL.startsWith('/') ? `${API_BASE}${storedURL}` : storedURL)
@@ -77,92 +83,277 @@ function MemberAvatar({ member }: { member: AdminLeagueMember }) {
   )
 }
 
+function RosterTable({ league, members }: { league: AdminLeague; members: AdminLeagueMember[] }) {
+  if (members.length === 0) {
+    return <p className="py-8 text-center font-mono text-[11px] text-mathua-muted">Nobody holds a seat in this league.</p>
+  }
+  const promote = league.movers
+  const relegate = league.movers
+  return (
+    <Table>
+      <TableCaption>
+        Top {promote} promote and bottom {relegate} relegate when the week closes. Rank and XP are the current week only.
+      </TableCaption>
+      <TableHeader>
+        <TableRow>
+          <TableHead className="w-12">Rank</TableHead>
+          <TableHead>Learner</TableHead>
+          <TableHead className="w-24 text-right">XP</TableHead>
+          <TableHead className="w-24 text-right">Movement</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {members.map((m) => {
+          const up = promote > 0 && m.rank <= promote
+          const down = relegate > 0 && m.rank > league.size - relegate
+          return (
+            <TableRow key={m.student_id} className={up ? 'bg-mathua-green-faint' : down ? 'bg-mathua-red-faint' : undefined}>
+              <TableCell className="text-mathua-secondary">{m.rank}</TableCell>
+              <TableCell>
+                <span className="flex min-w-0 items-center gap-2">
+                  <MemberAvatar member={m} />
+                  <span className="min-w-0">
+                    <Link
+                      href={`/admin/users/detail?id=${encodeURIComponent(m.student_id)}`}
+                      className="block truncate text-mathua-blue hover:underline"
+                      title={memberLabel(m)}
+                    >
+                      {memberLabel(m)}
+                    </Link>
+                    {m.username && m.username !== memberLabel(m) && (
+                      <span className="block truncate text-[10px] text-mathua-muted">@{m.username}</span>
+                    )}
+                  </span>
+                </span>
+              </TableCell>
+              <TableCell className="text-right tabular-nums text-mathua-primary">{m.xp.toLocaleString()}</TableCell>
+              <TableCell className="text-right">
+                {up ? <Badge variant="up">Up</Badge> : down ? <Badge variant="down">Down</Badge> : <Badge variant="stay">Stays</Badge>}
+              </TableCell>
+            </TableRow>
+          )
+        })}
+      </TableBody>
+    </Table>
+  )
+}
+
+function RosterPanel({
+  league,
+  members,
+  loading,
+  error,
+  onRetry,
+  compact = false,
+}: {
+  league: AdminLeague | null
+  members: AdminLeagueMember[]
+  loading: boolean
+  error: string
+  onRetry: () => void
+  compact?: boolean
+}) {
+  if (!league) {
+    return <p className="py-10 text-center font-mono text-[11px] text-mathua-muted">Choose a league to read its roster.</p>
+  }
+  return (
+    <div>
+      {!compact && (
+        <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
+          <div>
+            <p className="font-mono text-[10px] uppercase tracking-wider text-mathua-muted">{tierLabel(league.tier)}</p>
+            <h3 className="font-serif text-lg text-mathua-primary">League {league.league_no}</h3>
+          </div>
+          <p className="font-mono text-[10px] text-mathua-muted">
+            {league.size} of {LEAGUE_SIZE} seats
+          </p>
+        </div>
+      )}
+      {error ? (
+        <div className="border border-mathua-red bg-mathua-surface p-3">
+          <p role="alert" className="font-mono text-[11px] text-mathua-red">{error}</p>
+          <button type="button" onClick={onRetry} className="mt-2 h-8 border border-mathua-border px-2.5 font-mono text-[11px] text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue">
+            Retry
+          </button>
+        </div>
+      ) : loading ? (
+        <div className="space-y-2">
+          {Array.from({ length: 5 }, (_, i) => <Skeleton key={i} className="h-9 w-full" />)}
+        </div>
+      ) : (
+        <RosterTable league={league} members={members} />
+      )}
+    </div>
+  )
+}
+
 export default function AdminLeaguesPage() {
   const [week, setWeek] = useState<string | null>(null)
   const [leagues, setLeagues] = useState<AdminLeague[] | null>(null)
   const [seats, setSeats] = useState(0)
   const [promote, setPromote] = useState(0)
+  const [demote, setDemote] = useState(0)
   const [error, setError] = useState('')
-  const [rosters, setRosters] = useState<Record<string, AdminLeagueMember[]>>({})
-  const [open, setOpen] = useState('')
+  const [selected, setSelected] = useState<Selected | null>(null)
+  const [roster, setRoster] = useState<AdminLeagueMember[]>([])
+  const [rosterLoading, setRosterLoading] = useState(false)
   const [rosterError, setRosterError] = useState('')
+  const [sheetOpen, setSheetOpen] = useState(false)
+  const [retryToken, setRetryToken] = useState(0)
 
-  // Today's Monday, read once in the browser rather than during the build.
-  useEffect(() => { setWeek(weekKeyOf(new Date())) }, [])
+  // The static export cannot know today's Monday at build time, so the week is
+  // read from the URL in the browser and only then fetched.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const rawWeek = params.get('week')
+    const parsedWeek = rawWeek && /^\d{4}-\d{2}-\d{2}$/.test(rawWeek) ? rawWeek : weekKeyOf(new Date())
+    const rawTier = params.get('tier')
+    const rawLeague = Number(params.get('league'))
+    setWeek(parsedWeek)
+    if (rawTier && TIER_ORDER.includes(rawTier) && Number.isInteger(rawLeague) && rawLeague > 0) {
+      setSelected({ tier: rawTier, league: rawLeague })
+    }
+  }, [])
 
   const load = useCallback((key: string) => {
     setError('')
     getAdminLeagues({ week: key })
-      .then((res) => { setLeagues(res.leagues); setSeats(res.seats); setPromote(res.promote); setWeek(res.week) })
-      .catch((e) => { setError(getErrorMessage(e)); setLeagues([]) })
+      .then((res) => {
+        setLeagues(res.leagues)
+        setSeats(res.seats)
+        setPromote(res.promote)
+        setDemote(res.demote)
+        setWeek(res.week)
+      })
+      .catch((e) => {
+        setError(getErrorMessage(e))
+        setLeagues([])
+      })
   }, [])
 
   useEffect(() => { if (week) load(week) }, [week, load])
 
-  async function toggle(league: AdminLeague) {
-    const key = `${league.tier}/${league.league_no}`
-    setRosterError('')
-    if (open === key) { setOpen(''); return }
-    setOpen(key)
-    if (rosters[key]) return
-    try {
-      const res = await getAdminLeagues({ week: week ?? undefined, tier: league.tier, league: league.league_no })
-      const roster = res.leagues[0]?.members ?? []
-      setRosters((prev) => ({ ...prev, [key]: roster }))
-    } catch (e) {
-      // Collapse as well as report. Leaving the league open would show its loading state for a
-      // request that has already failed, which reads as "still working" rather than "cannot read".
-      setRosterError(getErrorMessage(e))
-      setOpen('')
+  // Keep the URL as the source of truth for a refresh or a shared link.
+  useEffect(() => {
+    if (!week) return
+    const params = new URLSearchParams()
+    params.set('week', week)
+    if (selected) {
+      params.set('tier', selected.tier)
+      params.set('league', String(selected.league))
     }
-  }
+    window.history.replaceState(null, '', `?${params.toString()}`)
+  }, [week, selected])
 
-  // Grouped for rendering, in pyramid order. A tier with no league this week is omitted rather
-  // than shown empty: "no gold league exists yet" is a fact about the week, not about the tier.
-  const tiers = useMemo(() => {
-    const byTier = new Map<string, AdminLeague[]>()
+  // A week with leagues should open on something rather than an empty roster.
+  useEffect(() => {
+    if (!leagues || leagues.length === 0) { setSelected(null); return }
+    const exists = selected && leagues.some(l => l.tier === selected.tier && l.league_no === selected.league)
+    if (!exists) setSelected({ tier: leagues[0].tier, league: leagues[0].league_no })
+  }, [leagues, selected])
+
+  useEffect(() => {
+    if (!week || !selected) { setRoster([]); return }
+    let live = true
+    setRosterLoading(true)
+    setRosterError('')
+    getAdminLeagues({ week, tier: selected.tier, league: selected.league })
+      .then((res) => {
+        if (live) setRoster(res.leagues[0]?.members ?? [])
+      })
+      .catch((e) => {
+        if (live) { setRoster([]); setRosterError(getErrorMessage(e)) }
+      })
+      .finally(() => { if (live) setRosterLoading(false) })
+    return () => { live = false }
+  }, [week, selected, retryToken])
+
+  const byTier = useMemo(() => {
+    const map = new Map<string, AdminLeague[]>()
     for (const l of leagues ?? []) {
-      const bucket = byTier.get(l.tier)
+      const bucket = map.get(l.tier)
       if (bucket) bucket.push(l)
-      else byTier.set(l.tier, [l])
+      else map.set(l.tier, [l])
     }
-    return TIER_ORDER.filter((t) => byTier.has(t)).map((t) => [t, byTier.get(t) ?? []] as const)
+    return map
   }, [leagues])
 
-  const thisWeek = week ? week === weekKeyOf(new Date()) : false
+  const selectedLeague = useMemo(
+    () => leagues?.find(l => selected && l.tier === selected.tier && l.league_no === selected.league) ?? null,
+    [leagues, selected],
+  )
+
+  const capacity = (leagues?.length ?? 0) * LEAGUE_SIZE
+  const fill = capacity > 0 ? Math.round((seats / capacity) * 100) : 0
+  const largest = leagues?.reduce<AdminLeague | null>((best, l) => (!best || l.size > best.size ? l : best), null)
+  const thisWeek = week === weekKeyOf(new Date())
+
+  function choose(l: AdminLeague) {
+    setSelected({ tier: l.tier, league: l.league_no })
+    if (window.matchMedia('(max-width: 767px)').matches) setSheetOpen(true)
+  }
 
   return (
     <AdminShell>
       <main className="mx-auto w-full max-w-[1200px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 overflow-x-hidden">
         <SectionHeader label="Administration" title="Leagues" />
-  
-        <div className="mb-4 flex flex-wrap items-center gap-3">
+
+        <div className="mb-5 flex flex-wrap items-center gap-2">
           <button
             type="button"
             disabled={!week}
             onClick={() => week && load(shiftWeek(week, -7))}
-            className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue px-3 h-9 font-mono text-xs disabled:opacity-50"
+            className="h-9 border border-mathua-border px-3 font-mono text-xs text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue disabled:opacity-50"
           >
-            Earlier week
+            Previous
           </button>
-          <p className="font-mono text-xs text-mathua-primary">
-            {week ? `Week of ${weekLabel(week)}` : 'Loading the week'}
-          </p>
           <button
             type="button"
             disabled={!week || thisWeek}
             onClick={() => week && load(shiftWeek(week, 7))}
-            className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue px-3 h-9 font-mono text-xs disabled:opacity-50"
+            className="h-9 border border-mathua-border px-3 font-mono text-xs text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue disabled:opacity-50"
           >
-            Later week
+            Next
           </button>
+          <select
+            aria-label="League week"
+            value={week ?? ''}
+            disabled={!week}
+            onChange={e => load(e.target.value)}
+            className="h-9 border border-mathua-border bg-mathua-surface px-2 font-mono text-xs text-mathua-primary"
+          >
+            {week && recentWeeks(weekKeyOf(new Date()), 12).concat(week).filter((w, i, all) => all.indexOf(w) === i).sort().reverse().map(w => (
+              <option key={w} value={w}>{weekLabel(w)}</option>
+            ))}
+          </select>
+          {!thisWeek && week && (
+            <button
+              type="button"
+              onClick={() => load(weekKeyOf(new Date()))}
+              className="h-9 px-2 font-mono text-[11px] text-mathua-blue hover:underline"
+            >
+              This week
+            </button>
+          )}
+          <span className="ml-auto font-mono text-[10px] text-mathua-muted">
+            {week ? `Week of ${weekLabel(week)} (UTC)` : 'Loading the week'}
+          </span>
         </div>
 
         {error && (
-          <p role="alert" className="mb-4 border border-mathua-red bg-mathua-surface p-4 font-mono text-xs text-mathua-red">{error}</p>
+          <div className="mb-4 border border-mathua-red bg-mathua-surface p-3">
+            <p role="alert" className="font-mono text-[11px] text-mathua-red">{error}</p>
+            <button type="button" onClick={() => week && load(week)} className="mt-2 h-8 border border-mathua-border px-2.5 font-mono text-[11px] text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue">
+              Retry
+            </button>
+          </div>
         )}
 
-        {!leagues && !error && <Loading label="LOADING LEAGUES" />}
+        {!leagues && !error && (
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {Array.from({ length: 4 }, (_, i) => <Skeleton key={i} className="h-24 w-full" />)}
+          </div>
+        )}
 
         {leagues && leagues.length === 0 && !error && (
           <p role="status" className="border border-mathua-border bg-mathua-surface p-4 font-mono text-xs text-mathua-secondary">
@@ -171,94 +362,136 @@ export default function AdminLeaguesPage() {
         )}
 
         {leagues && leagues.length > 0 && (
-          <p className="mb-6 font-mono text-[11px] text-mathua-muted">
-            {leagues.length} league{leagues.length === 1 ? '' : 's'}, {seats} learner{seats === 1 ? '' : 's'} seated.
-            {' '}A full league moves {promote} up and {promote} down; short leagues move a third of themselves and cohorts under six do not move.
-          </p>
-        )}
+          <>
+            <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+              <Card><CardHeader><CardTitle>Leagues formed</CardTitle></CardHeader><CardContent><p className="font-mono text-2xl tabular-nums text-mathua-primary">{leagues.length}</p><p className="mt-1 font-mono text-[10px] text-mathua-muted">Across {TIER_ORDER.filter(t => byTier.has(t)).length} tiers</p></CardContent></Card>
+              <Card><CardHeader><CardTitle>Learners seated</CardTitle></CardHeader><CardContent><p className="font-mono text-2xl tabular-nums text-mathua-primary">{seats.toLocaleString()}</p><p className="mt-1 font-mono text-[10px] text-mathua-muted">of {capacity.toLocaleString()} seats · {fill}% full</p></CardContent></Card>
+              <Card><CardHeader><CardTitle>Movement rule</CardTitle></CardHeader><CardContent><p className="font-mono text-2xl tabular-nums text-mathua-primary">{promote} / {demote}</p><p className="mt-1 font-mono text-[10px] text-mathua-muted">Promoted and relegated per full league</p></CardContent></Card>
+              <Card><CardHeader><CardTitle>Largest league</CardTitle></CardHeader><CardContent><p className="font-mono text-2xl tabular-nums text-mathua-primary">{largest?.size ?? 0}</p><p className="mt-1 font-mono text-[10px] text-mathua-muted">{largest ? `${tierLabel(largest.tier)} league ${largest.league_no}` : 'No league'}</p></CardContent></Card>
+            </div>
 
-        {rosterError && (
-          <p role="alert" className="mb-4 border border-mathua-red bg-mathua-surface p-4 font-mono text-xs text-mathua-red">{rosterError}</p>
-        )}
-
-        <div className="space-y-8">
-          {tiers.map(([tier, items]) => (
-            <section key={tier} className="space-y-3">
+            <section className="mt-8" aria-labelledby="pyramid-heading">
               <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-mathua-border pb-2">
-                <h2 className="font-mono text-xs text-mathua-primary">{tierLabel(tier)}</h2>
-                <span className="font-mono text-[10px] text-mathua-muted">
-                  {items.length} league{items.length === 1 ? '' : 's'}
-                </span>
+                <h2 id="pyramid-heading" className="font-mono text-xs uppercase tracking-wider text-mathua-primary">Tier pyramid</h2>
+                <span className="font-mono text-[10px] text-mathua-muted">Seats and fill by tier</span>
               </div>
-              <ul className="space-y-2">
-                {items.map((l) => {
-                  const key = `${l.tier}/${l.league_no}`
-                  const expanded = open === key
+              <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
+                {TIER_ORDER.map(tier => {
+                  const items = byTier.get(tier) ?? []
+                  const tierSeats = items.reduce((n, l) => n + l.size, 0)
+                  const tierCapacity = items.length * LEAGUE_SIZE
+                  const tierFill = tierCapacity > 0 ? Math.round((tierSeats / tierCapacity) * 100) : 0
+                  const first = items[0]
                   return (
-                    <li key={key} className="border border-mathua-border bg-mathua-surface">
-                      <button
-                        type="button"
-                        aria-expanded={expanded}
-                        aria-label={`${tierLabel(l.tier)} league ${l.league_no}, ${l.size} learner${l.size === 1 ? '' : 's'}`}
-                        onClick={() => { void toggle(l) }}
-                        className="flex w-full flex-wrap items-baseline justify-between gap-2 px-3 py-3 text-left"
-                      >
-                        <span className="font-mono text-xs text-mathua-primary">League {l.league_no}</span>
-                        <span className="font-mono text-[10px] text-mathua-muted">
-                          {l.size} learner{l.size === 1 ? '' : 's'}
-                          {l.movers > 0 ? `, ${l.movers} up and ${l.movers} down` : ', nobody moves'}
-                        </span>
-                      </button>
-                      {expanded && (
-                        <div className="border-t border-mathua-border px-3 py-3">
-                          {!rosters[key] && <Loading label="LOADING STANDINGS" />}
-                          {rosters[key] && rosters[key].length === 0 && (
-                            <p className="font-mono text-[11px] text-mathua-secondary">Nobody holds a seat in this league.</p>
-                          )}
-                          {rosters[key] && rosters[key].length > 0 && (
-                            <table className="w-full border-collapse font-mono text-[11px]">
-                              <thead>
-                                <tr className="text-mathua-muted">
-                                  <th scope="col" className="py-1 pr-2 text-left font-normal">Rank</th>
-                                  <th scope="col" className="py-1 pr-2 text-left font-normal">Learner</th>
-                                  <th scope="col" className="py-1 text-right font-normal">XP this week</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {rosters[key].map((m) => (
-                                  <tr key={m.student_id} className="border-t border-mathua-border">
-                                    <td className="py-1 pr-2 text-mathua-secondary">{m.rank}</td>
-                                    <td className="py-1 pr-2">
-                                      <span className="flex min-w-0 items-center gap-2">
-                                        <MemberAvatar member={m} />
-                                        <span className="min-w-0">
-                                          <Link
-                                            href={`/admin/users/detail?id=${encodeURIComponent(m.student_id)}`}
-                                            className="text-mathua-blue hover:underline"
-                                          >
-                                            {memberLabel(m)}
-                                          </Link>
-                                          {m.username && m.username !== memberLabel(m) && (
-                                            <span className="ml-2 text-mathua-muted">@{m.username}</span>
-                                          )}
-                                        </span>
-                                      </span>
-                                    </td>
-                                    <td className="py-1 text-right text-mathua-primary">{m.xp}</td>
-                                  </tr>
-                                ))}
-                              </tbody>
-                            </table>
-                          )}
-                        </div>
-                      )}
-                    </li>
+                    <button
+                      key={tier}
+                      type="button"
+                      disabled={!first}
+                      onClick={() => first && choose(first)}
+                      className={`border p-3 text-left transition-colors ${first ? 'border-mathua-border bg-mathua-surface hover:border-mathua-blue' : 'border-mathua-border bg-mathua-surface opacity-55'}`}
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="font-mono text-[10px] uppercase tracking-wider text-mathua-secondary">{tierLabel(tier)}</span>
+                        <span className={`h-2 w-2 ${TIER_CLASS[tier]}`} aria-hidden="true" />
+                      </div>
+                      <p className="mt-2 font-mono text-xl tabular-nums text-mathua-primary">{items.length}</p>
+                      <p className="font-mono text-[10px] text-mathua-muted">league{items.length === 1 ? '' : 's'}</p>
+                      <p className="mt-2 font-mono text-[10px] text-mathua-secondary">{tierSeats} / {tierCapacity} seats</p>
+                      <p className="font-mono text-[10px] text-mathua-muted">{tierFill}% full</p>
+                    </button>
                   )
                 })}
-              </ul>
+              </div>
+              <div className="mt-3 flex h-2 w-full overflow-hidden border border-mathua-border" aria-hidden="true">
+                {TIER_ORDER.map(tier => {
+                  const tierSeats = (byTier.get(tier) ?? []).reduce((n, l) => n + l.size, 0)
+                  const width = seats > 0 ? (tierSeats / seats) * 100 : 0
+                  return <span key={tier} className={TIER_CLASS[tier]} style={{ width: `${width}%` }} />
+                })}
+              </div>
             </section>
-          ))}
-        </div>
+
+            <section className="mt-8 grid gap-4 lg:grid-cols-[320px_minmax(0,1fr)]" aria-labelledby="rosters-heading">
+              <div className="min-w-0">
+                <h2 id="rosters-heading" className="border-b border-mathua-border pb-2 font-mono text-xs uppercase tracking-wider text-mathua-primary">Leagues</h2>
+                <ScrollArea className="mt-3 max-h-[560px] pr-2">
+                  <div className="space-y-4">
+                    {TIER_ORDER.filter(t => byTier.has(t)).map(tier => (
+                      <div key={tier}>
+                        <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-mathua-muted">{tierLabel(tier)}</p>
+                        <ul className="space-y-1">
+                          {(byTier.get(tier) ?? []).map(l => {
+                            const active = selected?.tier === l.tier && selected.league === l.league_no
+                            return (
+                              <li key={leagueKey(l)}>
+                                <button
+                                  type="button"
+                                  aria-pressed={active}
+                                  aria-label={`${tierLabel(l.tier)} league ${l.league_no}, ${l.size} of ${LEAGUE_SIZE} seats`}
+                                  onClick={() => choose(l)}
+                                  className={`flex w-full items-baseline justify-between gap-2 border px-3 py-2 text-left ${active ? 'border-mathua-blue bg-mathua-blue-faint' : 'border-mathua-border bg-mathua-surface hover:border-mathua-blue'}`}
+                                >
+                                  <span className="font-mono text-xs text-mathua-primary">League {l.league_no}</span>
+                                  <span className="font-mono text-[10px] text-mathua-muted">{l.size} / {LEAGUE_SIZE}{l.movers > 0 ? ` · ${l.movers} up` : ''}</span>
+                                </button>
+                              </li>
+                            )
+                          })}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                </ScrollArea>
+              </div>
+
+              <Card className="hidden min-w-0 md:block">
+                <CardContent className="pt-4">
+                  <RosterPanel
+                    league={selectedLeague}
+                    members={roster}
+                    loading={rosterLoading}
+                    error={rosterError}
+                    onRetry={() => setRetryToken(t => t + 1)}
+                  />
+                </CardContent>
+              </Card>
+
+              <div className="md:hidden">
+                <button
+                  type="button"
+                  disabled={!selectedLeague}
+                  onClick={() => setSheetOpen(true)}
+                  className="h-10 w-full border border-mathua-border font-mono text-xs text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue disabled:opacity-50"
+                >
+                  View roster
+                </button>
+                <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
+                  <SheetContent side="right" className="w-full overflow-y-auto p-4 sm:max-w-md">
+                    <SheetHeader>
+                      <SheetTitle>{selectedLeague ? `${tierLabel(selectedLeague.tier)} league ${selectedLeague.league_no}` : 'League roster'}</SheetTitle>
+                      <SheetDescription>Top and bottom learners move when the week closes.</SheetDescription>
+                    </SheetHeader>
+                    <div className="mt-4">
+                      <RosterPanel
+                        league={selectedLeague}
+                        members={roster}
+                        loading={rosterLoading}
+                        error={rosterError}
+                        onRetry={() => setRetryToken(t => t + 1)}
+                        compact
+                      />
+                    </div>
+                    <SheetClose asChild>
+                      <button type="button" className="mt-4 h-9 w-full border border-mathua-border font-mono text-xs text-mathua-secondary">
+                        Close
+                      </button>
+                    </SheetClose>
+                  </SheetContent>
+                </Sheet>
+              </div>
+            </section>
+          </>
+        )}
       </main>
     </AdminShell>
   )
