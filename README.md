@@ -1,14 +1,5 @@
 <div align="center">
 
-<pre style="font-family: monospace; font-size: 11px; line-height: 1.2;">
-███╗   ███╗ █████╗ ████████╗██╗  ██╗██╗   ██╗ █████╗
-████╗ ████║██╔══██╗╚══██╔══╝██║  ██║██║   ██║██╔══██╗
-██╔████╔██║███████║   ██║   ███████║██║   ██║███████║
-██║╚██╔╝██║██╔══██║   ██║   ██╔══██║██║   ██║██╔══██║
-██║ ╚═╝ ██║██║  ██║   ██║   ██║  ██║╚██████╔╝██║  ██║
-╚═╝     ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝
-</pre>
-
 <img src="web/next-app/public/og-github.png" alt="The Mathua landing page, showing the adaptive mathematics hero" width="100%">
 
 **Math Understanding Agent**
