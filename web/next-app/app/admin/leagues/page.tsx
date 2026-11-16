@@ -278,12 +278,22 @@ function TierMix({ rows }: { rows: PyramidRow[] }) {
 function TierViews({ rows, label }: { rows: PyramidRow[]; label: string }) {
   return (
     <Tabs defaultValue="pyramid">
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-mathua-border pb-2">
-        <TabsList className="h-9">
-          <TabsTrigger value="pyramid" className="font-mono text-[11px]">Tier pyramid</TabsTrigger>
-          <TabsTrigger value="mix" className="font-mono text-[11px]">Tier mix</TabsTrigger>
+      <div className="flex flex-wrap items-end justify-between gap-2">
+        <TabsList className="h-10 justify-start gap-4 rounded-none border-b border-mathua-border bg-transparent p-0 text-mathua-secondary">
+          <TabsTrigger
+            value="pyramid"
+            className="h-10 rounded-none border-b-2 border-transparent bg-transparent px-3 py-0 font-mono text-[11px] text-mathua-secondary shadow-none data-[state=active]:border-mathua-blue data-[state=active]:bg-transparent data-[state=active]:text-mathua-blue data-[state=active]:shadow-none focus-visible:ring-mathua-blue"
+          >
+            Tier pyramid
+          </TabsTrigger>
+          <TabsTrigger
+            value="mix"
+            className="h-10 rounded-none border-b-2 border-transparent bg-transparent px-3 py-0 font-mono text-[11px] text-mathua-secondary shadow-none data-[state=active]:border-mathua-blue data-[state=active]:bg-transparent data-[state=active]:text-mathua-blue data-[state=active]:shadow-none focus-visible:ring-mathua-blue"
+          >
+            Tier mix
+          </TabsTrigger>
         </TabsList>
-        <span className="font-mono text-[10px] text-mathua-muted">{label}</span>
+        <span className="pb-2 font-mono text-[10px] text-mathua-muted">{label}</span>
       </div>
       <TabsContent value="pyramid"><LeaguePyramid rows={rows} /></TabsContent>
       <TabsContent value="mix"><TierMix rows={rows} /></TabsContent>

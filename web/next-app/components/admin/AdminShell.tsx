@@ -6,7 +6,8 @@ import { usePathname } from 'next/navigation'
 import { useAdminMe } from '../../hooks/useAdminMe'
 import { useTheme } from '../../hooks/useTheme'
 import { ADMIN_GROUPS, ADMIN_ITEMS, type AdminNavItem, isAdminNavActive } from './nav'
-import { House, SunMoon } from '../icons'
+import { Close, House, Menu, SunMoon } from '../icons'
+import { SheetClose } from '../ui/sheet'
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '../ui/sheet'
 
 // The admin surface is its own window, not a tab inside the learner shell. It
@@ -148,15 +149,17 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
                     aria-label="Open admin navigation"
                     className="flex h-11 w-11 items-center justify-center text-mathua-secondary hover:text-mathua-blue"
                   >
-                    <span aria-hidden="true" className="flex flex-col gap-1">
-                      <span className="block h-0.5 w-4 bg-current" />
-                      <span className="block h-0.5 w-4 bg-current" />
-                      <span className="block h-0.5 w-4 bg-current" />
-                    </span>
+                    <Menu size={18} aria-hidden="true" />
                   </button>
                 </SheetTrigger>
                 <SheetContent side="left" className="w-60 border-r border-mathua-border bg-mathua-surface p-0">
                   <SheetTitle className="sr-only">Admin navigation</SheetTitle>
+                  <SheetClose
+                    aria-label="Close admin navigation"
+                    className="absolute right-2 top-2 z-10 flex h-9 w-9 items-center justify-center text-mathua-muted hover:text-mathua-blue"
+                  >
+                    <Close size={16} aria-hidden="true" />
+                  </SheetClose>
                   <div className="flex h-full flex-col">
                     <AdminSidebar
                       items={items}
