@@ -332,11 +332,11 @@ func TestLeagueRangeAggregatesStoredMovement(t *testing.T) {
 	if err != nil {
 		t.Fatalf("create b: %v", err)
 	}
-	execSeed(t, store, `INSERT INTO league_members (week, student_id, tier, league_no, xp, rank, movement) VALUES
-		('2026-11-02', ?, 'bronze', 1, 10, 1, 'new'),
-		('2026-11-02', ?, 'bronze', 1, 5, 2, 'new'),
-		('2026-11-09', ?, 'silver', 1, 12, 1, 'up'),
-		('2026-11-09', ?, 'bronze', 1, 8, 2, 'stay')`, a.ID, b.ID, a.ID, b.ID)
+	execSeed(t, store, `INSERT INTO league_members (week, student_id, tier, league_no, xp, rank, movement, from_tier) VALUES
+		('2026-11-02', ?, 'bronze', 1, 10, 1, 'new', ''),
+		('2026-11-02', ?, 'bronze', 1, 5, 2, 'new', ''),
+		('2026-11-09', ?, 'silver', 1, 12, 1, 'up', 'bronze'),
+		('2026-11-09', ?, 'bronze', 1, 8, 2, 'stay', 'bronze')`, a.ID, b.ID, a.ID, b.ID)
 	got, err := store.(interface {
 		LeagueRange(string, string, string) (*LeagueRange, error)
 	}).LeagueRange("2026-11-02", "2026-11-09", "week")
@@ -348,5 +348,11 @@ func TestLeagueRangeAggregatesStoredMovement(t *testing.T) {
 	}
 	if len(got.Buckets) != 2 || len(got.Tiers) != 2 {
 		t.Fatalf("buckets=%d tiers=%d", len(got.Buckets), len(got.Tiers))
+	}
+	if got.UniqueUp != 1 || got.UniqueDown != 0 {
+		t.Fatalf("unique movement = up %d down %d", got.UniqueUp, got.UniqueDown)
+	}
+	if len(got.Matrix) != 2 {
+		t.Fatalf("matrix = %+v", got.Matrix)
 	}
 }

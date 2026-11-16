@@ -10,21 +10,25 @@ import (
 // Movement is read from the seat rows, so a promotion is counted where it
 // happened rather than recomputed from two tier snapshots.
 type LeagueRange struct {
-	From     string               `json:"from"`
-	To       string               `json:"to"`
-	Group    string               `json:"group"`
-	Weeks    int                  `json:"weeks"`
-	WeekKeys []string             `json:"weeks_available"`
-	Seats    int                  `json:"seats"`
-	Unique   int                  `json:"unique_learners"`
-	Up       int                  `json:"promoted"`
-	Down     int                  `json:"demoted"`
-	Stay     int                  `json:"stayed"`
-	New      int                  `json:"new"`
-	Tiers    []LeagueRangeTier    `json:"tiers"`
-	Buckets  []LeagueRangeBucket  `json:"buckets"`
-	Top      []LeagueRangeLearner `json:"top_range"`
-	Latest   []LeagueRangeLearner `json:"top_latest"`
+	From       string               `json:"from"`
+	To         string               `json:"to"`
+	Group      string               `json:"group"`
+	Weeks      int                  `json:"weeks"`
+	WeekKeys   []string             `json:"weeks_available"`
+	Seats      int                  `json:"seats"`
+	Unique     int                  `json:"unique_learners"`
+	Up         int                  `json:"promoted"`
+	Down       int                  `json:"demoted"`
+	Stay       int                  `json:"stayed"`
+	New        int                  `json:"new"`
+	UniqueUp   int                  `json:"unique_promoted"`
+	UniqueDown int                  `json:"unique_demoted"`
+	Left       int                  `json:"left"`
+	Matrix     []LeagueTransition   `json:"matrix"`
+	Tiers      []LeagueRangeTier    `json:"tiers"`
+	Buckets    []LeagueRangeBucket  `json:"buckets"`
+	Top        []LeagueRangeLearner `json:"top_range"`
+	Latest     []LeagueRangeLearner `json:"top_latest"`
 }
 
 type LeagueRangeTier struct {
@@ -44,6 +48,12 @@ type LeagueRangeBucket struct {
 	Down   int    `json:"demoted"`
 	Stay   int    `json:"stayed"`
 	New    int    `json:"new"`
+}
+
+type LeagueTransition struct {
+	From  string `json:"from"`
+	To    string `json:"to"`
+	Count int    `json:"count"`
 }
 
 type LeagueRangeLearner struct {
@@ -131,6 +141,31 @@ func leagueRange(db *sql.DB, from, to, group string, rebind func(string) string)
 		return nil, fmt.Errorf("league range tier rows: %w", err)
 	}
 
+	if err := db.QueryRow(rebind(`SELECT COUNT(DISTINCT student_id) FROM league_members WHERE week >= ? AND week <= ? AND movement = 'up'`), from, to).Scan(&out.UniqueUp); err != nil {
+		return nil, fmt.Errorf("league range unique promoted: %w", err)
+	}
+	if err := db.QueryRow(rebind(`SELECT COUNT(DISTINCT student_id) FROM league_members WHERE week >= ? AND week <= ? AND movement = 'down'`), from, to).Scan(&out.UniqueDown); err != nil {
+		return nil, fmt.Errorf("league range unique demoted: %w", err)
+	}
+	mrows, err := db.Query(rebind(`SELECT from_tier, tier, COUNT(*) FROM league_members
+		WHERE week >= ? AND week <= ? AND from_tier <> '' GROUP BY from_tier, tier`), from, to)
+	if err != nil {
+		return nil, fmt.Errorf("league range matrix: %w", err)
+	}
+	for mrows.Next() {
+		var cell LeagueTransition
+		if err := mrows.Scan(&cell.From, &cell.To, &cell.Count); err != nil {
+			mrows.Close()
+			return nil, fmt.Errorf("scan league range matrix: %w", err)
+		}
+		out.Matrix = append(out.Matrix, cell)
+	}
+	mrows.Close()
+	out.Left, err = leagueRangeLeft(db, rebind, from, to)
+	if err != nil {
+		return nil, err
+	}
+
 	start, end := weekBounds(from, to)
 	out.Top, err = leagueRangeTop(db, rebind, start, end, to)
 	if err != nil {
@@ -175,4 +210,33 @@ func leagueRangeTop(db *sql.DB, rebind func(string) string, since, until time.Ti
 		return nil, fmt.Errorf("league range top rows: %w", err)
 	}
 	return out, nil
+}
+
+func leagueRangeLeft(db *sql.DB, rebind func(string) string, from, to string) (int, error) {
+	rows, err := db.Query(rebind(`SELECT week, student_id FROM league_members WHERE week >= ? AND week <= ? ORDER BY student_id, week`), from, to)
+	if err != nil {
+		return 0, fmt.Errorf("league range left: %w", err)
+	}
+	defer rows.Close()
+	last := map[string]string{}
+	left := 0
+	for rows.Next() {
+		var week, id string
+		if err := rows.Scan(&week, &id); err != nil {
+			return 0, fmt.Errorf("scan league range left: %w", err)
+		}
+		if prev, ok := last[id]; ok && prev < to && week != shiftWeekKey(prev, 7) {
+			left++
+		}
+		last[id] = week
+	}
+	if err := rows.Err(); err != nil {
+		return 0, fmt.Errorf("league range left rows: %w", err)
+	}
+	for _, week := range last {
+		if week < to {
+			left++
+		}
+	}
+	return left, nil
 }

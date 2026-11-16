@@ -11,6 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui
 import { Skeleton } from '../../../components/ui/skeleton'
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '../../../components/ui/table'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../components/ui/tabs'
+import { Bar, BarChart, CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import { dicebearUrl, isDicebearStyle } from '../../../lib/dicebear'
 import { API_BASE, getAdminLeagueRange, getAdminLeagues, getErrorMessage, type AdminLeague, type AdminLeagueMember, type AdminLeagueRange } from '../../../lib/api'
 import { DateRangePicker } from '../../../components/ui/date-range-picker'
@@ -301,6 +302,125 @@ function TierViews({ rows, label }: { rows: PyramidRow[]; label: string }) {
   )
 }
 
+function MovementSection({ data }: { data: AdminLeagueRange }) {
+  const comparable = Math.max(1, data.seats - data.new)
+  const rows = [
+    { label: 'Promoted', count: data.promoted, unique: data.unique_promoted, rate: (data.promoted / comparable) * 100, tone: 'text-mathua-green', bg: 'bg-mathua-green' },
+    { label: 'Demoted', count: data.demoted, unique: data.unique_demoted, rate: (data.demoted / comparable) * 100, tone: 'text-mathua-red', bg: 'bg-mathua-red' },
+    { label: 'Stayed', count: data.stayed, unique: 0, rate: (data.stayed / comparable) * 100, tone: 'text-mathua-blue', bg: 'bg-mathua-blue' },
+    { label: 'New seats', count: data.new, unique: 0, rate: (data.new / Math.max(1, data.seats)) * 100, tone: 'text-mathua-secondary', bg: 'bg-mathua-muted' },
+    { label: 'Left', count: data.left, unique: 0, rate: (data.left / Math.max(1, data.seats)) * 100, tone: 'text-mathua-secondary', bg: 'bg-mathua-border-strong' },
+  ]
+  const max = Math.max(1, ...rows.map(r => r.count))
+  const flow = data.buckets.map(b => ({ label: b.label, net: b.promoted - b.demoted }))
+  const rates = data.buckets.map(b => {
+    const denominator = Math.max(1, b.seats - b.new)
+    return { label: b.label, promoted: Number(((b.promoted / denominator) * 100).toFixed(1)), demoted: Number(((b.demoted / denominator) * 100).toFixed(1)) }
+  })
+  const matrix = new Map(data.matrix.map(cell => [`${cell.from}/${cell.to}`, cell.count]))
+  return (
+    <section className="mt-8" aria-labelledby="movement-heading">
+      <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-mathua-border pb-2">
+        <div>
+          <h2 id="movement-heading" className="font-mono text-xs uppercase tracking-wider text-mathua-primary">Movement</h2>
+          <p className="mt-1 font-mono text-[10px] text-mathua-muted">How seats changed between adjacent weeks.</p>
+        </div>
+        <span className="font-mono text-[10px] text-mathua-muted">{data.weeks} weeks · {data.seats} seats</span>
+      </div>
+
+      <div className="mt-4 grid gap-3 lg:grid-cols-[2fr_1fr]">
+        <div className="border border-mathua-border bg-mathua-surface p-4">
+          <div className="space-y-3">
+            {rows.map(row => (
+              <div key={row.label} className="grid grid-cols-[6rem_1fr_7rem] items-center gap-3">
+                <span className="font-mono text-[10px] uppercase tracking-wider text-mathua-secondary">{row.label}</span>
+                <span className="h-2 w-full bg-mathua-surface-elevated">
+                  <span className={`block h-2 ${row.bg}`} style={{ width: `${(row.count / max) * 100}%` }} />
+                </span>
+                <span className="text-right font-mono text-[11px] tabular-nums text-mathua-primary">
+                  {row.count.toLocaleString()}
+                  <span className="ml-1 text-[10px] text-mathua-muted">{row.rate.toFixed(1)}%</span>
+                </span>
+              </div>
+            ))}
+          </div>
+          <p className="mt-3 font-mono text-[10px] text-mathua-muted">Unique movers: {data.unique_promoted} promoted · {data.unique_demoted} demoted. Events can exceed learners when someone moves more than once.</p>
+        </div>
+
+        <div className="border border-mathua-border bg-mathua-surface p-4">
+          <p className="font-mono text-[10px] uppercase tracking-wider text-mathua-muted">Net flow</p>
+          <p className={`mt-2 font-mono text-3xl tabular-nums ${data.promoted - data.demoted >= 0 ? 'text-mathua-green' : 'text-mathua-red'}`}>
+            {data.promoted - data.demoted >= 0 ? '+' : ''}{(data.promoted - data.demoted).toLocaleString()}
+          </p>
+          <p className="mt-1 font-mono text-[10px] text-mathua-muted">Promotions minus demotions</p>
+          <p className="mt-4 font-mono text-[11px] text-mathua-secondary">Retention after next week</p>
+          <p className="font-mono text-lg tabular-nums text-mathua-primary">{data.seats > 0 ? (((data.seats - data.left) / data.seats) * 100).toFixed(1) : '—'}%</p>
+        </div>
+      </div>
+
+      <div className="mt-4 grid gap-3 lg:grid-cols-2">
+        <div className="border border-mathua-border bg-mathua-surface p-4">
+          <p className="font-mono text-[10px] uppercase tracking-wider text-mathua-secondary">Net flow by week</p>
+          <div className="mt-3 h-56">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={flow} margin={{ top: 4, right: 4, left: -18, bottom: 0 }}>
+                <CartesianGrid vertical={false} strokeDasharray="3 3" />
+                <XAxis dataKey="label" tickLine={false} axisLine={false} tickMargin={8} minTickGap={18} />
+                <YAxis tickLine={false} axisLine={false} />
+                <Tooltip />
+                <Bar dataKey="net" fill="var(--chart-1)" />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+        <div className="border border-mathua-border bg-mathua-surface p-4">
+          <p className="font-mono text-[10px] uppercase tracking-wider text-mathua-secondary">Movement rates</p>
+          <div className="mt-3 h-56">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={rates} margin={{ top: 4, right: 4, left: -18, bottom: 0 }}>
+                <CartesianGrid vertical={false} strokeDasharray="3 3" />
+                <XAxis dataKey="label" tickLine={false} axisLine={false} tickMargin={8} minTickGap={18} />
+                <YAxis tickLine={false} axisLine={false} tickFormatter={v => `${v}%`} />
+                <Tooltip formatter={(value) => `${value}%`} />
+                <Line type="monotone" dataKey="promoted" stroke="var(--chart-3)" strokeWidth={2} dot={false} />
+                <Line type="monotone" dataKey="demoted" stroke="var(--chart-4)" strokeWidth={2} dot={false} />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-4 overflow-x-auto border border-mathua-border bg-mathua-surface">
+        <table className="w-full min-w-[40rem] text-left">
+          <caption className="px-3 pt-3 text-left font-mono text-[10px] text-mathua-muted">Previous tier by current tier. First appearances and returns are excluded.</caption>
+          <thead className="border-b border-mathua-border">
+            <tr>
+              <th scope="col" className="px-3 py-2 font-mono text-[10px] uppercase tracking-wider text-mathua-muted">From</th>
+              {TIER_ORDER.map(tier => <th key={tier} scope="col" className="px-3 py-2 text-right font-mono text-[10px] uppercase tracking-wider text-mathua-muted">{tierLabel(tier)}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {TIER_ORDER.map(from => (
+              <tr key={from} className="border-b border-mathua-border last:border-0">
+                <th scope="row" className="px-3 py-2 font-mono text-[10px] uppercase tracking-wider text-mathua-secondary">{tierLabel(from)}</th>
+                {TIER_ORDER.map(to => {
+                  const count = matrix.get(`${from}/${to}`) ?? 0
+                  const intensity = Math.min(0.45, count / Math.max(1, data.seats))
+                  return (
+                    <td key={to} className="px-3 py-2 text-right font-mono text-[11px] tabular-nums text-mathua-primary" style={{ backgroundColor: count > 0 ? `color-mix(in oklab, var(--chart-1) ${Math.round(intensity * 100)}%, transparent)` : undefined }}>
+                      {count || '·'}
+                    </td>
+                  )
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  )
+}
+
 function RangePanel({
   data,
   loading,
@@ -366,6 +486,8 @@ function RangePanel({
           />
         </div>
       </section>
+
+      <MovementSection data={data} />
 
       <section className="mt-8" aria-labelledby="range-weeks">
         <div className="flex items-baseline justify-between border-b border-mathua-border pb-2">
