@@ -47,6 +47,7 @@ export function leagueFrameGeometry(size: number) {
 
 type Props = {
   tier?: string | null
+  /** Earned XP. A learner with none keeps the plain avatar. */
   weeklyXp?: number | null
   seed: string
   name: string

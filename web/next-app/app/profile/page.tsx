@@ -93,7 +93,6 @@ export default function ProfilePage() {
   const [error, setError] = useState('')
   const [goalOverride, setGoalOverride] = useState<number | null>(null)
   const [leagueTier, setLeagueTier] = useState<string | null>(null)
-  const [leagueWeeklyXp, setLeagueWeeklyXp] = useState(0)
   const [avatarUrl, setAvatarUrl] = useState<string | undefined>(undefined)
   const [avatarPreset, setAvatarPreset] = useState<number | null>(null)
   // /profile builds its own shell instead of using AppShell, so it has to read
@@ -229,12 +228,12 @@ export default function ProfilePage() {
           }).catch(() => {
             if (alive) setPlacementCompleted(info?.diagnostic_completed ?? false)
           })
-          // The frame is earned: only a current tier and positive weekly XP
-          // qualify. A missing league or a zero-XP week leaves the plain avatar.
+          // The frame follows the current league. Lifetime XP is the
+          // qualification: a learner who has earned nothing keeps the plain
+          // avatar, and a demotion changes the tier on the next read.
           getMyLeague().then(league => {
             if (!alive || !league) return
             setLeagueTier(league.tier || null)
-            setLeagueWeeklyXp(league.me?.xp ?? 0)
           }).catch(() => {})
           // The recommendation is the engine's answer, not a re-ranking of the fetches above.
           // Fetched beside them rather than derived from them: the report's numbers and the
@@ -394,7 +393,7 @@ export default function ProfilePage() {
           avatarUrl={avatarPreset !== null ? undefined : avatarUrl}
           avatarPreset={avatarPreset}
           leagueTier={leagueTier}
-          leagueWeeklyXp={leagueWeeklyXp}
+          leagueWeeklyXp={(effScores ?? scores).xp_total}
           catalogue={conceptCatalog}
           progress={progress}
           frontierLabel={frontierLabel}
