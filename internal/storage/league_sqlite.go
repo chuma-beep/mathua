@@ -169,7 +169,7 @@ func insertCohorts(tx *sql.Tx, week string, cohorts []leagueCohort, rebind func(
 // was resolved. It is idempotent: an existing row returns untouched, and the
 // (week, student) primary key settles a race between two tabs.
 func (s *SQLiteStore) EnsureLeagueMembership(studentID, week string) error {
-	if studentID == "" || IsGuestID(studentID) {
+	if studentID == "" {
 		return nil
 	}
 	var exists int
@@ -183,9 +183,10 @@ func (s *SQLiteStore) EnsureLeagueMembership(studentID, week string) error {
 		return fmt.Errorf("check league membership: %w", err)
 	}
 
-	var xpTotal int
-	if err := s.db.QueryRow(`SELECT xp_total FROM students WHERE id = ?`, studentID).
-		Scan(&xpTotal); err != nil {
+	var xpTotal, ranked int
+	if err := s.db.QueryRow(`SELECT s.xp_total, CASE WHEN `+rankedStudentWhere+` THEN 1 ELSE 0 END
+		FROM students s WHERE s.id = ?`, studentID).
+		Scan(&xpTotal, &ranked); err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
 			return nil
 		}
@@ -193,8 +194,9 @@ func (s *SQLiteStore) EnsureLeagueMembership(studentID, week string) error {
 	}
 	// A learner enters the league the week they first earn XP. Before that they
 	// are not competing, and a zero-XP row would be a participant with nothing
-	// to rank.
-	if xpTotal <= 0 {
+	// to rank. An adopted guest keeps its guest_ id but has credentials, so the
+	// ranked predicate, not the id prefix, decides.
+	if xpTotal <= 0 || ranked == 0 {
 		return nil
 	}
 

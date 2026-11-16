@@ -132,7 +132,7 @@ func (s *PostgresStore) bootstrapLeagues(tx *sql.Tx, week string) error {
 }
 
 func (s *PostgresStore) EnsureLeagueMembership(studentID, week string) error {
-	if studentID == "" || IsGuestID(studentID) {
+	if studentID == "" {
 		return nil
 	}
 	var exists int
@@ -146,15 +146,18 @@ func (s *PostgresStore) EnsureLeagueMembership(studentID, week string) error {
 		return fmt.Errorf("check league membership: %w", err)
 	}
 
-	var xpTotal int
-	if err := s.db.QueryRow(`SELECT xp_total FROM students WHERE id = $1`, studentID).
-		Scan(&xpTotal); err != nil {
+	var xpTotal, ranked int
+	if err := s.db.QueryRow(`SELECT s.xp_total, CASE WHEN `+rankedStudentWhere+` THEN 1 ELSE 0 END
+		FROM students s WHERE s.id = $1`, studentID).
+		Scan(&xpTotal, &ranked); err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
 			return nil
 		}
 		return fmt.Errorf("check league eligibility: %w", err)
 	}
-	if xpTotal <= 0 {
+	// An adopted guest keeps its guest_ id but has credentials, so the ranked
+	// predicate, not the id prefix, decides eligibility.
+	if xpTotal <= 0 || ranked == 0 {
 		return nil
 	}
 

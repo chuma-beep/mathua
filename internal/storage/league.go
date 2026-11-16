@@ -267,22 +267,22 @@ func rankInCohort(rows []LeagueRow) {
 // number of accounts it seated.
 func (s *SQLiteStore) BackfillLeagueMemberships(week string) (int, error) {
 	return backfillLeagueMemberships(s.db,
-		`SELECT id FROM students
-		 WHERE xp_total > 0
-		   AND substr(id, 1, 6) <> 'guest_'
+		`SELECT s.id FROM students s
+		 WHERE s.xp_total > 0
+		   AND `+rankedStudentWhere+`
 		   AND NOT EXISTS (SELECT 1 FROM league_members lm
-		                   WHERE lm.student_id = students.id AND lm.week = ?)
-		 ORDER BY id`, week, s.EnsureLeagueMembership)
+		                   WHERE lm.student_id = s.id AND lm.week = ?)
+		 ORDER BY s.id`, week, s.EnsureLeagueMembership)
 }
 
 func (s *PostgresStore) BackfillLeagueMemberships(week string) (int, error) {
 	return backfillLeagueMemberships(s.db, rebindDollars(
-		`SELECT id FROM students
-		 WHERE xp_total > 0
-		   AND substr(id, 1, 6) <> 'guest_'
+		`SELECT s.id FROM students s
+		 WHERE s.xp_total > 0
+		   AND `+rankedStudentWhere+`
 		   AND NOT EXISTS (SELECT 1 FROM league_members lm
-		                   WHERE lm.student_id = students.id AND lm.week = $1)
-		 ORDER BY id`), week, s.EnsureLeagueMembership)
+		                   WHERE lm.student_id = s.id AND lm.week = $1)
+		 ORDER BY s.id`), week, s.EnsureLeagueMembership)
 }
 
 // backfillLeagueMemberships reads the ids before seating anyone: SQLite holds a
