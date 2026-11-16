@@ -54,6 +54,7 @@ import {
   UsersIcon,
   ChevronDownIcon,
   ChevronUpIcon,
+  ArrowDownIcon,
   ArrowUpIcon,
   MessagesSquareIcon,
   XIcon,
@@ -162,6 +163,7 @@ export const MessagesSquare = wrap(MessagesSquareIcon as never)
 // in a component that also handles coordinates is a name waiting to be misread.
 export const Close = wrap(XIcon as never)
 export const ArrowUp = wrap(ArrowUpIcon as never)
+export const ArrowDown = wrap(ArrowDownIcon as never)
 
 // Settings' avatar randomiser. The app used lucide's `Dices` (two dice) and there is no animated
 // `Dices` in the set, `Dice5` is a single die. This is the one icon whose shape changes, and it
@@ -207,4 +209,5 @@ export const ICON_NAMES = [
   'MessagesSquare',
   'Close',
   'ArrowUp',
+  'ArrowDown',
 ] as const

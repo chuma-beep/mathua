@@ -5,7 +5,8 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import SectionHeader from '../../../components/SectionHeader'
 import Avatar from '../../../components/Avatar'
-import { Badge } from '../../../components/ui/badge'
+import { ArrowDown, ArrowUp } from '../../../components/icons'
+import LeagueAvatar from '../../../components/LeagueAvatar'
 import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card'
 import { Skeleton } from '../../../components/ui/skeleton'
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '../../../components/ui/table'
@@ -20,12 +21,12 @@ import { API_BASE, getAdminLeagues, getErrorMessage, type AdminLeague, type Admi
 
 const LEAGUE_SIZE = 30
 const TIER_ORDER = ['bronze', 'silver', 'gold', 'platinum', 'diamond']
-const TIER_CLASS: Record<string, string> = {
-  bronze: 'bg-[var(--chart-2)]',
-  silver: 'bg-[var(--chart-5)]',
-  gold: 'bg-[var(--chart-3)]',
-  platinum: 'bg-[var(--chart-1)]',
-  diamond: 'bg-[var(--chart-4)]',
+const TIER_COLOUR: Record<string, string> = {
+  bronze: 'var(--league-bronze)',
+  silver: 'var(--league-silver)',
+  gold: 'var(--league-gold)',
+  platinum: 'var(--league-platinum)',
+  diamond: 'var(--league-diamond)',
 }
 
 function weekKeyOf(d: Date): string {
@@ -64,14 +65,16 @@ function leagueKey(l: Pick<AdminLeague, 'tier' | 'league_no'> | Selected): strin
   return 'league_no' in l ? `${l.tier}/${l.league_no}` : `${l.tier}/${l.league}`
 }
 
-function MemberAvatar({ member }: { member: AdminLeagueMember }) {
+function MemberAvatar({ member, tier }: { member: AdminLeagueMember; tier: string }) {
   const pick = member.avatar_dicebear
   const storedURL = member.avatar_url
   const url = storedURL
     ? (storedURL.startsWith('/') ? `${API_BASE}${storedURL}` : storedURL)
     : (pick && isDicebearStyle(pick.style) ? dicebearUrl(pick.style, pick.seed) : undefined)
   return (
-    <Avatar
+    <LeagueAvatar
+      tier={tier}
+      weeklyXp={member.xp}
       seed={member.student_id}
       name={memberLabel(member)}
       size={24}
@@ -105,11 +108,11 @@ function RosterTable({ league, members }: { league: AdminLeague; members: AdminL
           const up = promote > 0 && m.rank <= promote
           const down = relegate > 0 && m.rank > league.size - relegate
           return (
-            <TableRow key={m.student_id} className={up ? 'bg-mathua-green-faint' : down ? 'bg-mathua-red-faint' : undefined}>
+            <TableRow key={m.student_id}>
               <TableCell className="text-mathua-secondary">{m.rank}</TableCell>
               <TableCell>
                 <span className="flex min-w-0 items-center gap-2">
-                  <MemberAvatar member={m} />
+                  <MemberAvatar member={m} tier={league.tier} />
                   <span className="min-w-0">
                     <Link
                       href={`/admin/users/detail?id=${encodeURIComponent(m.student_id)}`}
@@ -126,7 +129,22 @@ function RosterTable({ league, members }: { league: AdminLeague; members: AdminL
               </TableCell>
               <TableCell className="text-right tabular-nums text-mathua-primary">{m.xp.toLocaleString()}</TableCell>
               <TableCell className="text-right">
-                {up ? <Badge variant="up">Up</Badge> : down ? <Badge variant="down">Down</Badge> : <Badge variant="stay">Stays</Badge>}
+                {up ? (
+                  <span className="inline-flex items-center gap-1 text-mathua-green">
+                    <ArrowUp size={13} aria-hidden="true" />
+                    Up
+                  </span>
+                ) : down ? (
+                  <span className="inline-flex items-center gap-1 text-mathua-red">
+                    <ArrowDown size={13} aria-hidden="true" />
+                    Down
+                  </span>
+                ) : (
+                  <span className="inline-flex items-center gap-1 text-mathua-muted">
+                    <span aria-hidden="true">·</span>
+                    Stays
+                  </span>
+                )}
               </TableCell>
             </TableRow>
           )
@@ -384,7 +402,7 @@ export default function AdminLeaguesPage() {
                     >
                       <div className="flex items-center justify-between gap-2">
                         <span className="font-mono text-[10px] uppercase tracking-wider text-mathua-secondary">{tierLabel(tier)}</span>
-                        <span className={`h-2 w-2 ${TIER_CLASS[tier]}`} aria-hidden="true" />
+                        <span className="h-2 w-2" style={{ backgroundColor: TIER_COLOUR[tier] }} aria-hidden="true" />
                       </div>
                       <p className="mt-2 font-mono text-xl tabular-nums text-mathua-primary">{items.length}</p>
                       <p className="font-mono text-[10px] text-mathua-muted">league{items.length === 1 ? '' : 's'}</p>
@@ -398,7 +416,7 @@ export default function AdminLeaguesPage() {
                 {TIER_ORDER.map(tier => {
                   const tierSeats = (byTier.get(tier) ?? []).reduce((n, l) => n + l.size, 0)
                   const width = seats > 0 ? (tierSeats / seats) * 100 : 0
-                  return <span key={tier} className={TIER_CLASS[tier]} style={{ width: `${width}%` }} />
+                  return <span key={tier} style={{ width: `${width}%`, backgroundColor: TIER_COLOUR[tier] }} />
                 })}
               </div>
             </section>

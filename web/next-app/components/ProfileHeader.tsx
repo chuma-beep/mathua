@@ -6,6 +6,7 @@ import type { ConceptProgress, Scores } from '../lib/api'
 import { countOverall, type CatalogueConcept } from '../lib/progress'
 import { LEVEL_NAMES } from './ProfileStats'
 import Avatar from './Avatar'
+import LeagueAvatar from './LeagueAvatar'
 
 /**
  * The learner header as a few short sentences, not a wall of tiles.
@@ -31,6 +32,8 @@ export default function ProfileHeader({
   progress,
   frontierLabel,
   footer,
+  leagueTier,
+  leagueWeeklyXp,
 }: {
   name: string
   scores: Scores
@@ -42,6 +45,8 @@ export default function ProfileHeader({
   frontierLabel?: string | null
   /** Small actions that belong on the header line rather than as their own blocks. */
   footer?: ReactNode
+  leagueTier?: string | null
+  leagueWeeklyXp?: number | null
 }) {
   const counts = countOverall(catalogue, progress)
   if (counts.total === 0) return null
@@ -50,15 +55,16 @@ export default function ProfileHeader({
   return (
     <div className="border-[0.5px] border-mathua-border p-4 sm:px-5 w-full max-w-full min-w-0 overflow-hidden">
       <div className="flex items-start gap-4 min-w-0">
-        {/* The profile picture, square and boxed, at the left of the header. */}
-        <div className="shrink-0 border-[0.5px] border-mathua-border p-1">
-          <Avatar
+        {/* The profile picture and its earned league frame. */}
+        <div className="shrink-0">
+          <LeagueAvatar
+            tier={leagueTier}
+            weeklyXp={leagueWeeklyXp}
             seed={avatarSeed ?? name}
             name={name}
             size={72}
             url={avatarUrl}
             preset={avatarPreset ?? undefined}
-            className="!rounded-none"
           />
         </div>
         <section id="position" aria-label="Where you are" className="min-w-0 flex-1">

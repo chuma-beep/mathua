@@ -86,7 +86,7 @@ describe('ProfileHeader', () => {
     expect(screen.getByRole('link', { name: /Plan your learning/ }).getAttribute('href')).toBe('/plan')
   })
 
-  it('shows the profile picture square and boxed on the left', () => {
+  it('shows the profile picture as a circle on the left', () => {
     render(
       <ProfileHeader
         name="Tester"
@@ -97,13 +97,11 @@ describe('ProfileHeader', () => {
       />,
     )
     const pic = screen.getByLabelText('Tester avatar')
-    // Square, not the round default: the override flattens the border radius.
-    expect(pic.className).toMatch(/rounded-none/)
-    // And it sits in its own bordered box, not floating bare.
-    const box = pic.parentElement!
-    expect(box.className).toMatch(/border-mathua-border/)
+    // The league frame is circular, so the profile picture is too.
+    expect(pic.className).toMatch(/rounded-full/)
+    expect(pic.className).not.toMatch(/rounded-none/)
     // Before the text, not after it.
     const region = screen.getByRole('region', { name: 'Where you are' })
-    expect(box.compareDocumentPosition(region) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+    expect(pic.compareDocumentPosition(region) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
   })
 })
