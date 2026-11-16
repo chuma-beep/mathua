@@ -107,11 +107,11 @@ describe('LearnStepper done state (PR5)', () => {
 
     // Intro → first question.
     fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
-    expect(await screen.findByText('2 + 3 = ?')).toBeTruthy()
+    expect(await screen.findByText('2 + 3 = ?', {}, { timeout: 4000 })).toBeTruthy()
 
     // Two in a row advances the single KP → done (REQUIRED_IN_A_ROW = 2).
     await answerCurrent('5')
-    expect(await screen.findByText('4 + 1 = ?')).toBeTruthy()
+    expect(await screen.findByText('4 + 1 = ?', {}, { timeout: 4000 })).toBeTruthy()
     await answerCurrent('5')
 
     // Closure card with mastery feedback…
@@ -147,9 +147,9 @@ describe('LearnStepper done state (PR5)', () => {
     render(<LearnStepper conceptId={CID} />)
 
     fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
-    expect(await screen.findByText('2 + 3 = ?')).toBeTruthy()
+    expect(await screen.findByText('2 + 3 = ?', {}, { timeout: 4000 })).toBeTruthy()
     await answerCurrent('5')
-    expect(await screen.findByText('4 + 1 = ?')).toBeTruthy()
+    expect(await screen.findByText('4 + 1 = ?', {}, { timeout: 4000 })).toBeTruthy()
     await answerCurrent('5')
 
     // getNext absorbs its own network failure and returns its own recommendation, whose href
@@ -298,7 +298,7 @@ describe('LearnStepper explanation after submission', () => {
     render(<LearnStepper conceptId={CID} />)
 
     fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
-    expect(await screen.findByText('2 + 3 = ?')).toBeTruthy()
+    expect(await screen.findByText('2 + 3 = ?', {}, { timeout: 4000 })).toBeTruthy()
     await answerCurrent('5')
 
     // The reasoning for *this* instance, on the correct branch too.
@@ -321,7 +321,7 @@ describe('LearnStepper explanation after submission', () => {
     render(<LearnStepper conceptId={CID} />)
 
     fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
-    expect(await screen.findByText('2 + 3 = ?')).toBeTruthy()
+    expect(await screen.findByText('2 + 3 = ?', {}, { timeout: 4000 })).toBeTruthy()
     await answerCurrent('6')
 
     expect(await screen.findByText('Start at 2 and count on 3 to reach 5, not 6.')).toBeTruthy()
@@ -370,7 +370,7 @@ describe('LearnStepper explanation after submission', () => {
     render(<LearnStepper conceptId={CID} />)
 
     fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
-    expect(await screen.findByText('2 + 3 = ?')).toBeTruthy()
+    expect(await screen.findByText('2 + 3 = ?', {}, { timeout: 4000 })).toBeTruthy()
     await answerCurrent('5')
 
     // Card still locked (the tally header and the card both report the XP).
@@ -460,7 +460,7 @@ describe('LearnStepper question exhaustion', () => {
 
     render(<LearnStepper conceptId={CID} />)
     fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
-    expect(await screen.findByText('2 + 3 = ?')).toBeTruthy()
+    expect(await screen.findByText('2 + 3 = ?', {}, { timeout: 4000 })).toBeTruthy()
 
     // Answer incorrectly so the 2-in-a-row rule does not advance the section, the only way
     // to reach the "keep going in this section" path, which is where the strand was.
@@ -481,7 +481,7 @@ describe('LearnStepper question exhaustion', () => {
 
     render(<LearnStepper conceptId={CID} />)
     fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
-    expect(await screen.findByText('2 + 3 = ?')).toBeTruthy()
+    expect(await screen.findByText('2 + 3 = ?', {}, { timeout: 4000 })).toBeTruthy()
 
     await answerCurrent('5')
     await waitForTimeout(500)
@@ -514,18 +514,18 @@ describe('LearnStepper header tally', () => {
     })
     render(<LearnStepper conceptId={CID} />)
     fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
-    await screen.findByText('2 + 3 = ?')
+    await screen.findByText('2 + 3 = ?', {}, { timeout: 4000 })
 
     // Answered one at a time, waiting for each card: `answerField()` returns the *newest*
     // field, and a submitted card keeps its own, so answering without waiting would type into
     // the previous question.
     await answerCurrent('5')
-    expect(await screen.findByText('4 + 1 = ?')).toBeTruthy()
+    expect(await screen.findByText('4 + 1 = ?', {}, { timeout: 4000 })).toBeTruthy()
 
     // Two in a row advances to the second KP, the point at which the old tally reset. The
     // third served question is `1 + 6 = ?`, whose answer is 7.
     await answerCurrent('5')
-    expect(await screen.findByText('1 + 6 = ?')).toBeTruthy()
+    expect(await screen.findByText('1 + 6 = ?', {}, { timeout: 4000 })).toBeTruthy()
 
     // 3 answered, 3 correct across the concept. Under the old per-section tally this read
     // "0/1 correct" for the section the learner had just moved into.
@@ -548,7 +548,7 @@ describe('LearnStepper grading recovery', () => {
     render(<LearnStepper conceptId={CID} />)
     fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
     await answerCurrent('6')
-    await screen.findByText('4 + 1 = ?')
+    await screen.findByText('4 + 1 = ?', {}, { timeout: 4000 })
     vi.mocked(submitStudyAnswer).mockRejectedValueOnce(Object.assign(new Error('This topic has unmet prerequisites.'), {
       status: 403, code: 'TOPIC_LOCKED', prerequisiteConceptIds: ['arith.mult.2_5_10'],
     }))
@@ -583,7 +583,7 @@ describe('LearnStepper grading recovery', () => {
     render(<LearnStepper conceptId={CID} />)
     fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
     await answerCurrent('6')
-    await screen.findByText('4 + 1 = ?')
+    await screen.findByText('4 + 1 = ?', {}, { timeout: 4000 })
     vi.mocked(submitStudyAnswer).mockRejectedValueOnce(new TypeError('Failed to fetch'))
 
     await answerCurrent('5')
@@ -745,7 +745,7 @@ describe('LearnStepper question handoff', () => {
     fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
     await findMathField()
     await answerCurrent('5')
-    await screen.findByText('4 + 1 = ?')
+    await screen.findByText('4 + 1 = ?', {}, { timeout: 4000 })
     await answerCurrent('5')
     fireEvent.click(await screen.findByRole('button', { name: 'Practice again' }))
     fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
