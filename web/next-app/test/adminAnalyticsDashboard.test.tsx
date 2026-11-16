@@ -95,7 +95,7 @@ describe('admin analytics dashboard', () => {
   it('loads the sections for the selected tab', async () => {
     render(<AdminAnalyticsDashboard />)
     await screen.findByText('Unique learners')
-    fireEvent.click(screen.getByRole('tab', { name: 'Engagement' }))
+    fireEvent.mouseDown(screen.getByRole('tab', { name: 'Engagement' }))
     await screen.findByRole('heading', { name: 'New registrations' })
     await waitFor(() => {
       const calls = vi.mocked(adminAnalytics).mock.calls
@@ -106,7 +106,7 @@ describe('admin analytics dashboard', () => {
   it('changes the range and reloads the window', async () => {
     render(<AdminAnalyticsDashboard />)
     await screen.findByText('Unique learners')
-    fireEvent.click(screen.getByRole('button', { name: '24h' }))
+    fireEvent.click(screen.getByRole('radio', { name: '24h' }))
     await waitFor(() => {
       expect(adminAnalytics).toHaveBeenLastCalledWith('24h', expect.anything())
     })
@@ -115,7 +115,7 @@ describe('admin analytics dashboard', () => {
   it('shows notification delivery health on the operations tab', async () => {
     render(<AdminAnalyticsDashboard />)
     await screen.findByText('Unique learners')
-    fireEvent.click(screen.getByRole('tab', { name: 'Operations' }))
+    fireEvent.mouseDown(screen.getByRole('tab', { name: 'Operations' }))
     await screen.findByText('Notification delivery')
     expect(await screen.findByText('No failed or suppressed deliveries.')).toBeTruthy()
   })

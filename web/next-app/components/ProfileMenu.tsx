@@ -1,10 +1,16 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import Avatar from './Avatar'
 import { Shield, Settings, User } from './icons'
 import { SidebarMenuButton } from '@/components/ui/sidebar'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 
 type ProfileMenuProps = {
   name: string
@@ -33,88 +39,45 @@ export default function ProfileMenu({
   isAdmin = false,
   adminReports = 0,
 }: ProfileMenuProps) {
-  const [open, setOpen] = useState(false)
-  const root = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    if (!open) return
-    const onPointer = (event: PointerEvent) => {
-      if (root.current && !root.current.contains(event.target as Node)) setOpen(false)
-    }
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setOpen(false)
-    }
-    document.addEventListener('pointerdown', onPointer)
-    document.addEventListener('keydown', onKey)
-    return () => {
-      document.removeEventListener('pointerdown', onPointer)
-      document.removeEventListener('keydown', onKey)
-    }
-  }, [open])
-
   return (
-    <div ref={root} className="relative">
-      <SidebarMenuButton
-        size="lg"
-        tooltip={name}
-        aria-haspopup="menu"
-        aria-expanded={open}
-        aria-label={`${name}, account menu`}
-        onClick={() => setOpen((value) => !value)}
-      >
-        <Avatar
-          seed={studentId}
-          name={name}
-          size={32}
-          url={avatarPreset !== null && avatarPreset !== undefined ? undefined : avatarUrl}
-          preset={avatarPreset ?? undefined}
-        />
-        <span className="min-w-0 flex-1 text-left group-data-[collapsible=icon]:hidden">
-          <span className="block truncate font-mono text-xs text-mathua-primary">{name}</span>
-          <span className="block truncate font-mono text-[10px] text-mathua-muted">
-            {[username ? `@${username}` : null, level, typeof streak === 'number' ? `${streak}d` : null]
-              .filter(Boolean)
-              .join(' · ')}
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <SidebarMenuButton size="lg" tooltip={name} aria-label={`${name}, account menu`}>
+          <Avatar
+            seed={studentId}
+            name={name}
+            size={32}
+            url={avatarPreset !== null && avatarPreset !== undefined ? undefined : avatarUrl}
+            preset={avatarPreset ?? undefined}
+          />
+          <span className="min-w-0 flex-1 text-left group-data-[collapsible=icon]:hidden">
+            <span className="block truncate font-mono text-xs text-mathua-primary">{name}</span>
+            <span className="block truncate font-mono text-[10px] text-mathua-muted">
+              {[username ? `@${username}` : null, level, typeof streak === 'number' ? `${streak}d` : null]
+                .filter(Boolean)
+                .join(' · ')}
+            </span>
           </span>
-        </span>
-      </SidebarMenuButton>
-
-      {open && (
-        <div
-          role="menu"
-          aria-label="Account"
-          className="absolute bottom-full left-0 z-50 mb-1 w-56 border border-mathua-border bg-mathua-surface py-1 shadow-lg"
-        >
-          <Link
-            href="/profile"
-            role="menuitem"
-            onClick={() => setOpen(false)}
-            className="flex h-10 items-center gap-2.5 px-3 font-mono text-xs text-mathua-secondary hover:bg-mathua-surface-elevated hover:text-mathua-primary"
-          >
+        </SidebarMenuButton>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent side="top" align="start" className="w-56 rounded-none border-mathua-border bg-mathua-surface">
+        <DropdownMenuItem asChild className="font-mono text-xs text-mathua-secondary focus:bg-mathua-surface-elevated focus:text-mathua-primary">
+          <Link href="/profile">
             <User size={15} aria-hidden="true" />
             Profile
           </Link>
-          <Link
-            href="/settings"
-            role="menuitem"
-            onClick={() => setOpen(false)}
-            className="flex h-10 items-center gap-2.5 px-3 font-mono text-xs text-mathua-secondary hover:bg-mathua-surface-elevated hover:text-mathua-primary"
-          >
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild className="font-mono text-xs text-mathua-secondary focus:bg-mathua-surface-elevated focus:text-mathua-primary">
+          <Link href="/settings">
             <Settings size={15} aria-hidden="true" />
             Settings
           </Link>
-          {isAdmin && (
-            <>
-              <div className="my-1 border-t border-mathua-border" />
-              <a
-                href="/admin"
-                target="_blank"
-                rel="noreferrer"
-                role="menuitem"
-                onClick={() => setOpen(false)}
-                aria-label="Admin console, opens in a new tab"
-                className="flex h-10 items-center gap-2.5 px-3 font-mono text-xs text-mathua-secondary hover:bg-mathua-surface-elevated hover:text-mathua-blue"
-              >
+        </DropdownMenuItem>
+        {isAdmin && (
+          <>
+            <DropdownMenuSeparator className="bg-mathua-border" />
+            <DropdownMenuItem asChild className="font-mono text-xs text-mathua-secondary focus:bg-mathua-surface-elevated focus:text-mathua-blue">
+              <a href="/admin" target="_blank" rel="noreferrer" aria-label="Admin console, opens in a new tab">
                 <Shield size={15} aria-hidden="true" />
                 <span className="flex-1">Admin console</span>
                 {adminReports > 0 && (
@@ -123,10 +86,10 @@ export default function ProfileMenu({
                   </span>
                 )}
               </a>
-            </>
-          )}
-        </div>
-      )}
-    </div>
+            </DropdownMenuItem>
+          </>
+        )}
+      </DropdownMenuContent>
+    </DropdownMenu>
   )
 }

@@ -27,6 +27,8 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from '../ui/chart'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
+import { ToggleGroup, ToggleGroupItem } from '../ui/toggle-group'
 
 type Tab = 'overview' | 'engagement' | 'learning' | 'operations'
 type Range = '15m' | '1h' | '24h' | '7d' | '30d' | '90d'
@@ -269,28 +271,29 @@ export default function AdminAnalyticsDashboard() {
             </button>
           </div>
         </div>
-        <div className="mt-3 flex gap-1 overflow-x-auto" role="group" aria-label="Analytics range">
+        <ToggleGroup
+          type="single"
+          value={range}
+          onValueChange={(value) => {
+            if (!value || value === range) return
+            requestId.current++
+            setData(null)
+            setRange(value as Range)
+          }}
+          aria-label="Analytics range"
+          className="mt-3 flex justify-start gap-1 overflow-x-auto"
+        >
           {RANGES.map(item => (
-            <button
+            <ToggleGroupItem
               key={item.value}
-              type="button"
-              aria-pressed={range === item.value}
-              onClick={() => {
-                if (item.value === range) return
-                requestId.current++
-                setData(null)
-                setRange(item.value)
-              }}
-              className={`h-8 shrink-0 border px-2.5 font-mono text-[11px] ${
-                range === item.value
-                  ? 'border-mathua-blue bg-mathua-blue-faint text-mathua-blue'
-                  : 'border-mathua-border text-mathua-secondary hover:border-mathua-blue'
-              }`}
+              value={item.value}
+              aria-label={item.label}
+              className="h-8 shrink-0 rounded-none border border-mathua-border px-2.5 font-mono text-[11px] text-mathua-secondary data-[state=on]:border-mathua-blue data-[state=on]:bg-mathua-blue-faint data-[state=on]:text-mathua-blue"
             >
               {item.label}
-            </button>
+            </ToggleGroupItem>
           ))}
-        </div>
+        </ToggleGroup>
       </div>
 
       {error && (
@@ -303,34 +306,33 @@ export default function AdminAnalyticsDashboard() {
 
       <LiveStrip live={live} />
 
-      <div className="mt-6 flex gap-5 overflow-x-auto border-b border-mathua-border" role="tablist" aria-label="Analytics section">
-        {TABS.map(item => (
-          <button
-            key={item.value}
-            type="button"
-            role="tab"
-            aria-selected={tab === item.value}
-            onClick={() => {
-              if (item.value === tab) return
-              requestId.current++
-              setData(null)
-              setTab(item.value)
-            }}
-            className={`-mb-px h-10 shrink-0 border-b-2 font-mono text-[11px] ${
-              tab === item.value
-                ? 'border-mathua-blue text-mathua-blue'
-                : 'border-transparent text-mathua-secondary hover:text-mathua-primary'
-            }`}
-          >
-            {item.label}
-          </button>
-        ))}
-      </div>
+      <Tabs
+        value={tab}
+        onValueChange={(value) => {
+          if (value === tab) return
+          requestId.current++
+          setData(null)
+          setTab(value as Tab)
+        }}
+        className="mt-6"
+      >
+        <TabsList className="flex h-auto w-full justify-start gap-5 overflow-x-auto rounded-none border-b border-mathua-border bg-transparent p-0">
+          {TABS.map(item => (
+            <TabsTrigger
+              key={item.value}
+              value={item.value}
+              className="-mb-px h-10 shrink-0 rounded-none border-b-2 border-transparent bg-transparent px-0 font-mono text-[11px] text-mathua-secondary shadow-none data-[state=active]:border-mathua-blue data-[state=active]:bg-transparent data-[state=active]:text-mathua-blue data-[state=active]:shadow-none"
+            >
+              {item.label}
+            </TabsTrigger>
+          ))}
+        </TabsList>
 
-      {data && tab === 'overview' && <OverviewTab data={data} range={range} />}
-      {data && tab === 'engagement' && <EngagementTab data={data} range={range} />}
-      {data && tab === 'learning' && <LearningTab data={data} range={range} />}
-      {data && tab === 'operations' && <OperationsTab data={data} range={range} />}
+        <TabsContent value="overview">{data && <OverviewTab data={data} range={range} />}</TabsContent>
+        <TabsContent value="engagement">{data && <EngagementTab data={data} range={range} />}</TabsContent>
+        <TabsContent value="learning">{data && <LearningTab data={data} range={range} />}</TabsContent>
+        <TabsContent value="operations">{data && <OperationsTab data={data} range={range} />}</TabsContent>
+      </Tabs>
     </section>
   )
 }
