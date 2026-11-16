@@ -321,3 +321,32 @@ func TestAdoptedGuestIsSeatedByAward(t *testing.T) {
 		t.Fatalf("adopted membership = %q found=%v err=%v, want bronze", tier, found, err)
 	}
 }
+
+func TestLeagueRangeAggregatesStoredMovement(t *testing.T) {
+	store := newTestStore(t)
+	a, err := store.CreateUser("Range A", "range_a", "hash")
+	if err != nil {
+		t.Fatalf("create a: %v", err)
+	}
+	b, err := store.CreateUser("Range B", "range_b", "hash")
+	if err != nil {
+		t.Fatalf("create b: %v", err)
+	}
+	execSeed(t, store, `INSERT INTO league_members (week, student_id, tier, league_no, xp, rank, movement) VALUES
+		('2026-11-02', ?, 'bronze', 1, 10, 1, 'new'),
+		('2026-11-02', ?, 'bronze', 1, 5, 2, 'new'),
+		('2026-11-09', ?, 'silver', 1, 12, 1, 'up'),
+		('2026-11-09', ?, 'bronze', 1, 8, 2, 'stay')`, a.ID, b.ID, a.ID, b.ID)
+	got, err := store.(interface {
+		LeagueRange(string, string, string) (*LeagueRange, error)
+	}).LeagueRange("2026-11-02", "2026-11-09", "week")
+	if err != nil {
+		t.Fatalf("range: %v", err)
+	}
+	if got.Weeks != 2 || got.Seats != 4 || got.Unique != 2 || got.Up != 1 || got.Stay != 1 || got.New != 2 {
+		t.Fatalf("range totals = %+v", got)
+	}
+	if len(got.Buckets) != 2 || len(got.Tiers) != 2 {
+		t.Fatalf("buckets=%d tiers=%d", len(got.Buckets), len(got.Tiers))
+	}
+}

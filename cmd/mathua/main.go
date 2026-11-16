@@ -169,6 +169,15 @@ func adminCommand(args []string) error {
 		if err != nil {
 			return err
 		}
+		if movement, ok := repo.(interface {
+			BackfillLeagueMovement() (int, error)
+		}); ok {
+			n, err := movement.BackfillLeagueMovement()
+			if err != nil {
+				return err
+			}
+			fmt.Printf("backfilled movement for %d seats\n", n)
+		}
 		fmt.Printf("seated %d learners in leagues for week %s\n", seated, week)
 		return nil
 	default:
