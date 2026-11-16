@@ -2,7 +2,6 @@ package realanalysis
 
 import (
 	"fmt"
-	"math"
 	"math/rand"
 	"strconv"
 	"strings"
@@ -231,20 +230,7 @@ func measureNullProblem(o int) generator.Problem {
 }
 
 func cantorSetProblem(o int) generator.Problem {
-	switch o {
-	case 1:
-		k := 1 + rand.Intn(6)
-		removed := 1 - math.Pow(2.0/3.0, float64(k))
-		return raBridgeProblem(o, fmt.Sprintf("Starting from [0, 1], the Cantor construction removes the middle third at each stage. What total length has been removed after %d stages? (enter a decimal to 6 places)", k), raBridgeDecimal(removed, 6), fmt.Sprintf("The remaining length after %d stages is (2/3)^%d, so the removed length is 1 - (2/3)^%d = %s.", k, k, k, raBridgeDecimal(removed, 6)))
-	case 2:
-		k := 1 + rand.Intn(8)
-		ans := 1 << k
-		return raBridgeProblem(o, fmt.Sprintf("How many closed intervals remain after %d stages of the Cantor construction? (enter a number)", k), strconv.Itoa(ans), fmt.Sprintf("Each interval splits into two, so the count doubles %d times: 2^%d = %d intervals.", k, k, ans))
-	default:
-		k := 1 + rand.Intn(6)
-		rem := math.Pow(2.0/3.0, float64(k))
-		return raBridgeProblem(o, fmt.Sprintf("What is the total length of the intervals remaining after %d stages of the Cantor construction? (enter a decimal to 6 places)", k), raBridgeDecimal(rem, 6), fmt.Sprintf("Each stage keeps two thirds of the length, so after %d stages the length is (2/3)^%d = %s.", k, k, raBridgeDecimal(rem, 6)))
-	}
+	return raW2HCantorSet(o)
 }
 
 func totalBoundedProblem(o int) generator.Problem {
