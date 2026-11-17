@@ -455,7 +455,7 @@ func (g *radicalSimplifyGen) Generate(ctx generator.GeneratorContext) generator.
 	}
 	n := a * a * b
 	return generator.Problem{
-		Question:    fmt.Sprintf("The square root of %d can be written as \\(a\\sqrt{b}\\), where \\(b\\) is squarefree. What is the whole number \\(a\\)? (enter a number)", n),
+		Question:    fmt.Sprintf("The square root of %d can be written as \\(a\\sqrt{b}\\), where \\(b\\) is squarefree. Factor out the largest perfect square first. What is the whole number \\(a\\)? (enter a number)", n),
 		Answer:      strconv.Itoa(a),
 		Explanation: fmt.Sprintf("Since %d = %d times %d, the square root is \\(%d\\sqrt{%d}\\).", n, a*a, b, a, b),
 		Facts: map[string]string{
