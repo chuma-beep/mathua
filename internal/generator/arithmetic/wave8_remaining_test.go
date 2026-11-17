@@ -90,7 +90,7 @@ func w8RemArithAnswer(t *testing.T, kind string, kp int, p generator.Problem) in
 	case "doubling_halving":
 		a, b := w8RTInt(t, p, "a"), w8RTInt(t, p, "b")
 		if kp == 1 {
-			return 2 * a
+			return 2*a + 1
 		}
 		if kp == 2 {
 			return a
@@ -108,10 +108,10 @@ func w8RemArithAnswer(t *testing.T, kind string, kp int, p generator.Problem) in
 	case "near_doubles":
 		a := w8RTInt(t, p, "a")
 		if kp == 1 {
-			return 2 * a
+			return 2*a + 1
 		}
 		if kp == 2 {
-			return 2*a + 1
+			return 2*a + 3
 		}
 		return 1
 	case "partial_quotients":

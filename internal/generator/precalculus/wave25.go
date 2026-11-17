@@ -191,9 +191,9 @@ func w25Parity(o int) generator.Problem {
 	w25I(f, "m", m)
 	switch o {
 	case 1:
-		return w25P(o, fmt.Sprintf("The function f(x)=x^%d is even when the exponent is even. Enter 1 when %d is even and 0 otherwise.", n, n), strconv.Itoa(1-n%2), "An even power gives an even function.", f)
+		return w25P(o, fmt.Sprintf("Classify f(x)=x^%d by parity. Enter 1 when the function is even and 0 when it is odd.", n), strconv.Itoa(1-n%2), "A power is even exactly when its exponent is even.", f)
 	case 2:
-		return w25P(o, fmt.Sprintf("An even function is multiplied by an odd function to give x^%d times x^%d. Enter 1 when the product is even and 0 when it is odd.", n, m), strconv.Itoa(1-(n+m)%2), "Parity adds like exponents.", f)
+		return w25P(o, fmt.Sprintf("An even function is multiplied by an odd function. If their power factors are x^%d and x^%d, enter 1 when the product is even and 0 when it is odd.", n, m), strconv.Itoa(1-(n+m)%2), "Parity follows the parity of the summed exponent.", f)
 	default:
 		return w25P(o, fmt.Sprintf("The product x^%d times x^%d has exponent %d. Enter 1 when that exponent is even and 0 otherwise.", n, m, n+m), strconv.Itoa(1-(n+m)%2), "Add the exponents and test parity.", f)
 	}
