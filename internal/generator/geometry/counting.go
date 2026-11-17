@@ -134,7 +134,7 @@ func angleMeasureProblem() generator.Problem {
 	case 2:
 		a := 10 + rand.Intn(71)
 		return generator.Problem{
-			Question:    fmt.Sprintf("Two angles are complementary. One measures %d degrees. What is the other? (enter a number)", a),
+			Question:    fmt.Sprintf("Two angles are complementary, so they sum to 90 degrees. One measures %d degrees. What is the other? (enter a number)", a),
 			Answer:      fmt.Sprintf("%d", 90-a),
 			Explanation: fmt.Sprintf("Complementary angles sum to 90, so the other angle is 90 - %d = %d.", a, 90-a),
 			Facts:       map[string]string{"given": fmt.Sprintf("%d", a), "missing": fmt.Sprintf("%d", 90-a)},

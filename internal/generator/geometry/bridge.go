@@ -307,8 +307,17 @@ func (g *geoBridgeGen) Generate(ctx generator.GeneratorContext) generator.Proble
 			w := 2 + rand.Intn(9)
 			base := 2 + rand.Intn(9)
 			h := 2 + rand.Intn(9)
-			ans := l*w + base*h/2
-			return geoProb(o, fmt.Sprintf("A composite figure is a %d by %d rectangle with a triangle of base %d and height %d on top. What is the total area? (enter a number)", l, w, base, h), strconv.Itoa(ans), fmt.Sprintf("Rectangle area is %d x %d = %d, triangle area is %d x %d / 2 = %d, total %d.", l, w, l*w, base, h, base*h/2, ans))
+			// Half a square unit is a real area. Integer division used to round
+			// 43.5 down to 43, and a learner who answered 43.5 was marked wrong
+			// (report 477).
+			num := 2*l*w + base*h
+			ans := fmt.Sprintf("%d", num/2)
+			tri := fmt.Sprintf("%d", base*h/2)
+			if num%2 != 0 {
+				ans = fmt.Sprintf("%d.5", num/2)
+				tri = fmt.Sprintf("%d.5", base*h/2)
+			}
+			return geoProb(o, fmt.Sprintf("A composite figure is a %d by %d rectangle with a triangle of base %d and height %d on top. What is the total area? (enter a number)", l, w, base, h), ans, fmt.Sprintf("Rectangle area is %d x %d = %d, triangle area is %d x %d / 2 = %s, total %s.", l, w, l*w, base, h, tri, ans))
 		case 2:
 			l := 2 + rand.Intn(9)
 			w := 2 + rand.Intn(9)

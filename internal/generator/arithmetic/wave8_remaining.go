@@ -216,8 +216,8 @@ func w8DoublingHalving(kp int) generator.Problem {
 	w8RI(f, "b", b)
 	switch kp {
 	case 1:
-		return w8R(kp, fmt.Sprintf("What is the double of %d? (enter a number)", a), strconv.Itoa(2*a),
-			fmt.Sprintf("\\(2\\times%d=%d\\).", a, 2*a), f)
+		return w8R(kp, fmt.Sprintf("Use the double of %d to find \\(%d+%d\\). (enter a number)", a, a, a+1), strconv.Itoa(2*a+1),
+			fmt.Sprintf("This is a near double: \\(%d+%d=2\\times%d+1=%d\\).", a, a+1, a, 2*a+1), f)
 	case 2:
 		return w8R(kp, fmt.Sprintf("What is half of %d? (enter a number)", 2*a), strconv.Itoa(a),
 			fmt.Sprintf("Half of \\(2\\times%d\\) is %d.", a, a), f)
@@ -252,11 +252,11 @@ func w8NearDoubles(kp int) generator.Problem {
 	w8RI(f, "a", a)
 	switch kp {
 	case 1:
-		return w8R(kp, fmt.Sprintf("What is the double of %d? (enter a number)", a), strconv.Itoa(2*a),
-			fmt.Sprintf("\\(2\\times%d=%d\\).", a, 2*a), f)
-	case 2:
-		return w8R(kp, fmt.Sprintf("What is \\(%d+%d\\)? (enter a number)", a, a+1), strconv.Itoa(2*a+1),
+		return w8R(kp, fmt.Sprintf("Use the double of %d to find \\(%d+%d\\). (enter a number)", a, a, a+1), strconv.Itoa(2*a+1),
 			fmt.Sprintf("This is a near double: \\(%d+%d=2\\times%d+1=%d\\).", a, a+1, a, 2*a+1), f)
+	case 2:
+		return w8R(kp, fmt.Sprintf("Use a near double to find \\(%d+%d\\). (enter a number)", a+1, a+2), strconv.Itoa(2*a+3),
+			fmt.Sprintf("\\(%d+%d=2\\times%d+1=%d\\).", a+1, a+2, a+1, 2*a+3), f)
 	default:
 		return w8R(kp, fmt.Sprintf("How much more than the double of %d is \\(%d+%d\\)? (enter a number)", a, a, a+1), "1",
 			fmt.Sprintf("\\(%d+%d\\) is one more than \\(2\\times%d\\).", a, a+1, a), f)
