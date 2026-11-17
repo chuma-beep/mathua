@@ -58,6 +58,7 @@ import {
   ArrowUpIcon,
   MessagesSquareIcon,
   MenuIcon,
+  PanelLeftIcon,
   XIcon,
 } from '@animateicons/react/lucide'
 
@@ -156,6 +157,7 @@ export const Check = wrap(CheckIcon as never)
 export const Search = wrap(SearchIcon as never)
 export const Ellipsis = wrap(EllipsisIcon as never)
 export const Menu = wrap(MenuIcon as never)
+export const PanelLeft = wrap(PanelLeftIcon as never)
 
 // The product assistant's dock. A speech pair rather than a single bubble: the
 // control opens a conversation, and one bubble reads as a notification badge.
