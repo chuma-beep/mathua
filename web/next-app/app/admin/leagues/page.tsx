@@ -11,7 +11,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui
 import { Skeleton } from '../../../components/ui/skeleton'
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '../../../components/ui/table'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../components/ui/tabs'
-import { Bar, BarChart, CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { Bar, BarChart, CartesianGrid, Line, LineChart, XAxis, YAxis } from 'recharts'
+import { ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent, type ChartConfig } from '../../../components/ui/chart'
 import { dicebearUrl, isDicebearStyle } from '../../../lib/dicebear'
 import { API_BASE, getAdminLeagueRange, getAdminLeagues, getErrorMessage, type AdminLeague, type AdminLeagueMember, type AdminLeagueRange } from '../../../lib/api'
 import { DateRangePicker } from '../../../components/ui/date-range-picker'
@@ -302,6 +303,15 @@ function TierViews({ rows, label }: { rows: PyramidRow[]; label: string }) {
   )
 }
 
+const NETFLOW_CONFIG = {
+  net: { label: 'Net flow', color: 'var(--chart-1)' },
+} satisfies ChartConfig
+
+const RATE_CONFIG = {
+  promoted: { label: 'Promoted', color: 'var(--chart-3)' },
+  demoted: { label: 'Demoted', color: 'var(--chart-4)' },
+} satisfies ChartConfig
+
 function MovementSection({ data }: { data: AdminLeagueRange }) {
   const comparable = Math.max(1, data.seats - data.new)
   const rows = [
@@ -361,32 +371,29 @@ function MovementSection({ data }: { data: AdminLeagueRange }) {
       <div className="mt-4 grid gap-3 lg:grid-cols-2">
         <div className="border border-mathua-border bg-mathua-surface p-4">
           <p className="font-mono text-[10px] uppercase tracking-wider text-mathua-secondary">Net flow by week</p>
-          <div className="mt-3 h-56">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={flow} margin={{ top: 4, right: 4, left: -18, bottom: 0 }}>
-                <CartesianGrid vertical={false} strokeDasharray="3 3" />
-                <XAxis dataKey="label" tickLine={false} axisLine={false} tickMargin={8} minTickGap={18} />
-                <YAxis tickLine={false} axisLine={false} />
-                <Tooltip />
-                <Bar dataKey="net" fill="var(--chart-1)" />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
+          <ChartContainer config={NETFLOW_CONFIG} className="mt-3 h-56 w-full">
+            <BarChart data={flow} margin={{ top: 4, right: 4, left: -18, bottom: 0 }}>
+              <CartesianGrid vertical={false} strokeDasharray="3 3" />
+              <XAxis dataKey="label" tickLine={false} axisLine={false} tickMargin={8} minTickGap={18} />
+              <YAxis tickLine={false} axisLine={false} />
+              <ChartTooltip content={<ChartTooltipContent indicator="line" />} />
+              <Bar dataKey="net" fill="var(--color-net)" />
+            </BarChart>
+          </ChartContainer>
         </div>
         <div className="border border-mathua-border bg-mathua-surface p-4">
           <p className="font-mono text-[10px] uppercase tracking-wider text-mathua-secondary">Movement rates</p>
-          <div className="mt-3 h-56">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={rates} margin={{ top: 4, right: 4, left: -18, bottom: 0 }}>
-                <CartesianGrid vertical={false} strokeDasharray="3 3" />
-                <XAxis dataKey="label" tickLine={false} axisLine={false} tickMargin={8} minTickGap={18} />
-                <YAxis tickLine={false} axisLine={false} tickFormatter={v => `${v}%`} />
-                <Tooltip formatter={(value) => `${value}%`} />
-                <Line type="monotone" dataKey="promoted" stroke="var(--chart-3)" strokeWidth={2} dot={false} />
-                <Line type="monotone" dataKey="demoted" stroke="var(--chart-4)" strokeWidth={2} dot={false} />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
+          <ChartContainer config={RATE_CONFIG} className="mt-3 h-56 w-full">
+            <LineChart data={rates} margin={{ top: 4, right: 4, left: -18, bottom: 0 }}>
+              <CartesianGrid vertical={false} strokeDasharray="3 3" />
+              <XAxis dataKey="label" tickLine={false} axisLine={false} tickMargin={8} minTickGap={18} />
+              <YAxis tickLine={false} axisLine={false} tickFormatter={v => `${v}%`} />
+              <ChartTooltip content={<ChartTooltipContent indicator="line" />} />
+              <ChartLegend content={<ChartLegendContent />} />
+              <Line type="monotone" dataKey="promoted" stroke="var(--color-promoted)" strokeWidth={2} dot={false} />
+              <Line type="monotone" dataKey="demoted" stroke="var(--color-demoted)" strokeWidth={2} dot={false} />
+            </LineChart>
+          </ChartContainer>
         </div>
       </div>
 
