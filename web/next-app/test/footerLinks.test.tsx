@@ -27,4 +27,13 @@ describe('the footer creator links', () => {
       expect(anchor).toHaveAttribute('rel', 'noreferrer')
     }
   })
+
+  it('links the Mathua account, not a personal profile, from the project resources', () => {
+    render(<Footer />)
+
+    const anchor = screen.getByRole('link', { name: 'Mathua on X' })
+    expect(anchor).toHaveAttribute('href', 'https://x.com/mathua__')
+    expect(anchor).toHaveAttribute('target', '_blank')
+    expect(anchor).toHaveAttribute('rel', 'noreferrer')
+  })
 })
