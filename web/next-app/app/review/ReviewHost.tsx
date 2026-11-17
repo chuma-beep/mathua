@@ -36,6 +36,7 @@ export default function ReviewHost() {
 
   const [reviewQuestion, setReviewQuestion] = useState('')
   const [reviewConceptName, setReviewConceptName] = useState('')
+  const [reviewConcept, setReviewConcept] = useState('')
   const [reviewCount, setReviewCount] = useState(0)
   const [reviewAnswerInput, setReviewAnswerInput] = useState('')
   const [reviewLastResult, setReviewLastResult] = useState<{ correct: boolean; feedback: string; explanation?: string; diagnosis?: string; xp?: number; xpAdjustment?: number; xpNote?: string; xpSource?: string } | null>(null)
@@ -73,6 +74,7 @@ export default function ReviewHost() {
       setReviewQuestion(res.question.question)
       reviewConceptId.current = res.question.concept_id
       setReviewConceptName(res.question.concept_name)
+      setReviewConcept(res.question.concept_id)
       reviewAttemptId.current = res.question.attempt_id ?? ''
       reviewShownAt.current = Date.now()
       setAnswerFormat(formatForGradingType(res.question.grading_type))
@@ -169,6 +171,7 @@ export default function ReviewHost() {
     reviewConceptId.current = cid
     reviewShownAt.current = Date.now()
     setReviewConceptName(name)
+    setReviewConcept(cid)
     reviewAttemptId.current = attemptId
     setAnswerFormat(formatForGradingType(gradingType))
     reviewGradingType.current = gradingType
@@ -268,6 +271,11 @@ export default function ReviewHost() {
         <div className="mb-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-mono text-mathua-muted justify-center">
           <span className={reviewAccuracy.correct / Math.max(reviewAccuracy.total, 1) >= 0.7 ? 'text-mathua-green' : ''}>{reviewAccuracy.correct}/{reviewAccuracy.total} correct</span>
           {reviewXp !== 0 ? <span className={reviewXp > 0 ? 'text-yellow-400' : 'text-mathua-red'}>{reviewXp > 0 ? '+' : ''}{reviewXp} XP</span> : null}
+          {reviewConcept ? (
+            <Link href={`/learn?concept=${encodeURIComponent(reviewConcept)}`} className="text-mathua-blue hover:underline">
+              Read the lesson →
+            </Link>
+          ) : null}
         </div>
         <div className={`bg-mathua-surface border rounded-none p-4 sm:p-6 mb-6 transition-colors w-full max-w-full min-w-0 overflow-hidden ${reviewLastResult ? (reviewLastResult.correct ? 'border-mathua-green-faint' : 'border-mathua-red-faint') : 'border-mathua-border'}`}>
           <div className="bg-mathua-code border border-mathua-border rounded-none p-4 sm:p-6 text-center mb-4">
@@ -328,6 +336,13 @@ export default function ReviewHost() {
               {reviewLastResult.diagnosis && (
                 <p className="mt-2 text-center font-mono text-[11px] text-mathua-muted">{reviewLastResult.diagnosis}</p>
               )}
+              {reviewConcept ? (
+                <p className="mt-3 text-center">
+                  <Link href={`/learn?concept=${encodeURIComponent(reviewConcept)}`} className="font-mono text-[11px] text-mathua-blue hover:underline">
+                    Read the lesson →
+                  </Link>
+                </p>
+              ) : null}
               <XPAdjustmentNote
                 adjustment={reviewLastResult.xpAdjustment}
                 note={reviewLastResult.xpNote}

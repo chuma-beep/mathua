@@ -54,3 +54,35 @@ func TestMeanAnswerIsExact(t *testing.T) {
 		}
 	}
 }
+
+// Report 468: "at least at the ordinal level" was read as "only ordinal", so a
+// learner who counted the single ordinal variable answered 1. The stem now
+// names all three levels, and the explanation lists the level of every
+// variable so the count can be checked.
+func TestMeasurementLevelsStemNamesEveryQualifyingLevel(t *testing.T) {
+	gen := &measurementLevelsGen{}
+	for seed := int64(1); seed <= 100; seed++ {
+		p := gen.Generate(generator.GeneratorContext{Difficulty: 0.5, Seed: seed, KPOrdinal: 2})
+		if !strings.Contains(p.Question, "at the ordinal level or higher (ordinal, interval or ratio)") {
+			t.Fatalf("seed %d: stem does not name the qualifying levels: %q", seed, p.Question)
+		}
+		count := 0
+		for _, field := range strings.Split(p.Explanation, ";") {
+			i := strings.LastIndex(field, ": level ")
+			if i < 0 {
+				continue
+			}
+			raw := strings.TrimSuffix(strings.TrimSpace(field[i+len(": level "):]), ".")
+			level, err := strconv.Atoi(raw)
+			if err != nil {
+				t.Fatalf("seed %d: unreadable level %q in %q", seed, raw, field)
+			}
+			if level >= 2 {
+				count++
+			}
+		}
+		if got := strconv.Itoa(count); p.Answer != got {
+			t.Fatalf("seed %d: answer %q does not match %s qualifying levels: %q", seed, p.Answer, got, p.Explanation)
+		}
+	}
+}

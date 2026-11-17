@@ -19,7 +19,7 @@ import {
   type DiagnosticProgress,
 } from '../../lib/api'
 import { getErrorMessage, getErrorStatus } from '../../lib/api'
-import { formatForGradingType, type AnswerFormat } from '../../lib/answerFormat'
+import { formatForGradingType, formatForQuestion, type AnswerFormat } from '../../lib/answerFormat'
 import {
   MAX_SKIPS,
   toSubmitError,
@@ -150,7 +150,7 @@ export default function OnboardPage() {
   const conceptId = useRef('')
   // Next question staged from the submit response, revealed by goNext(),
   // never fetched. Cleared on advance, so double-press is a no-op.
-  const pendingNext = useRef<{ question: string; conceptId: string; conceptName: string; gradingType: string } | null>(null)
+  const pendingNext = useRef<{ question: string; conceptId: string; conceptName: string; format: AnswerFormat } | null>(null)
   // Whether the last attempt was an admitted unknown. A retry that forgets this
   // posts an empty graded answer, so the learner is marked wrong for a question
   // they said they could not answer.
@@ -267,7 +267,7 @@ export default function OnboardPage() {
     conceptId.current = res.concept_id || ''
     questionShownAt.current = Date.now()
     setConceptName(res.concept_name || '')
-    setAnswerFormat(formatForGradingType(res.grading_type))
+    setAnswerFormat(formatForQuestion(res))
     setQuestionCount(1)
     setProgress(res.progress ?? null)
     setAccuracy({ correct: 0, total: 0 })
@@ -351,7 +351,7 @@ export default function OnboardPage() {
       conceptId.current = data.concept_id || ''
       questionShownAt.current = Date.now()
       setConceptName(data.concept_name || '')
-      setAnswerFormat(formatForGradingType(data.grading_type))
+      setAnswerFormat(formatForQuestion(data))
       if (data.progress) {
         setProgress(data.progress)
         setQuestionCount(data.progress.answered + 1)
@@ -414,7 +414,7 @@ export default function OnboardPage() {
       if (dontKnow) {
         // Cleanly advance to the next probe without holding on a dead-end feedback card
         setAccuracy(prev => ({ correct: prev.correct, total: prev.total + 1 }))
-        applyQuestion(data.question, data.concept_id || '', data.concept_name || '', data.grading_type || '')
+        applyQuestion(data.question, data.concept_id || '', data.concept_name || '', formatForQuestion(data))
         setLoading(false)
         return
       }
@@ -431,7 +431,7 @@ export default function OnboardPage() {
         question: data.question || '',
         conceptId: data.concept_id || '',
         conceptName: data.concept_name || '',
-        gradingType: data.grading_type || '',
+        format: formatForQuestion(data),
       }
       setLoading(false)
     } catch (e) {
@@ -477,12 +477,12 @@ export default function OnboardPage() {
     }
   }
 
-  function applyQuestion(question: string, cid: string, name: string, gradingType: string) {
+  function applyQuestion(question: string, cid: string, name: string, format: AnswerFormat) {
     setQuestion(question)
     conceptId.current = cid
     questionShownAt.current = Date.now()
     setConceptName(name)
-    setAnswerFormat(formatForGradingType(gradingType))
+    setAnswerFormat(format)
     setQuestionCount(prev => prev + 1)
     setLastResult(null)
     setAnswerInput('')
@@ -504,7 +504,7 @@ export default function OnboardPage() {
       conceptId.current = data.concept_id || ''
       questionShownAt.current = Date.now()
       setConceptName(data.concept_name || '')
-      setAnswerFormat(formatForGradingType(data.grading_type || ''))
+      setAnswerFormat(formatForQuestion(data))
       setLastResult(null)
       setAnswerInput('')
     } catch (e) {
@@ -529,7 +529,7 @@ export default function OnboardPage() {
         }, 800)
         return
       }
-      applyQuestion(data.question || '', data.concept_id || '', data.concept_name || '', data.grading_type || '')
+      applyQuestion(data.question || '', data.concept_id || '', data.concept_name || '', formatForQuestion(data))
     } catch (e) {
       setSubmitError(toSubmitError(e, 'Failed to skip question.'))
     } finally {
@@ -555,7 +555,7 @@ export default function OnboardPage() {
     const staged = pendingNext.current
     if (!staged) return
     pendingNext.current = null
-    applyQuestion(staged.question, staged.conceptId, staged.conceptName, staged.gradingType)
+    applyQuestion(staged.question, staged.conceptId, staged.conceptName, staged.format)
   }
 
   // Keyboard flow: put the cursor back in the answer box whenever a fresh
