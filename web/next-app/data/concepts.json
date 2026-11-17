@@ -2277,7 +2277,7 @@
     "domain": "algebra",
     "grading_type": "expression",
     "id": "alg.factor.trinomial",
-    "label": "Factor trinomials of the form x² + bx + c",
+    "label": "Factor trinomials of the form x\u00b2 + bx + c",
     "mastery_threshold": {
       "avg_time_seconds": 20,
       "streak": 10
@@ -2308,7 +2308,7 @@
     "domain": "algebra",
     "grading_type": "expression",
     "id": "alg.factor.ac_method",
-    "label": "Factor trinomials ax² + bx + c using AC method",
+    "label": "Factor trinomials ax\u00b2 + bx + c using AC method",
     "mastery_threshold": {
       "avg_time_seconds": 25,
       "streak": 10
@@ -11710,7 +11710,7 @@
     "domain": "complex_numbers",
     "grading_type": "numeric",
     "id": "complex.adv.mobius",
-    "label": "Möbius transformations",
+    "label": "M\u00f6bius transformations",
     "mastery_threshold": {
       "avg_time_seconds": 24,
       "streak": 10
@@ -12274,7 +12274,7 @@
     "domain": "complex_numbers",
     "grading_type": "numeric",
     "id": "complex.adv.rouche",
-    "label": "Rouché's theorem",
+    "label": "Rouch\u00e9's theorem",
     "mastery_threshold": {
       "avg_time_seconds": 26,
       "streak": 10
@@ -19104,7 +19104,7 @@
   },
   {
     "domain": "geometry",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "geo.basic.points_lines",
     "label": "Points, lines, and planes",
     "mastery_threshold": {
@@ -21432,7 +21432,7 @@
     "domain": "graph_theory",
     "grading_type": "numeric",
     "id": "graph.turan",
-    "label": "Turán's theorem",
+    "label": "Tur\u00e1n's theorem",
     "mastery_threshold": {
       "avg_time_seconds": 28,
       "streak": 10
@@ -26687,7 +26687,7 @@
     "domain": "number_theory",
     "grading_type": "numeric",
     "id": "nt.basics.bezout",
-    "label": "Bézout's identity",
+    "label": "B\u00e9zout's identity",
     "mastery_threshold": {
       "avg_time_seconds": 15,
       "streak": 10
@@ -26801,7 +26801,7 @@
     "domain": "number_theory",
     "grading_type": "numeric",
     "id": "nt.adv.mobius",
-    "label": "Möbius function and inversion",
+    "label": "M\u00f6bius function and inversion",
     "mastery_threshold": {
       "avg_time_seconds": 24,
       "streak": 10
@@ -29038,7 +29038,7 @@
     "domain": "numerical_analysis",
     "grading_type": "numeric",
     "id": "numa.roots.aitken",
-    "label": "Aitken's Δ² acceleration",
+    "label": "Aitken's \u0394\u00b2 acceleration",
     "mastery_threshold": {
       "avg_time_seconds": 26,
       "streak": 10
@@ -29220,7 +29220,7 @@
     "domain": "numerical_analysis",
     "grading_type": "numeric",
     "id": "numa.approx.pade",
-    "label": "Padé approximants",
+    "label": "Pad\u00e9 approximants",
     "mastery_threshold": {
       "avg_time_seconds": 28,
       "streak": 10
@@ -43161,7 +43161,7 @@
     "domain": "topology",
     "grading_type": "numeric",
     "id": "topo.compactification.stone_cech",
-    "label": "Stone-Čech compactification",
+    "label": "Stone-\u010cech compactification",
     "mastery_threshold": {
       "avg_time_seconds": 26,
       "streak": 10
@@ -44896,7 +44896,7 @@
     "domain": "trigonometry",
     "grading_type": "numeric",
     "id": "trig.ident.pythagorean",
-    "label": "Pythagorean identity sin²θ + cos²θ = 1",
+    "label": "Pythagorean identity sin\u00b2\u03b8 + cos\u00b2\u03b8 = 1",
     "mastery_threshold": {
       "avg_time_seconds": 15,
       "streak": 10
@@ -44911,7 +44911,7 @@
     "domain": "trigonometry",
     "grading_type": "numeric",
     "id": "trig.basics.special_angles",
-    "label": "Exact values for 30°, 45°, 60°",
+    "label": "Exact values for 30\u00b0, 45\u00b0, 60\u00b0",
     "mastery_threshold": {
       "avg_time_seconds": 15,
       "streak": 10
