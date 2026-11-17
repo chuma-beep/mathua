@@ -376,7 +376,10 @@ function MovementSection({ data }: { data: AdminLeagueRange }) {
               <CartesianGrid vertical={false} strokeDasharray="3 3" />
               <XAxis dataKey="label" tickLine={false} axisLine={false} tickMargin={8} minTickGap={18} />
               <YAxis tickLine={false} axisLine={false} />
-              <ChartTooltip content={<ChartTooltipContent indicator="line" />} />
+              <ChartTooltip
+                cursor={{ fill: 'var(--surface-elevated)' }}
+                content={<ChartTooltipContent indicator="line" />}
+              />
               <Bar dataKey="net" fill="var(--color-net)" />
             </BarChart>
           </ChartContainer>
