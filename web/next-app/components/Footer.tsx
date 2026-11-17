@@ -319,6 +319,16 @@ export default function Footer({ className = '' }: FooterProps) {
                     GitHub
                   </a>
                 </li>
+                <li>
+                  <a
+                    href="https://x.com/mathua__"
+                    target="_blank"
+                    rel="noreferrer"
+                    className={linkClass}
+                  >
+                    Mathua on X
+                  </a>
+                </li>
               </ul>
             </nav>
 
