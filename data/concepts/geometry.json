@@ -4,7 +4,7 @@
     "label": "Points, lines, and planes",
     "domain": "geometry",
     "subdomain": "geometry.basics",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [],
     "mastery_threshold": {
       "streak": 10,

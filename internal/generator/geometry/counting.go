@@ -72,8 +72,7 @@ func countGeoVerdicts(lead string, pool []geoVerdict) generator.Problem {
 }
 
 func pointsLinesProblem() generator.Problem {
-	return countGeoVerdicts("How many of these statements about points, lines and planes are true?", []geoVerdict{
-		{"A point has no length, width or depth", true, "a point is zero-dimensional"},
+	pool := []geoVerdict{{"A point has no length, width or depth", true, "a point is zero-dimensional"},
 		{"Exactly one straight line passes through two distinct points", true, "two points determine a unique line"},
 		{"A line extends infinitely in both directions", true, "a line has no endpoints"},
 		{"A ray has exactly one endpoint", true, "the other direction continues forever"},
@@ -88,8 +87,28 @@ func pointsLinesProblem() generator.Problem {
 		{"Two distinct points determine infinitely many distinct lines", false, "they determine exactly one line"},
 		{"A line has exactly one endpoint", false, "a line has no endpoints"},
 		{"Skew lines intersect at a right angle", false, "skew lines never intersect"},
-		{"Any three points are always collinear", false, "three points can form a triangle"},
-	})
+		{"Any three points are always collinear", false, "three points can form a triangle"}}
+	var trueStatements, falseStatements []geoVerdict
+	for _, v := range pool {
+		if v.yes {
+			trueStatements = append(trueStatements, v)
+		} else {
+			falseStatements = append(falseStatements, v)
+		}
+	}
+	rand.Shuffle(len(trueStatements), func(i, j int) { trueStatements[i], trueStatements[j] = trueStatements[j], trueStatements[i] })
+	rand.Shuffle(len(falseStatements), func(i, j int) { falseStatements[i], falseStatements[j] = falseStatements[j], falseStatements[i] })
+	correct := trueStatements[0]
+	chosenFalse := falseStatements[:3]
+	p := generator.MultipleChoice("Which of these statements about points, lines and planes is true?", correct.label, chosenFalse[0].label, chosenFalse[1].label, chosenFalse[2].label)
+	notes := make([]string, 0, 4)
+	notes = append(notes, fmt.Sprintf("%s: true, %s", correct.label, correct.note))
+	for _, v := range chosenFalse {
+		notes = append(notes, fmt.Sprintf("%s: false, %s", v.label, v.note))
+	}
+	p.Explanation = strings.Join(notes, "; ")
+	p.Facts = map[string]string{"answer": correct.label}
+	return p
 }
 
 func angleTypesProblem() generator.Problem {
