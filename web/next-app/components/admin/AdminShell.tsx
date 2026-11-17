@@ -34,19 +34,29 @@ type SidebarProps = {
 function AdminSidebar({ items, pathname, loading, me, mounted, toggleTheme, collapsed, onToggle, onNavigate }: SidebarProps) {
   return (
     <>
-      <Link
-        href="/admin"
-        onClick={onNavigate}
-        className="flex h-16 items-center gap-2 border-b border-mathua-border px-5"
-      >
-        <span aria-hidden="true" className="font-mono text-lg text-mathua-blue">λ</span>
-        {!collapsed && (
-          <span className="min-w-0">
-            <span className="block font-mono text-xs uppercase tracking-wider text-mathua-primary">Mathua</span>
-            <span className="block font-mono text-[10px] uppercase tracking-wider text-mathua-muted">Administration</span>
-          </span>
+      <div className={`flex h-16 items-center border-b border-mathua-border ${collapsed ? 'justify-center px-1' : 'justify-between px-5'}`}>
+        <Link href="/admin" onClick={onNavigate} className="flex min-w-0 items-center gap-2">
+          <span aria-hidden="true" className="font-mono text-lg text-mathua-blue">λ</span>
+          {!collapsed && (
+            <span className="min-w-0">
+              <span className="block font-mono text-xs uppercase tracking-wider text-mathua-primary">Mathua</span>
+              <span className="block font-mono text-[10px] uppercase tracking-wider text-mathua-muted">Administration</span>
+            </span>
+          )}
+        </Link>
+        {onToggle && (
+          <button
+            type="button"
+            onClick={onToggle}
+            aria-label={collapsed ? 'Expand admin navigation' : 'Collapse admin navigation'}
+            aria-expanded={!collapsed}
+            title={collapsed ? 'Expand admin navigation' : 'Collapse admin navigation'}
+            className="flex h-8 w-8 shrink-0 items-center justify-center text-mathua-secondary hover:text-mathua-blue"
+          >
+            {collapsed ? <ChevronsRight size={15} aria-hidden="true" /> : <ChevronsLeft size={15} aria-hidden="true" />}
+          </button>
         )}
-      </Link>
+      </div>
 
       <nav aria-label="Admin sections" className="min-h-0 flex-1 overflow-y-auto px-3 py-4">
         {loading ? (
@@ -60,7 +70,7 @@ function AdminSidebar({ items, pathname, loading, me, mounted, toggleTheme, coll
               if (groupItems.length === 0) return null
               return (
                 <div key={group}>
-                  <p className="px-3 pb-1 font-mono text-[9px] uppercase tracking-[0.18em] text-mathua-muted">{group}</p>
+                  {!collapsed && <p className="px-3 pb-1 font-mono text-[9px] uppercase tracking-[0.18em] text-mathua-muted">{group}</p>}
                   <ul className="space-y-1">
                     {groupItems.map((item) => {
                       const active = isAdminNavActive(pathname ?? '', item.href)
@@ -93,23 +103,10 @@ function AdminSidebar({ items, pathname, loading, me, mounted, toggleTheme, coll
       </nav>
 
       <div className="border-t border-mathua-border p-3">
-        {onToggle && (
-          <button
-            type="button"
-            onClick={onToggle}
-            aria-label={collapsed ? 'Expand admin navigation' : 'Collapse admin navigation'}
-            aria-expanded={!collapsed}
-            title={collapsed ? 'Expand admin navigation' : 'Collapse admin navigation'}
-            className={`flex h-10 items-center gap-2.5 font-mono text-xs text-mathua-secondary hover:text-mathua-blue ${collapsed ? 'w-full justify-center px-0' : 'w-full px-3'}`}
-          >
-            {collapsed ? <ChevronsRight size={15} aria-hidden="true" /> : <ChevronsLeft size={15} aria-hidden="true" />}
-            {!collapsed && <span>Collapse sidebar</span>}
-          </button>
-        )}
         <Link
           href="/"
           onClick={onNavigate}
-          className="flex h-10 items-center gap-2.5 px-3 font-mono text-xs text-mathua-secondary hover:text-mathua-blue"
+          className={`flex h-10 items-center gap-2.5 font-mono text-xs text-mathua-secondary hover:text-mathua-blue ${collapsed ? 'justify-center px-0' : 'px-3'}`}
         >
           <House size={15} aria-hidden="true" />
           {!collapsed && <span>Learner site</span>}
@@ -125,7 +122,7 @@ function AdminSidebar({ items, pathname, loading, me, mounted, toggleTheme, coll
             {!collapsed && <span>Toggle theme</span>}
           </button>
         )}
-        {me && (
+        {me && !collapsed && (
           <p className="mt-2 truncate px-3 font-mono text-[10px] text-mathua-muted" title={me.id}>
             {me.role} · {me.id.slice(0, 8)}
           </p>
@@ -188,9 +185,10 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
                   <button
                     type="button"
                     aria-label="Open admin navigation"
-                    className="flex h-9 w-9 items-center justify-center border border-mathua-border bg-mathua-surface text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue"
+                    className="flex h-9 items-center gap-1.5 border border-mathua-border bg-mathua-surface px-2.5 font-mono text-[11px] text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue"
                   >
-                    <PanelLeft size={16} aria-hidden="true" />
+                    <PanelLeft size={15} aria-hidden="true" />
+                    Menu
                   </button>
                 </SheetTrigger>
                 <SheetContent side="left" className="w-60 border-r border-mathua-border bg-mathua-surface p-0">
