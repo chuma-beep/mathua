@@ -1,8 +1,8 @@
 import { describe, it, expect, vi, beforeEach, afterAll } from 'vitest'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import OnboardPage from '../app/onboard/page'
 import { submitGoalAnswer } from '../lib/api'
-import { answerValue, findAnswerField, findMathField, typeAnswer } from './helpers/answerInput'
+import { answerField, answerValue, findAnswerField, findMathField, typeAnswer } from './helpers/answerInput'
 
 // The onboard page routes to the results screen and back through the router.
 vi.mock('next/navigation', () => ({
@@ -104,8 +104,11 @@ describe('onboard diagnostic answer reset', () => {
     expect(vi.mocked(submitGoalAnswer)).toHaveBeenCalledWith('s1', 'arith.add.single', '', expect.any(Number), true)
 
     // The learner is looking at a new question: the box must not still say 7.
-    const next = await findAnswerField()
-    expect(answerValue(next)).toBe('')
+    // The same loading input is still mounted while the reset effect runs.
+    // Reading it immediately can catch the previous answer before React
+    // clears it, which is the flake this waits out.
+    await waitFor(() => expect(answerValue(answerField())).toBe(''))
+    const next = answerField()
 
     // What they type for this question is the whole answer, and it is what the
     // editor takes over when its chunk finally arrives.
