@@ -19,3 +19,23 @@ func TestTupleAcceptsDegreeVariants(t *testing.T) {
 		t.Error("a different text tuple graded correct")
 	}
 }
+
+func TestTupleAcceptsRearrangedParametricEquations(t *testing.T) {
+	g := tupleGrader{}
+	expected := "x=5+3t,y=-4+t"
+	for _, answer := range []string{
+		"x = 3t + 5, y = t -4",
+		"x=5+3*t,y=-4+t",
+		"x = 5 + 3t, y = t - 4",
+	} {
+		if r := g.grade(expected, answer); !r.Correct {
+			t.Errorf("grade(%q) = incorrect, want correct: %s", answer, r.Feedback)
+		}
+	}
+	if r := g.grade(expected, "y = 3t + 5, x = t - 4"); r.Correct {
+		t.Error("equations with swapped labels graded correct")
+	}
+	if r := g.grade(expected, "x = 3t + 5, y = t + 4"); r.Correct {
+		t.Error("a different parametric line graded correct")
+	}
+}

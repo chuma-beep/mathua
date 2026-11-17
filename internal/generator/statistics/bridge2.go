@@ -59,17 +59,19 @@ func (g *measurementLevelsGen) Generate(ctx generator.GeneratorContext) generato
 	case 2:
 		perm := rand.Perm(len(pool))[:6]
 		parts := make([]string, 0, 6)
+		levels := make([]string, 0, 6)
 		count := 0
 		for i, j := range perm {
 			parts = append(parts, fmt.Sprintf("(%c) %s", 'a'+i, pool[j].id))
+			levels = append(levels, fmt.Sprintf("%s: level %d", pool[j].id, pool[j].level))
 			if pool[j].level >= 2 {
 				count++
 			}
 		}
 		return generator.Problem{
-			Question:    fmt.Sprintf("How many of these variables are measured at least at the ordinal level? %s (enter a number)", strings.Join(parts, " ")),
+			Question:    fmt.Sprintf("How many of these variables are measured at the ordinal level or higher (ordinal, interval or ratio)? %s (enter a number)", strings.Join(parts, " ")),
 			Answer:      strconv.Itoa(count),
-			Explanation: fmt.Sprintf("Exactly %d of the six variables are ordinal, interval or ratio; the rest are nominal.", count),
+			Explanation: fmt.Sprintf("Exactly %d of the six variables are ordinal, interval or ratio; the rest are nominal. %s.", count, strings.Join(levels, "; ")),
 			Facts:       map[string]string{"kind": "at_least_ordinal", "answer": strconv.Itoa(count)},
 		}
 	default:

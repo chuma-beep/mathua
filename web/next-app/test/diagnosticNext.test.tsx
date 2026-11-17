@@ -5,6 +5,7 @@ import { DiagnosticStep, WelcomeStep } from '../app/onboard/steps'
 import OnboardPage from '../app/onboard/page'
 import QuizHost from '../app/goals/QuizHost'
 import {
+  startGoalDiagnostic,
   submitGoalAnswer,
   skipGoalQuestion,
   retryGoalQuestion,
@@ -385,6 +386,28 @@ describe('onboard diagnostic flow', () => {
     await screen.findByText('Q2 text')
     expect(screen.queryByRole('button', { name: 'Next →' })).toBeNull()
     expect(await findAnswerField()).toBe(document.activeElement)
+  })
+
+  it('uses the served input hint and mode instead of the grading type', async () => {
+    vi.mocked(startGoalDiagnostic).mockResolvedValueOnce({
+      session_id: 's1',
+      concept_id: 'arith.sqrt.simplify',
+      concept_name: 'Simplify square roots',
+      question: 'Simplify: $\\sqrt{125}$',
+      done: false,
+      grading_type: 'numeric',
+      answer_hint: 'Coefficient and radical, e.g. 5 sqrt(2)',
+      answer_input_mode: 'text',
+      progress: PROG0,
+    } as never)
+    render(<OnboardPage />)
+    fireEvent.click(await screen.findByRole('button', { name: /Arithmetic/ }))
+    fireEvent.click(screen.getByRole('button', { name: /Start diagnostic test/ }))
+    fireEvent.click(await screen.findByRole('button', { name: /Begin diagnostic/ }))
+
+    expect(await screen.findByText('Coefficient and radical, e.g. 5 sqrt(2)')).toBeInTheDocument()
+    expect(screen.queryByText('Answer with a number, fraction or mixed number (e.g. 4 1/10)')).toBeNull()
+    expect((await findAnswerField()).getAttribute('inputmode')).not.toBe('numeric')
   })
 
   it('numbers the question on screen, and reports how long it took', async () => {

@@ -53,6 +53,8 @@ describe('ReviewHost', () => {
     fireEvent.click(screen.getByRole('button', { name: /Start review/ }))
     expect(await screen.findByText('2 + 3 = ?')).toBeTruthy()
     expect(screen.getByText('Review question 1')).toBeTruthy()
+    const lesson = screen.getByRole('link', { name: /Read the lesson/ })
+    expect(lesson.getAttribute('href')).toBe('/learn?concept=arith.add.single')
   })
 
   it('answers, advances manually, then completes with a score', async () => {
