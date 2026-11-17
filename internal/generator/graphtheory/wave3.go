@@ -550,6 +550,7 @@ func w3StableMatching(kp int) generator.Problem {
 		queue[i] = i
 	}
 	proposals := 0
+	var trace []string
 	for len(queue) > 0 {
 		m := queue[0]
 		queue = queue[1:]
@@ -560,13 +561,16 @@ func w3StableMatching(kp int) generator.Problem {
 		next[m]++
 		proposals++
 		if matchW[w] == -1 {
+			trace = append(trace, fmt.Sprintf("man %d proposes to woman %d and is accepted", m+1, w+1))
 			matchM[m], matchW[w] = w, m
 		} else if rankW[w][m] < rankW[w][matchW[w]] {
 			old := matchW[w]
+			trace = append(trace, fmt.Sprintf("man %d proposes to woman %d and replaces man %d", m+1, w+1, old+1))
 			matchM[old] = -1
 			queue = append(queue, old)
 			matchM[m], matchW[w] = w, m
 		} else {
+			trace = append(trace, fmt.Sprintf("man %d proposes to woman %d and is rejected", m+1, w+1))
 			queue = append(queue, m)
 		}
 	}
@@ -585,8 +589,8 @@ func w3StableMatching(kp int) generator.Problem {
 		return w3G(kp, fmt.Sprintf("Run man-proposing Gale-Shapley with %d men and %d women. The men's preferences are %v and the women's are %v (columns list men in preference order). Who is the partner of man %d? (enter 1..%d)", n, n, men, women, i+1, n), strconv.Itoa(matchM[i]+1),
 			fmt.Sprintf("Trace the proposals. Man %d ends with woman %d.", i+1, matchM[i]+1), f)
 	case 2:
-		return w3G(kp, fmt.Sprintf("For the stable-matching instance with %d men and %d women, men's preferences %v and women's preferences %v, how many proposals are made before the algorithm stops?", n, n, men, women), strconv.Itoa(proposals),
-			fmt.Sprintf("Count every proposal, including rejected ones. The algorithm makes %d proposals.", proposals), f)
+		return w3G(kp, fmt.Sprintf("For the stable-matching instance with %d men and %d women, men's preferences %v and women's preferences %v, how many proposals are made before the algorithm stops, counting every proposal including rejected ones?", n, n, men, women), strconv.Itoa(proposals),
+			fmt.Sprintf("Count every proposal, including rejected ones. %s. The algorithm makes %d proposals.", strings.Join(trace, "; "), proposals), f)
 	default:
 		i, j := w3GR(0, n-1), w3GR(0, n-1)
 		w3GI(f, "asked_man", i+1)

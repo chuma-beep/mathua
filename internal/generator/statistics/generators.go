@@ -284,7 +284,7 @@ func (g *meanGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		answer = strconv.Itoa(sum / n)
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find the mean of: %s", strings.Join(valStrs, ", ")),
+		Question:    fmt.Sprintf("Find the mean of: %s (enter an exact integer or fraction)", strings.Join(valStrs, ", ")),
 		Answer:      answer,
 		Explanation: fmt.Sprintf("Mean = (%s) / %d = %d / %d = %s (about %.1f)", strings.Join(valStrs, " + "), n, sum, n, answer, float64(sum)/float64(n)),
 		Facts:       map[string]string{"sum": strconv.Itoa(sum), "n": strconv.Itoa(n), "answer": answer},
