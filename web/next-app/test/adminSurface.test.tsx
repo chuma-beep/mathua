@@ -140,6 +140,18 @@ describe('the client offers administration without enforcing it', () => {
     expect(screen.getByText(/needs a staff role/)).toBeTruthy()
   })
 
+  it('collapses the desktop sidebar and remembers the choice', async () => {
+    localStorage.clear()
+    const { unmount } = render(<AdminUsersPage />)
+    fireEvent.click(await screen.findByRole('button', { name: 'Collapse admin navigation' }))
+    expect(screen.getByRole('button', { name: 'Expand admin navigation' })).toBeTruthy()
+    expect(localStorage.getItem('mathua_admin_sidebar')).toBe('collapsed')
+    unmount()
+
+    render(<AdminUsersPage />)
+    await waitFor(() => expect(screen.getByRole('button', { name: 'Expand admin navigation' })).toBeTruthy())
+  })
+
   it('offers the same sections in the mobile sidebar sheet', async () => {
     render(<AdminUsersPage />)
     fireEvent.click(await screen.findByRole('button', { name: 'Open admin navigation' }))
