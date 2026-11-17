@@ -12,6 +12,7 @@ import (
 	"path"
 	"path/filepath"
 	"runtime/debug"
+	"strconv"
 	"strings"
 	"sync"
 	"syscall"
@@ -146,6 +147,31 @@ func adminCommand(args []string) error {
 		fmt.Printf("promoted %s (%s) to owner, audit %s by %s\n",
 			email, st.ID, res.Action, adminActorCLI)
 		return nil
+	case "resolve-reports":
+		if len(args) != 3 {
+			return errors.New("usage: mathua admin resolve-reports <id,id,...> <resolution>")
+		}
+		resolution := strings.TrimSpace(args[2])
+		if resolution == "" {
+			return errors.New("resolution is required")
+		}
+		repo, _, err := openRepo()
+		if err != nil {
+			return err
+		}
+		defer repo.Close()
+		for _, raw := range strings.Split(args[1], ",") {
+			id, err := strconv.ParseInt(strings.TrimSpace(raw), 10, 64)
+			if err != nil {
+				return fmt.Errorf("invalid report id %q", raw)
+			}
+			rep, err := repo.UpdateReportStatusAudited(adminActorCLI, id, "resolved", resolution)
+			if err != nil {
+				return fmt.Errorf("resolve report %d: %w", id, err)
+			}
+			fmt.Printf("resolved report %d (%s)\n", rep.ID, rep.Status)
+		}
+		return nil
 	case "backfill-leagues":
 		if len(args) > 2 {
 			return errors.New("usage: mathua admin backfill-leagues [week]")
@@ -181,7 +207,7 @@ func adminCommand(args []string) error {
 		fmt.Printf("seated %d learners in leagues for week %s\n", seated, week)
 		return nil
 	default:
-		return fmt.Errorf("unknown admin command %q. Available: promote <email>, backfill-leagues [week]", args[0])
+		return fmt.Errorf("unknown admin command %q. Available: promote <email>, backfill-leagues [week], resolve-reports <ids> <resolution>", args[0])
 	}
 }
 
