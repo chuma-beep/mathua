@@ -101,6 +101,23 @@ def strip_metadata(text):
     return text
 
 
+def strip_references(md):
+    """Remove a trailing 'Selected references' section.
+
+    Algebrica appends a bullet list of links to other universities' notes. It is
+    source provenance, and the lesson body is shown to a learner verbatim, so it
+    reads as a wall of links at the end of an explanation. Only the exact heading
+    is matched, and only when it is the last section: a later heading means the
+    body is returned untouched, because cutting there would delete real prose.
+    """
+    match = re.search(r'^## Selected references[ \t]*$', md, flags=re.MULTILINE | re.IGNORECASE)
+    if not match:
+        return md
+    if re.search(r'^#{1,2} ', md[match.end():], flags=re.MULTILINE):
+        return md
+    return md[:match.start()].rstrip() + "\n"
+
+
 def clean_markdown(md):
     """Post-process the html2text markdown output."""
     # Remove horizontal rules (---, ***, * * *)
@@ -121,6 +138,11 @@ def clean_markdown(md):
 
     # Strip metadata section
     md = strip_metadata(md)
+
+    # The trailing "Selected references" list is provenance, not teaching, and
+    # `internal/lessons/references.go` drops it from the served body as well.
+    # Dropping it here keeps a fresh scrape from writing it back.
+    md = strip_references(md)
 
     # Remove excessive blank lines (3+ → 2)
     md = re.sub(r'\n{4,}', '\n\n\n', md)

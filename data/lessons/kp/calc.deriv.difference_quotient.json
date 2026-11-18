@@ -18,12 +18,12 @@
     ]
   },
   {
-    "label": "Selected references",
-    "section": "Selected references",
+    "label": "Rationalising a square root",
+    "section": "Example 2",
     "subgoals": [
-      "Collect the quotient-limit definition",
-      "Point each reference at slope vs rate",
-      "Pick the worked-example source first"
+      "Rationalise the numerator of (sqrt(4+h)-2)/h",
+      "Cancel h and read the secant slope",
+      "Take h to 0 to get the derivative 1/4 at x = 4"
     ]
   }
 ]
