@@ -5,14 +5,6 @@
     "subgoals": [
       "Describe a partition and its width",
       "Choose left, right or midpoint sample points"
-    ]
-  },
-  {
-    "label": "Building a Riemann sum",
-    "section": "Building a Riemann sum",
-    "subgoals": [
-      "Write a sum for a given partition",
-      "Compute a left or right Riemann sum"
     ],
     "visual": {
       "type": "calc.riemann",
@@ -30,6 +22,14 @@
         "rule": "left"
       }
     }
+  },
+  {
+    "label": "Building a Riemann sum",
+    "section": "Building a Riemann sum",
+    "subgoals": [
+      "Write a sum for a given partition",
+      "Compute a left or right Riemann sum"
+    ]
   },
   {
     "label": "The definite integral as a limit",
