@@ -172,7 +172,7 @@ export interface GraphRes {
   count: number
 }
 
-export type LeaderboardView = 'weekly' | 'all_time'
+export type LeaderboardView = 'weekly' | 'monthly' | 'all_time'
 
 // No student id reaches the browser. `id` is a username (or a one-way
 // derivation of the account id), which is what the avatar route and React keys
@@ -208,14 +208,20 @@ export interface LeaderboardPosition {
 
 export interface LeaderboardBoard {
   view: LeaderboardView
+  period_kind?: LeaderboardView
+  period_start?: string
+  period_end?: string
+  final?: boolean
+  earliest_anchor?: string
   page: number
   page_size: number
   total: number
   total_pages: number
   entries: LeaderboardEntry[]
   me?: LeaderboardPosition
-  week_start: string
-  week_end: string
+  // Kept for one release so a cached bundle can read a weekly response.
+  week_start?: string
+  week_end?: string
 }
 
 export interface Scores {
@@ -374,8 +380,10 @@ export async function getLeaderboard(
   view: LeaderboardView,
   page: number,
   pageSize = 25,
+  anchor?: string,
 ): Promise<LeaderboardBoard> {
   const params = new URLSearchParams({ view, page: String(page), page_size: String(pageSize) })
+  if (anchor && view !== 'all_time') params.set('anchor', anchor)
   const res = await authedFetch(`${API_BASE}/api/leaderboard?${params.toString()}`, { cache: 'no-store' })
   if (!res.ok) await throwWithResponse(res, 'Could not load the leaderboard')
   const data = (await res.json()) as Partial<LeaderboardBoard>
@@ -401,6 +409,11 @@ export interface MyLeague {
   week: string
   week_start: string
   week_end: string
+  final?: boolean
+  earliest_week?: string
+  movement?: 'up' | 'down' | 'stay' | 'new' | string
+  from_tier?: string
+  to_tier?: string
   tier: string
   league_no: number
   size: number
@@ -412,8 +425,9 @@ export interface MyLeague {
 
 // A signed-in learner's own league. Unauthenticated callers get null rather
 // than an error: "sign in to compete" is an answer, not a failure.
-export async function getMyLeague(): Promise<MyLeague | null> {
-  const res = await authedFetch(`${API_BASE}/api/leagues`, { cache: 'no-store' })
+export async function getMyLeague(week?: string): Promise<MyLeague | null> {
+  const params = week ? `?week=${encodeURIComponent(week)}` : ''
+  const res = await authedFetch(`${API_BASE}/api/leagues${params}`, { cache: 'no-store' })
   if (res.status === 401) return null
   if (!res.ok) await throwWithResponse(res, 'Could not load your league')
   return res.json() as Promise<MyLeague>

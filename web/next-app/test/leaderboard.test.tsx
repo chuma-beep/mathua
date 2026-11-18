@@ -34,6 +34,7 @@ vi.mock('../hooks/useAuthState', () => ({
 vi.mock('next/navigation', () => ({
   usePathname: () => '/leaderboard',
   useRouter: () => ({ push: vi.fn() }),
+  useSearchParams: () => new URLSearchParams(),
 }))
 vi.mock('next/link', () => ({
   default: ({ children, href }: { children: React.ReactNode; href: string }) => (
@@ -48,6 +49,10 @@ vi.mock('../components/BottomTabs', () => ({ default: () => null }))
 function board(overrides: Partial<LeaderboardBoard> = {}): LeaderboardBoard {
   return {
     view: 'weekly',
+    period_kind: 'weekly',
+    period_start: '2026-10-19T00:00:00Z',
+    period_end: '2026-10-26T00:00:00Z',
+    final: false,
     page: 1,
     page_size: 25,
     total: 3,
@@ -68,6 +73,7 @@ function league(overrides: Partial<MyLeague> = {}): MyLeague {
     week: '2026-10-19',
     week_start: '2026-10-19T00:00:00Z',
     week_end: '2026-10-26T00:00:00Z',
+    final: false,
     tier: 'bronze',
     league_no: 1,
     size: 2,
@@ -112,8 +118,8 @@ describe('the leaderboard page', () => {
     render(<LeaderboardPage />)
     await screen.findByRole('table')
 
-    fireEvent.click(screen.getByRole('tab', { name: 'All time' }))
-    await waitFor(() => expect(getLeaderboard).toHaveBeenLastCalledWith('all_time', 1, 25))
+    fireEvent.mouseDown(screen.getByRole('tab', { name: 'All time' }))
+    await waitFor(() => expect(getLeaderboard).toHaveBeenLastCalledWith('all_time', 1, 25, undefined))
     expect(screen.getByRole('tab', { name: 'All time' })).toHaveAttribute('aria-selected', 'true')
   })
 
@@ -126,8 +132,8 @@ describe('the leaderboard page', () => {
     await screen.findByRole('table')
 
     fireEvent.click(screen.getByRole('button', { name: 'Next' }))
-    await waitFor(() => expect(getLeaderboard).toHaveBeenLastCalledWith('weekly', 2, 25))
-    expect(getLeaderboard).not.toHaveBeenCalledWith('all_time', 2, 25)
+    await waitFor(() => expect(getLeaderboard).toHaveBeenLastCalledWith('weekly', 2, 25, undefined))
+    expect(getLeaderboard).not.toHaveBeenCalledWith('all_time', 2, 25, undefined)
     // A page turn is not a route change, so ScrollToTopOnNavigate cannot see
     // it. The page control asks for the top explicitly.
     expect(scrollTo).toHaveBeenCalledWith({ top: 0, left: 0, behavior: 'auto' })
@@ -166,7 +172,7 @@ describe('the leaderboard page', () => {
     render(<LeaderboardPage />)
     await screen.findByRole('table')
 
-    fireEvent.click(screen.getByRole('tab', { name: 'My league' }))
+    fireEvent.mouseDown(screen.getByRole('tab', { name: 'My league' }))
     expect(await screen.findByText('bronze league 1')).toBeInTheDocument()
     expect(screen.getByText(/Top 5 move up a tier/)).toBeInTheDocument()
     expect(screen.getByText('you')).toBeInTheDocument()
@@ -179,7 +185,7 @@ describe('the leaderboard page', () => {
     render(<LeaderboardPage />)
     await screen.findByRole('table')
 
-    fireEvent.click(screen.getByRole('tab', { name: 'My league' }))
+    fireEvent.mouseDown(screen.getByRole('tab', { name: 'My league' }))
     expect(await screen.findByRole('link', { name: 'Sign in' })).toHaveAttribute('href', '/login')
   })
 

@@ -22,9 +22,6 @@ export function LeaderboardTableSkeleton({ rows = 8 }: { rows?: number }) {
           <td className="p-2.5 sm:p-[14px_20px]">
             <Skeleton className="h-4 w-10 ml-auto" />
           </td>
-          <td className="p-2.5 sm:p-[14px_20px]">
-            <Skeleton className="h-4 w-10 ml-auto" />
-          </td>
           <td className="p-2.5 sm:p-[14px_20px] hidden md:table-cell">
             <Skeleton className="h-4 w-16 ml-auto" />
           </td>
