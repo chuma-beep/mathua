@@ -6,7 +6,34 @@
       "Identify the objects and labels.",
       "Apply the relationship to an example.",
       "Check the result against the figure."
-    ]
+    ],
+    "visual": {
+      "type": "geo.transform2d",
+      "title": "Rotating a shape about the origin",
+      "caption": "Drag to rotate or change the angle: every vertex turns by the same angle, side lengths stay fixed, and the determinant stays 1.",
+      "params": {
+        "kind": "rotation",
+        "angle": 30,
+        "scale": 1.25,
+        "dx": 1,
+        "dy": 0.5,
+        "shape": [
+          [
+            0,
+            0
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "showOrbit": true
+      }
+    }
   },
   {
     "label": "Quarter and Half Turns",

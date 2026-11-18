@@ -2057,6 +2057,7 @@ func (s *Server) handleLessonConcept(w http.ResponseWriter, r *http.Request) {
 			Subgoals      []string        `json:"subgoals"`
 			WorkedExample string          `json:"worked_example"`
 			Assets        []lessons.Asset `json:"assets"`
+			Visual        *lessons.Visual `json:"visual,omitempty"`
 		}
 		out := make([]kpInfo, 0, len(kps))
 		for _, kp := range kps {
@@ -2077,6 +2078,7 @@ func (s *Server) handleLessonConcept(w http.ResponseWriter, r *http.Request) {
 				Subgoals:      kp.Subgoals,
 				WorkedExample: we,
 				Assets:        assets,
+				Visual:        kp.Visual,
 			})
 		}
 		writeJSON(w, map[string]interface{}{

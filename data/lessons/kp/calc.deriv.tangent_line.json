@@ -6,7 +6,25 @@
       "Evaluate slope f'(a) at the point",
       "Use point-slope form y-f(a) = f'(a)(x-a)",
       "Check x^2 at x = 1 gives y = 2x-1"
-    ]
+    ],
+    "visual": {
+      "type": "calc.tangent",
+      "title": "Tangent and secant at x",
+      "caption": "Drag x or change h: the teal secant approaches the blue tangent, and the gap between their slopes shrinks toward zero.",
+      "params": {
+        "coeffs": [
+          0,
+          0,
+          1
+        ],
+        "x": 1,
+        "h": 0.8,
+        "window": [
+          -2,
+          3
+        ]
+      }
+    }
   },
   {
     "label": "Worked tangent examples",

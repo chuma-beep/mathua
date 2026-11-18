@@ -24,6 +24,22 @@
       "Expand (a+bi)(c+di) term by term",
       "Collect (ac-bd) + (ad+bc)i",
       "Scale the modulus by |w| and rotate by arg(w)"
-    ]
+    ],
+    "visual": {
+      "type": "complex.multiply",
+      "title": "Multiplication rotates and scales",
+      "caption": "Drag z or w: the product's modulus is |z||w| and its argument is arg z + arg w, so multiplying by w rotates z by w's angle and scales it by w's length.",
+      "params": {
+        "z": [
+          1.5,
+          0.8
+        ],
+        "w": [
+          0.8,
+          1.2
+        ],
+        "showUnitCircle": true
+      }
+    }
   }
 ]

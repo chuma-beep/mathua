@@ -2,11 +2,17 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
 import KatexContent from './KatexContent'
 import XPAdjustmentNote from './XPAdjustmentNote'
 import XPTaskSummary from './XPTaskSummary'
 import LessonDiagram from './LessonDiagram'
 import LessonAssets from './LessonAssets'
+
+// The visualization subsystem is fetched only for a step that names one. Without
+// this, every lesson would download the dispatcher, the schemas and the frame for
+// a figure it does not have.
+const VisualFigure = dynamic(() => import('./visual/VisualFigure'), { ssr: false })
 import ChoiceOptions from './ChoiceOptions'
 import { stemWithoutChoices } from '../lib/choices'
 import ConceptReference from './ConceptReference'
@@ -746,11 +752,17 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
                     worked example is text lifted out of the lesson body, so its figures do
                     not come with it; selecting them per knowledge point is what keeps the
                     shorter surface shorter without discarding instruction. */}
-                <LessonAssets assets={ikp?.assets} />
-                {diagram && (
-                  <figure className="mt-4">
-                    <LessonDiagram src={diagram} alt={`Diagram for ${ikp?.label || 'this topic'}`} />
-                  </figure>
+                {ikp?.visual ? (
+                  <VisualFigure visual={ikp.visual} />
+                ) : (
+                  <>
+                    <LessonAssets assets={ikp?.assets} />
+                    {diagram && (
+                      <figure className="mt-4">
+                        <LessonDiagram src={diagram} alt={`Diagram for ${ikp?.label || 'this topic'}`} />
+                      </figure>
+                    )}
+                  </>
                 )}
                 {/* Steps appear once this section has been attempted. Listed before the
                     question they are a syllabus the learner has not chosen yet, and the

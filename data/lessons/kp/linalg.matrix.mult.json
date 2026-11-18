@@ -15,7 +15,25 @@
       "Multiply A times a column vector",
       "Read the result as a combination of A's columns",
       "Add the zero matrix to leave the product unchanged"
-    ]
+    ],
+    "visual": {
+      "type": "linalg.matrix2d",
+      "title": "Matrix multiplying a vector",
+      "caption": "Change A or drag v: the blue image is Av, and the deformed grid shows what A does to the plane. The determinant is the area scale.",
+      "params": {
+        "matrix": [
+          1.2,
+          0.6,
+          0.4,
+          1.4
+        ],
+        "vector": [
+          2,
+          1
+        ],
+        "showGrid": true
+      }
+    }
   },
   {
     "label": "Square matrices and special types",

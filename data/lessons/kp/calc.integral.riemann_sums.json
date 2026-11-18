@@ -13,7 +13,23 @@
     "subgoals": [
       "Write a sum for a given partition",
       "Compute a left or right Riemann sum"
-    ]
+    ],
+    "visual": {
+      "type": "calc.riemann",
+      "title": "Riemann sums approaching the area",
+      "caption": "Change n or the sample rule: the rectangles refine toward the exact area, so the error falls as n grows.",
+      "params": {
+        "coeffs": [
+          0,
+          0,
+          1
+        ],
+        "a": 0,
+        "b": 2,
+        "n": 8,
+        "rule": "left"
+      }
+    }
   },
   {
     "label": "The definite integral as a limit",

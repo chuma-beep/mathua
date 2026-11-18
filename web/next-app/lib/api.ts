@@ -1270,6 +1270,17 @@ export interface KpInfo {
 	// an authored asset_ids list on the shard). `/learn` shows these; `/study` shows the
 	// whole lesson. Optional so a response from a build predating the field still renders.
 	assets?: LessonAsset[]
+	// An optional interactive figure for this step. Declarative: the type names a
+	// template in the frontend registry and params are validated against its schema.
+	// Optional for the same reason as assets: an older server omits the field.
+	visual?: VisualSpec
+}
+
+export interface VisualSpec {
+	type: string
+	title?: string
+	caption?: string
+	params?: unknown
 }
 
 export interface LessonKpsRes {

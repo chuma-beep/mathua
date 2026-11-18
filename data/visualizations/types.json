@@ -1,0 +1,8 @@
+[
+  { "id": "linalg.matrix2d", "status": "stable" },
+  { "id": "calc.tangent", "status": "stable" },
+  { "id": "calc.riemann", "status": "stable" },
+  { "id": "complex.multiply", "status": "stable" },
+  { "id": "stat.normal", "status": "stable" },
+  { "id": "geo.transform2d", "status": "stable" }
+]
