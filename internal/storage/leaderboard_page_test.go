@@ -6,6 +6,16 @@ import (
 	"time"
 )
 
+// leaderboardPage keeps the old single-bound call shape in these tests: the
+// archive window is the seven days that follow the supplied week start.
+func leaderboardPage(store Repository, view string, week time.Time, limit, offset int) ([]LeaderboardRow, int, error) {
+	return store.LeaderboardPage(view, week, week.AddDate(0, 0, 7), week, limit, offset)
+}
+
+func leaderboardPosition(store Repository, id, view string, week time.Time) (rank, xp int, found bool, err error) {
+	return store.LeaderboardPosition(id, view, week, week.AddDate(0, 0, 7))
+}
+
 // seedBoardStudent creates an account, optionally names it, and awards xp in
 // this week. The key carries the name so one test can seed fifty learners
 // without inventing fifty keys by hand.
@@ -71,7 +81,7 @@ func TestLeaderboardPage_ExcludesUUIDGuestsAndIncludesAdoptedGuest(t *testing.T)
 
 	week := time.Now().UTC().Add(-24 * time.Hour)
 	for _, view := range []string{"weekly", "all_time"} {
-		rows, total, err := store.LeaderboardPage(view, week, 25, 0)
+		rows, total, err := leaderboardPage(store, view, week, 25, 0)
 		if err != nil {
 			t.Fatalf("%s page: %v", view, err)
 		}
@@ -90,14 +100,14 @@ func TestLeaderboardPage_ExcludesUUIDGuestsAndIncludesAdoptedGuest(t *testing.T)
 		}
 	}
 
-	rank, _, found, err := store.LeaderboardPosition(uuidGuest.ID, "weekly", week)
+	rank, _, found, err := leaderboardPosition(store, uuidGuest.ID, "weekly", week)
 	if err != nil {
 		t.Fatal(err)
 	}
 	if found || rank != 0 {
 		t.Fatalf("UUID guest position = %d, found %v", rank, found)
 	}
-	rank, _, found, err = store.LeaderboardPosition(adopted.ID, "weekly", week)
+	rank, _, found, err = leaderboardPosition(store, adopted.ID, "weekly", week)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -113,7 +123,7 @@ func TestLeaderboardPage_PaginatesAndCounts(t *testing.T) {
 	}
 
 	week := time.Now().UTC().Add(-24 * time.Hour)
-	page1, total1, err := store.LeaderboardPage("weekly", week, 25, 0)
+	page1, total1, err := leaderboardPage(store, "weekly", week, 25, 0)
 	if err != nil {
 		t.Fatalf("page 1: %v", err)
 	}
@@ -132,7 +142,7 @@ func TestLeaderboardPage_PaginatesAndCounts(t *testing.T) {
 		}
 	}
 
-	page2, total2, err := store.LeaderboardPage("weekly", week, 25, 25)
+	page2, total2, err := leaderboardPage(store, "weekly", week, 25, 25)
 	if err != nil {
 		t.Fatalf("page 2: %v", err)
 	}
@@ -154,7 +164,7 @@ func TestLeaderboardPage_OutOfRangeIsEmptyWithTotal(t *testing.T) {
 	store := newTestStore(t)
 	seedBoardStudent(t, store, "Solo", "solo", 4)
 
-	rows, total, err := store.LeaderboardPage("weekly", time.Now().UTC().Add(-24*time.Hour), 25, 500)
+	rows, total, err := leaderboardPage(store, "weekly", time.Now().UTC().Add(-24*time.Hour), 25, 500)
 	if err != nil {
 		t.Fatalf("out of range: %v", err)
 	}
@@ -182,7 +192,7 @@ func TestLeaderboardPage_ExcludesGuestsAndZeroXP(t *testing.T) {
 	seedBoardStudent(t, store, "Active", "active", 7)
 
 	week := time.Now().UTC().Add(-24 * time.Hour)
-	rows, total, err := store.LeaderboardPage("weekly", week, 25, 0)
+	rows, total, err := leaderboardPage(store, "weekly", week, 25, 0)
 	if err != nil {
 		t.Fatalf("weekly: %v", err)
 	}
@@ -190,7 +200,7 @@ func TestLeaderboardPage_ExcludesGuestsAndZeroXP(t *testing.T) {
 		t.Fatalf("weekly rows = %+v total=%d, want only the 7-XP account", rows, total)
 	}
 
-	rows, total, err = store.LeaderboardPage("all_time", week, 25, 0)
+	rows, total, err = leaderboardPage(store, "all_time", week, 25, 0)
 	if err != nil {
 		t.Fatalf("all-time: %v", err)
 	}
@@ -208,7 +218,7 @@ func TestLeaderboardPage_AllTimeOutlivesTheWeek(t *testing.T) {
 	execSeed(t, store, `UPDATE xp_events SET created_at = ? WHERE student_id = ?`, old, sid)
 
 	week := time.Now().UTC().Add(-24 * time.Hour)
-	weekly, wTotal, err := store.LeaderboardPage("weekly", week, 25, 0)
+	weekly, wTotal, err := leaderboardPage(store, "weekly", week, 25, 0)
 	if err != nil {
 		t.Fatalf("weekly: %v", err)
 	}
@@ -216,7 +226,7 @@ func TestLeaderboardPage_AllTimeOutlivesTheWeek(t *testing.T) {
 		t.Errorf("weekly = %+v total=%d, want empty: the XP was last week", weekly, wTotal)
 	}
 
-	all, aTotal, err := store.LeaderboardPage("all_time", week, 25, 0)
+	all, aTotal, err := leaderboardPage(store, "all_time", week, 25, 0)
 	if err != nil {
 		t.Fatalf("all-time: %v", err)
 	}
@@ -248,11 +258,11 @@ func TestLeaderboardPage_TiesAreDeterministic(t *testing.T) {
 	}
 	week := time.Now().UTC().Add(-24 * time.Hour)
 
-	first, _, err := store.LeaderboardPage("weekly", week, 25, 0)
+	first, _, err := leaderboardPage(store, "weekly", week, 25, 0)
 	if err != nil {
 		t.Fatalf("first read: %v", err)
 	}
-	second, _, err := store.LeaderboardPage("weekly", week, 25, 0)
+	second, _, err := leaderboardPage(store, "weekly", week, 25, 0)
 	if err != nil {
 		t.Fatalf("second read: %v", err)
 	}
@@ -278,7 +288,7 @@ func TestLeaderboardPosition_ReportsRankOutsideThePage(t *testing.T) {
 		}
 	}
 
-	rank, xp, found, err := store.LeaderboardPosition(last, "weekly", time.Now().UTC().Add(-24*time.Hour))
+	rank, xp, found, err := leaderboardPosition(store, last, "weekly", time.Now().UTC().Add(-24*time.Hour))
 	if err != nil {
 		t.Fatalf("position: %v", err)
 	}
@@ -288,7 +298,7 @@ func TestLeaderboardPosition_ReportsRankOutsideThePage(t *testing.T) {
 
 	// The same learner is not on page 1, which is the case the UI must handle
 	// with a separate row rather than by appending them to the page.
-	page1, _, err := store.LeaderboardPage("weekly", time.Now().UTC().Add(-24*time.Hour), 25, 0)
+	page1, _, err := leaderboardPage(store, "weekly", time.Now().UTC().Add(-24*time.Hour), 25, 0)
 	if err != nil {
 		t.Fatalf("page: %v", err)
 	}
@@ -301,7 +311,7 @@ func TestLeaderboardPosition_ReportsRankOutsideThePage(t *testing.T) {
 
 func TestLeaderboardPage_UnknownViewIsRefused(t *testing.T) {
 	store := newTestStore(t)
-	if _, _, err := store.LeaderboardPage("monthly", time.Now().UTC(), 25, 0); err == nil {
+	if _, _, err := leaderboardPage(store, "yearly", time.Now().UTC(), 25, 0); err == nil {
 		t.Fatal("unknown view accepted")
 	}
 }
@@ -332,11 +342,91 @@ func TestMigrate_KeepsExistingXP(t *testing.T) {
 		t.Errorf("lifetime XP = %d after migration, want 175", total)
 	}
 	// And it is what the all-time board ranks.
-	rows, _, err := store.LeaderboardPage("all_time", time.Now().UTC(), 25, 0)
+	rows, _, err := leaderboardPage(store, "all_time", time.Now().UTC(), 25, 0)
 	if err != nil {
 		t.Fatalf("all-time page: %v", err)
 	}
 	if len(rows) != 1 || rows[0].XP != 175 {
 		t.Errorf("all-time board = %+v, want the 175 XP learner", rows)
 	}
+}
+
+// A past week is a closed window. Without the upper bound, every later XP event
+// was included and the archive silently became a second all-time board.
+func TestLeaderboardPage_PastWeekExcludesLaterXP(t *testing.T) {
+	store := newTestStore(t)
+	sid := seedBoardStudent(t, store, "Archive", "archive", 10)
+	lastMonday := weekStartForTest(time.Now().UTC().AddDate(0, 0, -7))
+	execSeed(t, store, `UPDATE xp_events SET created_at = ? WHERE student_id = ?`, lastMonday.Add(time.Hour).UnixNano(), sid)
+	if err := store.AwardXP(sid, 99, "study", "this-week"); err != nil {
+		t.Fatal(err)
+	}
+
+	rows, total, err := store.LeaderboardPage("weekly", lastMonday, lastMonday.AddDate(0, 0, 7), lastMonday, 25, 0)
+	if err != nil {
+		t.Fatalf("archive week: %v", err)
+	}
+	if total != 1 || len(rows) != 1 {
+		t.Fatalf("archive rows = %+v total = %d, want one row", rows, total)
+	}
+	if rows[0].XP != 10 || rows[0].XPTotal != 109 {
+		t.Fatalf("archive row = %+v, want 10 in the week and 109 lifetime", rows[0])
+	}
+}
+
+func TestLeaderboardPage_WeekBoundaryIsMondayUTC(t *testing.T) {
+	store := newTestStore(t)
+	sunday := seedBoardStudent(t, store, "Sunday", "sunday", 5)
+	monday := seedBoardStudent(t, store, "Monday", "monday", 7)
+	start := weekStartForTest(dayForTest("2026-11-02"))
+	execSeed(t, store, `UPDATE xp_events SET created_at = ? WHERE student_id = ?`, dayForTest("2026-11-08").Add(23*time.Hour+59*time.Minute).UnixNano(), sunday)
+	execSeed(t, store, `UPDATE xp_events SET created_at = ? WHERE student_id = ?`, start.AddDate(0, 0, 7).UnixNano(), monday)
+
+	rows, total, err := store.LeaderboardPage("weekly", start, start.AddDate(0, 0, 7), start, 25, 0)
+	if err != nil {
+		t.Fatalf("week: %v", err)
+	}
+	if total != 1 || len(rows) != 1 || rows[0].StudentID != sunday {
+		t.Fatalf("week rows = %+v total=%d, want only the Sunday event", rows, total)
+	}
+
+	next, nextTotal, err := store.LeaderboardPage("weekly", start.AddDate(0, 0, 7), start.AddDate(0, 0, 14), start.AddDate(0, 0, 7), 25, 0)
+	if err != nil {
+		t.Fatalf("next week: %v", err)
+	}
+	if nextTotal != 1 || len(next) != 1 || next[0].StudentID != monday {
+		t.Fatalf("next rows = %+v total=%d, want the Monday event", next, nextTotal)
+	}
+}
+
+func TestLeaderboardPage_MonthIsCalendarMonth(t *testing.T) {
+	store := newTestStore(t)
+	first := seedBoardStudent(t, store, "First", "first", 3)
+	next := seedBoardStudent(t, store, "Next", "next", 4)
+	execSeed(t, store, `UPDATE xp_events SET created_at = ? WHERE student_id = ?`, dayForTest("2026-10-01").UnixNano(), first)
+	execSeed(t, store, `UPDATE xp_events SET created_at = ? WHERE student_id = ?`, dayForTest("2026-11-01").UnixNano(), next)
+
+	start := monthStartForTest(dayForTest("2026-10-17"))
+	rows, total, err := store.LeaderboardPage("monthly", start, start.AddDate(0, 1, 0), start, 25, 0)
+	if err != nil {
+		t.Fatalf("month: %v", err)
+	}
+	if total != 1 || len(rows) != 1 || rows[0].StudentID != first {
+		t.Fatalf("month rows = %+v total=%d, want only the October event", rows, total)
+	}
+}
+
+func dayForTest(s string) time.Time {
+	t, _ := time.Parse("2006-01-02", s)
+	return t.UTC()
+}
+
+func weekStartForTest(t time.Time) time.Time {
+	start, _ := WeekFromString(LeagueWeekKey(t))
+	return start
+}
+
+func monthStartForTest(t time.Time) time.Time {
+	t = t.UTC()
+	return time.Date(t.Year(), t.Month(), 1, 0, 0, 0, 0, time.UTC)
 }

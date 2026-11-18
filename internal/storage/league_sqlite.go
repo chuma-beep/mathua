@@ -297,6 +297,74 @@ func (s *SQLiteStore) LeagueRoster(week, tier string, leagueNo int, from, to tim
 	return out, nil
 }
 
+// LeagueRosterFinal reads a closed week from the stored XP snapshot. It must
+// not sum xp_events: a repair or a late ledger entry after the transition would
+// otherwise rewrite a result the learners already saw. Ties use the same
+// competition ranking as the live roster, so a table does not change shape the
+// moment its week closes.
+func (s *SQLiteStore) LeagueRosterFinal(week, tier string, leagueNo int) ([]LeagueRow, error) {
+	rows, err := s.db.Query(
+		`SELECT m.student_id, s.name, COALESCE(s.username, ''), s.avatar_url, s.settings, m.xp
+		 FROM league_members m
+		 JOIN students s ON s.id = m.student_id
+		 WHERE m.week = ? AND m.tier = ? AND m.league_no = ?
+		 ORDER BY m.xp DESC, s.name ASC, m.student_id ASC`,
+		week, validTier(tier), leagueNo)
+	if err != nil {
+		return nil, fmt.Errorf("read final league roster: %w", err)
+	}
+	defer rows.Close()
+	var out []LeagueRow
+	for rows.Next() {
+		var r LeagueRow
+		if err := rows.Scan(&r.StudentID, &r.Name, &r.Username, &r.AvatarURL, &r.Settings, &r.XP); err != nil {
+			return nil, fmt.Errorf("scan final league roster: %w", err)
+		}
+		out = append(out, r)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("read final league roster: %w", err)
+	}
+	rankInCohort(out)
+	return out, nil
+}
+
+// LeagueOutcome describes how a learner arrived in week. The transition writes
+// movement and from_tier onto the new seat, so the result of week W lives on
+// W+1.
+func (s *SQLiteStore) LeagueOutcome(studentID, week string) (movement, fromTier, toTier string, found bool, err error) {
+	err = s.db.QueryRow(
+		`SELECT movement, from_tier, tier FROM league_members
+		 WHERE week = ? AND student_id = ?`, week, studentID).
+		Scan(&movement, &fromTier, &toTier)
+	if errors.Is(err, sql.ErrNoRows) {
+		return "", "", "", false, nil
+	}
+	if err != nil {
+		return "", "", "", false, fmt.Errorf("read league outcome: %w", err)
+	}
+	if fromTier != "" {
+		fromTier = validTier(fromTier)
+	}
+	if toTier != "" {
+		toTier = validTier(toTier)
+	}
+	return movement, fromTier, toTier, true, nil
+}
+
+// EarliestLeagueWeek is the first week with seats, the lower bound for the
+// archive picker.
+func (s *SQLiteStore) EarliestLeagueWeek() (string, bool, error) {
+	var week sql.NullString
+	if err := s.db.QueryRow(`SELECT MIN(week) FROM league_members`).Scan(&week); err != nil {
+		return "", false, fmt.Errorf("earliest league week: %w", err)
+	}
+	if !week.Valid || week.String == "" {
+		return "", false, nil
+	}
+	return week.String, true, nil
+}
+
 // LeagueCohorts lists the week's leagues in pyramid order: bronze first, then
 // by league number inside each tier. The database groups and counts; the tier
 // order comes from LeagueTiers rather than from an alphabetical sort, which

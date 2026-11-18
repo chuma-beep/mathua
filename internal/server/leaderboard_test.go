@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
+	"time"
 )
 
 // leaderboardGet issues the public board request with an optional bearer token.
@@ -111,7 +112,10 @@ func TestLeaderboard_OutOfRangePageIsEmpty(t *testing.T) {
 func TestLeaderboard_RefusesBadParameters(t *testing.T) {
 	_, mux, _ := avatarTestServer(t)
 	for _, q := range []string{
-		"?view=monthly",
+		"?view=yearly",
+		"?view=weekly&anchor=not-a-date",
+		"?view=weekly&anchor=2999-01-01",
+		"?view=monthly&anchor=2999-01-01",
 		"?view=weekly&page=0",
 		"?view=weekly&page=-3",
 		"?view=weekly&page=abc",
@@ -170,5 +174,46 @@ func TestLeaderboard_ZeroXPAccountHasNoRank(t *testing.T) {
 	}
 	if me["eligible"] != false || me["rank"] != float64(0) {
 		t.Errorf("me = %v, want ineligible with no rank", me)
+	}
+}
+
+func TestLeaderboard_MonthlyWindowAndArchive(t *testing.T) {
+	_, mux, token := avatarTestServer(t)
+	now := time.Now().UTC()
+	code, body := leaderboardGet(t, mux, "?view=monthly", token)
+	if code != 200 {
+		t.Fatalf("monthly = %d %v", code, body)
+	}
+	if body["period_kind"] != "monthly" || body["final"] != false {
+		t.Fatalf("period = %v final=%v", body["period_kind"], body["final"])
+	}
+	want := time.Date(now.Year(), now.Month(), 1, 0, 0, 0, 0, time.UTC).Format(time.RFC3339)
+	if body["period_start"] != want {
+		t.Fatalf("period_start = %v, want %s", body["period_start"], want)
+	}
+
+	lastWeek := time.Now().UTC().AddDate(0, 0, -7).Format("2006-01-02")
+	code, body = leaderboardGet(t, mux, "?view=weekly&anchor="+lastWeek, token)
+	if code != 200 {
+		t.Fatalf("archive = %d %v", code, body)
+	}
+	if body["final"] != true {
+		t.Fatalf("an anchor in a closed week must be final: %v", body)
+	}
+	if body["period_end"] == body["period_start"] {
+		t.Fatalf("archive window is empty: %v", body)
+	}
+}
+
+func TestLeagues_RefusesAFutureOrMalformedWeek(t *testing.T) {
+	_, mux, token := avatarTestServer(t)
+	for _, query := range []string{"?week=not-a-date", "?week=2999-01-05"} {
+		req := httptest.NewRequest("GET", "/api/leagues"+query, nil)
+		req.Header.Set("Authorization", "Bearer "+token)
+		rec := httptest.NewRecorder()
+		mux.ServeHTTP(rec, req)
+		if rec.Code != 400 {
+			t.Fatalf("%s = %d %s, want 400", query, rec.Code, rec.Body.String())
+		}
 	}
 }

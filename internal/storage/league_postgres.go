@@ -252,6 +252,64 @@ func (s *PostgresStore) LeagueRoster(week, tier string, leagueNo int, from, to t
 	return out, nil
 }
 
+func (s *PostgresStore) LeagueRosterFinal(week, tier string, leagueNo int) ([]LeagueRow, error) {
+	rows, err := s.db.Query(
+		`SELECT m.student_id, s.name, COALESCE(s.username, ''), s.avatar_url, s.settings, m.xp
+		 FROM league_members m
+		 JOIN students s ON s.id = m.student_id
+		 WHERE m.week = $1 AND m.tier = $2 AND m.league_no = $3
+		 ORDER BY m.xp DESC, s.name ASC, m.student_id ASC`,
+		week, validTier(tier), leagueNo)
+	if err != nil {
+		return nil, fmt.Errorf("read final league roster: %w", err)
+	}
+	defer rows.Close()
+	var out []LeagueRow
+	for rows.Next() {
+		var r LeagueRow
+		if err := rows.Scan(&r.StudentID, &r.Name, &r.Username, &r.AvatarURL, &r.Settings, &r.XP); err != nil {
+			return nil, fmt.Errorf("scan final league roster: %w", err)
+		}
+		out = append(out, r)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("read final league roster: %w", err)
+	}
+	rankInCohort(out)
+	return out, nil
+}
+
+func (s *PostgresStore) LeagueOutcome(studentID, week string) (movement, fromTier, toTier string, found bool, err error) {
+	err = s.db.QueryRow(
+		`SELECT movement, from_tier, tier FROM league_members
+		 WHERE week = $1 AND student_id = $2`, week, studentID).
+		Scan(&movement, &fromTier, &toTier)
+	if errors.Is(err, sql.ErrNoRows) {
+		return "", "", "", false, nil
+	}
+	if err != nil {
+		return "", "", "", false, fmt.Errorf("read league outcome: %w", err)
+	}
+	if fromTier != "" {
+		fromTier = validTier(fromTier)
+	}
+	if toTier != "" {
+		toTier = validTier(toTier)
+	}
+	return movement, fromTier, toTier, true, nil
+}
+
+func (s *PostgresStore) EarliestLeagueWeek() (string, bool, error) {
+	var week sql.NullString
+	if err := s.db.QueryRow(`SELECT MIN(week) FROM league_members`).Scan(&week); err != nil {
+		return "", false, fmt.Errorf("earliest league week: %w", err)
+	}
+	if !week.Valid || week.String == "" {
+		return "", false, nil
+	}
+	return week.String, true, nil
+}
+
 // LeagueCohorts lists the week's leagues in pyramid order, exactly as the
 // SQLite twin does.
 func (s *PostgresStore) LeagueCohorts(week string) ([]LeagueCohort, error) {

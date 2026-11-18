@@ -867,10 +867,11 @@ func (s *Server) handleLeaderboard(w http.ResponseWriter, r *http.Request) {
 	if view == "" {
 		view = leaderboard.ViewWeekly
 	}
-	if view != leaderboard.ViewWeekly && view != leaderboard.ViewAllTime {
-		writeError(w, "view must be weekly or all_time", 400)
+	if view != leaderboard.ViewWeekly && view != leaderboard.ViewMonthly && view != leaderboard.ViewAllTime {
+		writeError(w, "view must be weekly, monthly or all_time", 400)
 		return
 	}
+	anchor := q.Get("anchor")
 	page := 1
 	if raw := q.Get("page"); raw != "" {
 		n, err := strconv.Atoi(raw)
@@ -890,7 +891,11 @@ func (s *Server) handleLeaderboard(w http.ResponseWriter, r *http.Request) {
 		pageSize = n
 	}
 	studentID, _ := r.Context().Value(authStudentKey{}).(string)
-	board, err := s.eng.GetLeaderboardPage(studentID, view, page, pageSize)
+	board, err := s.eng.GetLeaderboardPage(studentID, view, anchor, page, pageSize)
+	if errors.Is(err, leaderboard.ErrInvalidPeriod) {
+		writeError(w, err.Error(), 400)
+		return
+	}
 	if err != nil {
 		writeError(w, "failed to get leaderboard", 500)
 		return
@@ -905,7 +910,11 @@ func (s *Server) handleLeagues(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	studentID, _ := r.Context().Value(authStudentKey{}).(string)
-	league, err := s.eng.GetMyLeague(studentID)
+	league, err := s.eng.GetMyLeagueWeek(studentID, r.URL.Query().Get("week"))
+	if errors.Is(err, leaderboard.ErrInvalidPeriod) {
+		writeError(w, err.Error(), 400)
+		return
+	}
 	if err != nil {
 		writeError(w, "failed to get leagues", 500)
 		return

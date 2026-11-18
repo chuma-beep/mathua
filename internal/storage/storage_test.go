@@ -639,7 +639,7 @@ func TestLeaderboardCarriesUsernameAndAvatar(t *testing.T) {
 	if err := store.ResolveLeagueWeek(week, start.AddDate(0, 0, -7), start); err != nil {
 		t.Fatalf("resolve week: %v", err)
 	}
-	page, _, err := store.LeaderboardPage("weekly", start, 10, 0)
+	page, _, err := leaderboardPage(store, "weekly", start, 10, 0)
 	if err != nil {
 		t.Fatalf("weekly page: %v", err)
 	}

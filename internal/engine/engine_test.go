@@ -319,7 +319,7 @@ func TestEngine_GetLeaderboard(t *testing.T) {
 	if err := e.repo.AwardXP(alice.ID, 5, "test", "alice:1"); err != nil {
 		t.Fatalf("award: %v", err)
 	}
-	board, err := e.GetLeaderboardPage(alice.ID, "weekly", 1, 25)
+	board, err := e.GetLeaderboardPage(alice.ID, "weekly", "", 1, 25)
 	if err != nil {
 		t.Fatalf("get leaderboard: %v", err)
 	}
