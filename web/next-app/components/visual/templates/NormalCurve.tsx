@@ -5,7 +5,8 @@ import FigureFrame from '../FigureFrame'
 import { Slider, Toggle } from '../Controls'
 import { normalSchema } from '../schemas'
 import { normalPdf, normalProbability } from '../math/normal'
-import { clamp, invertLinear, pathFromPoints, scaleLinear } from '../scale'
+import { clamp, invertLinear, niceTicks, pathFromPoints, scaleLinear } from '../scale'
+import { XAxisTicks } from '../Axis'
 import { fmt } from '../format'
 import { useDrag } from '../useDrag'
 import type { TemplateProps } from '../types'
@@ -28,6 +29,7 @@ export default function NormalCurve({ params, title, caption }: TemplateProps) {
   const X = scaleLinear(lo, hi, PAD, W - PAD)
   const Y = scaleLinear(0, peak * 1.16, H - PAD, PAD)
   const invertX = invertLinear(lo, hi, PAD, W - PAD)
+  const xTicks = niceTicks(lo, hi, 6)
 
   const samples = useMemo(() => {
     const out: Array<[number, number]> = []
@@ -71,6 +73,7 @@ export default function NormalCurve({ params, title, caption }: TemplateProps) {
         'The shaded tail is P(X ≤ x). Moving μ slides the curve, σ widens it, and x moves the cut. The band probability stays the same after a change of μ or σ.'
       }
       onReset={reset}
+      hint="Drag the plot to move x, or use the sliders."
       readout={[
         { label: 'z', value: fmt(z) },
         { label: 'P(X ≤ x)', value: fmt(p, 4) },
@@ -83,7 +86,7 @@ export default function NormalCurve({ params, title, caption }: TemplateProps) {
       <svg
         ref={svgRef}
         viewBox={`0 0 ${W} ${H}`}
-        className="h-auto w-full touch-none font-mono"
+        className="mx-auto block h-auto w-full max-w-[420px] cursor-grab touch-none font-mono active:cursor-grabbing"
         style={{ touchAction: 'none' }}
         role="img"
         aria-label="A normal density with a shaded left tail"
@@ -100,21 +103,24 @@ export default function NormalCurve({ params, title, caption }: TemplateProps) {
                 strokeWidth="0.8"
                 strokeDasharray="3 3"
               />
-              <text x={X(mu + k * sigma)} y={H - PAD + 12} textAnchor="middle" fontSize="9" fill="var(--text-muted)">
+              <text x={X(mu + k * sigma)} y={PAD + 12} textAnchor="middle" fontSize="9" fill="var(--text-muted)">
                 {k > 0 ? `${k}σ` : `−${Math.abs(k)}σ`}
               </text>
             </g>
           ))}
 
         <line x1={PAD} y1={Y(0)} x2={W - PAD} y2={Y(0)} stroke="var(--text-muted)" strokeWidth="0.8" />
+        {/* The density height is not a quantity the reader needs, so the y axis
+            carries no numbers; the x axis carries the scale of the variable. */}
+        <XAxisTicks ticks={xTicks} scale={X} at={H - PAD} format={(v) => fmt(v, 1)} />
         {areaPath && <path d={areaPath} fill="var(--accent-blue)" fillOpacity="0.2" />}
         <path d={pathFromPoints(samples.map(([xv, yv]) => [X(xv), Y(yv)]))} fill="none" stroke="var(--text-primary)" strokeWidth="1.8" />
         <line x1={X(clamp(x, lo, hi))} y1={PAD} x2={X(clamp(x, lo, hi))} y2={H - PAD} stroke="var(--accent-blue)" strokeWidth="1.2" />
         <circle cx={X(clamp(x, lo, hi))} cy={Y(normalPdf(clamp(x, lo, hi), mu, sigma))} r="3.6" fill="var(--accent-blue)" />
 
         <text x={X(mu)} y={PAD + 2} textAnchor="middle" fontSize="9" fill="var(--text-muted)">μ</text>
-        <text x={X(clamp(x, lo, hi)) + 6} y={PAD + 16} fontSize="10" fill="var(--accent-blue)">x</text>
-        <text x={W - PAD} y={H - PAD + 12} textAnchor="end" fontSize="9" fill="var(--text-muted)">drag to move x</text>
+        {/* Below the σ band labels: at x = μ + σ the two would stack otherwise. */}
+        <text x={X(clamp(x, lo, hi)) + 6} y={PAD + 28} fontSize="10" fill="var(--accent-blue)">x</text>
       </svg>
 
       <div className="mt-3 space-y-2">

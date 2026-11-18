@@ -5,7 +5,8 @@ import FigureFrame from '../FigureFrame'
 import { Slider } from '../Controls'
 import { tangentSchema } from '../schemas'
 import { derivative, evalPoly } from '../math/poly'
-import { clamp, invertLinear, pathFromPoints, scaleLinear } from '../scale'
+import { clamp, invertLinear, niceTicks, pathFromPoints, scaleLinear } from '../scale'
+import { XAxisTicks, YAxisTicks } from '../Axis'
 import { fmt } from '../format'
 import { useDrag } from '../useDrag'
 import type { TemplateProps } from '../types'
@@ -50,6 +51,8 @@ export default function TangentLine({ params, title, caption }: TemplateProps) {
   const X = scaleLinear(window[0], window[1], PAD, W - PAD)
   const Y = scaleLinear(yMin, yMax, H - PAD, PAD)
   const invertX = invertLinear(window[0], window[1], PAD, W - PAD)
+  const xTicks = niceTicks(window[0], window[1], 5)
+  const yTicks = niceTicks(yMin, yMax, 4)
 
   const onDrag = useCallback(
     (point: { x: number; y: number }) => {
@@ -76,6 +79,7 @@ export default function TangentLine({ params, title, caption }: TemplateProps) {
         'Drag the point or move the x slider. As h shrinks, the secant slope approaches the derivative at the point.'
       }
       onReset={reset}
+      hint="Drag the plot, or move x and h with the sliders."
       readout={[
         { label: 'f(x)', value: fmt(f) },
         { label: "f'(x)", value: fmt(tangent) },
@@ -87,7 +91,7 @@ export default function TangentLine({ params, title, caption }: TemplateProps) {
       <svg
         ref={svgRef}
         viewBox={`0 0 ${W} ${H}`}
-        className="h-auto w-full touch-none font-mono"
+        className="mx-auto block h-auto w-full max-w-[420px] cursor-grab touch-none font-mono active:cursor-grabbing"
         style={{ touchAction: 'none' }}
         role="img"
         aria-label="A curve with a movable point, its tangent and a secant"
@@ -104,6 +108,8 @@ export default function TangentLine({ params, title, caption }: TemplateProps) {
         {window[0] < 0 && window[1] > 0 && (
           <line x1={X(0)} y1={PAD} x2={X(0)} y2={H - PAD} stroke="var(--text-muted)" strokeWidth="0.8" />
         )}
+        <XAxisTicks ticks={xTicks} scale={X} at={H - PAD} format={(v) => fmt(v, 1)} />
+        <YAxisTicks ticks={yTicks} scale={Y} at={PAD} format={(v) => fmt(v, 1)} />
 
         <path d={curvePath} fill="none" stroke="var(--text-primary)" strokeWidth="1.8" />
         <path d={line(secant)} fill="none" stroke="var(--accent-teal)" strokeWidth="1.4" strokeDasharray="5 4" />
@@ -113,11 +119,10 @@ export default function TangentLine({ params, title, caption }: TemplateProps) {
         <circle cx={X(x)} cy={Y(f)} r="4" fill="var(--accent-blue)" />
         <circle cx={X(x + h)} cy={Y(fh)} r="3.2" fill="var(--accent-teal)" />
 
-        <text x={X(x) + 7} y={Y(f) - 8} fontSize="10" fill="var(--accent-blue)">x</text>
-        <text x={X(x + h) + 7} y={Y(fh) - 8} fontSize="10" fill="var(--accent-teal)">x + h</text>
+        <text x={X(x) - 8} y={Y(f) - 10} textAnchor="end" fontSize="10" fill="var(--accent-blue)" stroke="var(--bg)" strokeWidth="3" paintOrder="stroke">x</text>
+        <text x={X(x + h) + 8} y={Y(fh) + 16} fontSize="10" fill="var(--accent-teal)" stroke="var(--bg)" strokeWidth="3" paintOrder="stroke">x + h</text>
         <text x={PAD + 2} y={PAD + 10} fontSize="10" fill="var(--accent-blue)">tangent</text>
         <text x={PAD + 2} y={PAD + 22} fontSize="10" fill="var(--accent-teal)">secant</text>
-        <text x={W - PAD} y={H - 8} textAnchor="end" fontSize="9" fill="var(--text-muted)">drag to move x</text>
       </svg>
 
       <div className="mt-3 space-y-2">

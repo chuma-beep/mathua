@@ -6,6 +6,7 @@ import { NumberField, Slider, Toggle } from '../Controls'
 import { matrix2dSchema } from '../schemas'
 import { apply, det, fromFlat } from '../math/matrix'
 import { fmt, fmtVec } from '../format'
+import { XAxisTicks, YAxisTicks } from '../Axis'
 import type { TemplateProps } from '../types'
 
 const SIZE = 320
@@ -61,6 +62,7 @@ export default function MatrixTransform2D({ params, title, caption }: TemplatePr
     return lines
   }, [showGrid])
 
+  const axisTicks = [-3, -2, -1, 1, 2, 3]
   const unitSquare: Array<[number, number]> = [
     [0, 0],
     [1, 0],
@@ -84,7 +86,7 @@ export default function MatrixTransform2D({ params, title, caption }: TemplatePr
         { label: '|Av|', value: fmt(Math.hypot(image[0], image[1])) },
       ]}
     >
-      <svg viewBox={`0 0 ${SIZE} ${SIZE}`} className="h-auto w-full font-mono" role="img" aria-label="A matrix acting on the plane">
+      <svg viewBox={`0 0 ${SIZE} ${SIZE}`} className="mx-auto block h-auto w-full max-w-[420px] font-mono" role="img" aria-label="A matrix acting on the plane">
         <defs>
           <marker id={`${uid}-blue`} markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
             <path d="M0,0 L6,3 L0,6 Z" fill="var(--accent-blue)" />
@@ -95,6 +97,12 @@ export default function MatrixTransform2D({ params, title, caption }: TemplatePr
           <marker id={`${uid}-green`} markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
             <path d="M0,0 L6,3 L0,6 Z" fill="var(--accent-green)" />
           </marker>
+          {/* A transformed line can leave the box: A sends points outside the
+              reference grid, and without a clip the image strokes run to the
+              figure edge and read as part of the frame. */}
+          <clipPath id={`${uid}-plot`}>
+            <rect x={pad} y={pad} width={SIZE - pad * 2} height={SIZE - pad * 2} />
+          </clipPath>
         </defs>
 
         {/* The untransformed grid, kept faint so the deformation is visible against it. */}
@@ -113,9 +121,12 @@ export default function MatrixTransform2D({ params, title, caption }: TemplatePr
         ))}
         <line x1={pad} y1={cy} x2={SIZE - pad} y2={cy} stroke="var(--text-muted)" strokeWidth="0.8" />
         <line x1={cx} y1={pad} x2={cx} y2={SIZE - pad} stroke="var(--text-muted)" strokeWidth="0.8" />
+        <XAxisTicks ticks={axisTicks} scale={X} at={cy} />
+        <YAxisTicks ticks={axisTicks} scale={Y} at={cx} />
 
         {/* The image of the grid: each line is mapped through A, so the deformation is
             the thing being shown rather than an assertion about it. */}
+        <g clipPath={`url(#${uid}-plot)`}>
         {gridLines.map((line, i) => {
           const a = apply(m, line.from)
           const b = apply(m, line.to)
@@ -132,6 +143,7 @@ export default function MatrixTransform2D({ params, title, caption }: TemplatePr
             />
           )
         })}
+        </g>
 
         <path
           d={`M ${X(0)} ${Y(0)} L ${X(unitSquare[1][0])} ${Y(unitSquare[1][1])} L ${X(unitSquare[2][0])} ${Y(unitSquare[2][1])} L ${X(unitSquare[3][0])} ${Y(unitSquare[3][1])} Z`}
@@ -155,9 +167,12 @@ export default function MatrixTransform2D({ params, title, caption }: TemplatePr
         <line x1={X(vector[0])} y1={Y(vector[1])} x2={X(image[0])} y2={Y(image[1])} stroke="var(--accent-green)" strokeWidth="0.8" strokeDasharray="3 3" opacity="0.6" />
         <line x1={X(0)} y1={Y(0)} x2={X(image[0])} y2={Y(image[1])} stroke="var(--accent-blue)" strokeWidth="2.4" markerEnd={`url(#${uid}-blue)`} />
 
-        <text x={X(m[0][0]) + 6} y={Y(m[1][0]) - 6} fontSize="10" fill="var(--accent-blue)">Ae₁</text>
-        <text x={X(m[0][1]) + 6} y={Y(m[1][1]) - 6} fontSize="10" fill="var(--accent-teal)">Ae₂</text>
-        <text x={X(image[0]) + 7} y={Y(image[1]) + 12} fontSize="10" fill="var(--accent-blue)">Av</text>
+        {/* Each label is offset away from the other basis arrow and stroked in the
+            figure background, so two arrows that land close stay legible. */}
+        <text x={X(m[0][0]) + 8} y={Y(m[1][0]) + 14} fontSize="10" fill="var(--accent-blue)" stroke="var(--bg)" strokeWidth="3" paintOrder="stroke">Ae₁</text>
+        <text x={X(m[0][1]) - 8} y={Y(m[1][1]) - 10} textAnchor="end" fontSize="10" fill="var(--accent-teal)" stroke="var(--bg)" strokeWidth="3" paintOrder="stroke">Ae₂</text>
+        <text x={X(vector[0]) - 6} y={Y(vector[1]) + 12} textAnchor="end" fontSize="10" fill="var(--accent-green)" stroke="var(--bg)" strokeWidth="3" paintOrder="stroke">v</text>
+        <text x={X(image[0]) + 8} y={Y(image[1]) - 8} fontSize="10" fill="var(--accent-blue)" stroke="var(--bg)" strokeWidth="3" paintOrder="stroke">Av</text>
       </svg>
 
       <div className="mt-3 space-y-2">

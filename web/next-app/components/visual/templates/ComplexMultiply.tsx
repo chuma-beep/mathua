@@ -30,12 +30,17 @@ export default function ComplexMultiply({ params, title, caption }: TemplateProp
   const uid = useId().replace(/:/g, '')
 
   const product = cmul(z, w)
-  const extent = Math.max(2, cmod(z), cmod(w), cmod(product)) * 1.12
-  const unit = (SIZE - PAD * 2) / (extent * 2)
-  const cx = SIZE / 2
-  const cy = SIZE / 2
-  const X = scaleLinear(-extent, extent, cx - extent * unit, cx + extent * unit)
-  const Y = scaleLinear(-extent, extent, cy + extent * unit, cy - extent * unit)
+  // Fit the view to the four points rather than to a radius: a fixed origin-centred square
+  // spends most of its area on quadrants the figure never draws in, which is why the vectors
+  // used to sit in a small cluster at the bottom of an empty canvas. One span for both axes
+  // keeps the unit circle a circle.
+  const lo = Math.min(0, z[0], w[0], product[0], z[1], w[1], product[1]) - 0.7
+  const hi = Math.max(0, z[0], w[0], product[0], z[1], w[1], product[1]) + 0.7
+  const unit = (SIZE - PAD * 2) / Math.max(2, hi - lo)
+  const X = scaleLinear(lo, hi, PAD, SIZE - PAD)
+  const Y = scaleLinear(hi, lo, PAD, SIZE - PAD)
+  const cx = X(0)
+  const cy = Y(0)
 
   const onDrag = useCallback(
     (point: { x: number; y: number }) => {
@@ -77,6 +82,7 @@ export default function ComplexMultiply({ params, title, caption }: TemplateProp
         'Drag either point, or edit its parts. Multiplying adds the arguments and multiplies the moduli, so the product is a rotation and a scaling of the plane.'
       }
       onReset={reset}
+      hint="Drag the nearer of z and w, or type its parts."
       readout={[
         { label: '|z|', value: fmt(cmod(z)) },
         { label: 'arg z', value: fmt(carg(z)) },
@@ -90,7 +96,7 @@ export default function ComplexMultiply({ params, title, caption }: TemplateProp
       <svg
         ref={svgRef}
         viewBox={`0 0 ${SIZE} ${SIZE}`}
-        className="h-auto w-full touch-none font-mono"
+        className="mx-auto block h-auto w-full max-w-[420px] cursor-grab touch-none font-mono active:cursor-grabbing"
         style={{ touchAction: 'none' }}
         role="img"
         aria-label="Two complex numbers, their arguments and their product"
@@ -126,7 +132,6 @@ export default function ComplexMultiply({ params, title, caption }: TemplateProp
         <text x={X(z[0]) + 7} y={Y(z[1]) - 7} fontSize="10" fill="var(--accent-blue)">z</text>
         <text x={X(w[0]) + 7} y={Y(w[1]) - 7} fontSize="10" fill="var(--accent-green)">w</text>
         <text x={X(product[0]) + 7} y={Y(product[1]) + 12} fontSize="10" fill="var(--accent-teal)">zw</text>
-        <text x={SIZE - PAD} y={PAD} textAnchor="end" fontSize="9" fill="var(--text-muted)">drag z or w</text>
       </svg>
 
       <div className="mt-3 grid grid-cols-2 gap-2">

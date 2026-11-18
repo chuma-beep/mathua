@@ -6,7 +6,8 @@ import { Select, Slider, Toggle } from '../Controls'
 import { transform2dSchema } from '../schemas'
 import { apply, compose, dilation, identity, reflection, rotation, type Mat2, type Vec2 } from '../math/matrix'
 import { maxSideDelta, polygonPath } from '../math/geometry'
-import { clamp, pathFromPoints, scaleLinear } from '../scale'
+import { clamp, niceTicks, pathFromPoints, scaleLinear } from '../scale'
+import { XAxisTicks, YAxisTicks } from '../Axis'
 import { fmt, fmtVec } from '../format'
 import { useDrag } from '../useDrag'
 import type { TemplateProps } from '../types'
@@ -20,7 +21,7 @@ type Kind = 'rotation' | 'reflection' | 'translation' | 'dilation' | 'compositio
 
 const KIND_OPTIONS: Array<{ value: Kind; label: string }> = [
   { value: 'rotation', label: 'Rotation' },
-  { value: 'reflection', label: 'Reflection in the y-axis' },
+  { value: 'reflection', label: 'Reflection' },
   { value: 'translation', label: 'Translation' },
   { value: 'dilation', label: 'Dilation' },
   { value: 'composition', label: 'Rotation then reflection' },
@@ -72,6 +73,7 @@ export default function Transform2D({ params, title, caption }: TemplateProps) {
   const Y = scaleLinear(extent, -extent, PAD, H - PAD)
   const cx = X(0)
   const cy = Y(0)
+  const axisTicks = niceTicks(-extent, extent, 4).filter((value) => value !== 0)
 
   const onDrag = useCallback(
     (point: { x: number; y: number }) => {
@@ -118,6 +120,7 @@ export default function Transform2D({ params, title, caption }: TemplateProps) {
         'The dashed outline is the original, the filled outline is its image. An isometry preserves every side length; a dilation does not. Drag the figure to turn or move it.'
       }
       onReset={reset}
+      hint={draggable ? 'Drag the plot to change the transformation, or use the controls.' : 'The dashed outline is the original, the filled one its image.'}
       readout={[
         { label: 'matrix', value: matrixText },
         ...(kind === 'translation' ? [{ label: 'offset', value: fmtVec(offset) }] : []),
@@ -129,7 +132,7 @@ export default function Transform2D({ params, title, caption }: TemplateProps) {
       <svg
         ref={svgRef}
         viewBox={`0 0 ${W} ${H}`}
-        className="h-auto w-full font-mono"
+        className={`mx-auto block h-auto w-full max-w-[420px] font-mono${draggable ? ' cursor-grab active:cursor-grabbing' : ''}`}
         style={{ touchAction: draggable ? 'none' : 'auto' }}
         role="img"
         aria-label="A polygon and its transformed image"
@@ -139,6 +142,8 @@ export default function Transform2D({ params, title, caption }: TemplateProps) {
         ))}
         <line x1={PAD} y1={cy} x2={W - PAD} y2={cy} stroke="var(--text-muted)" strokeWidth="0.9" />
         <line x1={cx} y1={PAD} x2={cx} y2={H - PAD} stroke="var(--text-muted)" strokeWidth="0.9" />
+        <XAxisTicks ticks={axisTicks} scale={X} at={cy} />
+        <YAxisTicks ticks={axisTicks} scale={Y} at={cx} />
 
         {showOrbit &&
           shape.map((p, i) => (
@@ -183,15 +188,12 @@ export default function Transform2D({ params, title, caption }: TemplateProps) {
           </marker>
         </defs>
 
-        <text x={W - PAD} y={H - PAD + 12} textAnchor="end" fontSize="9" fill="var(--text-muted)">
-          {draggable ? 'drag to change the transformation' : 'original and image'}
-        </text>
       </svg>
 
       <div className="mt-3 space-y-2">
         <Select label="Transformation" value={kind} options={KIND_OPTIONS} onChange={(v) => setKind(v as Kind)} />
         {(kind === 'rotation' || kind === 'composition') && (
-          <Slider label="angle" value={angle} min={0} max={360} step={1} onChange={setAngle} format={(v) => `${fmt(v, 0)}°`} />
+          <Slider label="angle" value={angle} min={0} max={360} step={1} onChange={setAngle} suffix="°" />
         )}
         {kind === 'dilation' && (
           <Slider label="scale" value={scale} min={0.25} max={2.5} step={0.05} onChange={setScale} />

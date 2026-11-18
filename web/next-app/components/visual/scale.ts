@@ -25,6 +25,23 @@ export function ticks(min: number, max: number, count = 4): number[] {
   return Array.from({ length: count + 1 }, (_, i) => min + step * i)
 }
 
+/**
+ * Ticks at "nice" numeric steps, so an axis can read 0, 1, 2 rather than
+ * 0.37, 0.74, 1.11. `target` is the number of intervals wanted; the step is
+ * rounded up to 1, 2 or 5 times a power of ten.
+ */
+export function niceTicks(min: number, max: number, target = 5): number[] {
+  if (!Number.isFinite(min) || !Number.isFinite(max) || max <= min || target < 1) return []
+  const raw = (max - min) / target
+  const magnitude = Math.pow(10, Math.floor(Math.log10(raw)))
+  const step = [1, 2, 5, 10].map((m) => m * magnitude).find((s) => s >= raw) ?? 10 * magnitude
+  const out: number[] = []
+  for (let value = Math.ceil(min / step) * step; value <= max + step * 1e-6; value += step) {
+    out.push(Math.abs(value) < step * 1e-6 ? 0 : Number(value.toFixed(10)))
+  }
+  return out
+}
+
 export function pathFromPoints(points: Array<[number, number]>): string {
   if (points.length === 0) return ''
   return points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p[0].toFixed(2)} ${p[1].toFixed(2)}`).join(' ')

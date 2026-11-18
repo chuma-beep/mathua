@@ -7,6 +7,9 @@ interface FigureFrameProps {
   title: string
   caption?: string
   readout: ReadoutItem[]
+  /** One line telling the reader how the drawing responds. Kept out of the SVG:
+   *  text inside the drawing scales with it and collided with the plot. */
+  hint?: string
   onReset?: () => void
   children: ReactNode
 }
@@ -20,11 +23,14 @@ interface FigureFrameProps {
  * with the keyboard hears the new value. It is never the only place a value
  * appears: every control carries its own visible output.
  */
-export default function FigureFrame({ title, caption, readout, onReset, children }: FigureFrameProps) {
+export default function FigureFrame({ title, caption, readout, hint, onReset, children }: FigureFrameProps) {
   return (
     <figure className="mt-5 border border-mathua-border bg-mathua-bg">
       <div className="flex items-center justify-between gap-3 border-b border-mathua-border px-3 py-2">
-        <p className="font-mono text-[11px] uppercase tracking-wider text-mathua-muted">{title}</p>
+        {/* No `uppercase` on a title or a label: CSS case folding rewrites the mathematics.
+            The readout once showed "P(X ≤ X)" for P(X ≤ x), "Μ ± Σ" for μ ± σ and "ΔΧ"
+            for Δx, because the Greek lower-case letters have upper-case codepoints. */}
+        <p className="font-mono text-[11px] tracking-wider text-mathua-muted">{title}</p>
         {onReset && (
           <button
             type="button"
@@ -35,23 +41,33 @@ export default function FigureFrame({ title, caption, readout, onReset, children
           </button>
         )}
       </div>
-      <div className="p-3">{children}</div>
+      <div className="p-3">
+        {/* Drawing and controls share one measure. An SVG capped at 420px with controls stretched
+            across a 700px card reads as two unrelated columns, which is what the complex figure
+            looked like before this wrapper existed. */}
+        <div className="mx-auto w-full max-w-[420px]">
+          {hint && <p className="mb-2 font-mono text-[10px] text-mathua-muted">{hint}</p>}
+          {children}
+        </div>
+      </div>
       {readout.length > 0 && (
-        <dl
-          aria-live="polite"
-          data-testid="visual-readout"
-          className="grid grid-cols-2 gap-x-4 gap-y-1 border-t border-mathua-border px-3 py-2 sm:grid-cols-3"
-        >
-          {readout.map((item) => (
-            <div key={item.label}>
-              <dt className="font-mono text-[9px] uppercase tracking-wide text-mathua-muted">{item.label}</dt>
-              <dd className="font-mono text-[11px] tabular-nums text-mathua-primary">{item.value}</dd>
-            </div>
-          ))}
-        </dl>
+        <div className="border-t border-mathua-border px-3 py-2">
+          <dl
+            aria-live="polite"
+            data-testid="visual-readout"
+            className="mx-auto grid w-full max-w-[420px] grid-cols-2 gap-x-4 gap-y-1 sm:grid-cols-3"
+          >
+            {readout.map((item) => (
+              <div key={item.label}>
+                <dt className="font-mono text-[9px] tracking-wide text-mathua-muted">{item.label}</dt>
+                <dd className="font-mono text-[11px] tabular-nums text-mathua-primary">{item.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
       )}
       {caption && (
-        <figcaption className="border-t border-mathua-border px-3 py-2 font-mono text-[10px] leading-relaxed text-mathua-secondary">
+        <figcaption className="border-t border-mathua-border px-3 py-2 font-mono text-[11px] leading-relaxed text-mathua-secondary">
           {caption}
         </figcaption>
       )}
