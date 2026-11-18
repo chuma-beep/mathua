@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useState, useEffect, useRef } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
-import { Compass, SunMoon, type IconHandle } from './icons'
+import { Compass, Github, SunMoon, type IconHandle } from './icons'
 import { useTheme } from '../hooks/useTheme'
 import { useAuthState } from '../hooks/useAuthState'
 import { useChrome } from '../hooks/useChrome'
@@ -56,12 +56,18 @@ export default function Header({ links }: HeaderProps) {
   const morePanelRef = useRef<HTMLDivElement>(null)
   const compassRef = useRef<IconHandle>(null)
   const sunMoonRef = useRef<IconHandle>(null)
+  const githubRef = useRef<IconHandle>(null)
+  const githubMenuRef = useRef<IconHandle>(null)
 
   function prefersReducedMotion(): boolean {
     return (
       typeof window !== 'undefined' &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches
     )
+  }
+
+  function animateGithub(ref: React.RefObject<IconHandle | null>): void {
+    if (!prefersReducedMotion()) ref.current?.startAnimation()
   }
 
   function toggleNav(): void {
@@ -297,12 +303,29 @@ export default function Header({ links }: HeaderProps) {
           </div>
 
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            <span className="hidden h-11 items-center gap-2 sm:flex">
+              <a
+                href="https://github.com/chuma-beep/mathua"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Give us a star on GitHub"
+                onMouseEnter={() => animateGithub(githubRef)}
+                onMouseLeave={() => githubRef.current?.stopAnimation()}
+                className="group flex h-11 items-center gap-1.5 font-mono text-xs leading-none whitespace-nowrap text-mathua-muted transition-colors hover:text-mathua-blue"
+              >
+                <Github ref={githubRef} size={15} isAnimated={false} />
+                <span className="relative after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-mathua-blue after:transition-transform after:duration-200 after:ease-out after:content-[''] group-hover:after:scale-x-100">
+                  Give us a star
+                </span>
+              </a>
+              <span aria-hidden="true" className="ml-3 h-4 w-px shrink-0 self-center bg-mathua-border" />
+            </span>
             {mounted && (
               <button
                 type="button"
                 onClick={handleThemeToggle}
                 aria-label="Toggle theme"
-                className="flex items-center justify-center min-h-[44px] min-w-[44px] text-mathua-muted bg-transparent border-none cursor-pointer hover:text-mathua-blue transition-colors"
+                className="flex h-11 w-11 items-center justify-center leading-none text-mathua-muted bg-transparent border-none cursor-pointer hover:text-mathua-blue transition-colors"
               >
                 <SunMoon ref={sunMoonRef} size={15} isAnimated={false} />
               </button>
@@ -388,6 +411,19 @@ export default function Header({ links }: HeaderProps) {
                         className="flex items-center min-h-[44px] px-4 font-mono text-xs whitespace-nowrap text-mathua-muted hover:text-mathua-blue hover:bg-mathua-surface-elevated transition-colors"
                       >
                         Discord
+                      </a>
+                      <a
+                        href="https://github.com/chuma-beep/mathua"
+                        role="menuitem"
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={() => setNavOpen(false)}
+                        onMouseEnter={() => animateGithub(githubMenuRef)}
+                        onMouseLeave={() => githubMenuRef.current?.stopAnimation()}
+                        className="flex items-center gap-2 min-h-[44px] border-t border-mathua-border px-4 font-mono text-xs whitespace-nowrap text-mathua-muted transition-colors hover:bg-mathua-surface-elevated hover:text-mathua-blue"
+                      >
+                        <Github ref={githubMenuRef} size={15} isAnimated={false} />
+                        Give us a star
                       </a>
                     </div>
                   </div>
