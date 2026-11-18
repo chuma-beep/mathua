@@ -2,6 +2,7 @@ package engine
 
 import (
 	"fmt"
+	"os"
 	"time"
 
 	"github.com/chuma-beep/mathua/internal/scheduler"
@@ -76,6 +77,21 @@ func (e *Engine) EligibilityFor(studentID, conceptID string) (*ConceptEligibilit
 			State:     state,
 			Met:       !missing[pid],
 		})
+	}
+
+	// MATHUA_DEV_UNLOCK=1 opens every concept on a local instance, so a reviewer
+	// can read a lesson without first mastering its prerequisites. It lives here
+	// because this is the single place the practice, study-answer and curriculum
+	// surfaces ask, so the override cannot be applied to one surface and not
+	// another. It is read per call and is never set in a deployment.
+	if os.Getenv("MATHUA_DEV_UNLOCK") == "1" {
+		out.Eligible = true
+		out.State = "unlocked"
+		out.Reason = ""
+		for i := range out.Prerequisites {
+			out.Prerequisites[i].Met = true
+			out.Prerequisites[i].State = "mastered"
+		}
 	}
 	return out, nil
 }
