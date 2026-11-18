@@ -24,11 +24,11 @@
       "predict": {
         "question": "As n doubles, the left-endpoint sum for x squared on [0, 2] does what?",
         "options": [
-          "Moves closer to 8/3",
           "Stays the same",
-          "Moves further from 8/3"
+          "Moves further from 8/3",
+          "Moves closer to 8/3"
         ],
-        "answer": 0,
+        "answer": 2,
         "explain": "Each rectangle is narrower and the staircase follows the curve more closely, so the sum approaches the exact area."
       }
     }

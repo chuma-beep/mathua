@@ -23,11 +23,11 @@
       "predict": {
         "question": "Adding one more term to a Taylor polynomial does what?",
         "options": [
+          "Reduces the degree",
           "Matches one more derivative at the centre",
-          "Matches the function everywhere",
-          "Reduces the degree"
+          "Matches the function everywhere"
         ],
-        "answer": 0,
+        "answer": 1,
         "explain": "Each term fixes one more derivative at the expansion point; agreement away from that point is a consequence, not a guarantee."
       }
     }
