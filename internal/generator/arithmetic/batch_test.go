@@ -570,6 +570,12 @@ func TestArithNegativeBaseRespectsParentheses(t *testing.T) {
 		if value != want {
 			t.Fatalf("%s: value = %d, want %d (parenthesized=%s)", p.Question, value, want, paren)
 		}
+		if paren == "false" && !strings.Contains(p.Question, "-(") {
+			t.Fatalf("bare negative-base question must show the sign outside the power: %q", p.Question)
+		}
+		if paren == "true" && !strings.Contains(p.Question, "(-") {
+			t.Fatalf("parenthesized negative-base question lost its parentheses: %q", p.Question)
+		}
 		shapes[shape]++
 		shapes[strconv.Itoa(power)]++
 	}

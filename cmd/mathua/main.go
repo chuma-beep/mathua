@@ -103,12 +103,12 @@ const adminActorCLI = "cli"
 
 func adminCommand(args []string) error {
 	if len(args) == 0 {
-		return errors.New("usage: mathua admin promote <email> | backfill-leagues [week]")
+		return errors.New("usage: mathua admin promote <email> | backfill-leagues [week] | resolve-reports <ids> <resolution>")
 	}
 	switch args[0] {
 	case "promote":
 		if len(args) != 2 {
-			return errors.New("usage: mathua admin promote <email> | backfill-leagues [week]")
+			return errors.New("usage: mathua admin promote <email> | backfill-leagues [week] | resolve-reports <ids> <resolution>")
 		}
 		email := strings.TrimSpace(args[1])
 		if email == "" {

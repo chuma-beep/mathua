@@ -36,6 +36,7 @@ describe('DiagnosticResults', () => {
     expect(screen.getByText('Suggested course: 5')).toBeInTheDocument()
     expect(screen.getByText(/150 XP → ≈5 days/)).toBeInTheDocument()
     expect(screen.getByText(/no timeout/i)).toBeInTheDocument()
+    expect(screen.getByText(/first gap on the prerequisite path/i)).toBeInTheDocument()
   })
 
   it('renders provisional frontier and conditional topics', () => {

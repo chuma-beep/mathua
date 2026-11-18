@@ -503,7 +503,7 @@ func (g *negativeBaseGen) Generate(ctx generator.GeneratorContext) generator.Pro
 		rule = "The parentheses put the negative sign inside the base, so the sign follows the exponent."
 	} else {
 		value = -mathutil.IntPow(base, power)
-		question = fmt.Sprintf("Evaluate \\(-%d^{%d}\\).", base, power)
+		question = fmt.Sprintf("Evaluate \\(-(%d^{%d})\\).", base, power)
 		explanation = fmt.Sprintf("Without parentheses the exponent applies to %d first, so \\(-%d^{%d} = -(%d^{%d}) = %d\\).", base, base, power, base, power, value)
 		rule = "Without parentheses the exponent applies to the positive base first, and the negative sign stays outside."
 	}

@@ -37,6 +37,9 @@ export default function DiagnosticResults({ plan, onStartPractice }: Props) {
             </p>
           )}
           <p className="font-mono text-[10px] text-mathua-muted mt-2">
+            Start here is the first gap on the prerequisite path to your goal. It can sit below the course you chose, because that course depends on it.
+          </p>
+          <p className="font-mono text-[10px] text-mathua-muted mt-2">
             Measured for automaticity, no timeout. Slow answers count as gaps to refresh, not failures.
           </p>
           {plan.conditionally_completed && plan.conditionally_completed.length > 0 && (
