@@ -15,7 +15,7 @@ import { Bar, BarChart, CartesianGrid, Line, LineChart, XAxis, YAxis } from 'rec
 import { ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent, type ChartConfig } from '../../../components/ui/chart'
 import { dicebearUrl, isDicebearStyle } from '../../../lib/dicebear'
 import { API_BASE, getAdminLeagueRange, getAdminLeagues, getErrorMessage, type AdminLeague, type AdminLeagueMember, type AdminLeagueRange } from '../../../lib/api'
-import { DateRangePicker } from '../../../components/ui/date-range-picker'
+import { DateRangePicker, dateKey } from '../../../components/ui/date-range-picker'
 import type { DateRange } from 'react-day-picker'
 
 // The league console is a reading surface, not a queue. A week has five tiers,
@@ -670,8 +670,8 @@ export default function AdminLeaguesPage() {
     } else if (scope === 'year') {
       params.set('year', year)
     } else if (custom?.from && custom?.to) {
-      params.set('from', custom.from.toISOString().slice(0, 10))
-      params.set('to', custom.to.toISOString().slice(0, 10))
+      params.set('from', dateKey(custom.from))
+      params.set('to', dateKey(custom.to))
     }
     window.history.replaceState(null, '', `?${params.toString()}`)
   }, [week, selected, scope, month, year, custom])

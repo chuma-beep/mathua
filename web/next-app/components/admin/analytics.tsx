@@ -30,9 +30,17 @@ import {
 } from '../ui/chart'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
 import { ToggleGroup, ToggleGroupItem } from '../ui/toggle-group'
+import { DateRangePicker, dateKey } from '../ui/date-range-picker'
+import type { DateRange } from 'react-day-picker'
 
 type Tab = 'overview' | 'engagement' | 'learning' | 'operations'
 type Range = '15m' | '1h' | '24h' | '7d' | '30d' | '90d'
+type AnalyticsRange = Range | 'custom'
+
+interface AnalyticsWindow {
+  range: AnalyticsRange
+  custom?: DateRange
+}
 
 const RANGES: { value: Range; label: string }[] = [
   { value: '15m', label: '15m' },
@@ -127,14 +135,17 @@ function number(value: number | undefined): string {
   return (value ?? 0).toLocaleString()
 }
 
-function bucketRows(data: AdminAnalytics, range: Range): Row[] {
+// The response owns the bucket size. Reading it here means a preset and a
+// custom window of the same span are labelled the same way, and a weekly
+// custom bucket gets a date rather than a time.
+function bucketRows(data: AdminAnalytics): Row[] {
   const map = new Map<number, Row>()
   const row = (start: number): Row => {
     const existing = map.get(start)
     if (existing) return existing
     const next: Row = {
       start,
-      label: rangeLabel(start, range),
+      label: rangeLabel(start, data.bucket_seconds),
       signups: 0,
       cumulativeRegistered: 0,
       activeRegistered: 0,
@@ -200,10 +211,23 @@ function bucketRows(data: AdminAnalytics, range: Range): Row[] {
 const RANGE_VALUES = new Set(RANGES.map(item => item.value))
 const TAB_VALUES = new Set(TABS.map(item => item.value))
 
-function initialRange(): Range {
-  if (typeof window === 'undefined') return '7d'
-  const value = new URLSearchParams(window.location.search).get('range')
-  return value && RANGE_VALUES.has(value as Range) ? (value as Range) : '7d'
+function parseDay(value: string | null): Date | undefined {
+  if (!value || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return undefined
+  const parsed = new Date(`${value}T00:00:00Z`)
+  return Number.isNaN(parsed.getTime()) ? undefined : parsed
+}
+
+function initialWindow(): AnalyticsWindow {
+  if (typeof window === 'undefined') return { range: '7d' }
+  const params = new URLSearchParams(window.location.search)
+  if (params.get('range') === 'custom') {
+    const from = parseDay(params.get('from'))
+    const to = parseDay(params.get('to'))
+    if (from && to && from <= to) return { range: 'custom', custom: { from, to } }
+    return { range: '7d' }
+  }
+  const value = params.get('range')
+  return { range: value && RANGE_VALUES.has(value as Range) ? (value as Range) : '7d' }
 }
 
 function initialTab(): Tab {
@@ -212,21 +236,29 @@ function initialTab(): Tab {
   return value && TAB_VALUES.has(value as Tab) ? (value as Tab) : 'overview'
 }
 
-// The range and tab are part of the page URL so an operator can share exactly
+// The window and tab are part of the page URL so an operator can share exactly
 // what they are looking at. replaceState keeps the back button on the page
 // rather than stepping through every control change.
-function syncAnalyticsUrl(range: Range, tab: Tab) {
+function syncAnalyticsUrl(selection: AnalyticsWindow, tab: Tab) {
   if (typeof window === 'undefined') return
   const url = new URL(window.location.href)
-  if (range === '7d') url.searchParams.delete('range')
-  else url.searchParams.set('range', range)
+  if (selection.range === '7d') url.searchParams.delete('range')
+  else url.searchParams.set('range', selection.range)
+  if (selection.range === 'custom' && selection.custom?.from && selection.custom.to) {
+    url.searchParams.set('from', dateKey(selection.custom.from))
+    url.searchParams.set('to', dateKey(selection.custom.to))
+  } else {
+    url.searchParams.delete('from')
+    url.searchParams.delete('to')
+  }
   if (tab === 'overview') url.searchParams.delete('tab')
   else url.searchParams.set('tab', tab)
   window.history.replaceState({}, '', url.toString())
 }
 
 export default function AdminAnalyticsDashboard() {
-  const [range, setRange] = useState<Range>(initialRange)
+  const [selection, setSelection] = useState<AnalyticsWindow>(initialWindow)
+  const { range, custom } = selection
   const [tab, setTab] = useState<Tab>(initialTab)
   const [data, setData] = useState<AdminAnalytics | null>(null)
   const [live, setLive] = useState<AdminAnalyticsLive | null>(null)
@@ -237,12 +269,19 @@ export default function AdminAnalyticsDashboard() {
   const sections = useMemo(() => TABS.find(item => item.value === tab)?.sections ?? [], [tab])
 
   const load = useCallback(async () => {
+    // A half-selected custom range has no meaning to the server. Keep the
+    // current chart until the operator picks the second day.
+    if (range === 'custom' && !(custom?.from && custom?.to)) return
     const id = ++requestId.current
     setError('')
     setLoading(true)
     try {
+      const days =
+        range === 'custom' && custom?.from && custom.to
+          ? { from: dateKey(custom.from), to: dateKey(custom.to) }
+          : {}
       const [next, nextLive] = await Promise.all([
-        adminAnalytics(range, { sections }),
+        adminAnalytics(range, { sections, ...days }),
         adminAnalyticsLive(),
       ])
       if (id !== requestId.current) return
@@ -254,7 +293,7 @@ export default function AdminAnalyticsDashboard() {
     } finally {
       if (id === requestId.current) setLoading(false)
     }
-  }, [range, sections])
+  }, [range, custom, sections])
 
   useEffect(() => {
     void load()
@@ -303,29 +342,56 @@ export default function AdminAnalyticsDashboard() {
             </button>
           </div>
         </div>
-        <ToggleGroup
-          type="single"
-          value={range}
-          onValueChange={(value) => {
-            if (!value || value === range) return
-            requestId.current++
-            setRange(value as Range)
-            syncAnalyticsUrl(value as Range, tab)
-          }}
-          aria-label="Analytics range"
-          className="mt-3 flex justify-start gap-1 overflow-x-auto"
-        >
-          {RANGES.map(item => (
-            <ToggleGroupItem
-              key={item.value}
-              value={item.value}
-              aria-label={item.label}
-              className="h-8 shrink-0 rounded-none border border-mathua-border px-2.5 font-mono text-[11px] text-mathua-secondary data-[state=on]:border-mathua-blue data-[state=on]:bg-mathua-blue-faint data-[state=on]:text-mathua-blue"
-            >
-              {item.label}
-            </ToggleGroupItem>
-          ))}
-        </ToggleGroup>
+        <div className="mt-3 flex flex-wrap items-center gap-2">
+          <ToggleGroup
+            type="single"
+            value={range}
+            onValueChange={(value) => {
+              if (!value || value === range) return
+              requestId.current++
+              const next: AnalyticsWindow = { range: value as Range }
+              setSelection(next)
+              syncAnalyticsUrl(next, tab)
+            }}
+            aria-label="Analytics range"
+            className="flex justify-start gap-1 overflow-x-auto"
+          >
+            {RANGES.map(item => (
+              <ToggleGroupItem
+                key={item.value}
+                value={item.value}
+                aria-label={item.label}
+                className="h-8 shrink-0 rounded-none border border-mathua-border px-2.5 font-mono text-[11px] text-mathua-secondary data-[state=on]:border-mathua-blue data-[state=on]:bg-mathua-blue-faint data-[state=on]:text-mathua-blue"
+              >
+                {item.label}
+              </ToggleGroupItem>
+            ))}
+          </ToggleGroup>
+          <DateRangePicker
+            value={custom}
+            onChange={(next) => {
+              if (!next) {
+                if (!custom) return
+                requestId.current++
+                const fallback: AnalyticsWindow = { range: '7d' }
+                setSelection(fallback)
+                syncAnalyticsUrl(fallback, tab)
+                return
+              }
+              // Wait for the second day before switching windows. The picker
+              // keeps the first click visible in the meantime.
+              if (!next.to) {
+                setSelection(current => ({ ...current, custom: next }))
+                return
+              }
+              requestId.current++
+              const chosen: AnalyticsWindow = { range: 'custom', custom: next }
+              setSelection(chosen)
+              syncAnalyticsUrl(chosen, tab)
+            }}
+            max={new Date()}
+          />
+        </div>
       </div>
 
       {error && (
@@ -351,7 +417,7 @@ export default function AdminAnalyticsDashboard() {
           if (value === tab) return
           requestId.current++
           setTab(value as Tab)
-          syncAnalyticsUrl(range, value as Tab)
+          syncAnalyticsUrl(selection, value as Tab)
         }}
         className="mt-6"
       >
@@ -367,10 +433,10 @@ export default function AdminAnalyticsDashboard() {
           ))}
         </TabsList>
 
-        <TabsContent value="overview">{data && <OverviewTab data={data} range={range} />}</TabsContent>
-        <TabsContent value="engagement">{data && <EngagementTab data={data} range={range} />}</TabsContent>
-        <TabsContent value="learning">{data && <LearningTab data={data} range={range} />}</TabsContent>
-        <TabsContent value="operations">{data && <OperationsTab data={data} range={range} />}</TabsContent>
+        <TabsContent value="overview">{data && <OverviewTab data={data} />}</TabsContent>
+        <TabsContent value="engagement">{data && <EngagementTab data={data} />}</TabsContent>
+        <TabsContent value="learning">{data && <LearningTab data={data} />}</TabsContent>
+        <TabsContent value="operations">{data && <OperationsTab data={data} />}</TabsContent>
       </Tabs>
     </section>
   )
@@ -451,8 +517,8 @@ function PrimaryKpis({ data }: { data: AdminAnalytics }) {
   )
 }
 
-function OverviewTab({ data, range }: { data: AdminAnalytics; range: Range }) {
-  const rows = bucketRows(data, range)
+function OverviewTab({ data }: { data: AdminAnalytics }) {
+  const rows = bucketRows(data)
   return (
     <>
       <PrimaryKpis data={data} />
@@ -485,9 +551,9 @@ function OverviewTab({ data, range }: { data: AdminAnalytics; range: Range }) {
   )
 }
 
-function EngagementTab({ data, range }: { data: AdminAnalytics; range: Range }) {
+function EngagementTab({ data }: { data: AdminAnalytics }) {
   const totals = data.totals
-  const rows = bucketRows(data, range)
+  const rows = bucketRows(data)
   return (
     <>
       <PrimaryKpis data={data} />
@@ -515,8 +581,8 @@ function EngagementTab({ data, range }: { data: AdminAnalytics; range: Range }) 
   )
 }
 
-function LearningTab({ data, range }: { data: AdminAnalytics; range: Range }) {
-  const rows = bucketRows(data, range)
+function LearningTab({ data }: { data: AdminAnalytics }) {
+  const rows = bucketRows(data)
   const masteryEvents = rows.reduce((sum, item) => sum + item.mastery, 0)
   const domainRows = Object.entries(data.mastered_by_concept ?? {})
     .sort((a, b) => b[1] - a[1])
@@ -563,8 +629,8 @@ function LearningTab({ data, range }: { data: AdminAnalytics; range: Range }) {
   )
 }
 
-function OperationsTab({ data, range }: { data: AdminAnalytics; range: Range }) {
-  const rows = bucketRows(data, range)
+function OperationsTab({ data }: { data: AdminAnalytics }) {
+  const rows = bucketRows(data)
   return (
     <>
       <PrimaryKpis data={data} />
@@ -928,9 +994,9 @@ function updatedLabel(value: string | undefined): string {
   return `${date.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' })} UTC`
 }
 
-function rangeLabel(start: number, range: Range): string {
+function rangeLabel(start: number, bucketSeconds: number): string {
   const date = new Date(start * 1000)
-  if (range === '15m' || range === '1h' || range === '24h') {
+  if (bucketSeconds < 24 * 60 * 60) {
     return date.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' })
   }
   return date.toLocaleDateString('en-GB', { month: 'short', day: 'numeric', timeZone: 'UTC' })
