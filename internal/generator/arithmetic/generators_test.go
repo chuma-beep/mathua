@@ -294,3 +294,18 @@ func TestDivisibilityHidesTheMissingDigit(t *testing.T) {
 		}
 	}
 }
+
+func TestNegNumberLineHasEnoughVariety(t *testing.T) {
+	g := &negNumberLineGen{}
+	seen := map[string]struct{}{}
+	for i := 0; i < 300; i++ {
+		p := g.Generate(generator.GeneratorContext{Difficulty: 0.4})
+		if p.Answer == "0" {
+			t.Fatalf("opposite of zero served: %q", p.Question)
+		}
+		seen[p.Question] = struct{}{}
+	}
+	if len(seen) < 8 {
+		t.Fatalf("only %d distinct prompts at difficulty 0.4, want at least 8", len(seen))
+	}
+}

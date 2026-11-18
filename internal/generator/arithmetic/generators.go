@@ -769,18 +769,14 @@ func minInt(a, b int) int {
 type negNumberLineGen struct{}
 
 func (g *negNumberLineGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*5)
-	a := rand.Intn(scale*2) - scale
-	// 0 is its own opposite, trivial and confusing; re-roll to non-zero.
-	for a == 0 {
-		a = rand.Intn(scale*2) - scale
-		if scale <= 1 {
-			a = rand.Intn(4) - 2
-			if a == 0 {
-				a = 1
-			}
-			break
-		}
+	// At difficulty 0.4 the old range held only five non-zero prompts, so the
+	// next question repeated the one before it. A wider band keeps the
+	// arithmetic trivial while giving the feed room.
+	scale := int(3 + ctx.Difficulty*9)
+	a := rand.Intn(2*scale+1) - scale
+	// 0 is its own opposite, trivial and confusing; use a non-zero value.
+	if a == 0 {
+		a = 1
 	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("What is the opposite of %d?", a),
