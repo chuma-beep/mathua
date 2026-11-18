@@ -115,7 +115,11 @@ func (c *adminAnalyticsCache) finish(key string, payload []byte, err error, now 
 // Rolling ranges are measured back from now; daily ranges start at UTC
 // midnight and include the partial current day.
 type adminAnalyticsRange struct {
-	Name   string
+	Name string
+	// Key identifies the window in the cache. Presets key on the name, but a
+	// custom window must include its dates or every custom request would
+	// share the first response for the next 30 seconds.
+	Key    string
 	Since  time.Time
 	Until  time.Time
 	Bucket time.Duration
@@ -192,7 +196,12 @@ func (s *Server) handleAdminAnalytics(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	now := time.Now().UTC()
-	window, ok := resolveAdminAnalyticsRange(r.URL.Query().Get("range"), now)
+	window, ok := resolveAdminAnalyticsRange(
+		r.URL.Query().Get("range"),
+		r.URL.Query().Get("from"),
+		r.URL.Query().Get("to"),
+		now,
+	)
 	if !ok {
 		writeError(w, "invalid range", http.StatusBadRequest)
 		return
@@ -203,7 +212,7 @@ func (s *Server) handleAdminAnalytics(w http.ResponseWriter, r *http.Request) {
 		writeError(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	cacheKey := adminAnalyticsCacheKey(window.Name, view, sections)
+	cacheKey := adminAnalyticsCacheKey(window.Key, view, sections)
 	payload, flight, leader, cached := s.analyticsCache.begin(cacheKey, now)
 	if cached {
 		w.Header().Set("Content-Type", "application/json")
@@ -362,10 +371,10 @@ type adminAnalyticsError struct{ msg string }
 
 func (e *adminAnalyticsError) Error() string { return e.msg }
 
-func adminAnalyticsCacheKey(rangeName, view string, sections []string) string {
+func adminAnalyticsCacheKey(windowKey, view string, sections []string) string {
 	copied := append([]string(nil), sections...)
 	sort.Strings(copied)
-	return rangeName + "|" + view + "|" + strings.Join(copied, ",")
+	return windowKey + "|" + view + "|" + strings.Join(copied, ",")
 }
 
 func (s *Server) handleAdminAnalyticsLive(w http.ResponseWriter, r *http.Request) {
@@ -406,25 +415,87 @@ func (s *Server) handleAdminAnalyticsLive(w http.ResponseWriter, r *http.Request
 // resolveAdminAnalyticsRange maps the public range names to a window and a
 // bucket. The daily ranges begin at UTC midnight so the first and last labels
 // match the calendar a learner sees elsewhere in the product.
-func resolveAdminAnalyticsRange(raw string, now time.Time) (adminAnalyticsRange, bool) {
+//
+// A custom range carries a start and end calendar day, both inclusive and both
+// UTC. The end day is extended to the end of that day and clamped to now, so an
+// operator asking for today does not get a bucket for the rest of the day.
+func resolveAdminAnalyticsRange(raw, fromRaw, toRaw string, now time.Time) (adminAnalyticsRange, bool) {
 	now = now.UTC()
+	if raw == "custom" {
+		return resolveCustomAdminAnalyticsRange(fromRaw, toRaw, now)
+	}
+	// Dates on any other range are a caller mistake, not something to ignore:
+	// answering with a preset would show a different window than the one asked
+	// for.
+	if fromRaw != "" || toRaw != "" {
+		return adminAnalyticsRange{}, false
+	}
 	dayStart := time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, time.UTC)
 	switch raw {
 	case "", "30d":
-		return adminAnalyticsRange{Name: "30d", Since: dayStart.AddDate(0, 0, -29), Until: now, Bucket: 24 * time.Hour}, true
+		return adminAnalyticsRange{Name: "30d", Key: "30d", Since: dayStart.AddDate(0, 0, -29), Until: now, Bucket: 24 * time.Hour}, true
 	case "15m":
-		return adminAnalyticsRange{Name: "15m", Since: now.Add(-15 * time.Minute), Until: now, Bucket: time.Minute}, true
+		return adminAnalyticsRange{Name: "15m", Key: "15m", Since: now.Add(-15 * time.Minute), Until: now, Bucket: time.Minute}, true
 	case "1h":
-		return adminAnalyticsRange{Name: "1h", Since: now.Add(-time.Hour), Until: now, Bucket: 5 * time.Minute}, true
+		return adminAnalyticsRange{Name: "1h", Key: "1h", Since: now.Add(-time.Hour), Until: now, Bucket: 5 * time.Minute}, true
 	case "24h":
-		return adminAnalyticsRange{Name: "24h", Since: now.Add(-24 * time.Hour), Until: now, Bucket: time.Hour}, true
+		return adminAnalyticsRange{Name: "24h", Key: "24h", Since: now.Add(-24 * time.Hour), Until: now, Bucket: time.Hour}, true
 	case "7d":
-		return adminAnalyticsRange{Name: "7d", Since: dayStart.AddDate(0, 0, -6), Until: now, Bucket: 24 * time.Hour}, true
+		return adminAnalyticsRange{Name: "7d", Key: "7d", Since: dayStart.AddDate(0, 0, -6), Until: now, Bucket: 24 * time.Hour}, true
 	case "90d":
-		return adminAnalyticsRange{Name: "90d", Since: dayStart.AddDate(0, 0, -89), Until: now, Bucket: 24 * time.Hour}, true
+		return adminAnalyticsRange{Name: "90d", Key: "90d", Since: dayStart.AddDate(0, 0, -89), Until: now, Bucket: 24 * time.Hour}, true
 	default:
 		return adminAnalyticsRange{}, false
 	}
+}
+
+// adminAnalyticsMaxCustomDays caps a custom window. The storage aggregate scans
+// the whole window, so an unbounded range would let one request walk the entire
+// event history.
+const adminAnalyticsMaxCustomDays = 366
+
+func resolveCustomAdminAnalyticsRange(fromRaw, toRaw string, now time.Time) (adminAnalyticsRange, bool) {
+	if fromRaw == "" || toRaw == "" {
+		return adminAnalyticsRange{}, false
+	}
+	from, err := time.Parse("2006-01-02", fromRaw)
+	if err != nil {
+		return adminAnalyticsRange{}, false
+	}
+	to, err := time.Parse("2006-01-02", toRaw)
+	if err != nil || to.Before(from) {
+		return adminAnalyticsRange{}, false
+	}
+	requestedUntil := to.AddDate(0, 0, 1)
+	span := requestedUntil.Sub(from)
+	if span > adminAnalyticsMaxCustomDays*24*time.Hour {
+		return adminAnalyticsRange{}, false
+	}
+	until := requestedUntil
+	if until.After(now) {
+		until = now
+	}
+	if !from.Before(until) {
+		return adminAnalyticsRange{}, false
+	}
+	// The bucket follows the requested days, not the clamped span, so a range
+	// that ends today keeps hourly buckets early in the morning instead of
+	// switching to minutes because only a few hours have elapsed. A custom
+	// range is day-granular, so the smallest useful bucket is one hour.
+	bucket := 7 * 24 * time.Hour
+	switch {
+	case span <= 3*24*time.Hour:
+		bucket = time.Hour
+	case span <= 120*24*time.Hour:
+		bucket = 24 * time.Hour
+	}
+	return adminAnalyticsRange{
+		Name:   "custom",
+		Key:    "custom:" + fromRaw + ":" + toRaw,
+		Since:  from,
+		Until:  until,
+		Bucket: bucket,
+	}, true
 }
 
 func lastBucketPartial(window adminAnalyticsRange) bool {

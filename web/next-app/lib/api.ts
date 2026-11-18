@@ -2130,10 +2130,16 @@ export type AdminAnalyticsLive = z.infer<typeof AdminAnalyticsLiveSchema>
 
 export async function adminAnalytics(
 	range: string,
-	options: { sections?: string[]; view?: string } = {},
+	options: { sections?: string[]; view?: string; from?: string; to?: string } = {},
 ): Promise<AdminAnalytics> {
 	const params = new URLSearchParams({ range })
 	if (options.view) params.set('view', options.view)
+	// Custom windows are two inclusive UTC days. The server refuses a request
+	// that carries only one of them, so they travel together or not at all.
+	if (options.from && options.to) {
+		params.set('from', options.from)
+		params.set('to', options.to)
+	}
 	if (options.sections && options.sections.length > 0) params.set('sections', options.sections.join(','))
 	const res = await authedFetch(`${API_BASE}/api/admin/analytics?${params.toString()}`)
 	if (!res.ok) await throwWithResponse(res, 'Could not load analytics')
