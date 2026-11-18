@@ -27,6 +27,7 @@ import {
   BookOpenIcon,
   ChartNoAxesColumnIcon,
   CheckIcon,
+  ChevronLeftIcon,
   ChevronRightIcon,
   ChevronsLeftIcon,
   ChevronsRightIcon,
@@ -150,6 +151,7 @@ export const User = wrap(UserIcon as never)
 // The friends destination. A pair rather than one person: the surface is about
 // the relationship, and a single user icon would read as the profile page.
 export const Users = wrap(UsersIcon as never)
+export const ChevronLeft = wrap(ChevronLeftIcon as never)
 export const ChevronDown = wrap(ChevronDownIcon as never)
 export const ChevronUp = wrap(ChevronUpIcon as never)
 export const ChevronRight = wrap(ChevronRightIcon as never)

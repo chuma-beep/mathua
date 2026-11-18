@@ -1,35 +1,52 @@
 'use client'
 
-import { useTheme } from '../../hooks/useTheme'
-import { useState, useEffect, useCallback } from 'react'
+import { Suspense, useCallback, useEffect, useMemo, useState } from 'react'
+import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import AppShell from '../../components/app-shell'
 import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
-import LeagueAvatar from '../../components/LeagueAvatar'
-import { LeaderboardTableSkeleton } from '../../components/skeletons/LeaderboardSkeleton'
+import BoardTable from '../../components/leaderboard/board-table'
+import LeagueBoard from '../../components/leaderboard/league-board'
+import Podium from '../../components/leaderboard/podium'
+import { MonthPicker, PeriodArrows, WeekPicker } from '../../components/leaderboard/period-picker'
+import { useTheme } from '../../hooks/useTheme'
 import { useAuthState } from '../../hooks/useAuthState'
 import {
   getLeaderboard,
   getMyLeague,
   getSettings,
   type LeaderboardBoard,
-  type LeaderboardEntry,
   type LeaderboardView,
   type MyLeague,
 } from '../../lib/api'
-import { resolveAvatar } from '../../lib/dicebear'
+import {
+  monthStartKey,
+  monthsAvailable,
+  parsePeriodKey,
+  periodLabel,
+  shiftMonthKey,
+  shiftWeekKey,
+  todayKey,
+  weekStartKey,
+} from '../../lib/leaderboard-period'
+import { Button } from '../../components/ui/button'
 import { scrollToPageTop } from '../../lib/scroll'
+import { Tabs, TabsList, TabsTrigger } from '../../components/ui/tabs'
 
 type Tab = LeaderboardView | 'league'
 
-const TABS: { id: Tab; label: string }[] = [
-  { id: 'weekly', label: 'This week' },
-  { id: 'all_time', label: 'All time' },
-  { id: 'league', label: 'My league' },
-]
-
 const PAGE_SIZE = 25
+
+function parseTab(raw: string | null): Tab {
+  if (raw === 'monthly' || raw === 'all_time' || raw === 'league') return raw
+  return 'weekly'
+}
+
+function parsePage(raw: string | null): number {
+  const value = Number(raw)
+  return Number.isInteger(value) && value > 0 ? value : 1
+}
 
 function computeCountdown(): string {
   const now = new Date()
@@ -43,79 +60,38 @@ function computeCountdown(): string {
   return `${d}d ${h}h ${m}m`
 }
 
-// The server decides the avatar shape; the client only has to turn it into a
-// URL. A generated avatar is seeded from the public id, never from the account.
-function avatarURL(row: { id: string; avatar?: { kind: string; url?: string; style?: string; version?: number } }): string | undefined {
-  const av = row.avatar
-  if (!av) return undefined
-  if (av.kind === 'custom' && av.url) {
-    return av.version ? `${av.url}?v=${av.version}` : av.url
-  }
-  return resolveAvatar(
-    { avatar_url: '' },
-    { avatar_dicebear: av.style ? { style: av.style, seed: row.id } : null },
-  ).url
-}
-
-// The server resolves a display name, but a blank cell is a silent failure and
-// costs one line to prevent: fall back to the public id, which is never empty.
-function nameOf(row: { name: string; id: string }): string {
-  return row.name.trim() || row.id
-}
-
-function shortWeek(iso: string): string {
-  const d = new Date(iso)
-  if (Number.isNaN(d.getTime())) return ''
-  return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric', timeZone: 'UTC' })
-}
-
-function Podium({ entries }: { entries: LeaderboardEntry[] }) {
-  if (entries.length < 3) return null
-  return (
-    <ol className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6 list-none p-0">
-      {entries.slice(0, 3).map((row, i) => (
-        <li
-          key={`podium-${row.id}`}
-          className={`border border-mathua-border bg-mathua-surface px-4 py-3 flex items-center gap-3 min-w-0 ${i === 0 ? 'sm:order-2' : i === 1 ? 'sm:order-1' : 'sm:order-3'}`}
-        >
-          <span className="font-mono text-lg text-mathua-blue w-5 shrink-0">{row.rank}</span>
-          <LeagueAvatar tier={row.league} weeklyXp={row.league_xp} seed={row.id} name={nameOf(row)} size={30} url={avatarURL(row)} className="shrink-0" />
-          <span className="min-w-0 flex-1">
-            <span className="block text-sm text-mathua-primary truncate" title={nameOf(row)}>{nameOf(row)}</span>
-            <span className="block font-mono text-[10px] uppercase tracking-wider text-mathua-muted">
-              {row.xp} XP
-            </span>
-          </span>
-        </li>
-      ))}
-    </ol>
-  )
-}
-
 function PositionStrip({
   me,
   view,
+  final,
 }: {
   me: NonNullable<LeaderboardBoard['me']>
   view: LeaderboardView
+  final?: boolean
 }) {
   if (me.guest) {
     return (
       <p className="mb-4 text-sm text-mathua-secondary">
-        You are browsing as a guest. <Link href="/login" className="text-mathua-blue hover:underline">Sign in</Link> to compete on the board.
+        You are browsing as a guest.{' '}
+        <Link href="/login" className="text-mathua-blue hover:underline">
+          Sign in
+        </Link>{' '}
+        to compete on the board.
       </p>
     )
   }
   if (!me.eligible || me.rank === 0) {
+    const period =
+      view === 'weekly' ? (final ? ' that week' : ' this week') : view === 'monthly' ? (final ? ' that month' : ' this month') : ''
     return (
       <p className="mb-4 text-sm text-mathua-secondary">
-        You have no place yet{view === 'weekly' ? ' this week' : ''}. Answer one question and your XP puts you on the board.
+        You have no place yet{period}. Answer one question and your XP puts you on the board.
       </p>
     )
   }
   if (me.in_page) return null
   return (
-    <p className="mb-4 font-mono text-xs text-mathua-primary border border-mathua-border bg-mathua-blue-faint px-3 py-2">
+    <p className="mb-4 border border-mathua-border bg-mathua-blue-faint px-3 py-2 font-mono text-xs text-mathua-primary">
       Your position: <span className="text-mathua-blue">#{me.rank}</span> with {me.xp} XP
     </p>
   )
@@ -133,92 +109,73 @@ function PageControls({
   const start = board.total === 0 ? 0 : (board.page - 1) * board.page_size + 1
   const end = start === 0 ? 0 : start + board.entries.length - 1
   return (
-    <div className="flex flex-wrap items-center justify-between gap-3 mt-4">
+    <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
       <p className="font-mono text-[11px] text-mathua-muted" aria-live="polite">
         {board.total === 0 ? 'No learners' : `${start}–${end} of ${board.total}`}
       </p>
       <div className="flex items-center gap-2">
-        <button
+        <Button
           type="button"
+          variant="outline"
           onClick={() => onPage(board.page - 1)}
           disabled={busy || board.page <= 1}
-          className="font-mono text-xs px-3 py-1.5 border border-mathua-border text-mathua-primary disabled:opacity-40 disabled:cursor-not-allowed hover:border-mathua-blue"
+          className="h-8 rounded-none border-mathua-border font-mono text-xs"
         >
           Previous
-        </button>
+        </Button>
         <span className="font-mono text-[11px] text-mathua-muted">
-          Page {board.page} of {board.total_pages}
+          Page {board.page} of {Math.max(board.total_pages, 1)}
         </span>
-        <button
+        <Button
           type="button"
+          variant="outline"
           onClick={() => onPage(board.page + 1)}
           disabled={busy || board.page >= board.total_pages}
-          className="font-mono text-xs px-3 py-1.5 border border-mathua-border text-mathua-primary disabled:opacity-40 disabled:cursor-not-allowed hover:border-mathua-blue"
+          className="h-8 rounded-none border-mathua-border font-mono text-xs"
         >
           Next
-        </button>
+        </Button>
       </div>
     </div>
   )
 }
 
-function BoardTable({ board, view }: { board: LeaderboardBoard; view: LeaderboardView }) {
-  const scoreLabel = view === 'weekly' ? 'This week' : 'Lifetime'
+function LeaderboardFallback() {
   return (
-    <div className="w-[calc(100%+2rem)] -mx-4 px-4 sm:w-full sm:mx-0 sm:px-0 overflow-x-auto overscroll-x-contain">
-      <table className="w-full min-w-[320px] border-collapse bg-mathua-surface border border-mathua-border">
-        <caption className="sr-only">
-          {view === 'weekly' ? 'This week’s XP standings' : 'Lifetime XP standings'}
-        </caption>
-        <thead>
-          <tr>
-            <th scope="col" className="font-mono text-[11px] uppercase text-mathua-muted text-left p-2.5 sm:p-[14px_20px] bg-mathua-surface-elevated border-b border-mathua-border w-10 sm:w-12">#</th>
-            <th scope="col" className="font-mono text-[11px] uppercase text-mathua-muted text-left p-2.5 sm:p-[14px_20px] bg-mathua-surface-elevated border-b border-mathua-border">Learner</th>
-            <th scope="col" className="font-mono text-[11px] uppercase text-mathua-muted text-right p-2.5 sm:p-[14px_20px] bg-mathua-surface-elevated border-b border-mathua-border">{scoreLabel}</th>
-            <th scope="col" className="font-mono text-[11px] uppercase text-mathua-muted text-right p-2.5 sm:p-[14px_20px] bg-mathua-surface-elevated border-b border-mathua-border hidden md:table-cell">Level</th>
-          </tr>
-        </thead>
-        <tbody>
-          {board.entries.map((row) => (
-            <tr
-              key={row.id}
-              className={`border-b border-mathua-border last:border-b-0 ${row.is_me ? 'bg-mathua-blue-faint' : ''}`}
-            >
-              <td className="p-2.5 sm:p-[14px_20px] font-mono text-sm text-mathua-muted">{row.rank}</td>
-              <td className="p-2.5 sm:p-[14px_20px] text-mathua-primary text-sm font-medium max-w-[160px] sm:max-w-none">
-                <span className="flex items-center gap-2 min-w-0">
-                  <LeagueAvatar tier={row.league} weeklyXp={row.league_xp} seed={row.id} name={nameOf(row)} size={28} url={avatarURL(row)} className="shrink-0" />
-                  <span className="block truncate" title={nameOf(row)}>{nameOf(row)}</span>
-                  {row.is_me && (
-                    <span className="font-mono text-[10px] uppercase text-mathua-blue shrink-0">you</span>
-                  )}
-                </span>
-              </td>
-              <td className="p-2.5 sm:p-[14px_20px] font-mono text-sm text-mathua-green text-right whitespace-nowrap">{row.xp}</td>
-              <td className="p-2.5 sm:p-[14px_20px] text-mathua-secondary text-sm text-right hidden md:table-cell truncate max-w-[130px]">{row.level}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <AppShell>
+      <div className="mx-auto max-w-container px-4 pb-[calc(80px+env(safe-area-inset-bottom))] sm:px-6 lg:pb-0">
+        <section className="pt-8">
+          <SectionHeader label="Competition" title="Leaderboard" />
+        </section>
+      </div>
+      <Footer />
+    </AppShell>
   )
 }
 
-export default function LeaderboardPage() {
+function LeaderboardPageInner() {
+  const params = useSearchParams()
   const { mounted } = useTheme()
   const { loggedIn } = useAuthState()
   const [countdown, setCountdown] = useState(computeCountdown)
-  const [tab, setTab] = useState<Tab>('weekly')
-  const [page, setPage] = useState(1)
+  const [tab, setTab] = useState<Tab>(() => parseTab(params.get('view')))
+  const [anchor, setAnchor] = useState<string | undefined>(() => params.get('anchor') ?? undefined)
+  const [page, setPage] = useState(() => parsePage(params.get('page')))
+  const [leagueWeek, setLeagueWeek] = useState<string | undefined>(() =>
+    parseTab(params.get('view')) === 'league' ? params.get('anchor') ?? undefined : undefined,
+  )
   const [reload, setReload] = useState(0)
   const [board, setBoard] = useState<LeaderboardBoard | null>(null)
   const [league, setLeague] = useState<MyLeague | null>(null)
+  const [earliest, setEarliest] = useState<string | undefined>(undefined)
   const [loading, setLoading] = useState(true)
   const [failed, setFailed] = useState(false)
-  // Visible until the account's own settings say otherwise. A signed-out visitor
-  // has no settings to read, and a failed read cannot be evidence that a learner
-  // turned leaderboards off.
   const [showLeaderboards, setShowLeaderboards] = useState(true)
+
+  const showMonth = useMemo(
+    () => tab === 'monthly' || monthsAvailable(earliest) || monthsAvailable(league?.earliest_week),
+    [earliest, league?.earliest_week, tab],
+  )
 
   useEffect(() => {
     if (!loggedIn) {
@@ -246,24 +203,58 @@ export default function LeaderboardPage() {
   }, [])
 
   useEffect(() => {
+    if (!mounted) return
     let live = true
     setLoading(true)
     setFailed(false)
     if (tab === 'league') {
-      getMyLeague()
-        .then((data) => { if (live) { setLeague(data); setLoading(false) } })
-        .catch(() => { if (live) { setFailed(true); setLoading(false) } })
+      getMyLeague(leagueWeek)
+        .then((data) => {
+          if (!live) return
+          setLeague(data)
+          setLoading(false)
+        })
+        .catch(() => {
+          if (live) {
+            setFailed(true)
+            setLoading(false)
+          }
+        })
     } else {
-      getLeaderboard(tab, page, PAGE_SIZE)
-        .then((data) => { if (live) { setBoard(data); setLoading(false) } })
-        .catch(() => { if (live) { setFailed(true); setLoading(false) } })
+      getLeaderboard(tab, page, PAGE_SIZE, anchor)
+        .then((data) => {
+          if (!live) return
+          setBoard(data)
+          if (data.earliest_anchor) setEarliest(data.earliest_anchor)
+          setLoading(false)
+        })
+        .catch(() => {
+          if (live) {
+            setFailed(true)
+            setLoading(false)
+          }
+        })
     }
-    return () => { live = false }
-  }, [tab, page, reload])
+    return () => {
+      live = false
+    }
+  }, [mounted, tab, anchor, page, leagueWeek, reload])
+
+  useEffect(() => {
+    const query = new URLSearchParams()
+    if (tab !== 'weekly') query.set('view', tab)
+    const activeAnchor = tab === 'league' ? leagueWeek : anchor
+    if (activeAnchor) query.set('anchor', activeAnchor)
+    if (page > 1) query.set('page', String(page))
+    const suffix = query.toString()
+    window.history.replaceState(null, '', suffix ? `${window.location.pathname}?${suffix}` : window.location.pathname)
+  }, [tab, anchor, page, leagueWeek])
 
   const selectTab = useCallback((next: Tab) => {
     setTab(next)
     setPage(1)
+    setAnchor(undefined)
+    setLeagueWeek(undefined)
   }, [])
 
   const changePage = useCallback((next: number) => {
@@ -273,193 +264,289 @@ export default function LeaderboardPage() {
 
   const retry = useCallback(() => setReload((n) => n + 1), [])
 
+  const view = tab === 'league' ? null : tab
+  const periodStart = board?.period_start ? board.period_start.slice(0, 10) : undefined
+  const currentWeek = weekStartKey(new Date())
+  const currentMonth = monthStartKey(new Date())
+  const today = todayKey()
+  const weekValue = periodStart ?? anchor ?? currentWeek
+  const monthValue = periodStart ?? anchor ?? currentMonth
+
+  const earliestWeek = useMemo(() => {
+    const value = earliest ? parsePeriodKey(earliest) : undefined
+    return value ? weekStartKey(value) : undefined
+  }, [earliest])
+  const earliestMonth = useMemo(() => {
+    const value = earliest ? parsePeriodKey(earliest) : undefined
+    return value ? monthStartKey(value) : undefined
+  }, [earliest])
+
   if (!mounted) {
-    return (
-      <AppShell>
-        <div style={{ background: 'var(--bg)', minHeight: '100vh' }} />
-        <Footer />
-      </AppShell>
-    )
+    return <LeaderboardFallback />
   }
 
-  // The rail and the header already drop the destination; this states why, so a
-  // learner who reaches the URL directly is not looking at a page they believe
-  // they turned off. The server has anonymised the rows either way.
   if (!showLeaderboards) {
     return (
       <AppShell>
-        <div className="max-w-container mx-auto px-4 sm:px-6 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
-          <section className="pt-8 min-w-0 overflow-hidden">
-            <span className="flex mb-4">
-              <button type="button" onClick={() => { if (window.history.length > 1) window.history.back() }} className="text-mathua-secondary text-sm hover:text-mathua-blue">
+        <div className="mx-auto max-w-container min-w-0 overflow-x-hidden px-4 pb-[calc(80px+env(safe-area-inset-bottom))] sm:px-6 lg:pb-0">
+          <section className="min-w-0 overflow-hidden pt-8">
+            <span className="mb-4 flex">
+              <button
+                type="button"
+                onClick={() => {
+                  if (window.history.length > 1) window.history.back()
+                }}
+                className="text-sm text-mathua-secondary hover:text-mathua-blue"
+              >
                 ← Back
               </button>
             </span>
-
             <SectionHeader label="Competition" title="Leaderboard" />
-
-            <div className="border border-mathua-border bg-mathua-surface p-6 mt-6 max-w-[560px] mx-auto text-center">
+            <div className="mx-auto mt-6 max-w-[560px] border border-mathua-border bg-mathua-surface p-6 text-center">
               <p className="font-mono text-sm text-mathua-primary">Leaderboards are turned off</p>
-              <p className="text-mathua-secondary text-sm mt-2">
-                You are anonymous on the public ranking, so your name never appears on it. Change this in <Link href="/settings" className="text-mathua-blue hover:underline">Settings</Link>.
+              <p className="mt-2 text-sm text-mathua-secondary">
+                You are anonymous on the public ranking, so your name never appears on it. Change this in{' '}
+                <Link href="/settings" className="text-mathua-blue hover:underline">
+                  Settings
+                </Link>
+                .
               </p>
             </div>
           </section>
         </div>
-
         <Footer />
       </AppShell>
     )
   }
 
+  const tabs: { id: Tab; label: string }[] = [
+    { id: 'weekly', label: 'Week' },
+    ...(showMonth ? [{ id: 'monthly' as const, label: 'Month' }] : []),
+    { id: 'all_time', label: 'All time' },
+    { id: 'league', label: 'My league' },
+  ]
+
+  const atEarliest =
+    view === 'weekly'
+      ? !earliestWeek || weekValue <= earliestWeek
+      : view === 'monthly'
+        ? !earliestMonth || monthValue <= earliestMonth
+        : true
+
   return (
     <AppShell>
-      <div className="max-w-container mx-auto px-4 sm:px-6 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
-        <section className="pt-8 min-w-0 overflow-hidden">
-          <span className="flex mb-4">
-            <button type="button" onClick={() => { if (window.history.length > 1) window.history.back() }} className="text-mathua-secondary text-sm hover:text-mathua-blue">
+      <div className="mx-auto max-w-container min-w-0 overflow-x-hidden px-4 pb-[calc(80px+env(safe-area-inset-bottom))] sm:px-6 lg:pb-0">
+        <section className="min-w-0 overflow-hidden pt-8">
+          <span className="mb-4 flex">
+            <button
+              type="button"
+              onClick={() => {
+                if (window.history.length > 1) window.history.back()
+              }}
+              className="text-sm text-mathua-secondary hover:text-mathua-blue"
+            >
               ← Back
             </button>
           </span>
 
           <SectionHeader label="Competition" title="Leaderboard" />
 
-          <p className="text-mathua-secondary text-sm text-center mt-4 mb-6 px-2 max-w-[560px] mx-auto">
-            XP comes from answered questions, not from time spent. The week runs Monday 00:00 to
-            Monday 00:00 UTC, and the board resets to zero each week while lifetime XP keeps counting.
+          <p className="mx-auto mb-6 mt-4 max-w-[560px] px-2 text-center text-sm text-mathua-secondary">
+            XP comes from answered questions, not from time spent. Weeks run Monday 00:00 to Monday
+            00:00 UTC and months are calendar months in UTC. The current board is live; a closed
+            period stays fixed.
           </p>
 
-          {tab === 'weekly' && (
-            <div className="flex justify-center mb-6 px-2">
-              <div className="bg-mathua-surface border border-mathua-border p-4 text-center w-full max-w-[260px] sm:min-w-[200px] sm:w-auto">
-                <span className="font-mono text-[10px] uppercase text-mathua-muted">Resets in</span>
-                <div className="font-mono text-2xl text-mathua-blue mt-1">{countdown}</div>
-              </div>
-            </div>
-          )}
-
-          <div role="tablist" aria-label="Leaderboard view" className="flex flex-wrap justify-center gap-1 border-b border-mathua-border mb-6">
-            {TABS.map((t) => (
-              <button
-                key={t.id}
-                type="button"
-                role="tab"
-                id={`tab-${t.id}`}
-                aria-selected={tab === t.id}
-                aria-controls={`panel-${t.id}`}
-                onClick={() => selectTab(t.id)}
-                className={`font-mono text-xs uppercase tracking-wider px-3 sm:px-4 py-2 border-b-2 -mb-px whitespace-nowrap ${
-                  tab === t.id
-                    ? 'border-mathua-blue text-mathua-blue'
-                    : 'border-transparent text-mathua-muted hover:text-mathua-primary'
-                }`}
-              >
-                {t.label}
-              </button>
-            ))}
+          <div className="mb-5 flex flex-wrap items-center justify-center gap-2">
+            {view === 'weekly' && (
+              <>
+                <PeriodArrows
+                  onPrev={() => {
+                    setAnchor(shiftWeekKey(weekValue, -1))
+                    setPage(1)
+                  }}
+                  onNext={() => {
+                    setAnchor(shiftWeekKey(weekValue, 1))
+                    setPage(1)
+                  }}
+                  prevDisabled={atEarliest}
+                  nextDisabled={!board?.final}
+                  label="week"
+                />
+                <WeekPicker
+                  value={weekValue}
+                  onChange={(next) => {
+                    setAnchor(next)
+                    setPage(1)
+                  }}
+                  min={earliestWeek}
+                  max={today}
+                />
+                {board && !board.final && (
+                  <span className="border border-mathua-border bg-mathua-surface px-3 py-2 font-mono text-[10px] uppercase text-mathua-muted">
+                    Resets in <span className="text-mathua-blue">{countdown}</span>
+                  </span>
+                )}
+                {board?.final && (
+                  <span className="border border-mathua-border bg-mathua-surface px-3 py-2 font-mono text-[10px] uppercase text-mathua-muted">
+                    Final
+                  </span>
+                )}
+              </>
+            )}
+            {view === 'monthly' && (
+              <>
+                <PeriodArrows
+                  onPrev={() => {
+                    setAnchor(shiftMonthKey(monthValue, -1))
+                    setPage(1)
+                  }}
+                  onNext={() => {
+                    setAnchor(shiftMonthKey(monthValue, 1))
+                    setPage(1)
+                  }}
+                  prevDisabled={atEarliest}
+                  nextDisabled={!board?.final}
+                  label="month"
+                />
+                <MonthPicker
+                  value={monthValue}
+                  onChange={(next) => {
+                    setAnchor(next)
+                    setPage(1)
+                  }}
+                  min={earliestMonth}
+                  max={currentMonth}
+                />
+                {board?.final ? (
+                  <span className="border border-mathua-border bg-mathua-surface px-3 py-2 font-mono text-[10px] uppercase text-mathua-muted">
+                    Final
+                  </span>
+                ) : (
+                  <span className="border border-mathua-border bg-mathua-surface px-3 py-2 font-mono text-[10px] uppercase text-mathua-muted">
+                    Live
+                  </span>
+                )}
+              </>
+            )}
           </div>
-        </section>
 
-        <div
-          role="tabpanel"
-          id={`panel-${tab}`}
-          aria-labelledby={`tab-${tab}`}
-          className="mb-12 min-w-0"
-        >
-          {loading && (
-            <div className="w-[calc(100%+2rem)] -mx-4 px-4 sm:w-full sm:mx-0 sm:px-0 overflow-x-auto">
-              <span role="status" aria-live="polite" className="sr-only">Loading leaderboard</span>
-              <table className="w-full min-w-[320px] border-collapse bg-mathua-surface border border-mathua-border">
-                <tbody><LeaderboardTableSkeleton rows={8} /></tbody>
-              </table>
-            </div>
-          )}
+          <Tabs value={tab} onValueChange={(value) => selectTab(value as Tab)}>
+            <TabsList className="mb-6 flex h-auto w-full flex-wrap justify-center gap-1 rounded-none border-b border-mathua-border bg-transparent p-0">
+              {tabs.map((item) => (
+                <TabsTrigger
+                  key={item.id}
+                  value={item.id}
+                  className="rounded-none border-b-2 border-transparent px-3 py-2 font-mono text-xs uppercase tracking-wider text-mathua-muted data-[state=active]:border-mathua-blue data-[state=active]:bg-transparent data-[state=active]:text-mathua-blue data-[state=active]:shadow-none sm:px-4"
+                >
+                  {item.label}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </Tabs>
 
-          {!loading && failed && (
-            <p className="text-center text-mathua-muted text-sm py-8">
-              Could not load this board.{' '}
-              <button type="button" onClick={retry} className="text-mathua-blue hover:underline">Retry</button>
+          {view && (
+            <p className="mb-3 text-center font-mono text-[11px] uppercase tracking-wider text-mathua-muted">
+              {periodLabel(view, board?.period_start)}
             </p>
           )}
+        </section>
 
-          {!loading && !failed && tab !== 'league' && board && (
+        <div className="mb-12 min-w-0">
+          {view && (
             <>
-              {board.page === 1 && <Podium entries={board.entries} />}
-              {board.me && <PositionStrip me={board.me} view={tab} />}
-              {board.entries.length === 0 ? (
-                <p className="text-center text-mathua-muted text-sm py-8 px-2">
-                  {tab === 'weekly'
-                    ? 'No one has earned XP this week yet. Answer a question and the board starts with you.'
-                    : 'No learner has earned XP yet. The first answer puts the first name here.'}
-                  {' '}<Link href="/learn" className="text-mathua-blue hover:underline">Start learning</Link>
+              {failed && (
+                <p className="py-8 text-center text-sm text-mathua-muted">
+                  Could not load this board.{' '}
+                  <Button type="button" variant="link" onClick={retry} className="h-auto p-0 font-mono text-xs">
+                    Retry
+                  </Button>
                 </p>
-              ) : (
+              )}
+              {!failed && (
                 <>
-                  <BoardTable board={board} view={tab} />
-                  <PageControls board={board} onPage={changePage} busy={loading} />
+                  {!loading && board && board.page === 1 && (
+                    <Podium
+                      entries={board.entries}
+                      score={
+                        view === 'all_time'
+                          ? 'lifetime'
+                          : view === 'weekly'
+                            ? board?.final
+                              ? 'that week'
+                              : 'this week'
+                            : board?.final
+                              ? 'that month'
+                              : 'this month'
+                      }
+                    />
+                  )}
+                  {!loading && board?.me && <PositionStrip me={board.me} view={view} final={board.final} />}
+                  {!loading && board && board.entries.length === 0 && (
+                    <p className="px-2 py-8 text-center text-sm text-mathua-muted">
+                      {board.final
+                        ? 'No one scored in this period.'
+                        : view === 'weekly'
+                          ? 'No one has earned XP this week yet. Answer a question and the board starts with you.'
+                          : view === 'monthly'
+                            ? 'No one has earned XP this month yet. Answer a question and the board starts with you.'
+                            : 'No learner has earned XP yet. The first answer puts the first name here.'}{' '}
+                      {!board.final && (
+                        <Link href="/learn" className="text-mathua-blue hover:underline">
+                          Start learning
+                        </Link>
+                      )}
+                    </p>
+                  )}
+                  {(loading || (board && board.entries.length > 0)) && (
+                    <BoardTable
+                      board={board}
+                      view={view}
+                      loading={loading}
+                      caption={`${periodLabel(view, board?.period_start)} XP standings`}
+                    />
+                  )}
+                  {!loading && board && board.entries.length > 0 && (
+                    <PageControls board={board} onPage={changePage} busy={loading} />
+                  )}
                 </>
               )}
             </>
           )}
 
-          {!loading && !failed && tab === 'league' && (
-            league === null ? (
-              <p className="text-center text-mathua-muted text-sm py-8 px-2">
-                <Link href="/login" className="text-mathua-blue hover:underline">Sign in</Link> to join a league.
-              </p>
-            ) : league.tier === '' ? (
-              <p className="text-center text-mathua-muted text-sm py-8 px-2">
-                You are not in a league yet. Answer one question this week and you join a Bronze
-                league with room. The top five in each league move up a tier every Monday.
-              </p>
-            ) : (
-              <>
-                <div className="flex flex-wrap items-baseline justify-between gap-2 mb-4">
-                  <h2 className="font-mono text-xs uppercase tracking-wider text-mathua-primary">
-                    {league.tier} league {league.league_no}
-                  </h2>
-                  <p className="font-mono text-[11px] text-mathua-muted">
-                    {shortWeek(league.week_start)} to {shortWeek(league.week_end)} · {league.size} learners
-                  </p>
-                </div>
-                <p className="text-mathua-secondary text-sm mb-4">
-                  Top {league.promote} move up a tier next Monday, bottom {league.demote} move down.
-                  Ties on XP are ordered by name so positions are stable.
+          {tab === 'league' && (
+            <>
+              {failed && (
+                <p className="py-8 text-center text-sm text-mathua-muted">
+                  Could not load your league.{' '}
+                  <Button type="button" variant="link" onClick={retry} className="h-auto p-0 font-mono text-xs">
+                    Retry
+                  </Button>
                 </p>
-                <div className="w-[calc(100%+2rem)] -mx-4 px-4 sm:w-full sm:mx-0 sm:px-0 overflow-x-auto">
-                  <table className="w-full min-w-[320px] border-collapse bg-mathua-surface border border-mathua-border">
-                    <caption className="sr-only">Your league standings this week</caption>
-                    <thead>
-                      <tr>
-                        <th scope="col" className="font-mono text-[11px] uppercase text-mathua-muted text-left p-2.5 sm:p-[14px_20px] bg-mathua-surface-elevated border-b border-mathua-border w-10 sm:w-12">#</th>
-                        <th scope="col" className="font-mono text-[11px] uppercase text-mathua-muted text-left p-2.5 sm:p-[14px_20px] bg-mathua-surface-elevated border-b border-mathua-border">Learner</th>
-                        <th scope="col" className="font-mono text-[11px] uppercase text-mathua-muted text-right p-2.5 sm:p-[14px_20px] bg-mathua-surface-elevated border-b border-mathua-border">XP</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {league.members.map((m) => (
-                        <tr key={m.id} className={`border-b border-mathua-border last:border-b-0 ${m.is_me ? 'bg-mathua-blue-faint' : ''}`}>
-                          <td className="p-2.5 sm:p-[14px_20px] font-mono text-sm text-mathua-muted">{m.rank}</td>
-                          <td className="p-2.5 sm:p-[14px_20px] text-mathua-primary text-sm font-medium max-w-[160px] sm:max-w-none">
-                            <span className="flex items-center gap-2 min-w-0">
-                              <LeagueAvatar tier={league.tier} weeklyXp={m.xp} seed={m.id} name={nameOf(m)} size={26} url={avatarURL(m)} className="shrink-0" />
-                              <span className="block truncate" title={nameOf(m)}>{nameOf(m)}</span>
-                              {m.is_me && <span className="font-mono text-[10px] uppercase text-mathua-blue shrink-0">you</span>}
-                            </span>
-                          </td>
-                          <td className="p-2.5 sm:p-[14px_20px] font-mono text-sm text-mathua-green text-right whitespace-nowrap">{m.xp}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </>
-            )
+              )}
+              {!failed && (
+                <LeagueBoard
+                  league={league}
+                  week={leagueWeek ?? league?.week ?? currentWeek}
+                  earliest={league?.earliest_week}
+                  loading={loading}
+                  onWeek={(next) => setLeagueWeek(next)}
+                />
+              )}
+            </>
           )}
         </div>
       </div>
 
       <Footer />
     </AppShell>
+  )
+}
+
+export default function LeaderboardPage() {
+  return (
+    <Suspense fallback={<LeaderboardFallback />}>
+      <LeaderboardPageInner />
+    </Suspense>
   )
 }

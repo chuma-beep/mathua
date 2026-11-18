@@ -353,7 +353,7 @@ test('scroll containers are edge-to-edge and horizontally scrollable', async ({ 
     },
   }))
   await page.goto('/leaderboard')
-  const lb = page.locator('div.overflow-x-auto').first()
+  const lb = page.getByRole('table').first().locator('..')
   await expect(lb).toBeVisible()
   let lbBox = await lb.boundingBox()
   expect(lbBox).toBeTruthy()
