@@ -162,9 +162,9 @@ describe('Header mobile nav menu', () => {
     // Whatever is left after the tab bar is subtracted out. Domains is not here: it holds a
     // tab, having taken the slot the closed Study route occupied, so it is always one tap away
     // on mobile instead of hiding one level deep.
-    expect(labels).toEqual(['Leaderboard', 'Glossary', 'Contact', 'Login', 'Discord'])
+    expect(labels).toEqual(['Leaderboard', 'Glossary', 'Contact', 'Login', 'Discord', 'Give us a star'])
     const hrefs = items.map(i => (i as HTMLAnchorElement).getAttribute('href'))
-    expect(hrefs).toEqual(['/leaderboard', '/glossary', '/contact', '/login', 'https://discord.gg/qXPeQ2jys'])
+    expect(hrefs).toEqual(['/leaderboard', '/glossary', '/contact', '/login', 'https://discord.gg/qXPeQ2jys', 'https://github.com/chuma-beep/mathua'])
     // The invariant behind the exact list: nothing appears twice on one screen.
     for (const href of hrefs) {
       expect(hrefs.filter(h => h === href)).toHaveLength(1)
@@ -188,7 +188,7 @@ describe('Header mobile nav menu', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Open navigation menu' }))
     const menu = screen.getByRole('menu', { name: 'Site navigation' })
     const labels = within(menu).getAllByRole('menuitem').map(i => i.textContent)
-    expect(labels).toEqual(['Graph', 'Docs', 'Architecture', 'Contributing', 'Note', 'Discord'])
+    expect(labels).toEqual(['Graph', 'Docs', 'Architecture', 'Contributing', 'Note', 'Discord', 'Give us a star'])
   })
 
   it('folds secondary signed-in destinations into a desktop More menu', () => {
@@ -265,7 +265,7 @@ describe('Header mobile nav menu', () => {
   it('closes on Escape', () => {
     render(<Header />)
     fireEvent.click(screen.getByRole('button', { name: 'Open navigation menu' }))
-    expect(screen.getAllByRole('menuitem')).toHaveLength(5)
+    expect(screen.getAllByRole('menuitem')).toHaveLength(6)
     fireEvent.keyDown(document, { key: 'Escape' })
     expect(screen.queryAllByRole('menuitem')).toHaveLength(0)
   })
@@ -274,11 +274,11 @@ describe('Header mobile nav menu', () => {
     render(<Header />)
     const button = screen.getByRole('button', { name: 'Open navigation menu' })
     fireEvent.click(button)
-    expect(screen.getAllByRole('menuitem')).toHaveLength(5)
+    expect(screen.getAllByRole('menuitem')).toHaveLength(6)
     fireEvent.click(button)
     expect(screen.queryAllByRole('menuitem')).toHaveLength(0)
     fireEvent.click(button)
-    expect(screen.getAllByRole('menuitem')).toHaveLength(5)
+    expect(screen.getAllByRole('menuitem')).toHaveLength(6)
   })
 
   it('closes when a link is clicked', () => {
@@ -293,6 +293,25 @@ describe('Header mobile nav menu', () => {
     render(<Header />)
     fireEvent.click(screen.getByRole('button', { name: 'Toggle theme' }))
     expect(toggleThemeMock).toHaveBeenCalledTimes(1)
+  })
+
+  it('offers the GitHub star link beside the theme control', () => {
+    render(<Header />)
+    const link = screen.getByRole('link', { name: 'Give us a star on GitHub' })
+    expect(link).toHaveAttribute('href', 'https://github.com/chuma-beep/mathua')
+    expect(link).toHaveAttribute('target', '_blank')
+    expect(link).toHaveAttribute('rel', 'noreferrer')
+    expect(within(link).getByText('Give us a star')).toBeInTheDocument()
+  })
+
+  it('offers the labelled star link from the mobile navigation menu', () => {
+    render(<Header />)
+    fireEvent.click(screen.getByRole('button', { name: 'Open navigation menu' }))
+    const menu = screen.getByRole('menu', { name: 'Site navigation' })
+    const link = within(menu).getByRole('menuitem', { name: 'Give us a star' })
+    expect(link).toHaveAttribute('href', 'https://github.com/chuma-beep/mathua')
+    expect(link).toHaveAttribute('target', '_blank')
+    expect(link).toHaveAttribute('rel', 'noreferrer')
   })
 })
 

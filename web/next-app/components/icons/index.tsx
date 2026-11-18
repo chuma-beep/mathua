@@ -36,6 +36,7 @@ import {
   EllipsisIcon,
   EllipsisVerticalIcon,
   FileTextIcon,
+  GithubIcon,
   HandshakeIcon,
   HouseIcon,
   LayersIcon,
@@ -131,6 +132,7 @@ export const ChevronsLeft = wrap(ChevronsLeftIcon as never)
 export const ChevronsRight = wrap(ChevronsRightIcon as never)
 export const Compass = wrap(CompassAnimatedIcon as never)
 export const FileText = wrap(FileTextIcon as never)
+export const Github = wrap(GithubIcon as never)
 export const Handshake = wrap(HandshakeIcon as never)
 export const House = wrap(HouseIcon as never)
 export const Layers = wrap(LayersIcon as never)
@@ -191,6 +193,7 @@ export const ICON_NAMES = [
   'Dices',
   'EllipsisVertical',
   'FileText',
+  'Github',
   'Handshake',
   'House',
   'Layers',
