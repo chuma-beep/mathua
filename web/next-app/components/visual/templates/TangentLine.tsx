@@ -91,8 +91,8 @@ export default function TangentLine({ params, title, caption }: TemplateProps) {
       <svg
         ref={svgRef}
         viewBox={`0 0 ${W} ${H}`}
-        className="mx-auto block h-auto w-full max-w-[420px] cursor-grab touch-none font-mono active:cursor-grabbing"
-        style={{ touchAction: 'none' }}
+        className="mx-auto block h-auto w-full max-w-[420px] cursor-grab font-mono active:cursor-grabbing"
+        style={{ touchAction: 'pan-y' }}
         role="img"
         aria-label="A curve with a movable point, its tangent and a secant"
       >

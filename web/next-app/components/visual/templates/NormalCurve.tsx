@@ -64,6 +64,7 @@ export default function NormalCurve({ params, title, caption }: TemplateProps) {
 
   const z = (x - mu) / sigma
   const p = normalProbability(x, mu, sigma)
+  const band = normalProbability(mu + sigma, mu, sigma) - normalProbability(mu - sigma, mu, sigma)
 
   return (
     <FigureFrame
@@ -78,7 +79,7 @@ export default function NormalCurve({ params, title, caption }: TemplateProps) {
         { label: 'z', value: fmt(z) },
         { label: 'P(X ≤ x)', value: fmt(p, 4) },
         { label: 'P(X > x)', value: fmt(1 - p, 4) },
-        { label: 'μ ± σ', value: '0.6827' },
+        { label: 'μ ± σ', value: fmt(band, 4) },
         { label: 'μ', value: fmt(mu) },
         { label: 'σ', value: fmt(sigma) },
       ]}
@@ -86,8 +87,8 @@ export default function NormalCurve({ params, title, caption }: TemplateProps) {
       <svg
         ref={svgRef}
         viewBox={`0 0 ${W} ${H}`}
-        className="mx-auto block h-auto w-full max-w-[420px] cursor-grab touch-none font-mono active:cursor-grabbing"
-        style={{ touchAction: 'none' }}
+        className="mx-auto block h-auto w-full max-w-[420px] cursor-grab font-mono active:cursor-grabbing"
+        style={{ touchAction: 'pan-y' }}
         role="img"
         aria-label="A normal density with a shaded left tail"
       >

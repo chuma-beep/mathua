@@ -17,7 +17,6 @@ export interface VisualSpec {
 
 export interface TemplateProps {
   params: unknown
-  reducedMotion: boolean
   /** Authored chrome from the shard's VisualSpec, not from the parameter object. */
   title?: string
   caption?: string

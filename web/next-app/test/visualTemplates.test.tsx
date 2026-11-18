@@ -18,7 +18,6 @@ describe('visual templates', () => {
       <MatrixTransform2D
         title="Matrix"
         params={{ matrix: [1, 0.5, 0.5, 1], vector: [2, 1], showGrid: true }}
-        reducedMotion
       />,
     )
     expect(readout()).toContain('0.75')
@@ -31,7 +30,6 @@ describe('visual templates', () => {
       <TangentLine
         title="Tangent"
         params={{ coeffs: [0, 0, 1], x: 1, h: 0.8, window: [-2, 3] }}
-        reducedMotion
       />,
     )
     expect(readout()).toContain('f(x)1')
@@ -44,7 +42,6 @@ describe('visual templates', () => {
       <RiemannSum
         title="Riemann"
         params={{ coeffs: [0, 0, 1], a: 0, b: 2, n: 8, rule: 'left' }}
-        reducedMotion
       />,
     )
     fireEvent.change(screen.getByLabelText('n'), { target: { value: '0' } })
@@ -57,7 +54,6 @@ describe('visual templates', () => {
       <ComplexMultiply
         title="Product"
         params={{ z: [1.5, 0.8], w: [0.8, 1.2], showUnitCircle: true }}
-        reducedMotion
       />,
     )
     fireEvent.change(screen.getByLabelText('z re'), { target: { value: '2' } })
@@ -69,7 +65,6 @@ describe('visual templates', () => {
       <NormalCurve
         title="Normal"
         params={{ mu: 0, sigma: 1, x: 1, bands: true }}
-        reducedMotion
       />,
     )
     expect(readout()).toContain('0.84')
@@ -90,7 +85,6 @@ describe('visual templates', () => {
           shape: [[0, 0], [2, 0], [1, 2]],
           showOrbit: true,
         }}
-        reducedMotion
       />,
     )
     expect(readout()).toContain('1.73')

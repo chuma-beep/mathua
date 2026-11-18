@@ -105,7 +105,8 @@ describe('normal distribution', () => {
   it('has the standard density peak and symmetry', () => {
     close(normalPdf(0, 0, 1), 1 / Math.sqrt(2 * Math.PI))
     close(normalPdf(1, 0, 1), normalPdf(-1, 0, 1))
-    close(normalPdf(2, 2, 3), normalPdf(2, 2, 3))
+    close(normalPdf(3, 2, 3), normalPdf(1, 2, 3))
+    close(normalPdf(2, 2, 3), 1 / (3 * Math.sqrt(2 * Math.PI)))
   })
 
   it('matches the known cumulative probabilities', () => {

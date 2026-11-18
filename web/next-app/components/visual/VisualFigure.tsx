@@ -67,11 +67,14 @@ export default function VisualFigure({ visual }: VisualFigureProps) {
       <Suspense
         fallback={
           <FigureFrame title={visual.title || 'Interactive figure'} readout={[]}>
-            <div className="h-[260px] w-full animate-pulse bg-mathua-surface" aria-hidden="true" />
+            <div
+              className={`h-[260px] w-full bg-mathua-surface ${reducedMotion ? '' : 'animate-pulse'}`}
+              aria-hidden="true"
+            />
           </FigureFrame>
         }
       >
-        <Template params={parsed.data} reducedMotion={reducedMotion} title={visual.title} caption={visual.caption} />
+        <Template params={parsed.data} title={visual.title} caption={visual.caption} />
       </Suspense>
     </VisualErrorBoundary>
   )
