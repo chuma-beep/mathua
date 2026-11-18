@@ -1281,6 +1281,17 @@ export interface VisualSpec {
 	title?: string
 	caption?: string
 	params?: unknown
+	// An optional question the figure asks before it is explored. The proposal's
+	// teaching sequence puts prediction before revelation, so the prompt travels
+	// with the visual rather than with the template that draws it.
+	predict?: PredictSpec
+}
+
+export interface PredictSpec {
+	question: string
+	options: string[]
+	answer: number
+	explain?: string
 }
 
 export interface LessonKpsRes {

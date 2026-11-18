@@ -16,6 +16,16 @@
         "sigma": 1,
         "x": 1,
         "bands": true
+      },
+      "predict": {
+        "question": "If sigma doubles, the probability inside one standard deviation does what?",
+        "options": [
+          "Stays about 0.6827",
+          "Halves",
+          "Doubles"
+        ],
+        "answer": 0,
+        "explain": "The band widens with the curve, so the fraction of the area it holds is unchanged; only the spread on the x axis changes."
       }
     }
   },

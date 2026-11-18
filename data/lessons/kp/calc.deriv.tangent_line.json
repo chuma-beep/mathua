@@ -23,6 +23,16 @@
           -2,
           3
         ]
+      },
+      "predict": {
+        "question": "As h shrinks toward zero, what happens to the secant slope?",
+        "options": [
+          "It approaches f'(x)",
+          "It stays the same",
+          "It approaches zero"
+        ],
+        "answer": 0,
+        "explain": "The secant is the average rate over h; as h goes to zero the average becomes the instantaneous rate, which is the derivative."
       }
     }
   },

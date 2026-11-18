@@ -16,6 +16,16 @@
         "n": 9,
         "draws": 600,
         "seed": 7
+      },
+      "predict": {
+        "question": "As the sample size grows, the spread of the sample mean does what?",
+        "options": [
+          "Shrinks like 1 divided by the square root of n",
+          "Stays the same",
+          "Grows with n"
+        ],
+        "answer": 0,
+        "explain": "Averaging more observations cancels more of their noise, and the standard error is the population spread divided by the square root of n."
       }
     }
   },

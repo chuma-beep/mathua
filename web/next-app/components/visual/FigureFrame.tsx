@@ -1,6 +1,7 @@
 'use client'
 
 import type { ReactNode } from 'react'
+import { PredictBlock, usePredict } from './predict'
 import type { ReadoutItem } from './types'
 
 interface FigureFrameProps {
@@ -24,6 +25,7 @@ interface FigureFrameProps {
  * appears: every control carries its own visible output.
  */
 export default function FigureFrame({ title, caption, readout, hint, onReset, children }: FigureFrameProps) {
+  const predict = usePredict()
   return (
     <figure className="mt-5 border border-mathua-border bg-mathua-bg">
       <div className="flex items-center justify-between gap-3 border-b border-mathua-border px-3 py-2">
@@ -47,6 +49,7 @@ export default function FigureFrame({ title, caption, readout, hint, onReset, ch
             looked like before this wrapper existed. */}
         <div className="mx-auto w-full max-w-[420px]">
           {hint && <p className="mb-2 font-mono text-[10px] text-mathua-muted">{hint}</p>}
+          {predict && <PredictBlock predict={predict} />}
           {children}
         </div>
       </div>

@@ -35,6 +35,16 @@
           ]
         ],
         "showResiduals": true
+      },
+      "predict": {
+        "question": "One point sits far above the rest. What does least squares do with it?",
+        "options": [
+          "Pulls the line toward it more than a near point would",
+          "Ignores it",
+          "Removes it from the fit"
+        ],
+        "answer": 0,
+        "explain": "The residual is squared, so a point twice as far away contributes four times as much to the sum being minimized."
       }
     }
   },

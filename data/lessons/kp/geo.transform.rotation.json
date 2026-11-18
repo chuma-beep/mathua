@@ -32,6 +32,16 @@
           ]
         ],
         "showOrbit": true
+      },
+      "predict": {
+        "question": "A rotation changes position and orientation. What does it leave unchanged?",
+        "options": [
+          "Distances and area",
+          "Distances but not area",
+          "Neither distances nor area"
+        ],
+        "answer": 0,
+        "explain": "A rotation is an isometry with determinant 1, so every length and the enclosed area survive it."
       }
     }
   },

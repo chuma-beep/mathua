@@ -23,6 +23,16 @@
           1
         ],
         "showGrid": true
+      },
+      "predict": {
+        "question": "det A is 1.44. What does that say about the image of the unit square?",
+        "options": [
+          "Its area is 1.44 times the original",
+          "Its area is unchanged",
+          "Its area is 0.72 times the original"
+        ],
+        "answer": 0,
+        "explain": "The determinant is the area scale factor, so the unit square's image has area 1.44."
       }
     }
   },

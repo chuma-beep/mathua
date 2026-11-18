@@ -148,3 +148,41 @@ func TestCurriculumVisualsAreValid(t *testing.T) {
 		t.Fatalf("expected at least the six authored visuals, found %d", count)
 	}
 }
+
+func TestPredictValidate(t *testing.T) {
+	types := map[string]bool{"calc.tangent": true}
+	good := &Visual{
+		Type:    "calc.tangent",
+		Predict: &Predict{Question: "Which is steeper?", Options: []string{"the tangent", "the secant"}, Answer: 0, Explain: "At h > 0 the secant is below."},
+	}
+	if err := good.Validate(types); err != nil {
+		t.Fatalf("valid prediction rejected: %v", err)
+	}
+	// A prediction must validate even when the figure relies on template defaults,
+	// because the params block is allowed to be empty.
+	noParams := &Visual{Type: "calc.tangent", Predict: &Predict{Question: "Q?", Options: []string{"a", "b"}, Answer: 1}}
+	if err := noParams.Validate(types); err != nil {
+		t.Fatalf("prediction without params rejected: %v", err)
+	}
+
+	cases := []struct {
+		name string
+		p    *Predict
+	}{
+		{"empty question", &Predict{Question: "  ", Options: []string{"a", "b"}}},
+		{"one option", &Predict{Question: "Q?", Options: []string{"a"}}},
+		{"five options", &Predict{Question: "Q?", Options: []string{"a", "b", "c", "d", "e"}}},
+		{"empty option", &Predict{Question: "Q?", Options: []string{"a", "  "}}},
+		{"answer negative", &Predict{Question: "Q?", Options: []string{"a", "b"}, Answer: -1}},
+		{"answer past end", &Predict{Question: "Q?", Options: []string{"a", "b"}, Answer: 2}},
+		{"question too long", &Predict{Question: strings.Repeat("q", maxPredictQuestionRunes+1), Options: []string{"a", "b"}}},
+		{"option too long", &Predict{Question: "Q?", Options: []string{strings.Repeat("o", maxPredictOptionRunes+1), "b"}}},
+		{"explain too long", &Predict{Question: "Q?", Options: []string{"a", "b"}, Explain: strings.Repeat("e", maxPredictExplainRunes+1)}},
+	}
+	for _, tc := range cases {
+		v := &Visual{Type: "calc.tangent", Predict: tc.p}
+		if err := v.Validate(types); err == nil {
+			t.Errorf("%s: expected an error", tc.name)
+		}
+	}
+}

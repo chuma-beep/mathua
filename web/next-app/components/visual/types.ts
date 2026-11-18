@@ -1,5 +1,6 @@
 import type { ComponentType } from 'react'
 import type { ZodTypeAny } from 'zod'
+import type { PredictSpec } from '../../lib/api'
 
 // The visual subsystem's contract. A shard names one of the templates below and
 // hands it parameters; the registry validates and the dispatcher renders.
@@ -13,6 +14,8 @@ export interface VisualSpec {
   title?: string
   caption?: string
   params?: unknown
+  /** An optional question the figure asks before it is explored. */
+  predict?: PredictSpec
 }
 
 export interface TemplateProps {

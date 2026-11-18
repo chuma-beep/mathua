@@ -3,6 +3,7 @@
 import { Component, Suspense, lazy, useMemo, type ComponentType, type ReactNode } from 'react'
 import FigureFrame from './FigureFrame'
 import { VISUAL_TEMPLATES } from './registry'
+import { PredictProvider } from './predict'
 import { useReducedMotion } from './useReducedMotion'
 import type { TemplateProps, VisualSpec } from './types'
 
@@ -74,7 +75,9 @@ export default function VisualFigure({ visual }: VisualFigureProps) {
           </FigureFrame>
         }
       >
-        <Template params={parsed.data} title={visual.title} caption={visual.caption} />
+        <PredictProvider predict={visual.predict}>
+          <Template params={parsed.data} title={visual.title} caption={visual.caption} />
+        </PredictProvider>
       </Suspense>
     </VisualErrorBoundary>
   )

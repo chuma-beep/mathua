@@ -15,6 +15,16 @@
         "kind": "removable",
         "a": 2,
         "delta": 0.6
+      },
+      "predict": {
+        "question": "At a hole in a graph, the limit does what?",
+        "options": [
+          "Can exist even though the value there does not",
+          "Never exists",
+          "Always equals the value there"
+        ],
+        "answer": 0,
+        "explain": "The limit describes what the two sides approach, and a single missing point does not disturb that approach."
       }
     }
   },
