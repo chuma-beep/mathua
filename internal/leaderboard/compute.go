@@ -20,6 +20,7 @@ import (
 // count, so the two questions had one wrong answer between them.
 const (
 	ViewWeekly  = "weekly"
+	ViewMonthly = "monthly"
 	ViewAllTime = "all_time"
 
 	DefaultPageSize = 25
@@ -67,15 +68,22 @@ type Position struct {
 
 // Board is one page of one view.
 type Board struct {
-	View       string    `json:"view"`
-	Page       int       `json:"page"`
-	PageSize   int       `json:"page_size"`
-	Total      int       `json:"total"`
-	TotalPages int       `json:"total_pages"`
-	Entries    []Entry   `json:"entries"`
-	Me         *Position `json:"me,omitempty"`
-	WeekStart  string    `json:"week_start,omitempty"`
-	WeekEnd    string    `json:"week_end,omitempty"`
+	View           string    `json:"view"`
+	PeriodKind     string    `json:"period_kind"`
+	PeriodStart    string    `json:"period_start,omitempty"`
+	PeriodEnd      string    `json:"period_end,omitempty"`
+	Final          bool      `json:"final"`
+	EarliestAnchor string    `json:"earliest_anchor,omitempty"`
+	Page           int       `json:"page"`
+	PageSize       int       `json:"page_size"`
+	Total          int       `json:"total"`
+	TotalPages     int       `json:"total_pages"`
+	Entries        []Entry   `json:"entries"`
+	Me             *Position `json:"me,omitempty"`
+	// WeekStart and WeekEnd stay for one release so a cached bundle can still
+	// read a weekly response while the new period fields roll out.
+	WeekStart string `json:"week_start,omitempty"`
+	WeekEnd   string `json:"week_end,omitempty"`
 }
 
 type Computer struct {
@@ -91,9 +99,10 @@ func NewComputer(repo storage.Repository) *Computer {
 // Total and rank come from the store's own predicates. Nothing is cached: a
 // page query is one indexed read, and the previous 30-second whole-board cache
 // meant a learner could answer a question and watch their rank stay stale.
-func (c *Computer) Board(studentID, view string, page, pageSize int, now time.Time) (*Board, error) {
-	if view != ViewWeekly && view != ViewAllTime {
-		return nil, fmt.Errorf("unknown leaderboard view %q", view)
+func (c *Computer) Board(studentID, view, anchor string, page, pageSize int, now time.Time) (*Board, error) {
+	period, err := ResolvePeriod(view, anchor, now)
+	if err != nil {
+		return nil, err
 	}
 	if pageSize <= 0 || pageSize > MaxPageSize {
 		pageSize = DefaultPageSize
@@ -101,43 +110,51 @@ func (c *Computer) Board(studentID, view string, page, pageSize int, now time.Ti
 	if page < 1 {
 		page = 1
 	}
-	week := WeekStart(now)
 	offset := (page - 1) * pageSize
 
-	rows, total, err := c.repo.LeaderboardPage(view, week, pageSize, offset)
+	rows, total, err := c.repo.LeaderboardPage(view, period.Start, period.End, period.LeagueWeek(now), pageSize, offset)
 	if err != nil {
 		return nil, err
 	}
 	board := &Board{
 		View:       view,
+		PeriodKind: view,
+		Final:      period.Final,
 		Page:       page,
 		PageSize:   pageSize,
 		Total:      total,
 		TotalPages: (total + pageSize - 1) / pageSize,
 		Entries:    make([]Entry, 0, len(rows)),
 	}
+	if !period.Start.IsZero() {
+		board.PeriodStart = period.Start.Format(time.RFC3339)
+		board.PeriodEnd = period.End.Format(time.RFC3339)
+	}
 	if view == ViewWeekly {
-		board.WeekStart = week.Format(time.RFC3339)
-		board.WeekEnd = week.Add(7 * 24 * time.Hour).Format(time.RFC3339)
+		board.WeekStart = period.Start.Format(time.RFC3339)
+		board.WeekEnd = period.End.Format(time.RFC3339)
+	}
+	if earliest, ok, err := c.repo.EarliestLeaderboardEvent(); err == nil && ok {
+		board.EarliestAnchor = earliest.Format("2006-01-02")
 	}
 	for i, r := range rows {
 		board.Entries = append(board.Entries, entryFromRow(r, offset+i+1, studentID))
 	}
 	if studentID != "" {
-		board.Me = c.position(studentID, view, week, offset, pageSize)
+		board.Me = c.position(studentID, view, period.Start, period.End, offset, pageSize)
 	}
 	return board, nil
 }
 
 // position never fails the page: a learner who cannot be located is simply not
 // shown a rank, which is better than a 500 on a board that did load.
-func (c *Computer) position(studentID, view string, week time.Time, offset, pageSize int) *Position {
+func (c *Computer) position(studentID, view string, start, end time.Time, offset, pageSize int) *Position {
 	me := &Position{}
 	if storage.IsGuestID(studentID) {
 		me.Guest = true
 		return me
 	}
-	rank, xp, found, err := c.repo.LeaderboardPosition(studentID, view, week)
+	rank, xp, found, err := c.repo.LeaderboardPosition(studentID, view, start, end)
 	if err != nil || !found {
 		return me
 	}

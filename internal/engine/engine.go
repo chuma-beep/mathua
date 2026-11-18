@@ -3002,16 +3002,22 @@ func (e *Engine) GetLessonLoader() *lessons.Loader {
 	return e.ll
 }
 
-// GetLeaderboardPage answers one page of the weekly or all-time board. The
-// caller's id is used only to mark their row and locate them outside it.
-func (e *Engine) GetLeaderboardPage(studentID, view string, page, pageSize int) (*leaderboard.Board, error) {
-	return e.lboard.Board(studentID, view, page, pageSize, nowUTC())
+// GetLeaderboardPage answers one page of the weekly, monthly or all-time board.
+// The caller's id is used only to mark their row and locate them outside it.
+func (e *Engine) GetLeaderboardPage(studentID, view, anchor string, page, pageSize int) (*leaderboard.Board, error) {
+	return e.lboard.Board(studentID, view, anchor, page, pageSize, nowUTC())
 }
 
 // GetMyLeague returns the caller's weekly league. The transition for the week
 // runs inside this call; see leaderboard.Computer.MyLeague.
 func (e *Engine) GetMyLeague(studentID string) (*leaderboard.MyLeague, error) {
 	return e.lboard.MyLeague(studentID, nowUTC())
+}
+
+// GetMyLeagueWeek returns the caller's league for the week containing anchor.
+// An empty anchor means the current week.
+func (e *Engine) GetMyLeagueWeek(studentID, anchor string) (*leaderboard.MyLeague, error) {
+	return e.lboard.MyLeagueAt(studentID, anchor, nowUTC())
 }
 
 // ShareReport is the read-only parent/teacher view of a student.

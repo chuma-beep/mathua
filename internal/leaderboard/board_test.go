@@ -71,9 +71,9 @@ func TestBoard_RanksContinueAcrossPages(t *testing.T) {
 		seed(t, store, fmt.Sprintf("Learner %02d", i), fmt.Sprintf("l%02d", i), i)
 	}
 	c := NewComputer(store)
-	now := time.Date(2026, 10, 22, 12, 0, 0, 0, time.UTC)
+	now := time.Now().UTC()
 
-	first, err := c.Board("", ViewWeekly, 1, 25, now)
+	first, err := c.Board("", ViewWeekly, "", 1, 25, now)
 	if err != nil {
 		t.Fatalf("page 1: %v", err)
 	}
@@ -83,11 +83,14 @@ func TestBoard_RanksContinueAcrossPages(t *testing.T) {
 	if len(first.Entries) != 25 || first.Entries[0].Rank != 1 || first.Entries[24].Rank != 25 {
 		t.Fatalf("page 1 ranks = %d rows", len(first.Entries))
 	}
-	if first.WeekStart != "2026-10-19T00:00:00Z" || first.WeekEnd != "2026-10-26T00:00:00Z" {
-		t.Errorf("week = %s..%s", first.WeekStart, first.WeekEnd)
+	if want := WeekStart(now).Format(time.RFC3339); first.WeekStart != want {
+		t.Errorf("week start = %s, want %s", first.WeekStart, want)
+	}
+	if want := WeekStart(now).AddDate(0, 0, 7).Format(time.RFC3339); first.WeekEnd != want {
+		t.Errorf("week end = %s, want %s", first.WeekEnd, want)
 	}
 
-	second, err := c.Board("", ViewWeekly, 2, 25, now)
+	second, err := c.Board("", ViewWeekly, "", 2, 25, now)
 	if err != nil {
 		t.Fatalf("page 2: %v", err)
 	}
@@ -111,9 +114,9 @@ func TestBoard_MeOutsideThePage(t *testing.T) {
 		}
 	}
 	c := NewComputer(store)
-	now := time.Date(2026, 10, 22, 12, 0, 0, 0, time.UTC)
+	now := time.Now().UTC()
 
-	page, err := c.Board(me, ViewWeekly, 1, 25, now)
+	page, err := c.Board(me, ViewWeekly, "", 1, 25, now)
 	if err != nil {
 		t.Fatalf("board: %v", err)
 	}
@@ -132,7 +135,7 @@ func TestBoard_MeOutsideThePage(t *testing.T) {
 		}
 	}
 
-	last, err := c.Board(me, ViewWeekly, 2, 25, now)
+	last, err := c.Board(me, ViewWeekly, "", 2, 25, now)
 	if err != nil {
 		t.Fatalf("page 2: %v", err)
 	}
@@ -150,9 +153,9 @@ func TestBoard_GuestCallerIsNotRanked(t *testing.T) {
 	store := testRepo(t)
 	seed(t, store, "Real", "real", 12)
 	c := NewComputer(store)
-	now := time.Date(2026, 10, 22, 12, 0, 0, 0, time.UTC)
+	now := time.Now().UTC()
 
-	board, err := c.Board("guest_abc123", ViewWeekly, 1, 25, now)
+	board, err := c.Board("guest_abc123", ViewWeekly, "", 1, 25, now)
 	if err != nil {
 		t.Fatalf("board: %v", err)
 	}
@@ -168,9 +171,9 @@ func TestBoard_ZeroXPCallerHasNoRank(t *testing.T) {
 	seed(t, store, "Active", "active", 5)
 	idle := seed(t, store, "Idle", "idle", 0)
 	c := NewComputer(store)
-	now := time.Date(2026, 10, 22, 12, 0, 0, 0, time.UTC)
+	now := time.Now().UTC()
 
-	board, err := c.Board(idle, ViewWeekly, 1, 25, now)
+	board, err := c.Board(idle, ViewWeekly, "", 1, 25, now)
 	if err != nil {
 		t.Fatalf("board: %v", err)
 	}
@@ -189,9 +192,9 @@ func TestBoard_JSONHasNoStudentID(t *testing.T) {
 	named := seed(t, store, "Named", "named", 9)
 	unnamed := seed(t, store, "Unnamed", "", 8)
 	c := NewComputer(store)
-	now := time.Date(2026, 10, 22, 12, 0, 0, 0, time.UTC)
+	now := time.Now().UTC()
 
-	board, err := c.Board(named, ViewWeekly, 1, 25, now)
+	board, err := c.Board(named, ViewWeekly, "", 1, 25, now)
 	if err != nil {
 		t.Fatalf("board: %v", err)
 	}
@@ -237,8 +240,8 @@ func TestBoard_AnonymisesOptedOutLearners(t *testing.T) {
 			}
 			setSettings(t, store, hidden, tc.settings)
 
-			now := time.Date(2026, 10, 22, 12, 0, 0, 0, time.UTC)
-			board, err := NewComputer(store).Board("", ViewWeekly, 1, 25, now)
+			now := time.Now().UTC()
+			board, err := NewComputer(store).Board("", ViewWeekly, "", 1, 25, now)
 			if err != nil {
 				t.Fatalf("board: %v", err)
 			}
@@ -257,7 +260,7 @@ func TestBoard_AnonymisesOptedOutLearners(t *testing.T) {
 				t.Errorf("id = %q, want a stable anon- alias", got.ID)
 			}
 			// The alias is stable across reads, not rerolled per request.
-			again, err := NewComputer(store).Board("", ViewWeekly, 1, 25, now)
+			again, err := NewComputer(store).Board("", ViewWeekly, "", 1, 25, now)
 			if err != nil {
 				t.Fatalf("board again: %v", err)
 			}
@@ -308,8 +311,8 @@ func TestBoard_AnonymisedCallerIsStillMe(t *testing.T) {
 	seed(t, store, "Grace Hopper", "grace", 20)
 	setSettings(t, store, hidden, `{"leaderboard_privacy":"anonymous"}`)
 
-	now := time.Date(2026, 10, 22, 12, 0, 0, 0, time.UTC)
-	board, err := NewComputer(store).Board(hidden, ViewWeekly, 1, 25, now)
+	now := time.Now().UTC()
+	board, err := NewComputer(store).Board(hidden, ViewWeekly, "", 1, 25, now)
 	if err != nil {
 		t.Fatalf("board: %v", err)
 	}
@@ -368,8 +371,8 @@ func TestBoard_KeepsNamedLearners(t *testing.T) {
 			id := seed(t, store, "Grace Hopper", "grace", 20)
 			setSettings(t, store, id, tc.settings)
 
-			now := time.Date(2026, 10, 22, 12, 0, 0, 0, time.UTC)
-			board, err := NewComputer(store).Board("", ViewWeekly, 1, 25, now)
+			now := time.Now().UTC()
+			board, err := NewComputer(store).Board("", ViewWeekly, "", 1, 25, now)
 			if err != nil {
 				t.Fatalf("board: %v", err)
 			}
@@ -431,15 +434,15 @@ func TestPublicID_IsStableAndNonReversible(t *testing.T) {
 func TestBoard_ViewAndPageBounds(t *testing.T) {
 	repo := testRepo(t)
 	comp := NewComputer(repo)
-	now := time.Date(2026, 10, 21, 12, 0, 0, 0, time.UTC)
+	now := time.Now().UTC()
 
 	// Unknown view returns error
-	if _, err := comp.Board("", "monthly", 1, 10, now); err == nil {
+	if _, err := comp.Board("", "yearly", "", 1, 10, now); err == nil {
 		t.Fatal("expected error for unknown view")
 	}
 
 	// Page size <= 0 resets to DefaultPageSize (50)
-	b, err := comp.Board("", ViewAllTime, 0, 0, now)
+	b, err := comp.Board("", ViewAllTime, "", 0, 0, now)
 	if err != nil {
 		t.Fatalf("Board: %v", err)
 	}
@@ -451,7 +454,7 @@ func TestBoard_ViewAndPageBounds(t *testing.T) {
 	}
 
 	// Page size > MaxPageSize resets to DefaultPageSize
-	b, err = comp.Board("", ViewAllTime, 1, MaxPageSize+100, now)
+	b, err = comp.Board("", ViewAllTime, "", 1, MaxPageSize+100, now)
 	if err != nil {
 		t.Fatalf("Board: %v", err)
 	}

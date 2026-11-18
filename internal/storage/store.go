@@ -1232,10 +1232,15 @@ type Repository interface {
 	GetWeeklyLeaderboard() ([]LeaderboardRow, error)
 	// LeaderboardPage returns one page and the count of eligible rows. The
 	// count comes from the same predicate as the rows, so "page 3 of 9" is a
-	// fact rather than a guess.
-	LeaderboardPage(view string, since time.Time, limit, offset int) ([]LeaderboardRow, int, error)
+	// fact rather than a guess. Weekly and monthly views read the half-open
+	// window [start, end); all_time ignores the bounds. leagueWeek picks the
+	// tier frame, so a month never borrows next month's tier.
+	LeaderboardPage(view string, start, end, leagueWeek time.Time, limit, offset int) ([]LeaderboardRow, int, error)
 	// LeaderboardPosition locates one learner without loading the board.
-	LeaderboardPosition(studentID, view string, since time.Time) (rank, xp int, found bool, err error)
+	LeaderboardPosition(studentID, view string, start, end time.Time) (rank, xp int, found bool, err error)
+	// EarliestLeaderboardEvent is the first recorded XP event, the lower bound
+	// an archive picker may offer.
+	EarliestLeaderboardEvent() (time.Time, bool, error)
 	// ResolveLeagueWeek materialises week's league seats from the previous
 	// week's final standings, in one transaction. It is safe to call on every
 	// read: a completed week is recorded in league_weeks and a second call
@@ -1246,6 +1251,17 @@ type Repository interface {
 	EnsureLeagueMembership(studentID, week string) error
 	LeagueMembershipOf(studentID, week string) (tier string, leagueNo int, found bool, err error)
 	LeagueRoster(week, tier string, leagueNo int, from, to time.Time) ([]LeagueRow, error)
+	// LeagueRosterFinal reads a closed week from the stored snapshot rather
+	// than recomputing it from the ledger, so a late correction cannot rewrite
+	// a result the learners already saw.
+	LeagueRosterFinal(week, tier string, leagueNo int) ([]LeagueRow, error)
+	// LeagueOutcome describes how a learner arrived in week: the movement and
+	// source tier recorded on that week's seat. For the result of week W, ask
+	// for W+1, because the transition writes the outcome onto the new seat.
+	LeagueOutcome(studentID, week string) (movement, fromTier, toTier string, found bool, err error)
+	// EarliestLeagueWeek is the first week with any seats, the lower bound for
+	// the league archive picker.
+	EarliestLeagueWeek() (string, bool, error)
 	// LeagueCohorts lists every league that exists in a week, in tier order and
 	// then league number. It reads seats only, so an administrator can see the
 	// whole pyramid without loading one roster per league.
