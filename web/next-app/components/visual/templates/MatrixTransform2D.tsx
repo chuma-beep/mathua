@@ -138,27 +138,29 @@ export default function MatrixTransform2D({ params, title, caption }: TemplatePr
               x2={X(b[0])}
               y2={Y(b[1])}
               stroke="var(--accent-blue)"
-              strokeWidth="0.7"
-              opacity="0.35"
+              strokeWidth="0.6"
+              opacity="0.22"
             />
           )
         })}
         </g>
 
         <path
-          d={`M ${X(0)} ${Y(0)} L ${X(unitSquare[1][0])} ${Y(unitSquare[1][1])} L ${X(unitSquare[2][0])} ${Y(unitSquare[2][1])} L ${X(unitSquare[3][0])} ${Y(unitSquare[3][1])} Z`}
-          fill="none"
-          stroke="var(--accent-green)"
-          strokeWidth="1"
-          strokeDasharray="4 3"
-          opacity="0.7"
-        />
-        <path
           d={`M ${X(0)} ${Y(0)} L ${X(apply(m, unitSquare[1])[0])} ${Y(apply(m, unitSquare[1])[1])} L ${X(apply(m, unitSquare[2])[0])} ${Y(apply(m, unitSquare[2])[1])} L ${X(apply(m, unitSquare[3])[0])} ${Y(apply(m, unitSquare[3])[1])} Z`}
           fill="var(--accent-blue)"
           fillOpacity="0.12"
           stroke="var(--accent-blue)"
           strokeWidth="1.4"
+        />
+        {/* Drawn after the image, because the two overlap whenever det A is small and
+            the original is the reference the image is read against. */}
+        <path
+          d={`M ${X(0)} ${Y(0)} L ${X(unitSquare[1][0])} ${Y(unitSquare[1][1])} L ${X(unitSquare[2][0])} ${Y(unitSquare[2][1])} L ${X(unitSquare[3][0])} ${Y(unitSquare[3][1])} Z`}
+          fill="none"
+          stroke="var(--accent-green)"
+          strokeWidth="1"
+          strokeDasharray="4 3"
+          opacity="0.9"
         />
 
         <line x1={X(0)} y1={Y(0)} x2={X(m[0][0])} y2={Y(m[1][0])} stroke="var(--accent-blue)" strokeWidth="2" markerEnd={`url(#${uid}-blue)`} />
