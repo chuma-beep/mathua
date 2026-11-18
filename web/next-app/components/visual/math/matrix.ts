@@ -78,3 +78,34 @@ export function fromFlat(flat: [number, number, number, number]): Mat2 {
 export function toFlat(m: Mat2): [number, number, number, number] {
   return [m[0][0], m[0][1], m[1][0], m[1][1]]
 }
+
+export function dot(a: Vec2, b: Vec2): number {
+  return a[0] * b[0] + a[1] * b[1]
+}
+
+export function length(v: Vec2): number {
+  return Math.hypot(v[0], v[1])
+}
+
+/** A unit vector in the same direction. The zero vector is returned unchanged. */
+export function normalize(v: Vec2): Vec2 {
+  const len = length(v)
+  return len === 0 ? [0, 0] : [v[0] / len, v[1] / len]
+}
+
+export function scaleVec(v: Vec2, k: number): Vec2 {
+  return [v[0] * k, v[1] * k]
+}
+
+export function trace(m: Mat2): number {
+  return m[0][0] + m[1][1]
+}
+
+/** The unsigned angle between two vectors, in radians, in [0, pi]. */
+export function angleBetween(a: Vec2, b: Vec2): number {
+  const la = length(a)
+  const lb = length(b)
+  if (la === 0 || lb === 0) return 0
+  const cos = Math.min(1, Math.max(-1, dot(a, b) / (la * lb)))
+  return Math.acos(cos)
+}

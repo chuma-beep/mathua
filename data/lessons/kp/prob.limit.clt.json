@@ -6,7 +6,18 @@
       "Centre the sum at its mean",
       "Scale by the standard deviation",
       "Recognise mean zero and variance one"
-    ]
+    ],
+    "visual": {
+      "type": "stat.sampling",
+      "title": "Sample means bunch up as the sample grows",
+      "caption": "Raise n: the histogram of means narrows like 1/sqrt(n) and turns normal, even though the population stays skewed.",
+      "params": {
+        "population": "skewed",
+        "n": 9,
+        "draws": 600,
+        "seed": 7
+      }
+    }
   },
   {
     "label": "Worked: standardising a value",

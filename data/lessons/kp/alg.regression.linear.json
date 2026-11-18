@@ -6,7 +6,37 @@
       "Interpret the slope",
       "Describe a residual",
       "Distinguish the fitted line from a point-to-point line"
-    ]
+    ],
+    "visual": {
+      "type": "stat.regression",
+      "title": "The line that minimizes the squared gaps",
+      "caption": "Drag a point and watch the sum of squares. The line always passes through the mean point, and one far point pulls it harder than a near one.",
+      "params": {
+        "points": [
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            3,
+            3.5
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6.5
+          ]
+        ],
+        "showResiduals": true
+      }
+    }
   },
   {
     "label": "The intercept and the mean point",

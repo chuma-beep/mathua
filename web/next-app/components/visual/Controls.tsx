@@ -122,23 +122,28 @@ export function Slider({ label, value, min, max, step = 0.1, onChange, suffix }:
     onChange(Math.min(max, Math.max(min, next)))
   }
   return (
-    <div className="flex flex-wrap items-center gap-2">
-      <label htmlFor={id} className="w-10 shrink-0 font-mono text-[10px] text-mathua-muted">
+    // Below `sm` the label takes its own line and the range shares the next one
+    // with the stepper, because three items on one row wrap mid-control at 320px
+    // and the stepper lands under the label with nothing to align to.
+    <div className="space-y-1 sm:flex sm:items-center sm:gap-2 sm:space-y-0">
+      <label htmlFor={id} className="block shrink-0 font-mono text-[10px] text-mathua-muted sm:w-10">
         {label}
       </label>
-      <input
-        id={id}
-        type="range"
-        min={min}
-        max={max}
-        step={step}
-        value={value}
-        onChange={(e) => commit(Number(e.target.value))}
-        className="min-w-[96px] flex-1"
-        style={{ accentColor: 'var(--accent-blue)' }}
-      />
-      <Stepper label={label} value={value} min={min} max={max} step={step} onChange={onChange} />
-      {suffix && <span className="font-mono text-[10px] text-mathua-muted">{suffix}</span>}
+      <div className="flex items-center gap-2 sm:flex-1">
+        <input
+          id={id}
+          type="range"
+          min={min}
+          max={max}
+          step={step}
+          value={value}
+          onChange={(e) => commit(Number(e.target.value))}
+          className="min-w-0 flex-1"
+          style={{ accentColor: 'var(--accent-blue)' }}
+        />
+        <Stepper label={label} value={value} min={min} max={max} step={step} onChange={onChange} />
+        {suffix && <span className="font-mono text-[10px] text-mathua-muted">{suffix}</span>}
+      </div>
     </div>
   )
 }

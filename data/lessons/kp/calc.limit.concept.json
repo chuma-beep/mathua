@@ -6,7 +6,17 @@
       "Preview sin x/x to 1 and (1+1/n)^n to e",
       "Separate trig vs exponential families",
       "Flag 0/0 shape before evaluating"
-    ]
+    ],
+    "visual": {
+      "type": "calc.limit",
+      "title": "A limit asks what the two sides approach",
+      "caption": "Narrow the band around a. The hole at a does not matter, because the limit describes the approach rather than the value there.",
+      "params": {
+        "kind": "removable",
+        "a": 2,
+        "delta": 0.6
+      }
+    }
   },
   {
     "label": "The trigonometric fundamental limit",

@@ -4,5 +4,10 @@
   { "id": "calc.riemann", "status": "stable" },
   { "id": "complex.multiply", "status": "stable" },
   { "id": "stat.normal", "status": "stable" },
-  { "id": "geo.transform2d", "status": "stable" }
+  { "id": "geo.transform2d", "status": "stable" },
+  { "id": "linalg.eigen", "status": "stable" },
+  { "id": "calc.taylor", "status": "stable" },
+  { "id": "calc.limit", "status": "stable" },
+  { "id": "stat.sampling", "status": "stable" },
+  { "id": "stat.regression", "status": "stable" }
 ]

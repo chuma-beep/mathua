@@ -1,10 +1,15 @@
 import type { VisualTemplateEntry } from './types'
 import {
   complexMultiplySchema,
+  eigenSchema,
+  limitSchema,
   matrix2dSchema,
   normalSchema,
+  regressionSchema,
   riemannSchema,
+  samplingSchema,
   tangentSchema,
+  taylorSchema,
   transform2dSchema,
 } from './schemas'
 
@@ -38,6 +43,26 @@ export const VISUAL_TEMPLATES: Record<string, VisualTemplateEntry> = {
   'geo.transform2d': {
     schema: transform2dSchema,
     load: () => import('./templates/Transform2D'),
+  },
+  'linalg.eigen': {
+    schema: eigenSchema,
+    load: () => import('./templates/EigenDirections'),
+  },
+  'calc.taylor': {
+    schema: taylorSchema,
+    load: () => import('./templates/TaylorSeries'),
+  },
+  'calc.limit': {
+    schema: limitSchema,
+    load: () => import('./templates/LimitApproach'),
+  },
+  'stat.sampling': {
+    schema: samplingSchema,
+    load: () => import('./templates/SamplingDistribution'),
+  },
+  'stat.regression': {
+    schema: regressionSchema,
+    load: () => import('./templates/LeastSquares'),
   },
 }
 
