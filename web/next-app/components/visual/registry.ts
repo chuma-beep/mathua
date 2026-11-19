@@ -10,6 +10,7 @@ import {
   contourSchema,
   eigenSchema,
   familySchema,
+  gaussianSchema,
   limitSchema,
   matrix2dSchema,
   normalSchema,
@@ -70,6 +71,10 @@ export const VISUAL_TEMPLATES: Record<string, VisualTemplateEntry> = {
   'complex.contour': {
     schema: contourIntegralSchema,
     load: () => import('./templates/ContourIntegral'),
+  },
+  'linalg.elimination': {
+    schema: gaussianSchema,
+    load: () => import('./templates/GaussianElimination'),
   },
   'stat.family': {
     schema: familySchema,

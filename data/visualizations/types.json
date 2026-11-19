@@ -86,5 +86,9 @@
   {
     "id": "complex.contour",
     "status": "stable"
+  },
+  {
+    "id": "linalg.elimination",
+    "status": "stable"
   }
 ]

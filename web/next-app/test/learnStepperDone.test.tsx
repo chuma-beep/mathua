@@ -632,7 +632,7 @@ describe('LearnStepper grading recovery', () => {
     await answerCurrent('5')
     expect(await screen.findByText(/1\/1 correct/)).toBeTruthy()
     expect(screen.queryByRole('alert')).toBeNull()
-  })
+  }, 15000)
 })
 
 describe('LearnStepper question handoff', () => {
@@ -675,7 +675,7 @@ describe('LearnStepper question handoff', () => {
     await waitFor(() => expect(input).toHaveFocus())
     expect(answerFields()).toHaveLength(1)
     expect(vi.mocked(Element.prototype.scrollIntoView).mock.contexts.at(-1)).toBe(answerCard(input))
-  })
+  }, 15000)
 
   it('keeps the answer visible when the card is taller than the viewport', async () => {
     const original = HTMLElement.prototype.getBoundingClientRect

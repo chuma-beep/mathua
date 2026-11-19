@@ -4,7 +4,7 @@ import { useCallback, useMemo, useRef, useState } from 'react'
 import FigureFrame from '../FigureFrame'
 import { NumberField, Slider, Toggle } from '../Controls'
 import { eigenSchema } from '../schemas'
-import { angleBetween, apply, det, dot, fromFlat, normalize, trace, type Vec2 } from '../math/matrix'
+import { angleBetween, apply, det, dot, eigen, fromFlat, normalize, trace, type Vec2 } from '../math/matrix'
 import { clamp, scaleLinear } from '../scale'
 import { fmt } from '../format'
 import { useDrag } from '../useDrag'
@@ -56,6 +56,7 @@ export default function EigenDirections({ params, title, caption }: TemplateProp
     Math.abs(m[0][0]) + Math.abs(m[0][1]),
     Math.abs(m[1][0]) + Math.abs(m[1][1]),
   )
+  const spectrum = eigen(m)
   const extent = Math.max(1.6, rowSum * 1.15)
   const X = scaleLinear(-extent, extent, PAD, SIZE - PAD)
   const Y = scaleLinear(extent, -extent, PAD, SIZE - PAD)
@@ -120,6 +121,15 @@ export default function EigenDirections({ params, title, caption }: TemplateProp
         { label: 'v·Av', value: fmt(quotient) },
         { label: 'turn', value: `${fmt(deviation, 1)}°` },
         { label: 'state', value: isEigen ? 'eigenvector' : 'not an eigenvector' },
+        {
+          label: 'eigenvalues',
+          value:
+            spectrum.kind === 'complex'
+              ? `${fmt(spectrum.re)} ± ${fmt(spectrum.im)}i`
+              : spectrum.repeated
+                ? `${fmt(spectrum.values[0])} (twice)`
+                : `${fmt(spectrum.values[0])}, ${fmt(spectrum.values[1])}`,
+        },
         { label: 'det A', value: fmt(det(m)) },
         { label: 'trace', value: fmt(trace(m)) },
       ]}
@@ -173,6 +183,16 @@ export default function EigenDirections({ params, title, caption }: TemplateProp
           Av
         </text>
 
+        {spectrum.kind === 'complex' && (
+          <text x={PAD} y={SIZE - PAD - 18} fontSize="9" fill="var(--text-muted)">
+            no real eigen-direction: λ = {fmt(spectrum.re)} ± {fmt(spectrum.im)}i
+          </text>
+        )}
+        {spectrum.kind === 'real' && spectrum.repeated && (
+          <text x={PAD} y={SIZE - PAD - 18} fontSize="9" fill="var(--text-muted)">
+            repeated eigenvalue: one direction
+          </text>
+        )}
         {isEigen && (
           <text x={PAD} y={PAD + 10} fontSize="10" fill="var(--accent-green)">
             eigenvector, λ ≈ {fmt(quotient)}

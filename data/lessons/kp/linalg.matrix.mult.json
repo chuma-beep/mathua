@@ -10,7 +10,7 @@
     "visual": {
       "type": "linalg.matrix2d",
       "title": "Matrix multiplying a vector",
-      "caption": "Change A or drag v: the blue image is Av, and the shaded square is the image of the unit square. Its area is |det A|, the edge arrows keep the original direction when det A is positive and reverse it when it is negative, and at det A = 0 the square collapses onto a line.",
+      "caption": "The two columns are the arrows: drag a knob and you are editing A. The shaded parallelogram is the image of the unit square, so its area is |det A|, and the sign of det A says whether orientation is kept or flipped. A⁻¹ exists exactly when det A is not zero, even when the image is too thin to see.",
       "params": {
         "matrix": [
           1.2,
@@ -28,10 +28,9 @@
         "question": "det A is 1.44. What does that say about the image of the unit square?",
         "options": [
           "Its area is unchanged",
-          "Its area is 0.72 times the original",
           "Its area is 1.44 times the original"
         ],
-        "answer": 2,
+        "answer": 1,
         "explain": "The determinant is the area scale factor, so the unit square's image has area 1.44."
       }
     }

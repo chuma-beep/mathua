@@ -1,11 +1,17 @@
 import { describe, expect, it } from 'vitest'
 import {
   apply,
+  collapseState,
+  columns,
   compose,
+  describeCollapse,
   det,
   dilation,
   fromFlat,
   identity,
+  inverse,
+  lerpMatrix,
+  matrixScale,
   mul,
   reflection,
   rotation,
@@ -169,5 +175,121 @@ describe('scales and ticks', () => {
     expect(t[0]).toBe(-2)
     expect(t[t.length - 1]).toBe(2)
     expect(t.every((v, i) => i === 0 || v > t[i - 1])).toBe(true)
+  })
+})
+
+describe('the matrix a plane is drawn with', () => {
+  const A: Mat2 = [
+    [1.2, 0.6],
+    [0.4, 1.4],
+  ]
+
+  it('interpolates from the identity to A, endpoint to endpoint', () => {
+    expect(toFlat(lerpMatrix(identity(), A, 0))).toEqual(toFlat(identity()))
+    expect(toFlat(lerpMatrix(identity(), A, 1))).toEqual(toFlat(A))
+    // Midpoint is the average of the entries, which is the whole definition.
+    close(lerpMatrix(identity(), A, 0.5)[0][0], 1.1)
+    close(lerpMatrix(identity(), A, 0.5)[1][1], 1.2)
+    // t outside [0, 1] is clamped rather than extrapolated.
+    expect(toFlat(lerpMatrix(identity(), A, -3))).toEqual(toFlat(identity()))
+    expect(toFlat(lerpMatrix(identity(), A, 7))).toEqual(toFlat(A))
+  })
+
+  it('takes its columns from apply, so they cannot disagree with A e₁ and A e₂', () => {
+    const [first, second] = columns(A)
+    expect(first).toEqual(apply(A, [1, 0]))
+    expect(second).toEqual(apply(A, [0, 1]))
+  })
+
+  it('builds a matrix-vector product as a combination of columns', () => {
+    const v: Vec2 = [2, -1]
+    const [first, second] = columns(A)
+    const built: Vec2 = [v[0] * first[0] + v[1] * second[0], v[0] * first[1] + v[1] * second[1]]
+    close(built[0], apply(A, v)[0])
+    close(built[1], apply(A, v)[1])
+  })
+
+  it('reads the determinant as a signed area', () => {
+    close(det(A), 1.44)
+    close(Math.abs(det(reflection('x'))), 1)
+    expect(det(reflection('x'))).toBeLessThan(0)
+    expect(det(dilation(3))).toBe(9)
+  })
+
+  it('interpolates a quarter turn and a reflection through the identity', () => {
+    const quarter = lerpMatrix(identity(), rotation(Math.PI / 2), 0.5)
+    expect(toFlat(quarter)).toEqual([0.5, -0.5, 0.5, 0.5])
+    // A reflection passes through a singular matrix halfway: det drops to zero
+    // and comes back negative. That is a real fact about the path, not noise.
+    const halfway = lerpMatrix(identity(), reflection('y'), 0.5)
+    close(det(halfway), 0)
+    expect(collapseState(halfway, 55)).toBe('singular')
+    expect(det(lerpMatrix(identity(), reflection('y'), 1))).toBe(-1)
+  })
+
+  it('calls only a zero determinant singular', () => {
+    expect(collapseState([[1, 0], [0, 1]], 55)).toBe('none')
+    expect(collapseState([[1, 2], [2, 4]], 55)).toBe('singular')
+    expect(collapseState([[1, 0], [0, 0]], 55)).toBe('singular')
+    expect(collapseState([[0, 0], [0, 0]], 55)).toBe('singular')
+  })
+
+  it('separates near, pixel and singular without changing invertibility', () => {
+    // Determinant 0.01: an area, a real inverse, and a height of about 0.37px at
+    // 37px per unit, so it is invisible at this scale but not singular.
+    const thin: Mat2 = [
+      [1, 0],
+      [0, 0.01],
+    ]
+    expect(collapseState(thin, 37)).toBe('pixel')
+    expect(inverse(thin)).not.toBeNull()
+    close(Math.abs(det(thin)), 0.01)
+
+    // Determinant 1e-4 is also thinner than a pixel at this scale, and the
+    // drawing verdict is the one that matters for a shape, so pixel wins.
+    const thinner: Mat2 = [
+      [1, 0],
+      [0, 1e-4],
+    ]
+    expect(collapseState(thinner, 37)).toBe('pixel')
+    expect(inverse(thinner)).not.toBeNull()
+
+    // Nearly collapsed is the case where the determinant is small relative to
+    // the entries but the image is still thick enough to draw: a large map with a
+    // tiny area scale.
+    const nearly: Mat2 = [
+      [20, 0],
+      [0, 0.016],
+    ]
+    expect(collapseState(nearly, 37)).toBe('near')
+    expect(inverse(nearly)).not.toBeNull()
+
+    expect(collapseState([[1, 2], [2, 4]], 37)).toBe('singular')
+    expect(inverse([[1, 2], [2, 4]])).toBeNull()
+  })
+
+  it('describes each state in words a learner can act on', () => {
+    expect(describeCollapse('none', 1)).toBe('full parallelogram')
+    expect(describeCollapse('singular', 0)).toContain('line')
+    expect(describeCollapse('pixel', 0.01)).toContain('thinner than a pixel')
+    expect(describeCollapse('near', 1e-4)).toContain('nearly collapsed')
+  })
+
+  it('measures scale by the largest entry', () => {
+    expect(matrixScale(A)).toBe(1.4)
+    expect(matrixScale([[0, 0], [0, 0]])).toBe(0)
+    expect(matrixScale([[-3, 1], [0, 2]])).toBe(3)
+  })
+
+  it('handles a projection matrix as a real singular map', () => {
+    const project: Mat2 = [
+      [1, 0],
+      [0, 0],
+    ]
+    expect(det(project)).toBe(0)
+    expect(inverse(project)).toBeNull()
+    // Every vector loses its second component, which is what the figure draws.
+    expect(apply(project, [3, 5])).toEqual([3, 0])
+    expect(collapseState(project, 55)).toBe('singular')
   })
 })

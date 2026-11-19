@@ -64,3 +64,5 @@ One file per decision. The domain language stays in [`CONTEXT.md`](../../CONTEXT
 | [ADR-058](ADR-058-an-interactive-visualization-is-declared-data-and-the.md) | An interactive visualization is declared data, and the browser owns its meaning | 2026-11-18 |
 | [ADR-060](ADR-060-a-contour-integral-accumulates-in-the-plane-and-is-not-an-area.md) | A contour integral accumulates in the plane, and it is not an area | 2026-11-18 |
 | [ADR-059](ADR-059-3d-solids-use-three-js-lazily-inside-the-lesson-flow.md) | 3D solids use Three.js, lazily, inside the lesson flow | 2026-11-18 |
+| [ADR-061](ADR-061-linear-transformations-use-one-svg-engine-and-elimination-stays-separate.md) | Linear transformations use one SVG engine, and elimination stays separate | 2026-11-19 |
+| [ADR-062](ADR-062-a-matrix-figure-is-dragged-not-performed.md) | A matrix figure is dragged, not performed | 2026-11-19 |

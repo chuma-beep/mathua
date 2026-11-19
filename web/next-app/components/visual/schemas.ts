@@ -168,3 +168,12 @@ export const contourIntegralSchema = z.object({
   centerX: z.number().finite().min(-2).max(2).default(0),
   t: z.number().finite().min(0).max(1).default(1),
 })
+
+const triple = z.tuple([z.number().finite(), z.number().finite(), z.number().finite()])
+
+export const gaussianSchema = z.object({
+  rows: z.tuple([triple, triple]).default([
+    [2, 1, 5],
+    [1, -1, 1],
+  ]),
+})

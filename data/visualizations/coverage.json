@@ -291,5 +291,11 @@
         "stat.spread"
       ]
     }
+  ],
+  "supplementary": [
+    {
+      "id": "linalg.elimination",
+      "reason": "linear systems are not one of the proposal's 31 topics; the elimination figure is required by the linear-transformation brief and teaches a different activity, so it is recorded here rather than inflating the topic list"
+    }
   ]
 }

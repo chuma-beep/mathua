@@ -284,3 +284,18 @@ describe('vector combination edge cases', () => {
     expect(readout()).toContain('angle a,bundefined'.replace('undefined', '180°'))
   })
 })
+
+describe('eigen spectrum readout', () => {
+  const readout = () => screen.getByTestId('visual-readout').textContent ?? ''
+
+  it('names both real eigenvalues of a symmetric matrix', () => {
+    render(<EigenDirections title="Eigen" params={{ matrix: [2, 1, 1, 2], vector: [1, 0], showCircle: true }} />)
+    expect(readout()).toContain('1, 3')
+  })
+
+  it('reports a complex pair instead of inventing a real direction', () => {
+    render(<EigenDirections title="Eigen" params={{ matrix: [0, -1, 1, 0], vector: [1, 0], showCircle: true }} />)
+    expect(readout()).toContain('0 ± 1i')
+    expect(screen.getByText(/no real eigen-direction/)).toBeInTheDocument()
+  })
+})

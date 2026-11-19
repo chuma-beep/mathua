@@ -130,6 +130,19 @@ def coverage_findings(registry: dict[str, dict[str, str]]) -> tuple[list[str], d
                 findings.append(f"coverage: {tid} names unknown template {name}")
             used.add(name)
 
+    # A figure outside the proposal's 31 topics is recorded under `supplementary`
+    # with a reason, so the topic count stays honest and no template is orphaned.
+    for entry in data.get("supplementary", []):
+        name = str(entry.get("id", "")).strip()
+        if not name:
+            findings.append("coverage: a supplementary entry has no id")
+            continue
+        if not str(entry.get("reason", "")).strip():
+            findings.append(f"coverage: supplementary template {name} has no reason")
+        if name not in registry:
+            findings.append(f"coverage: supplementary template {name} is not in the registry")
+        used.add(name)
+
     for name in sorted(set(registry) - used):
         findings.append(f"coverage: template {name} teaches no topic in coverage.json")
 

@@ -391,3 +391,37 @@ describe('transform edge cases', () => {
     expect(after[4]).toBe(before[4])
   })
 })
+
+describe('matrix inverse readout', () => {
+  const readout = () => screen.getByTestId('visual-readout').textContent ?? ''
+
+  it('reports the inverse when one exists and says when it does not', () => {
+    const first = render(
+      <MatrixTransform2D title="Inverse" params={{ matrix: [2, 1, 1, 1], vector: [2, 1], showGrid: true, showBasis: true }} />,
+    )
+    // Compact on purpose: the spaced form wrapped to three lines in a 320px cell.
+    expect(readout()).toContain('[[1,-1],[-1,2]]')
+    first.unmount()
+    render(
+      <MatrixTransform2D title="Singular" params={{ matrix: [1, 2, 2, 4], vector: [1, 1], showGrid: true, showBasis: true }} />,
+    )
+    expect(readout()).toContain('no inverse (singular)')
+    expect(screen.getByText(/no inverse/)).toBeInTheDocument()
+  })
+})
+
+describe('matrix column combination', () => {
+  it('states Av as the sum of the scaled columns', () => {
+    render(
+      <MatrixTransform2D
+        title="Columns"
+        params={{ matrix: [1.2, 0.6, 0.4, 1.4], vector: [2, 1], showGrid: true, showBasis: true }}
+      />,
+    )
+    const text = screen.getByTestId('visual-readout').textContent ?? ''
+    // The arrows draw the two scaled columns; the readout has to say that their sum
+    // is Av, because a reader should not have to infer the equation from the picture.
+    expect(text).toContain('Av = 2·(1.2, 0.4) + 1·(0.6, 1.4)')
+    expect(text).toContain('(3, 2.2)')
+  })
+})
