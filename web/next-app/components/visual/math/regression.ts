@@ -30,6 +30,17 @@ export function slope(points: Point[]): number {
   return sxx === 0 ? 0 : sxy / sxx
 }
 
+/**
+ * Whether x varies at all. When every x is the same, the normal equations are
+ * singular: no line is better than any other, so `slope` returns 0 as a stand-in
+ * and the figure must say the line is undefined rather than draw that stand-in.
+ */
+export function hasXSpread(points: Point[]): boolean {
+  if (points.length < 2) return false
+  const [mx] = means(points)
+  return points.reduce((sum, [x]) => sum + (x - mx) * (x - mx), 0) > 1e-12
+}
+
 export function intercept(points: Point[]): number {
   const [mx, my] = means(points)
   return my - slope(points) * mx

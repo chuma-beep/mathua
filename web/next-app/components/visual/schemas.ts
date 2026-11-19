@@ -97,3 +97,74 @@ export const regressionSchema = z.object({
   ]),
   showResiduals: z.boolean().default(true),
 })
+
+export const vectorCombinationSchema = z.object({
+  a: pair.default([1, 2]),
+  b: pair.default([2, 0.5]),
+  k: z.number().finite().min(-3).max(3).default(-1.5),
+  showSum: z.boolean().default(true),
+})
+
+export const basisChangeSchema = z.object({
+  u: pair.default([1.5, 0.5]),
+  v: pair.default([0.5, 1.5]),
+  point: pair.default([2, 1]),
+})
+
+export const spreadSchema = z.object({
+  values: z.array(z.number().finite().min(0).max(10)).min(2).max(8).default([1, 2, 2, 4, 6]),
+  squared: z.boolean().default(true),
+  sample: z.boolean().default(true),
+})
+
+export const conicSchema = z.object({
+  A: z.number().finite().min(-2).max(2).default(1),
+  B: z.number().finite().min(-2).max(2).default(0),
+  C: z.number().finite().min(-2).max(2).default(0.5),
+})
+
+export const contourSchema = z.object({
+  field: z.enum(['bowl', 'saddle', 'product', 'ripple']).default('bowl'),
+  levels: z.number().int().min(3).max(12).default(7),
+  probe: pair.default([1, 1]),
+})
+
+export const complexMapSchema = z.object({
+  map: z.enum(['square', 'exp', 'inverse', 'conjugate']).default('square'),
+  z: pair.default([0.8, 0.4]),
+  turn: z.number().finite().min(10).max(170).default(60),
+})
+
+export const complexFieldSchema = z.object({
+  fn: z.enum(['square', 'cube', 'exp', 'inverse', 'sine']).default('square'),
+  probe: pair.default([1, 0.6]),
+  levels: z.number().int().min(3).max(8).default(5),
+  showImag: z.boolean().default(true),
+})
+
+export const coordinateSchema = z.object({
+  mode: z.enum(['measure', 'intersect']).default('measure'),
+  a: pair.default([-3, 1]),
+  b: pair.default([2, 4]),
+  c: pair.default([1, -2]),
+  slope: z.number().finite().min(-3).max(3).default(1),
+})
+
+export const familySchema = z.object({
+  emphasis: z.enum(['normal', 'uniform', 'exponential']).default('uniform'),
+  x: z.number().finite().min(-4.5).max(5.5).default(1),
+})
+
+export const solid3dSchema = z.object({
+  cut: z.number().finite().min(0).max(4).default(2),
+  showCut: z.boolean().default(true),
+})
+
+export const contourIntegralSchema = z.object({
+  path: z.enum(['circle', 'ellipse', 'wavy', 'line']).default('circle'),
+  fn: z.enum(['inv', 'identity', 'square', 'conj', 'exp']).default('inv'),
+  reverse: z.boolean().default(false),
+  radius: z.number().finite().min(0.3).max(2.5).default(1),
+  centerX: z.number().finite().min(-2).max(2).default(0),
+  t: z.number().finite().min(0).max(1).default(1),
+})

@@ -10,7 +10,7 @@
     "visual": {
       "type": "linalg.matrix2d",
       "title": "Matrix multiplying a vector",
-      "caption": "Change A or drag v: the blue image is Av, and the deformed grid shows what A does to the plane. The determinant is the area scale.",
+      "caption": "Change A or drag v: the blue image is Av, and the shaded square is the image of the unit square. Its area is |det A|, the edge arrows keep the original direction when det A is positive and reverse it when it is negative, and at det A = 0 the square collapses onto a line.",
       "params": {
         "matrix": [
           1.2,

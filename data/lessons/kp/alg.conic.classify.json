@@ -6,7 +6,27 @@
       "Check whether both variables are squared",
       "One squared variable means a parabola",
       "Two squared variables narrow it to three conics"
-    ]
+    ],
+    "visual": {
+      "type": "geo.conic",
+      "title": "One equation, several curves",
+      "caption": "Raise the cross term B and the conic turns without changing kind. A and C decide the kind through their signs and the discriminant, and when one squared term vanishes the curve is a pair of parallel lines rather than a parabola.",
+      "params": {
+        "A": 1,
+        "B": 0,
+        "C": 0.5
+      },
+      "predict": {
+        "question": "Keep A and C positive and raise the cross term B. Which type can B alone produce?",
+        "options": [
+          "A parabola",
+          "None: B only rotates the ellipse",
+          "A hyperbola"
+        ],
+        "answer": 1,
+        "explain": "B adds a rotation. The discriminant is B squared minus 4AC, and with A and C positive 4AC wins unless the terms balance exactly."
+      }
+    }
   },
   {
     "label": "Compare the coefficients",

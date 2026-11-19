@@ -5,7 +5,7 @@ import FigureFrame from '../FigureFrame'
 import { Select, Slider } from '../Controls'
 import { XAxisTicks } from '../Axis'
 import { limitSchema } from '../schemas'
-import { continuousAt, limitExists, limitValue, oneSidedLimits, type LimitKind } from '../math/limit'
+import { continuousAt, limitExists, limitValue, oneSidedLimits, valueAtPoint, type LimitKind } from '../math/limit'
 import { pathFromPoints, scaleLinear } from '../scale'
 import { fmt } from '../format'
 import type { TemplateProps } from '../types'
@@ -84,7 +84,7 @@ export default function LimitApproach({ params, title, caption }: TemplateProps)
       readout={[
         { label: 'left limit', value: limitText(sides.left) },
         { label: 'right limit', value: limitText(sides.right) },
-        { label: 'f(a)', value: limitText(limitValue(kind, a, a)) },
+        { label: 'f(a)', value: limitText(valueAtPoint(kind, a)) },
         { label: 'two-sided', value: exists ? 'exists' : 'does not exist' },
         { label: 'continuous', value: continuous ? 'yes' : 'no' },
         { label: 'δ', value: fmt(delta) },

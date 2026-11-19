@@ -5,7 +5,7 @@ import FigureFrame from '../FigureFrame'
 import { NumberField, Select, Toggle } from '../Controls'
 import { XAxisTicks } from '../Axis'
 import { regressionSchema } from '../schemas'
-import { correlation, intercept, means, predict, slope, sse, type Point } from '../math/regression'
+import { correlation, hasXSpread, intercept, means, predict, slope, sse, type Point } from '../math/regression'
 import { clamp, scaleLinear } from '../scale'
 import { fmt } from '../format'
 import { useDrag } from '../useDrag'
@@ -42,6 +42,10 @@ export default function LeastSquares({ params, title, caption }: TemplateProps) 
   const b = intercept(points)
   const r = correlation(points)
   const [mx, my] = means(points)
+  // A cloud whose x values are all equal has no unique least-squares line, so the
+  // figure reports the fit as undefined instead of drawing the zero slope the
+  // guard in `slope` returns.
+  const defined = hasXSpread(points)
 
   // The nearest point takes the drag, so overlapping points stay separable.
   const onDrag = useCallback(
@@ -70,8 +74,11 @@ export default function LeastSquares({ params, title, caption }: TemplateProps) 
   const editPoint = (axis: 0 | 1, value: number) => {
     setPoints((prev) => {
       const next = [...prev]
-      const current = next[selected] ?? [0, 0]
-      next[selected] = axis === 0 ? [clamp(value, X_MIN + 0.1, X_MAX - 0.1), current[1]] : [current[0], clamp(value, Y_MIN + 0.1, Y_MAX - 0.1)]
+      // Removing a point can leave the selection past the end; clamping here stops
+      // an edit from appending a stray point at a stale index.
+      const index = Math.min(selected, next.length - 1)
+      const current = next[index] ?? [0, 0]
+      next[index] = axis === 0 ? [clamp(value, X_MIN + 0.1, X_MAX - 0.1), current[1]] : [current[0], clamp(value, Y_MIN + 0.1, Y_MAX - 0.1)]
       return next
     })
   }
@@ -106,12 +113,12 @@ export default function LeastSquares({ params, title, caption }: TemplateProps) 
       }
       onReset={reset}
       readout={[
-        { label: 'slope', value: fmt(m, 3) },
-        { label: 'intercept', value: fmt(b, 3) },
-        { label: 'r', value: fmt(r, 3) },
-        { label: 'sum of squares', value: fmt(sse(points), 3) },
+        { label: 'slope', value: defined ? fmt(m, 3) : 'undefined' },
+        { label: 'intercept', value: defined ? fmt(b, 3) : 'undefined' },
+        { label: 'r', value: defined ? fmt(r, 3) : 'undefined' },
+        { label: 'sum of squares', value: defined ? fmt(sse(points), 3) : 'undefined' },
         { label: 'mean point', value: `(${fmt(mx)}, ${fmt(my)})` },
-        { label: 'at x = 6', value: fmt(predict(points, 6)) },
+        { label: 'at x = 6', value: defined ? fmt(predict(points, 6)) : 'undefined' },
       ]}
     >
       <svg
@@ -125,7 +132,7 @@ export default function LeastSquares({ params, title, caption }: TemplateProps) 
         <line x1={PAD} y1={Y(0)} x2={W - PAD} y2={Y(0)} stroke="var(--text-muted)" strokeWidth="0.8" />
         <line x1={X(0)} y1={PAD} x2={X(0)} y2={H - PAD} stroke="var(--text-muted)" strokeWidth="0.8" />
 
-        {showResiduals &&
+        {defined && showResiduals &&
           points.map(([x, y], i) => (
             <line
               key={`r${i}`}
@@ -140,14 +147,21 @@ export default function LeastSquares({ params, title, caption }: TemplateProps) 
             />
           ))}
 
-        <line
-          x1={X(X_MIN)}
-          y1={Y(b + m * X_MIN)}
-          x2={X(X_MAX)}
-          y2={Y(b + m * X_MAX)}
-          stroke="var(--accent-blue)"
-          strokeWidth="1.8"
-        />
+        {defined && (
+          <line
+            x1={X(X_MIN)}
+            y1={Y(b + m * X_MIN)}
+            x2={X(X_MAX)}
+            y2={Y(b + m * X_MAX)}
+            stroke="var(--accent-blue)"
+            strokeWidth="1.8"
+          />
+        )}
+        {!defined && (
+          <text x={PAD + 2} y={PAD + 10} fontSize="9" fill="var(--accent-red)">
+            x does not vary: no unique line
+          </text>
+        )}
 
         <circle cx={X(mx)} cy={Y(my)} r="4.5" fill="none" stroke="var(--accent-green)" strokeWidth="1.4" />
         {points.map(([x, y], i) => (

@@ -6,7 +6,26 @@
       "Map each outcome to a real X value",
       "Zero out P(X = x0) for exact points",
       "Drop endpoints without changing the probability"
-    ]
+    ],
+    "visual": {
+      "type": "stat.family",
+      "title": "Same spread, different distributions",
+      "caption": "All three densities here have standard deviation 1. Move x and compare the shaded tail with the other two: the same interval gets a different probability from each family.",
+      "params": {
+        "emphasis": "uniform",
+        "x": 1
+      },
+      "predict": {
+        "question": "At x = 1, which family puts the most probability below that point?",
+        "options": [
+          "Exponential",
+          "Uniform",
+          "Normal"
+        ],
+        "answer": 2,
+        "explain": "The normal accumulates fastest near its centre, giving about 0.84, against 0.79 for the uniform and 0.63 for the exponential."
+      }
+    }
   },
   {
     "label": "Probability from the density function",

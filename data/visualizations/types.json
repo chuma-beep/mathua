@@ -1,13 +1,90 @@
 [
-  { "id": "linalg.matrix2d", "status": "stable" },
-  { "id": "calc.tangent", "status": "stable" },
-  { "id": "calc.riemann", "status": "stable" },
-  { "id": "complex.multiply", "status": "stable" },
-  { "id": "stat.normal", "status": "stable" },
-  { "id": "geo.transform2d", "status": "stable" },
-  { "id": "linalg.eigen", "status": "stable" },
-  { "id": "calc.taylor", "status": "stable" },
-  { "id": "calc.limit", "status": "stable" },
-  { "id": "stat.sampling", "status": "stable" },
-  { "id": "stat.regression", "status": "stable" }
+  {
+    "id": "linalg.matrix2d",
+    "status": "stable"
+  },
+  {
+    "id": "calc.tangent",
+    "status": "stable"
+  },
+  {
+    "id": "calc.riemann",
+    "status": "stable"
+  },
+  {
+    "id": "complex.multiply",
+    "status": "stable"
+  },
+  {
+    "id": "stat.normal",
+    "status": "stable"
+  },
+  {
+    "id": "geo.transform2d",
+    "status": "stable"
+  },
+  {
+    "id": "linalg.eigen",
+    "status": "stable"
+  },
+  {
+    "id": "calc.taylor",
+    "status": "stable"
+  },
+  {
+    "id": "calc.limit",
+    "status": "stable"
+  },
+  {
+    "id": "stat.sampling",
+    "status": "stable"
+  },
+  {
+    "id": "stat.regression",
+    "status": "stable"
+  },
+  {
+    "id": "linalg.vector",
+    "status": "stable"
+  },
+  {
+    "id": "linalg.basis",
+    "status": "stable"
+  },
+  {
+    "id": "stat.spread",
+    "status": "stable"
+  },
+  {
+    "id": "geo.conic",
+    "status": "stable"
+  },
+  {
+    "id": "calc.contour",
+    "status": "stable"
+  },
+  {
+    "id": "complex.map",
+    "status": "stable"
+  },
+  {
+    "id": "complex.levels",
+    "status": "stable"
+  },
+  {
+    "id": "geo.coord",
+    "status": "stable"
+  },
+  {
+    "id": "stat.family",
+    "status": "stable"
+  },
+  {
+    "id": "solid3d",
+    "status": "stable"
+  },
+  {
+    "id": "complex.contour",
+    "status": "stable"
+  }
 ]

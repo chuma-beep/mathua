@@ -31,19 +31,34 @@ export default function TaylorSeries({ params, title, caption }: TemplateProps) 
 
   const coeffs = useMemo(() => taylorCoeffs(fn, center, degree), [fn, center, degree])
   const samples = useMemo(() => {
-    const curve: Array<[number, number]> = []
-    const poly: Array<[number, number]> = []
+    // One path per continuous piece. Joining across an undefined sample would draw
+    // a straight line through the pole of 1/(1-x), which is the opposite of what a
+    // pole looks like.
+    const curve: Array<Array<[number, number]>> = []
+    const poly: Array<Array<[number, number]>> = []
+    let currentCurve: Array<[number, number]> = []
+    let currentPoly: Array<[number, number]> = []
     for (let i = 0; i <= 240; i++) {
       const x = window[0] + ((window[1] - window[0]) * i) / 240
       const f = fnValue(fn, x)
       const p = taylorValue(coeffs, center, x)
-      if (Number.isFinite(f) && Math.abs(f) < 40) curve.push([x, f])
-      if (Number.isFinite(p) && Math.abs(p) < 40) poly.push([x, p])
+      if (Number.isFinite(f) && Math.abs(f) < 40) currentCurve.push([x, f])
+      else if (currentCurve.length > 0) {
+        curve.push(currentCurve)
+        currentCurve = []
+      }
+      if (Number.isFinite(p) && Math.abs(p) < 40) currentPoly.push([x, p])
+      else if (currentPoly.length > 0) {
+        poly.push(currentPoly)
+        currentPoly = []
+      }
     }
+    if (currentCurve.length > 0) curve.push(currentCurve)
+    if (currentPoly.length > 0) poly.push(currentPoly)
     return { curve, poly }
   }, [fn, coeffs, center, window])
 
-  const yValues = [...samples.curve, ...samples.poly].map(([, y]) => y).concat([0])
+  const yValues = [...samples.curve.flat(), ...samples.poly.flat()].map(([, y]) => y).concat([0])
   const loose = Math.max(3, Math.min(12, Math.max(...yValues.map(Math.abs))))
   const yMin = -loose
   const yMax = loose
@@ -52,6 +67,10 @@ export default function TaylorSeries({ params, title, caption }: TemplateProps) 
 
   const error = maxError(fn, center, degree, window[0], window[1])
   const leading = coeffs[coeffs.length - 1]
+  // The centre can be dragged onto the pole at x = 1, where there is no Taylor
+  // polynomial at all. Say so instead of printing a number that came from an
+  // undefined coefficient.
+  const singular = !Number.isFinite(fnValue(fn, center))
 
   const reset = () => {
     setFn(defaults.fn)
@@ -71,7 +90,7 @@ export default function TaylorSeries({ params, title, caption }: TemplateProps) 
       readout={[
         { label: 'degree', value: String(degree) },
         { label: 'centre', value: fmt(center) },
-        { label: 'max error', value: fmt(error, 4) },
+        { label: 'max error', value: singular || Number.isNaN(error) ? 'undefined' : fmt(error, 4) },
         { label: 'error at right', value: fmt(Math.abs(fnValue(fn, window[1]) - taylorValue(coeffs, center, window[1])), 4) },
         { label: 'leading coeff', value: fmt(leading, 4) },
       ]}
@@ -95,18 +114,34 @@ export default function TaylorSeries({ params, title, caption }: TemplateProps) 
           </clipPath>
         </defs>
         <g clipPath={`url(#${uid}-plot)`}>
-          <path d={pathFromPoints(samples.curve.map(([x, y]) => [X(x), Y(y)]))} fill="none" stroke="var(--text-primary)" strokeWidth="1.8" />
-          <path
-            d={pathFromPoints(samples.poly.map(([x, y]) => [X(x), Y(y)]))}
-            fill="none"
-            stroke="var(--accent-blue)"
-            strokeWidth="1.6"
-            strokeDasharray="6 3"
-          />
+          {samples.curve.map((segment, i) => (
+            <path
+              key={`f${i}`}
+              d={pathFromPoints(segment.map(([x, y]) => [X(x), Y(y)]))}
+              fill="none"
+              stroke="var(--text-primary)"
+              strokeWidth="1.8"
+            />
+          ))}
+          {samples.poly.map((segment, i) => (
+            <path
+              key={`p${i}`}
+              d={pathFromPoints(segment.map(([x, y]) => [X(x), Y(y)]))}
+              fill="none"
+              stroke="var(--accent-blue)"
+              strokeWidth="1.6"
+              strokeDasharray="6 3"
+            />
+          ))}
         </g>
 
         <line x1={X(center)} y1={PAD} x2={X(center)} y2={H - PAD} stroke="var(--accent-green)" strokeWidth="1" strokeDasharray="3 3" />
-        <circle cx={X(center)} cy={Y(fnValue(fn, center))} r="4" fill="var(--accent-green)" />
+        {!singular && <circle cx={X(center)} cy={Y(fnValue(fn, center))} r="4" fill="var(--accent-green)" />}
+        {singular && (
+          <text x={PAD + 34} y={PAD + 10} fontSize="9" fill="var(--accent-red)">
+            pole at the centre
+          </text>
+        )}
 
         <XAxisTicks ticks={niceTicks(window[0], window[1], 5)} scale={X} at={Y(0)} />
         <YAxisTicks ticks={niceTicks(yMin, yMax, 4).filter((v) => Math.abs(v) > 1e-9)} scale={Y} at={X(0)} />

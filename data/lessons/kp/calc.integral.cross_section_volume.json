@@ -6,7 +6,26 @@
       "State the volume integral",
       "Write the area of a section",
       "Compute a volume"
-    ]
+    ],
+    "visual": {
+      "type": "solid3d",
+      "title": "A solid sliced into disks",
+      "caption": "Drag to turn the solid. Each slice at the cut is a disk of radius r(x), and the volume is the integral of those disk areas along the axis.",
+      "params": {
+        "cut": 2,
+        "showCut": true
+      },
+      "predict": {
+        "question": "Move the cut to where the body is widest. What happens to the cross-section area there?",
+        "options": [
+          "It is largest there",
+          "It is smallest there",
+          "It is the same everywhere"
+        ],
+        "answer": 0,
+        "explain": "The slice is a disk of radius r(x), so its area is largest where the profile is widest."
+      }
+    }
   },
   {
     "label": "The integral of the area",

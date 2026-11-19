@@ -15,7 +15,7 @@ import {
 } from '../components/visual/math/matrix'
 import { antiderivative, definiteIntegral, derivative, evalPoly } from '../components/visual/math/poly'
 import { riemannSum } from '../components/visual/math/integrate'
-import { carg, cmod, cmul, type Complex } from '../components/visual/math/complex'
+import { carg, cargOrNull, cmod, cmul, wrapAngle, type Complex } from '../components/visual/math/complex'
 import { normalCdf, normalPdf, normalProbability } from '../components/visual/math/normal'
 import { distance, maxSideDelta, sideLengths } from '../components/visual/math/geometry'
 import { clamp, invertLinear, scaleLinear, ticks } from '../components/visual/scale'
@@ -98,6 +98,17 @@ describe('complex arithmetic', () => {
     close(carg(product), carg(z) + carg(w))
     close(carg([-1, 0]), Math.PI)
     close(carg([0, -1]), -Math.PI / 2)
+  })
+
+  it('reduces a sum of arguments into the principal range, and refuses to name a direction for zero', () => {
+    // Two vectors at 120 degrees: their product sits at 240, which is -120 once wrapped.
+    close(wrapAngle((2 * 2 * Math.PI) / 3), (-2 * Math.PI) / 3)
+    close(wrapAngle(Math.PI), Math.PI)
+    close(wrapAngle(-Math.PI), Math.PI)
+    close(wrapAngle(0.3), 0.3)
+    expect(cargOrNull([0, 0])).toBeNull()
+    close(cargOrNull([1, 0]) as number, 0)
+    close(cargOrNull([0, 1]) as number, Math.PI / 2)
   })
 })
 

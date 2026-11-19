@@ -20,7 +20,13 @@ export default function RiemannSum({ params, title, caption }: TemplateProps) {
   const [n, setN] = useState(() => clamp(initial.n, 1, 256))
   const [rule, setRule] = useState<RiemannRule>(initial.rule)
 
-  const { coeffs, a, b } = initial
+  const { coeffs } = initial
+  // An interval is a set, so an authored a > b describes the same interval as
+  // b > a. Without this, a reversed pair drew a mirrored curve with zero-width
+  // rectangles while the readout still showed numbers: the picture and the
+  // arithmetic disagreed about which way round the interval was.
+  const a = Math.min(initial.a, initial.b)
+  const b = Math.max(initial.a, initial.b)
   const exact = definiteIntegral(coeffs, a, b)
   const sum = riemannSum(coeffs, a, b, n, rule)
   const dx = (b - a) / n
@@ -106,9 +112,9 @@ export default function RiemannSum({ params, title, caption }: TemplateProps) {
           label="n"
           value={n}
           min={1}
-          max={64}
+          max={256}
           step={1}
-          onChange={(value) => setN(clamp(Math.round(value), 1, 64))}
+          onChange={(value) => setN(clamp(Math.round(value), 1, 256))}
         />
         <Select
           label="sample"

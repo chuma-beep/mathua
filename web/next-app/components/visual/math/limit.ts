@@ -20,10 +20,14 @@ export function limitValue(kind: LimitKind, a: number, x: number): number {
   }
 }
 
-/** The value the shard says f has at a: a hole is undefined, a jump takes both sides. */
+/**
+ * The value the function has at a, which is not the same question as its limit.
+ * A hole and a vertical asymptote have no value there; the jump is defined, by the
+ * piece the point falls in, and its value is 3 rather than undefined. This delegates
+ * to `limitValue` so the drawn curve and the printed value cannot disagree.
+ */
 export function valueAtPoint(kind: LimitKind, a: number): number {
-  if (kind === 'jump') return Number.NaN
-  return Number.NaN
+  return limitValue(kind, a, a)
 }
 
 /**

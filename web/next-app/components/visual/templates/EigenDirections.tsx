@@ -40,10 +40,23 @@ export default function EigenDirections({ params, title, caption }: TemplateProp
   // it is printed beside the angle: the learner sees both settle at once.
   const quotient = dot(vector, image)
   const deviation = angleBetween(vector, image) * DEG
-  const isEigen = deviation < 2
+  // Collinear, not "within two degrees". An eigenvector whose eigenvalue is
+  // negative maps to the opposite ray, which is the same line, and the old angle
+  // test called that 180 degrees and refused to name it. With |v| = 1 the cross
+  // product is |A v| sin(theta), so it vanishes exactly on that line and nowhere
+  // else. A zero image is also an eigenvector, with eigenvalue zero.
+  const imageLength = Math.hypot(image[0], image[1])
+  const cross = vector[0] * image[1] - vector[1] * image[0]
+  const isEigen = imageLength < 1e-9 || Math.abs(cross) < 1e-6 * imageLength
 
-  const extent =
-    Math.max(1.4, Math.abs(image[0]), Math.abs(image[1]), Math.abs(vector[0]), Math.abs(vector[1])) * 1.25
+  // The frame follows the matrix, not the current image: an extent that tracked
+  // |A v| rescaled the drawing on every pointer move, so the point slid away from
+  // the cursor while it was being dragged.
+  const rowSum = Math.max(
+    Math.abs(m[0][0]) + Math.abs(m[0][1]),
+    Math.abs(m[1][0]) + Math.abs(m[1][1]),
+  )
+  const extent = Math.max(1.6, rowSum * 1.15)
   const X = scaleLinear(-extent, extent, PAD, SIZE - PAD)
   const Y = scaleLinear(extent, -extent, PAD, SIZE - PAD)
   const cx = X(0)
@@ -106,6 +119,7 @@ export default function EigenDirections({ params, title, caption }: TemplateProp
         { label: 'Av', value: `(${fmt(image[0])}, ${fmt(image[1])})` },
         { label: 'v·Av', value: fmt(quotient) },
         { label: 'turn', value: `${fmt(deviation, 1)}°` },
+        { label: 'state', value: isEigen ? 'eigenvector' : 'not an eigenvector' },
         { label: 'det A', value: fmt(det(m)) },
         { label: 'trace', value: fmt(trace(m)) },
       ]}

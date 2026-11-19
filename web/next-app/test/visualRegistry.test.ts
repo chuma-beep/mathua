@@ -20,7 +20,9 @@ function shardFiles(): string[] {
 
 describe('visual registry', () => {
   it('matches the Go allowlist exactly', () => {
-    expect(VISUAL_TYPES).toEqual(allowlist.map((entry) => entry.id))
+    // The ids are a set: the registry's key order and the file's entry order are not
+    // part of the contract, so compare sorted and let either file be appended to.
+    expect([...VISUAL_TYPES].sort()).toEqual(allowlist.map((entry) => entry.id).sort())
   })
 
   it('every allowlisted id has a schema and a loader', () => {

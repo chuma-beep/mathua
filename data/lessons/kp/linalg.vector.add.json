@@ -6,7 +6,34 @@
       "Place vectors tail to tail",
       "Complete the parallelogram diagonal",
       "Read the diagonal as the sum"
-    ]
+    ],
+    "visual": {
+      "type": "linalg.vector",
+      "title": "Addition is the diagonal of a parallelogram",
+      "caption": "Drag either arrowhead and change k. The sum follows the parallelogram, and scaling b by k stretches the same direction or reverses it.",
+      "params": {
+        "a": [
+          1,
+          2
+        ],
+        "b": [
+          2,
+          0.5
+        ],
+        "k": -1.5,
+        "showSum": true
+      },
+      "predict": {
+        "question": "With k = -1, how does k b compare with b?",
+        "options": [
+          "The same length, pointing the opposite way",
+          "The same vector, unchanged",
+          "The zero vector"
+        ],
+        "answer": 0,
+        "explain": "Multiplying by a negative scalar keeps the line and the length but reverses the direction, so k b = -b."
+      }
+    }
   },
   {
     "label": "Components and coordinate representation",

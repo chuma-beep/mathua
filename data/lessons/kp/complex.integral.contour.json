@@ -6,7 +6,30 @@
       "Parametrize with z = e^{it}",
       "Integrate i dt from 0 to 2 pi",
       "Match against the enclosed residue"
-    ]
+    ],
+    "visual": {
+      "type": "complex.contour",
+      "title": "The integral accumulates in a second plane",
+      "caption": "Sweep t: the vector in the right plane is the integral so far, and it returns to the origin for every analytic function. At the pole 1/z has no value, so the figure reports the crossing rather than a number.",
+      "params": {
+        "path": "circle",
+        "fn": "inv",
+        "reverse": false,
+        "radius": 1,
+        "centerX": 0,
+        "t": 1
+      },
+      "predict": {
+        "question": "Traverse the unit circle backwards with 1/z. What is the integral?",
+        "options": [
+          "2πi",
+          "−2πi",
+          "0"
+        ],
+        "answer": 1,
+        "explain": "Reversing the path reverses the sign: the integral is −2πi, not 2πi and certainly not zero."
+      }
+    }
   },
   {
     "label": "Worked: integral of one over z squared is zero",

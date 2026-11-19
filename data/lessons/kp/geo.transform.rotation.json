@@ -10,7 +10,7 @@
     "visual": {
       "type": "geo.transform2d",
       "title": "Rotating a shape about the origin",
-      "caption": "Drag to rotate or change the angle: every vertex turns by the same angle, side lengths stay fixed, and the determinant stays 1.",
+      "caption": "Add, remove or drag vertices to build the polygon, then transform it. The dashed outline is yours, the filled outline is its image, and an isometry keeps every side length while a dilation does not.",
       "params": {
         "kind": "rotation",
         "angle": 30,
@@ -34,14 +34,14 @@
         "showOrbit": true
       },
       "predict": {
-        "question": "A rotation changes position and orientation. What does it leave unchanged?",
+        "question": "Build a shape, then choose Dilation with a scale above 1. What happens to the side lengths?",
         "options": [
-          "Distances and area",
-          "Distances but not area",
-          "Neither distances nor area"
+          "They are unchanged",
+          "They all scale by the same factor",
+          "Only the longest side grows"
         ],
-        "answer": 0,
-        "explain": "A rotation is an isometry with determinant 1, so every length and the enclosed area survive it."
+        "answer": 1,
+        "explain": "A dilation multiplies every vector by the same k, so every side length is multiplied by |k| and the area by k squared."
       }
     }
   },

@@ -33,6 +33,11 @@ export default function SamplingDistribution({ params, title, caption }: Templat
   const values = useMemo(() => sampleMeans(population, n, draws, defaults.seed), [population, n, draws, defaults.seed])
   const counts = useMemo(() => histogram(values, LO, HI, BINS), [values])
   const maxCount = Math.max(1, ...counts)
+  // Samples outside the drawn window are dropped by the histogram, so the bars
+  // can total less than the number drawn. Reporting the difference is what keeps
+  // "samples 600" from quietly meaning fewer than 600 bars.
+  const plotted = counts.reduce((sum, count) => sum + count, 0)
+  const offPlot = values.length - plotted
   const standardError = 1 / Math.sqrt(n)
   const binWidth = (HI - LO) / BINS
 
@@ -67,10 +72,14 @@ export default function SamplingDistribution({ params, title, caption }: Templat
   return (
     <FigureFrame
       title={title ?? 'The sampling distribution of the mean'}
-      hint="Change n: the bars narrow even though the population does not."
+      hint={
+        n === 1
+          ? 'n = 1: the bars are the population itself, not a sampling distribution yet.'
+          : 'Change n: the bars narrow even though the population does not. Off-plot counts any sample mean outside this window.'
+      }
       caption={
         caption ??
-        'Each bar counts the mean of one sample of size n. The grey curve is the population, drawn to its own scale; the dashed curve is the normal the central limit theorem predicts, with spread 1/√n.'
+        'Each bar counts the mean of one sample of size n. The grey curve is the population, drawn to its own scale; the dashed curve is the normal approximation with spread 1/√n, which improves as n grows.'
       }
       onReset={reset}
       readout={[
@@ -79,6 +88,7 @@ export default function SamplingDistribution({ params, title, caption }: Templat
         { label: 'observed sd', value: fmt(sd(values), 3) },
         { label: 'mean of means', value: fmt(mean(values), 3) },
         { label: 'samples', value: String(draws) },
+        { label: 'off-plot', value: String(offPlot) },
       ]}
     >
       <svg
@@ -130,6 +140,7 @@ export default function SamplingDistribution({ params, title, caption }: Templat
         <text x={W - PAD} y={PAD + 10} textAnchor="end" fontSize="9" fill="var(--accent-teal)">
           1/√n
         </text>
+
       </svg>
 
       <div className="mt-3 space-y-2">

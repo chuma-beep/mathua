@@ -72,6 +72,10 @@ validate: fmt-check lint-go
 	python3 scripts/counts.py --check
 	python3 scripts/check_additive.py
 	python3 scripts/check_docs.py
+	# Frontend data the corpus checks cannot see: the allowlist, the registry and
+	# the authored shards are three lists edited by hand, and a template can be
+	# missing from one of them while every other check passes.
+	python3 scripts/audit_visuals.py
 	python3 scripts/check_ste.py
 	node web/next-app/scripts/build-docs.mjs --check
 	go test ./internal/generator/ -run TestLearnerDomainsHaveSchemas

@@ -28,30 +28,36 @@ export default function TangentLine({ params, title, caption }: TemplateProps) {
   const tangent = evalPoly(slopeCoeffs, x)
   const secant = (fh - f) / h
 
+  // The right edge grows to hold x + h. Without this, dragging x to the end of the
+  // window with a large h put the secant's second point outside the viewBox: the
+  // curve, the dot and the label were clipped while the readout still reported a
+  // slope, so the figure stopped showing the thing its caption claims.
+  const domain = useMemo<[number, number]>(() => [window[0], Math.max(window[1], x + h)], [window, x, h])
+
   const samples = useMemo(() => {
     const out: Array<[number, number]> = []
     for (let i = 0; i <= 240; i++) {
-      const xv = window[0] + ((window[1] - window[0]) * i) / 240
+      const xv = domain[0] + ((domain[1] - domain[0]) * i) / 240
       out.push([xv, evalPoly(coeffs, xv)])
     }
     return out
-  }, [coeffs, window])
+  }, [coeffs, domain])
 
   const yValues = useMemo(() => {
     const values = samples.map((p) => p[1])
     const lineAt = (m: number, at: number) => f + m * (at - x)
-    values.push(lineAt(secant, window[0]), lineAt(secant, window[1]))
-    values.push(lineAt(tangent, window[0]), lineAt(tangent, window[1]))
+    values.push(lineAt(secant, domain[0]), lineAt(secant, domain[1]))
+    values.push(lineAt(tangent, domain[0]), lineAt(tangent, domain[1]))
     values.push(f, fh)
     return values.filter(Number.isFinite)
-  }, [samples, secant, tangent, f, fh, window, x])
+  }, [samples, secant, tangent, f, fh, domain, x])
 
   const yMin = Math.min(...yValues) - 0.6
   const yMax = Math.max(...yValues) + 0.6
-  const X = scaleLinear(window[0], window[1], PAD, W - PAD)
+  const X = scaleLinear(domain[0], domain[1], PAD, W - PAD)
   const Y = scaleLinear(yMin, yMax, H - PAD, PAD)
-  const invertX = invertLinear(window[0], window[1], PAD, W - PAD)
-  const xTicks = niceTicks(window[0], window[1], 5)
+  const invertX = invertLinear(domain[0], domain[1], PAD, W - PAD)
+  const xTicks = niceTicks(domain[0], domain[1], 5)
   const yTicks = niceTicks(yMin, yMax, 4)
 
   const onDrag = useCallback(
@@ -69,7 +75,7 @@ export default function TangentLine({ params, title, caption }: TemplateProps) {
 
   const curvePath = pathFromPoints(samples.map(([xv, yv]) => [X(xv), Y(yv)]))
   const line = (m: number) =>
-    `M ${X(window[0])} ${Y(f + m * (window[0] - x))} L ${X(window[1])} ${Y(f + m * (window[1] - x))}`
+    `M ${X(domain[0])} ${Y(f + m * (domain[0] - x))} L ${X(domain[1])} ${Y(f + m * (domain[1] - x))}`
 
   return (
     <FigureFrame
@@ -120,7 +126,18 @@ export default function TangentLine({ params, title, caption }: TemplateProps) {
         <circle cx={X(x + h)} cy={Y(fh)} r="3.2" fill="var(--accent-teal)" />
 
         <text x={X(x) - 8} y={Y(f) - 10} textAnchor="end" fontSize="10" fill="var(--accent-blue)" stroke="var(--bg)" strokeWidth="3" paintOrder="stroke">x</text>
-        <text x={X(x + h) + 8} y={Y(fh) + 16} fontSize="10" fill="var(--accent-teal)" stroke="var(--bg)" strokeWidth="3" paintOrder="stroke">x + h</text>
+        <text
+          x={X(x + h) + (X(x + h) > W - PAD - 30 ? -8 : 8)}
+          y={Y(fh) + 16}
+          textAnchor={X(x + h) > W - PAD - 30 ? 'end' : 'start'}
+          fontSize="10"
+          fill="var(--accent-teal)"
+          stroke="var(--bg)"
+          strokeWidth="3"
+          paintOrder="stroke"
+        >
+          x + h
+        </text>
         <text x={PAD + 2} y={PAD + 10} fontSize="10" fill="var(--accent-blue)">tangent</text>
         <text x={PAD + 2} y={PAD + 22} fontSize="10" fill="var(--accent-teal)">secant</text>
       </svg>

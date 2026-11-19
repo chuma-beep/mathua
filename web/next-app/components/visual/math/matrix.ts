@@ -109,3 +109,11 @@ export function angleBetween(a: Vec2, b: Vec2): number {
   const cos = Math.min(1, Math.max(-1, dot(a, b) / (la * lb)))
   return Math.acos(cos)
 }
+
+export function addVec(a: Vec2, b: Vec2): Vec2 {
+  return [a[0] + b[0], a[1] + b[1]]
+}
+
+export function subVec(a: Vec2, b: Vec2): Vec2 {
+  return [a[0] - b[0], a[1] - b[1]]
+}

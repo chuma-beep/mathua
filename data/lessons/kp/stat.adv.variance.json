@@ -6,7 +6,33 @@
       "Measure each |xi - xbar| deviation from the mean",
       "Square, average, then root into the quadratic deviation",
       "Tag sum(xi-M)^2 as the deviance"
-    ]
+    ],
+    "visual": {
+      "type": "stat.spread",
+      "title": "Variance is an average of squared gaps",
+      "caption": "Drag a point: the mean is the balance point, the signed gaps cancel, and the squares are what variance averages.",
+      "params": {
+        "values": [
+          1,
+          2,
+          2,
+          4,
+          6
+        ],
+        "squared": true,
+        "sample": true
+      },
+      "predict": {
+        "question": "Move one point far from the rest. How does the variance respond?",
+        "options": [
+          "It rises faster than the distance does",
+          "It stays the same",
+          "It falls"
+        ],
+        "answer": 0,
+        "explain": "Distance is squared, so doubling a gap multiplies that contribution by four."
+      }
+    }
   },
   {
     "label": "Variance",

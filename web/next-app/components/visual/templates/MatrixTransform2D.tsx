@@ -41,6 +41,16 @@ export default function MatrixTransform2D({ params, title, caption }: TemplatePr
   const composed = B ? mul(B, A) : null
   const mid = apply(A, vector)
   const image = composed ? apply(composed, vector) : mid
+  // The image of the unit square is the area claim, so the determinant is read three
+  // ways: its value, the area it makes, and the orientation it keeps or reverses. A
+  // zero determinant is not a small area, it is a collapsed one, and the drawing has to
+  // show that rather than a thin quadrilateral.
+  const determinant = det(A)
+  const area = Math.abs(determinant)
+  const collapsed = area < 1e-9
+  const orientation = collapsed ? 'collapsed' : determinant > 0 ? 'preserved' : 'reversed'
+  const imageColor = determinant < 0 ? 'var(--accent-red)' : 'var(--accent-blue)'
+  const diagonal = apply(A, [1, 1])
 
   const unit = (SIZE - PAD * 2) / (EXTENT * 2)
   const cx = SIZE / 2
@@ -90,12 +100,14 @@ export default function MatrixTransform2D({ params, title, caption }: TemplatePr
       title={title ?? 'Matrix as a transformation'}
       caption={
         caption ??
-        'The grid is the plane itself. Each basis arrow is where the matrix sends e₁ and e₂, and the shaded square is the image of the unit square. Its area is |det A|.'
+        'The grid is the plane itself. Each basis arrow is where the matrix sends e₁ and e₂, and the shaded square is the image of the unit square. Its area is |det A|, and the arrows around its edge run the same way as the original when det A is positive and the opposite way when it is negative. At det A = 0 the square collapses to a segment. Volume would need a third dimension, so this figure stops at area.'
       }
       onReset={reset}
       readout={[
         { label: 'A', value: `[[${fmt(matrix[0], 1)}, ${fmt(matrix[1], 1)}], [${fmt(matrix[2], 1)}, ${fmt(matrix[3], 1)}]]` },
-        { label: 'det A', value: fmt(det(A)) },
+        { label: 'det A', value: fmt(determinant) },
+        { label: 'area', value: fmt(area) },
+        { label: 'orientation', value: orientation },
         { label: 'v', value: fmtVec(vector) },
         { label: 'Av', value: fmtVec(mid) },
         ...(composed
@@ -105,7 +117,11 @@ export default function MatrixTransform2D({ params, title, caption }: TemplatePr
               { label: 'det BA', value: fmt(det(composed)) },
             ]
           : []),
-        { label: '|Av|', value: fmt(Math.hypot(image[0], image[1])) },
+        // |Av| is the length of A v, which is `mid` whether or not a second matrix
+        // follows. Using `image` here labelled the composed length as |Av| and hid
+        // the intermediate one entirely.
+        { label: '|Av|', value: fmt(Math.hypot(mid[0], mid[1])) },
+        ...(composed ? [{ label: '|BAv|', value: fmt(Math.hypot(image[0], image[1])) }] : []),
       ]}
     >
       <svg
@@ -165,13 +181,53 @@ export default function MatrixTransform2D({ params, title, caption }: TemplatePr
         </g>
 
         <path d={squarePath(unitSquare)} fill="none" stroke="var(--accent-green)" strokeWidth="1" strokeDasharray="4 3" opacity="0.9" />
-        <path
-          d={squarePath(unitSquare.map((p) => apply(A, p)))}
-          fill="var(--accent-blue)"
-          fillOpacity="0.12"
-          stroke="var(--accent-blue)"
-          strokeWidth="1.4"
-        />
+
+        {collapsed ? (
+          <>
+            {/* A rank-one image is a segment from the origin to A(e1 + e2): every point of
+                the square lands on it, so there is no interior left to shade. */}
+            <line
+              x1={X(0)}
+              y1={Y(0)}
+              x2={X(diagonal[0])}
+              y2={Y(diagonal[1])}
+              stroke="var(--accent-red)"
+              strokeWidth="3"
+            />
+            <text x={PAD} y={SIZE - PAD - 4} fontSize="10" fill="var(--accent-red)">
+              area 0: the plan is squashed onto a line
+            </text>
+          </>
+        ) : (
+          <>
+            <path
+              d={squarePath(unitSquare.map((p) => apply(A, p)))}
+              fill={imageColor}
+              fillOpacity="0.12"
+              stroke={imageColor}
+              strokeWidth="1.4"
+            />
+            {/* Traversal arrows, so orientation is visible rather than only printed: the
+                same vertex order goes round the original and round the image, which means
+                the same direction when det A > 0 and the opposite when it is negative. */}
+            {unitSquare.map((point, i) => {
+              const next = unitSquare[(i + 1) % unitSquare.length]
+              const a = apply(A, point)
+              const b = apply(A, next)
+              const mx = (X(a[0]) + X(b[0])) / 2
+              const my = (Y(a[1]) + Y(b[1])) / 2
+              const angle = (Math.atan2(Y(b[1]) - Y(a[1]), X(b[0]) - X(a[0])) * 180) / Math.PI
+              return (
+                <path
+                  key={`trav${i}`}
+                  d="M -3.5 2.2 L 3.5 0 L -3.5 -2.2 Z"
+                  transform={`translate(${mx} ${my}) rotate(${angle})`}
+                  fill={imageColor}
+                />
+              )
+            })}
+          </>
+        )}
 
         {showBasis && (
           <>

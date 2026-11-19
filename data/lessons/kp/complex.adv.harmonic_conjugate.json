@@ -6,7 +6,31 @@
       "State the governing relation for harmonic conjugates",
       "Identify the quantities in the find the conjugate step",
       "Carry out the find the conjugate computation"
-    ]
+    ],
+    "visual": {
+      "type": "complex.levels",
+      "title": "Two families of curves, always at right angles",
+      "caption": "Blue is Re f, teal is Im f. Cauchy-Riemann makes the families perpendicular wherever f' is not zero, and at a critical point neither has a tangent to be perpendicular to.",
+      "params": {
+        "fn": "square",
+        "probe": [
+          1,
+          0.6
+        ],
+        "levels": 5,
+        "showImag": true
+      },
+      "predict": {
+        "question": "Choose the conjugate map, which is not analytic. Do the two families still cross at a right angle?",
+        "options": [
+          "Yes, orthogonality is visual only",
+          "No, the angles stop being right",
+          "Only on the axes"
+        ],
+        "answer": 1,
+        "explain": "Orthogonality is a consequence of the Cauchy-Riemann equations, not of drawing two families of curves."
+      }
+    }
   },
   {
     "label": "Verify the Cauchy-Riemann equations",

@@ -23,8 +23,14 @@ export default function NormalCurve({ params, title, caption }: TemplateProps) {
   const [bands, setBands] = useState(initial.bands)
   const svgRef = useRef<SVGSVGElement | null>(null)
 
-  const lo = mu - 4 * sigma
-  const hi = mu + 4 * sigma
+  // A fixed window in raw units, not mu +/- 4 sigma. Scaling the window with sigma
+  // made the curve pixel-identical at every sigma, because widening the window and
+  // widening the curve cancelled: the figure claimed "sigma widens it" and showed
+  // nothing changing. With the window fixed, a larger sigma visibly spreads the
+  // curve and a smaller one draws a needle.
+  const HALF = 4
+  const lo = mu - HALF
+  const hi = mu + HALF
   const peak = normalPdf(mu, mu, sigma)
   const X = scaleLinear(lo, hi, PAD, W - PAD)
   const Y = scaleLinear(0, peak * 1.16, H - PAD, PAD)
@@ -82,6 +88,7 @@ export default function NormalCurve({ params, title, caption }: TemplateProps) {
         { label: 'μ ± σ', value: fmt(band, 4) },
         { label: 'μ', value: fmt(mu) },
         { label: 'σ', value: fmt(sigma) },
+        { label: 'peak', value: fmt(peak, 3) },
       ]}
     >
       <svg
@@ -93,7 +100,9 @@ export default function NormalCurve({ params, title, caption }: TemplateProps) {
         aria-label="A normal density with a shaded left tail"
       >
         {bands &&
-          [-3, -2, -1, 1, 2, 3].map((k) => (
+          [-3, -2, -1, 1, 2, 3]
+            .filter((k) => Math.abs(k * sigma) <= HALF)
+            .map((k) => (
             <g key={k}>
               <line
                 x1={X(mu + k * sigma)}

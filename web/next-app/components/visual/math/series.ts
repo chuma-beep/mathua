@@ -67,12 +67,21 @@ export function taylorValue(coeffs: number[], center: number, x: number): number
 
 /** The largest |f(x) - P(x)| over a sampled window, which is the visual's claim. */
 export function maxError(fn: SeriesFn, center: number, degree: number, a: number, b: number, samples = 200): number {
+  // A sample grid can step over the pole of 1/(1-x) and report a finite maximum for
+  // a window where the function has no value. The pole is known in closed form, so
+  // it is checked directly rather than hoped for.
+  if (fn === 'geometric' && a <= 1 && b >= 1) return Number.NaN
   const coeffs = taylorCoeffs(fn, center, degree)
   let worst = 0
   for (let i = 0; i <= samples; i++) {
     const x = a + ((b - a) * i) / samples
     const d = Math.abs(fnValue(fn, x) - taylorValue(coeffs, center, x))
-    if (Number.isFinite(d)) worst = Math.max(worst, d)
+    // Returning 0 for an undefined sample is worse than returning nothing: the
+    // window of 1/(1-x) contains its pole, so at least one sample has no value,
+    // and a figure that printed "max error 0" there would be claiming a match it
+    // never computed.
+    if (!Number.isFinite(d)) return Number.NaN
+    worst = Math.max(worst, d)
   }
   return worst
 }

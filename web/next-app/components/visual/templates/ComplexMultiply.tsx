@@ -4,7 +4,7 @@ import { useCallback, useMemo, useRef, useState, useId } from 'react'
 import FigureFrame from '../FigureFrame'
 import { NumberField, Toggle } from '../Controls'
 import { complexMultiplySchema } from '../schemas'
-import { carg, cmul, cmod, type Complex } from '../math/complex'
+import { carg, cargOrNull, cmul, cmod, wrapAngle, type Complex } from '../math/complex'
 import { arcPath, clamp, scaleLinear } from '../scale'
 import { fmt } from '../format'
 import { useDrag } from '../useDrag'
@@ -30,6 +30,14 @@ export default function ComplexMultiply({ params, title, caption }: TemplateProp
   const uid = useId().replace(/:/g, '')
 
   const product = cmul(z, w)
+  const argZ = cargOrNull(z)
+  const argW = cargOrNull(w)
+  const argProduct = cargOrNull(product)
+  // The product's argument is the sum of the arguments only after reduction into
+  // the principal range, otherwise 120 degrees plus 120 degrees prints 4.19 beside
+  // a product that reads -2.09.
+  const argSum = argZ !== null && argW !== null ? wrapAngle(argZ + argW) : null
+  const angleText = (value: number | null) => (value === null ? 'undefined' : fmt(value))
   // Fit the view to the four points rather than to a radius: a fixed origin-centred square
   // spends most of its area on quadrants the figure never draws in, which is why the vectors
   // used to sit in a small cluster at the bottom of an empty canvas. One span for both axes
@@ -85,12 +93,12 @@ export default function ComplexMultiply({ params, title, caption }: TemplateProp
       hint="Drag the nearer of z and w, or type its parts."
       readout={[
         { label: '|z|', value: fmt(cmod(z)) },
-        { label: 'arg z', value: fmt(carg(z)) },
+        { label: 'arg z', value: angleText(argZ) },
         { label: '|w|', value: fmt(cmod(w)) },
-        { label: 'arg w', value: fmt(carg(w)) },
+        { label: 'arg w', value: angleText(argW) },
         { label: '|zw|', value: fmt(cmod(product)) },
-        { label: 'arg zw', value: fmt(carg(product)) },
-        { label: 'arg sum', value: fmt(carg(z) + carg(w)) },
+        { label: 'arg zw', value: angleText(argProduct) },
+        { label: 'arg sum', value: angleText(argSum) },
       ]}
     >
       <svg
@@ -117,9 +125,9 @@ export default function ComplexMultiply({ params, title, caption }: TemplateProp
         <line x1={cx} y1={PAD} x2={cx} y2={SIZE - PAD} stroke="var(--text-muted)" strokeWidth="0.8" />
         {showUnitCircle && <circle cx={cx} cy={cy} r={unit} fill="none" stroke="var(--border-strong)" strokeDasharray="3 4" />}
 
-        <path d={arcPath(cx, cy, radius, carg(z))} fill="none" stroke="var(--accent-blue)" strokeWidth="1" opacity="0.6" />
-        <path d={arcPath(cx, cy, radius + 10, carg(w))} fill="none" stroke="var(--accent-green)" strokeWidth="1" opacity="0.6" />
-        <path d={arcPath(cx, cy, radius + 20, carg(product))} fill="none" stroke="var(--accent-teal)" strokeWidth="1" opacity="0.6" />
+        {argZ !== null && <path d={arcPath(cx, cy, radius, argZ)} fill="none" stroke="var(--accent-blue)" strokeWidth="1" opacity="0.6" />}
+        {argW !== null && <path d={arcPath(cx, cy, radius + 10, argW)} fill="none" stroke="var(--accent-green)" strokeWidth="1" opacity="0.6" />}
+        {argProduct !== null && <path d={arcPath(cx, cy, radius + 20, argProduct)} fill="none" stroke="var(--accent-teal)" strokeWidth="1" opacity="0.6" />}
 
         {arrow([0, 0], z, 'var(--accent-blue)', 'blue')}
         {arrow([0, 0], w, 'var(--accent-green)', 'green')}

@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest'
-import { angleBetween, dot, length, normalize, trace, type Mat2 } from '../components/visual/math/matrix'
+import { addVec, angleBetween, dot, length, normalize, subVec, trace, type Mat2 } from '../components/visual/math/matrix'
 import { maxError, nthDerivative, taylorCoeffs, taylorValue } from '../components/visual/math/series'
-import { continuousAt, limitExists, limitValue, oneSidedLimits } from '../components/visual/math/limit'
+import { continuousAt, limitExists, limitValue, oneSidedLimits, valueAtPoint } from '../components/visual/math/limit'
 import { draw, histogram, mean, populationPdf, rng, sampleMeans, sd } from '../components/visual/math/sampling'
-import { correlation, intercept, means, predict, slope, sse, type Point } from '../components/visual/math/regression'
+import { correlation, hasXSpread, intercept, means, predict, slope, sse, type Point } from '../components/visual/math/regression'
 
 const close = (a: number, b: number, tolerance = 1e-12) => expect(Math.abs(a - b)).toBeLessThan(tolerance)
 
@@ -58,6 +58,13 @@ describe('Taylor polynomials', () => {
       const f = fn === 'sin' ? Math.sin(1.2) : fn === 'cos' ? Math.cos(1.2) : Math.exp(1.2)
       close(taylorValue(coeffs, 1.2, 1.2), f, 1e-10)
     }
+  })
+
+  it('reports no error when the window contains a pole', () => {
+    // 1/(1-x) has no value at x = 1, so a maximum over a window containing it is
+    // undefined rather than zero.
+    expect(Number.isNaN(maxError('geometric', 0, 4, -3, 3))).toBe(true)
+    expect(Number.isFinite(maxError('geometric', 0, 4, -0.5, 0.5))).toBe(true)
   })
 
   it('reduces the maximum error as the degree rises', () => {
@@ -116,6 +123,11 @@ describe('sampling distribution', () => {
     expect(Math.abs(mean(sampleMeans('skewed', 4, 1500, 5)))).toBeLessThan(0.12)
   })
 
+  it('drops out-of-range values when binning, which is why the figure reports them', () => {
+    const counts = histogram([5, -5, 0, 0], -1, 1, 4)
+    expect(counts.reduce((a, b) => a + b, 0)).toBe(2)
+  })
+
   it('bins values and scales the population shape to mean zero spread one', () => {
     const counts = histogram([-1, 0, 0, 0.2, 5], -1, 1, 4)
     expect(counts.reduce((a, b) => a + b, 0)).toBe(4)
@@ -156,6 +168,16 @@ describe('least squares', () => {
     expect(correlation(cloud)).toBeGreaterThan(0.9)
   })
 
+  it('knows when x has no spread, which is when no line is determined', () => {
+    expect(hasXSpread(perfect)).toBe(true)
+    expect(hasXSpread([[2, 1]])).toBe(false)
+    expect(hasXSpread([
+      [2, 1],
+      [2, 4],
+      [2, 9],
+    ])).toBe(false)
+  })
+
   it('refuses to invent a slope when every x is the same', () => {
     const vertical: Point[] = [
       [2, 1],
@@ -164,5 +186,37 @@ describe('least squares', () => {
     ]
     expect(slope(vertical)).toBe(0)
     expect(correlation(vertical)).toBe(0)
+  })
+})
+
+describe('vector combination', () => {
+  it('adds and subtracts component-wise', () => {
+    expect(addVec([1, 2], [2, 0.5])).toEqual([3, 2.5])
+    expect(subVec([1, 2], [2, 0.5])).toEqual([-1, 1.5])
+  })
+
+  it('leaves the sum of a vector and its negation at the origin', () => {
+    const a: [number, number] = [1.5, -0.5]
+    expect(addVec(a, [-a[0], -a[1]])).toEqual([0, 0])
+    close(length(addVec([3, 4], [0, 0])), 5)
+  })
+})
+
+describe('the value at the point, not its limit', () => {
+  it('gives the jump its defined value and leaves a hole and an asymptote undefined', () => {
+    // The jump's right-hand piece covers x = a, so f(a) = 3. Reporting undefined here
+    // would describe a different function from the one drawn.
+    expect(valueAtPoint('jump', 0)).toBe(3)
+    expect(valueAtPoint('jump', -2)).toBe(3)
+    expect(Number.isNaN(valueAtPoint('removable', 2))).toBe(true)
+    expect(Number.isNaN(valueAtPoint('vertical_asymptote', 0))).toBe(true)
+  })
+
+  it('is discontinuous at a for every shape the figure offers', () => {
+    // The figure teaches the three failure modes, so all three must report "no" and a
+    // continuous example is deliberately not among them.
+    for (const kind of ['removable', 'jump', 'vertical_asymptote'] as const) {
+      expect(continuousAt(kind, 1)).toBe(false)
+    }
   })
 })
