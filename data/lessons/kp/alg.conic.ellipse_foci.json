@@ -6,7 +6,30 @@
       "State the constant sum",
       "Identify the major axis",
       "Use the definition of an ellipse"
-    ]
+    ],
+    "visual": {
+      "type": "geo.conic",
+      "title": "The constant focal sum",
+      "caption": "An ellipse is the set of points whose distances to two fixed foci add to a constant. For x²/2 + y² = 1, a = √2, b = 1 and c = 1, so the foci are (0, ±1). Every point on the curve satisfies PF1 + PF2 = 2a = 2√2, even though the two distances change.",
+      "params": {
+        "A": 1,
+        "B": 0,
+        "C": 0.5,
+        "D": 0,
+        "E": 0,
+        "F": -1
+      },
+      "predict": {
+        "question": "As the probe moves around this ellipse, what happens to PF1 + PF2?",
+        "options": [
+          "It changes with the point",
+          "It stays equal to 2a",
+          "It stays equal to 2b"
+        ],
+        "answer": 1,
+        "explain": "The defining property of an ellipse is a constant focal sum, PF1 + PF2 = 2a. Here 2a = 2√2; only the separate distances change."
+      }
+    }
   },
   {
     "label": "Finding c",

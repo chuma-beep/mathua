@@ -117,10 +117,15 @@ export const spreadSchema = z.object({
   sample: z.boolean().default(true),
 })
 
+// The general six-term equation. F defaults to -1 so the old homogeneous
+// params {A, B, C} keep drawing the same curve: Ax² + Bxy + Cy² - 1 = 0.
 export const conicSchema = z.object({
   A: z.number().finite().min(-2).max(2).default(1),
   B: z.number().finite().min(-2).max(2).default(0),
   C: z.number().finite().min(-2).max(2).default(0.5),
+  D: z.number().finite().min(-4).max(4).default(0),
+  E: z.number().finite().min(-4).max(4).default(0),
+  F: z.number().finite().min(-4).max(4).default(-1),
 })
 
 export const contourSchema = z.object({

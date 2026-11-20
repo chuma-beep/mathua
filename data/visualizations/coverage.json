@@ -185,7 +185,7 @@
       "templates": [
         "geo.conic"
       ],
-      "note": "shows which conic the equation Ax^2 + Bxy + Cy^2 = 1 describes, from the sign pattern of the squared terms and the discriminant, with the degenerate rank-one case drawn as the pair of parallel lines it is. A parabola needs a linear term this equation family does not have, so it cannot appear here, and circles, ellipses and hyperbolas are drawn axis-aligned or rotated by the cross term only."
+      "note": "The general six-term equation draws circles, ellipses, hyperbolas, parabolas and degenerate cases, and the probe now demonstrates foci, directrices, the constant ellipse focal sum and the constant hyperbola difference. Intersections, tangents and parametric or polar forms are still not shown, so the topic stays partial."
     },
     {
       "id": "argand_plane",

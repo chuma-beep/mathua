@@ -5,7 +5,7 @@
     "subgoals": [
       "Read A, B and C",
       "Compute B^2 - 4AC",
-      "Classify by its sign"
+      "Classify by its sign, then check for a degenerate curve"
     ]
   },
   {

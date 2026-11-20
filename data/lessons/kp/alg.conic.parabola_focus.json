@@ -6,7 +6,30 @@
       "Identify p from the equation",
       "Relate p to the focus",
       "Recognize the direction of opening"
-    ]
+    ],
+    "visual": {
+      "type": "geo.conic",
+      "title": "p fixes the focus and the latus rectum",
+      "caption": "The standard form x² = 4py puts the focus at (0, p), the directrix at y = -p and the latus rectum, the chord through the focus parallel to the directrix, at length 4p. Here p = 1, so the focus is (0, 1), the directrix is y = -1 and the latus rectum is 4 units long.",
+      "params": {
+        "A": 1,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": -4,
+        "F": 0
+      },
+      "predict": {
+        "question": "For x² = 4py, how long is the latus rectum?",
+        "options": [
+          "4p",
+          "2p",
+          "p"
+        ],
+        "answer": 0,
+        "explain": "The chord through the focus has endpoints (2p, p) and (-2p, p), because x² = 4p·p gives x = ±2p. Its length is 4p."
+      }
+    }
   },
   {
     "label": "Focus and directrix",

@@ -4,7 +4,7 @@
     "section": "Introduction to conic sections",
     "subgoals": [
       "Collect the six terms into f(x,y) = 0",
-      "Check a11 and a22 are both nonzero",
+      "Check the discriminant is negative and the curve is not a point or empty",
       "Name the cone cut circle, parabola, ellipse, or hyperbola"
     ]
   },
