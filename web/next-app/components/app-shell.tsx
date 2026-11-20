@@ -10,6 +10,7 @@ import { useAuthState } from '../hooks/useAuthState'
 import { canOpenAdminConsole } from '../lib/auth'
 import { adminOverview, getConfig, getDueReviews, getNotificationUnreadCount, getSettings, listAnnouncements, listMyReports, type Announcement } from '../lib/api'
 import AnnouncementToast from './announcements/AnnouncementToast'
+import { ensureGuestToken } from '../lib/auth'
 import { resolveAvatar } from '../lib/dicebear'
 
 type AppShellProps = {
@@ -162,15 +163,18 @@ export default function AppShell({ children, ...overrides }: AppShellProps) {
   }, [loggedIn])
 
   useEffect(() => {
-    if (!loggedIn) {
-      setNotificationUnread(0)
-      return
-    }
+    // Guests hold a guest token, so the announcement feed and the counts are
+    // reachable for them too. Skipping this when not logged in meant a guest
+    // never saw a product announcement.
     let live = true
     const load = async () => {
       const [reports, announcements, notifications] = await Promise.allSettled([
         listMyReports(),
-        listAnnouncements(),
+        listAnnouncements().catch(async (cause) => {
+          const minted = await ensureGuestToken().catch(() => false)
+          if (!minted) throw cause
+          return listAnnouncements()
+        }),
         getNotificationUnreadCount(),
       ])
       if (!live) return

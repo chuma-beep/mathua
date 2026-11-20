@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { listAnnouncements, markAnnouncementRead, type Announcement } from '@/lib/api'
+import { ensureGuestToken } from '@/lib/auth'
 
 interface Feed {
   items: Announcement[]
@@ -27,7 +28,14 @@ export function useAnnouncementsFeed(enabled = true) {
     setLoading(true)
     setError('')
     try {
-      const response = await listAnnouncements()
+      // A guest has no account, so the feed answers 401 until a guest token
+      // exists. Mint one and try once more. A signed-in learner never reaches
+      // the retry.
+      const response = await listAnnouncements().catch(async (cause) => {
+        const minted = await ensureGuestToken().catch(() => false)
+        if (!minted) throw cause
+        return listAnnouncements()
+      })
       setFeed({ items: response.announcements, unread: response.unread })
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : 'Announcements could not be loaded.')
