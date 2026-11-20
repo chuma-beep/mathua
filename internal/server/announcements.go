@@ -108,6 +108,31 @@ func (s *Server) handleAnnouncementsRead(w http.ResponseWriter, r *http.Request)
 	writeJSON(w, map[string]interface{}{"ok": true, "read_at": now.Format(time.RFC3339)})
 }
 
+// POST /api/announcements/{id}/read marks one published announcement read for
+// the caller. The feed-wide endpoint stays for the "mark all" button.
+func (s *Server) handleAnnouncementRead(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		writeError(w, "method not allowed", 405)
+		return
+	}
+	rest := strings.TrimPrefix(r.URL.Path, "/api/announcements/")
+	id, ok := strings.CutSuffix(rest, "/read")
+	if !ok || id == "" || strings.Contains(id, "/") {
+		writeError(w, "not found", 404)
+		return
+	}
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	store, ok := announcementStore(w, s.repo)
+	if !ok {
+		return
+	}
+	if err := store.MarkAnnouncementRead(studentID, id, time.Now().UTC()); err != nil {
+		writeError(w, "failed to mark the announcement read", 500)
+		return
+	}
+	writeJSON(w, map[string]interface{}{"ok": true, "id": id})
+}
+
 // POST /api/announcements/clear hides the caller's current announcement feed.
 // The global announcement rows and their read state stay intact.
 func (s *Server) handleAnnouncementsClear(w http.ResponseWriter, r *http.Request) {

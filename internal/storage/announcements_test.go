@@ -189,3 +189,56 @@ func TestAnnouncementUpdateMissingRow(t *testing.T) {
 		t.Fatal("update missing announcement returned nil error")
 	}
 }
+
+func TestMarkAnnouncementReadIsPerAnnouncement(t *testing.T) {
+	store := newTestStore(t)
+	ann := announcementStore(t, store)
+	learner := seedStudent(t, store)
+
+	now := time.Now().UTC()
+	first, err := ann.CreateAnnouncement(Announcement{Title: "First", Body: "one"})
+	if err != nil {
+		t.Fatalf("create first: %v", err)
+	}
+	second, err := ann.CreateAnnouncement(Announcement{Title: "Second", Body: "two"})
+	if err != nil {
+		t.Fatalf("create second: %v", err)
+	}
+	if _, err := ann.UpdateAnnouncement(first.ID, first.Title, first.Body, true, now); err != nil {
+		t.Fatalf("publish first: %v", err)
+	}
+	if _, err := ann.UpdateAnnouncement(second.ID, second.Title, second.Body, true, now.Add(time.Second)); err != nil {
+		t.Fatalf("publish second: %v", err)
+	}
+
+	// Dismissing one announcement must not clear the other from the badge.
+	if err := ann.MarkAnnouncementRead(learner.ID, first.ID, now.Add(2*time.Second)); err != nil {
+		t.Fatalf("mark one read: %v", err)
+	}
+	items, err := ann.ListPublishedAnnouncements(learner.ID)
+	if err != nil {
+		t.Fatalf("list: %v", err)
+	}
+	read := make(map[string]bool, len(items))
+	for _, item := range items {
+		read[item.ID] = item.Read
+	}
+	if !read[first.ID] {
+		t.Fatalf("first announcement is unread after MarkAnnouncementRead")
+	}
+	if read[second.ID] {
+		t.Fatalf("marking one announcement read also marked the other")
+	}
+
+	// Idempotent, and a draft cannot be marked: only published rows are selected.
+	if err := ann.MarkAnnouncementRead(learner.ID, first.ID, now); err != nil {
+		t.Fatalf("repeat mark: %v", err)
+	}
+	draft, err := ann.CreateAnnouncement(Announcement{Title: "Draft", Body: "x"})
+	if err != nil {
+		t.Fatalf("create draft: %v", err)
+	}
+	if err := ann.MarkAnnouncementRead(learner.ID, draft.ID, now); err != nil {
+		t.Fatalf("mark draft read: %v", err)
+	}
+}

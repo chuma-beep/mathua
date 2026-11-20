@@ -1125,3 +1125,14 @@ body {
     content: '';
   }
 }
+
+
+/* Toasts sit above the phone tab bar and the support bubble. Sonner 1.7 has no
+   mobile offset prop, so the offset variable it already reads is raised here. */
+@media (max-width: 640px) {
+  /* sonner-tab-bar-lift */
+  ol[data-sonner-toaster] {
+    --offset: 76px !important;
+    bottom: 76px !important;
+  }
+}

@@ -5,7 +5,8 @@ import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { askAssistant, getConfig, type AssistantPart, type AssistantTurn } from '../lib/api'
 import { splitMath } from '../lib/assistantMath'
-import { ArrowUp, Close, MessagesSquare } from './icons'
+import { ArrowUp, Bell, Close, MessagesSquare } from './icons'
+import { useAnnouncementsFeed } from './announcements/useAnnouncementsFeed'
 
 // KaTeX is a large dependency and the dock is mounted in the root layout, so it
 // would otherwise be pulled into every route's bundle. Loading it through a
@@ -196,6 +197,9 @@ export default function AssistantDock() {
 		[busy, status, turns, consent],
 	)
 
+	const announcements = useAnnouncementsFeed()
+	const unreadAnnouncement = announcements.newestUnread
+
 	return (
 		// The mobile offset carries the safe-area inset for the same reason the tab
 		// bar does: on a phone with a home indicator, a plain 5rem lands the trigger
@@ -377,10 +381,23 @@ export default function AssistantDock() {
 				onClick={() => setOpen(v => !v)}
 				aria-expanded={open}
 				aria-label={open ? 'Close assistant' : 'Open assistant'}
-				className="flex h-11 w-11 items-center justify-center rounded-none border border-mathua-border bg-mathua-surface text-mathua-primary shadow-lg hover:bg-mathua-surface-elevated"
+				className="flex h-11 w-11 items-center justify-center rounded-none text-mathua-primary hover:text-mathua-blue"
 			>
 				{open ? <Close size={18} /> : <MessagesSquare size={18} />}
 			</button>
+
+			{unreadAnnouncement ? (
+				<Link
+					href="/announcements"
+					onClick={() => void announcements.markRead(unreadAnnouncement.id)}
+					aria-label={`Unread announcement: ${unreadAnnouncement.title}`}
+					title={unreadAnnouncement.title}
+					className="relative flex h-11 w-11 items-center justify-center rounded-none text-mathua-muted hover:text-mathua-blue"
+				>
+					<Bell size={18} />
+					<span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-mathua-red" aria-hidden="true" />
+				</Link>
+			) : null}
 		</div>
 	)
 }
