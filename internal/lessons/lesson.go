@@ -42,6 +42,10 @@ type KP struct {
 	// not resolve. It is what `/learn` shows in place of the lesson body: a rule, a few
 	// examples, and at most one misconception note. See slice.go.
 	Slice *Slice `json:"slice,omitempty"`
+	// Visual is an optional interactive figure for this step. It is declarative: the
+	// shard names a template and supplies parameters, and the browser renders it.
+	// See visual.go for why the server does not interpret the parameters.
+	Visual *Visual `json:"visual,omitempty"`
 }
 
 type mapping struct {
@@ -112,12 +116,32 @@ func Load(lessonsDir string) (*Loader, error) {
 		}
 	}
 
-	return &Loader{concepts: concepts, kps: loadKPs(lessonsDir)}, nil
+	// Visuals are disabled rather than half-enabled when the allowlist cannot be read:
+	// the shard still renders, and the warning says why the figure is missing.
+	visualTypes := map[string]bool{}
+	if allowDir := filepath.Join(filepath.Dir(lessonsDir), "visualizations"); dirExists(allowDir) {
+		var err error
+		visualTypes, err = LoadVisualTypes(filepath.Join(allowDir, "types.json"))
+		if err != nil {
+			log.Printf("warning: visual type allowlist unavailable, visuals disabled: %v", err)
+			visualTypes = map[string]bool{}
+		}
+	}
+
+	return &Loader{concepts: concepts, kps: loadKPs(lessonsDir, visualTypes)}, nil
+}
+
+// dirExists reports whether path names a directory. A lesson fixture has no
+// visualizations directory at all, which is not the same failure as a deployment
+// whose allowlist went missing: the first is a test, the second must be logged.
+func dirExists(path string) bool {
+	info, err := os.Stat(path)
+	return err == nil && info.IsDir()
 }
 
 // loadKPs reads <dir>/kp/<concept_id>.json shard files (a JSON array of KP).
 // A missing kp directory is not an error, shards are optional enrichment.
-func loadKPs(dir string) map[string][]KP {
+func loadKPs(dir string, visualTypes map[string]bool) map[string][]KP {
 	kpDir := filepath.Join(dir, "kp")
 	entries, err := os.ReadDir(kpDir)
 	if err != nil {
@@ -138,6 +162,15 @@ func loadKPs(dir string) map[string][]KP {
 		if err := json.Unmarshal(data, &kps); err != nil {
 			log.Printf("warning: parse kp shard %q: %v", e.Name(), err)
 			continue
+		}
+		for i := range kps {
+			if kps[i].Visual == nil {
+				continue
+			}
+			if err := kps[i].Visual.Validate(visualTypes); err != nil {
+				log.Printf("warning: kp shard %q step %d: dropping visual: %v", e.Name(), i+1, err)
+				kps[i].Visual = nil
+			}
 		}
 		if len(kps) > 0 {
 			out[cid] = kps

@@ -6,7 +6,27 @@
       "hold the basis fixed",
       "require non-negative basic values",
       "solve the resulting inequalities"
-    ]
+    ],
+    "visual": {
+      "type": "optim.path",
+      "title": "How far can the bound move?",
+      "caption": "The allowable range keeps the same active set. For x + 2y the bound can move from 2.5 to 10 before a nonnegativity bound joins or leaves the basis.",
+      "params": {
+        "mode": "feasible",
+        "candidateX": 2,
+        "candidateY": 1
+      },
+      "predict": {
+        "question": "While both resource constraints stay active, what is the allowable range for the bound x + 2y?",
+        "options": [
+          "From 4 to 5",
+          "From 2.5 to 10",
+          "From 0 to 4"
+        ],
+        "answer": 1,
+        "explain": "Solving the two active equalities for x and y gives x = (10 − b)/3 and y = (2b − 5)/3. Requiring both nonnegative gives 2.5 ≤ b ≤ 10."
+      }
+    }
   },
   {
     "label": "Test a change",

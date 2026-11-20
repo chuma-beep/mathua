@@ -6,7 +6,27 @@
       "State the governing relation for depth-first search",
       "Identify the quantities in the discovery and finish times step",
       "Carry out the discovery and finish times computation"
-    ]
+    ],
+    "visual": {
+      "type": "graph.network",
+      "title": "Depth-first follows one branch",
+      "caption": "Depth-first search follows one neighbour as far as it can before backtracking. The visit order is the discovery order, and the highlighted edges form the depth-first tree.",
+      "params": {
+        "algorithm": "dfs",
+        "start": "A",
+        "showTree": true
+      },
+      "predict": {
+        "question": "After A → B → C, which node does depth-first discover next?",
+        "options": [
+          "D",
+          "F",
+          "E"
+        ],
+        "answer": 1,
+        "explain": "From C the unvisited neighbour is F, so depth-first goes to F before returning to C. D and E are reached only after that branch is exhausted."
+      }
+    }
   },
   {
     "label": "The DFS tree",

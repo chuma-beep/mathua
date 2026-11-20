@@ -6,7 +6,27 @@
       "Name the prior",
       "Name the likelihood",
       "Combine them into the posterior"
-    ]
+    ],
+    "visual": {
+      "type": "prob.tree",
+      "title": "A positive test does not replace the prior",
+      "caption": "The prior sets the first split. A positive test moves probability toward disease, but when the disease is rare the healthy-positive leaf can still be much larger, so the posterior stays small.",
+      "params": {
+        "prior": 0.01,
+        "sensitivity": 0.95,
+        "specificity": 0.9
+      },
+      "predict": {
+        "question": "With prior 1%, sensitivity 95% and specificity 90%, P(D | +) is about",
+        "options": [
+          "8.8%",
+          "50%",
+          "95%"
+        ],
+        "answer": 0,
+        "explain": "The positive leaves are 0.0095 and 0.099. Dividing the disease leaf by their sum gives 0.0095 / 0.1085, about 0.0876, or 8.8%. The sensitivity alone is not the posterior."
+      }
+    }
   },
   {
     "label": "Worked: two boxes",

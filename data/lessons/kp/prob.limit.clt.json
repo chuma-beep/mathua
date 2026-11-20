@@ -6,7 +6,28 @@
       "Centre the sum at its mean",
       "Scale by the standard deviation",
       "Recognise mean zero and variance one"
-    ]
+    ],
+    "visual": {
+      "type": "stat.sampling",
+      "title": "Sample means bunch up as the sample grows",
+      "caption": "Raise n: the histogram of means narrows like 1/sqrt(n) and turns normal, even though the population stays skewed.",
+      "params": {
+        "population": "skewed",
+        "n": 9,
+        "draws": 600,
+        "seed": 7
+      },
+      "predict": {
+        "question": "As the sample size grows, the spread of the sample mean does what?",
+        "options": [
+          "Shrinks like 1 divided by the square root of n",
+          "Stays the same",
+          "Grows with n"
+        ],
+        "answer": 0,
+        "explain": "Averaging more observations cancels more of their noise, and the standard error is the population spread divided by the square root of n."
+      }
+    }
   },
   {
     "label": "Worked: standardising a value",

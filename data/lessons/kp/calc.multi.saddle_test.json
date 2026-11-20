@@ -6,7 +6,27 @@
       "Write the discriminant",
       "Compute it for a quadratic",
       "Explain the subtracted square"
-    ]
+    ],
+    "visual": {
+      "type": "calc.surface",
+      "title": "The discriminant at a critical point",
+      "caption": "At the origin the surface rises in one direction and falls in the other. The gradient vanishes, so only the second derivatives can tell which kind of critical point it is.",
+      "params": {
+        "field": "saddle",
+        "x0": 0,
+        "y0": 0
+      },
+      "predict": {
+        "question": "For f = x² − y² at the origin, D = f_xx f_yy − f_xy² is:",
+        "options": [
+          "4, a saddle",
+          "−4, a saddle",
+          "0, degenerate"
+        ],
+        "answer": 1,
+        "explain": "f_xx = 2, f_yy = −2 and f_xy = 0, so D = −4. A negative discriminant means a saddle."
+      }
+    }
   },
   {
     "label": "Minima, maxima and saddles",

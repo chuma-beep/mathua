@@ -6,7 +6,27 @@
       "Write the divergence",
       "Compute it for a linear field",
       "Relate it to the trace"
-    ]
+    ],
+    "visual": {
+      "type": "calc.vectorfield",
+      "title": "Outflow per unit area",
+      "caption": "The source field points away from the origin everywhere. The flux through the loop grows with the radius, and dividing by the enclosed area returns the same number at every radius.",
+      "params": {
+        "preset": "source",
+        "radius": 1.2,
+        "showStreamlines": true
+      },
+      "predict": {
+        "question": "For F = (x, y) the divergence is 2. What does that number measure?",
+        "options": [
+          "Outflow per unit area",
+          "Rotation per unit area",
+          "Path length around the loop"
+        ],
+        "answer": 0,
+        "explain": "div F = ∂P/∂x + ∂Q/∂y = 1 + 1 = 2. It is the source strength per unit area, which is why flux equals 2 times area."
+      }
+    }
   },
   {
     "label": "Sources and sinks",

@@ -6,7 +6,27 @@
       "Place negative numbers left of zero",
       "Read positions on the number line",
       "Compare negative values"
-    ]
+    ],
+    "visual": {
+      "type": "arith.line",
+      "title": "Which number is farther left?",
+      "caption": "A signed number line places negative values left of zero. The marker positions are the numbers themselves, so comparison is the same as reading left to right.",
+      "params": {
+        "mode": "signed",
+        "a": -4,
+        "b": 2
+      },
+      "predict": {
+        "question": "Which statement about -4 and 2 is true?",
+        "options": [
+          "-4 is farther left, so -4 < 2",
+          "2 is farther left, so 2 < -4",
+          "They are the same distance from zero"
+        ],
+        "answer": 0,
+        "explain": "-4 lies four units left of zero and 2 lies two units right, so -4 is farther left and -4 < 2."
+      }
+    }
   },
   {
     "label": "Adding signed numbers",

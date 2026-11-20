@@ -6,7 +6,35 @@
       "Evaluate slope f'(a) at the point",
       "Use point-slope form y-f(a) = f'(a)(x-a)",
       "Check x^2 at x = 1 gives y = 2x-1"
-    ]
+    ],
+    "visual": {
+      "type": "calc.tangent",
+      "title": "Tangent and secant at x",
+      "caption": "Drag x or change h: the teal secant approaches the blue tangent, and the gap between their slopes shrinks toward zero.",
+      "params": {
+        "coeffs": [
+          0,
+          0,
+          1
+        ],
+        "x": 1,
+        "h": 0.8,
+        "window": [
+          -2,
+          3
+        ]
+      },
+      "predict": {
+        "question": "As h shrinks toward zero, what happens to the secant slope?",
+        "options": [
+          "It approaches zero",
+          "It approaches f'(x)",
+          "It stays the same"
+        ],
+        "answer": 1,
+        "explain": "The secant is the average rate over h; as h goes to zero the average becomes the instantaneous rate, which is the derivative."
+      }
+    }
   },
   {
     "label": "Worked tangent examples",

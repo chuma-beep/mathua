@@ -6,7 +6,29 @@
       "Assume the null is true",
       "Measure the tail area at least as extreme",
       "Double the tail for a two-sided test"
-    ]
+    ],
+    "visual": {
+      "type": "stat.inference",
+      "title": "The tail beyond the observation",
+      "caption": "The p-value is the area at least as extreme as the observed statistic under the null. For a two-sided test both tails count, so the same distance on the other side is included.",
+      "params": {
+        "dist": "z",
+        "df": 10,
+        "alpha": 0.05,
+        "effect": 0.8,
+        "observed": 2.5
+      },
+      "predict": {
+        "question": "The observed statistic is 2.5. What is the two-sided p-value?",
+        "options": [
+          "About 0.006",
+          "About 0.012",
+          "About 0.050"
+        ],
+        "answer": 1,
+        "explain": "The upper tail beyond 2.5 is about 0.0062. A two-sided test doubles it, so p is about 0.0124."
+      }
+    }
   },
   {
     "label": "Worked: comparing p with alpha",

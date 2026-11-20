@@ -6,7 +6,36 @@
       "Write the augmented matrix",
       "Swap, scale, and add rows",
       "Aim for one variable fewer per step"
-    ]
+    ],
+    "visual": {
+      "type": "linalg.elimination",
+      "title": "Each operation keeps every solution",
+      "caption": "Step through the elimination. Every row operation replaces one equation by a combination of both, which is why the pair of values that solves the system survives a change that rewrites the equations.",
+      "params": {
+        "rows": [
+          [
+            2,
+            1,
+            5
+          ],
+          [
+            1,
+            -1,
+            1
+          ]
+        ]
+      },
+      "predict": {
+        "question": "After replacing R2 by R2 + R1, how many solutions does the new system have?",
+        "options": [
+          "One, the same solution as before",
+          "Two",
+          "None: the equations changed"
+        ],
+        "answer": 0,
+        "explain": "Adding a multiple of one equation to another is reversible, so it cannot create or destroy a solution."
+      }
+    }
   },
   {
     "label": "Eliminate in order",

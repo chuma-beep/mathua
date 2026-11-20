@@ -501,7 +501,7 @@ func TestLoadKPs_DirectoriesAndCorruptFiles(t *testing.T) {
 	// Subdirectory
 	os.MkdirAll(filepath.Join(kpDir, "subdir"), 0755)
 
-	kps := loadKPs(dir)
+	kps := loadKPs(dir, map[string]bool{})
 	if len(kps) != 1 {
 		t.Fatalf("expected 1 valid shard loaded, got %d", len(kps))
 	}
@@ -510,7 +510,7 @@ func TestLoadKPs_DirectoriesAndCorruptFiles(t *testing.T) {
 	}
 
 	// Nonexistent kp directory returns nil
-	if missing := loadKPs(t.TempDir()); missing != nil {
+	if missing := loadKPs(t.TempDir(), map[string]bool{}); missing != nil {
 		t.Fatalf("expected nil for missing kp directory, got %v", missing)
 	}
 }

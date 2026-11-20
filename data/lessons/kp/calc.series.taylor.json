@@ -6,7 +6,31 @@
       "Write sum f^(n)(a)(x-a)^n/n!",
       "Center at a = 0 for Maclaurin",
       "Preview e^x = sum x^n/n!"
-    ]
+    ],
+    "visual": {
+      "type": "calc.taylor",
+      "title": "Taylor polynomials that match one derivative at a time",
+      "caption": "Raise the degree: the polynomial agrees with the curve to one more derivative at the centre, and the error away from it shrinks.",
+      "params": {
+        "fn": "sin",
+        "center": 0,
+        "degree": 3,
+        "window": [
+          -3,
+          3
+        ]
+      },
+      "predict": {
+        "question": "Adding one more term to a Taylor polynomial does what?",
+        "options": [
+          "Reduces the degree",
+          "Matches one more derivative at the centre",
+          "Matches the function everywhere"
+        ],
+        "answer": 1,
+        "explain": "Each term fixes one more derivative at the expansion point; agreement away from that point is a consequence, not a guarantee."
+      }
+    }
   },
   {
     "label": "Analytic functions and the motivating problem",

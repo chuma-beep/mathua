@@ -6,7 +6,36 @@
       "Write v in the chosen basis",
       "Keep the vector fixed while the coordinates change",
       "Compare standard and nonstandard coordinates"
-    ]
+    ],
+    "visual": {
+      "type": "linalg.basis",
+      "title": "The same point, different coordinates",
+      "caption": "The grid is the basis. The coordinates say how far to go along u and along v, so the pair changes when the arrows change even though the point does not.",
+      "params": {
+        "u": [
+          1.5,
+          0.5
+        ],
+        "v": [
+          0.5,
+          1.5
+        ],
+        "point": [
+          2,
+          1
+        ]
+      },
+      "predict": {
+        "question": "Keep the point where it is and double u. What happens to the coordinate along u?",
+        "options": [
+          "It doubles",
+          "It halves",
+          "It stays the same"
+        ],
+        "answer": 1,
+        "explain": "The point is unchanged, so alpha u has to stay the same total. Doubling u halves the alpha that produces it."
+      }
+    }
   },
   {
     "label": "Worked: solving for coordinates",

@@ -6,7 +6,30 @@
       "Differentiate e^z",
       "Show the derivative never vanishes",
       "Conclude angles are preserved at every point"
-    ]
+    ],
+    "visual": {
+      "type": "complex.map",
+      "title": "The angle survives an analytic map",
+      "caption": "Both rays leave z at the same point and the map carries them to new directions. For an analytic map the angle between them is unchanged; the conjugate reflects and flips its sense.",
+      "params": {
+        "map": "square",
+        "z": [
+          0.8,
+          0.4
+        ],
+        "turn": 60
+      },
+      "predict": {
+        "question": "Square the plane and carry two rays through z. What happens to the angle between them?",
+        "options": [
+          "It doubles",
+          "It is unchanged",
+          "It is reversed"
+        ],
+        "answer": 1,
+        "explain": "z squared multiplies every tangent by 2z, a rotation with a scale. A common rotation preserves the angle, which is what conformal means."
+      }
+    }
   },
   {
     "label": "Worked: z squared doubles angles at zero",

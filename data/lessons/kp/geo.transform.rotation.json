@@ -6,7 +6,44 @@
       "Identify the objects and labels.",
       "Apply the relationship to an example.",
       "Check the result against the figure."
-    ]
+    ],
+    "visual": {
+      "type": "geo.transform2d",
+      "title": "Rotating a shape about the origin",
+      "caption": "Add, remove or drag vertices to build the polygon, then transform it. The dashed outline is yours, the filled outline is its image, and an isometry keeps every side length while a dilation does not.",
+      "params": {
+        "kind": "rotation",
+        "angle": 30,
+        "scale": 1.25,
+        "dx": 1,
+        "dy": 0.5,
+        "shape": [
+          [
+            0,
+            0
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "showOrbit": true
+      },
+      "predict": {
+        "question": "Build a shape, then choose Dilation with a scale above 1. What happens to the side lengths?",
+        "options": [
+          "They are unchanged",
+          "They all scale by the same factor",
+          "Only the longest side grows"
+        ],
+        "answer": 1,
+        "explain": "A dilation multiplies every vector by the same k, so every side length is multiplied by |k| and the area by k squared."
+      }
+    }
   },
   {
     "label": "Quarter and Half Turns",

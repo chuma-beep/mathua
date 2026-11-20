@@ -6,7 +6,26 @@
       "Factor the shell volume to 2pi times mean radius times height times thickness",
       "Read the mean radius as the strip midpoint x*",
       "Write V = 2pi times the integral of x times [f(x)-g(x)]"
-    ]
+    ],
+    "visual": {
+      "type": "calc.solidrev",
+      "title": "Unroll the tube",
+      "caption": "The shell is a thin tube at radius x. Cut it open and it flattens to a slab whose length is the circumference, which is where the 2πx comes from.",
+      "params": {
+        "mode": "shell",
+        "slice": 1.2
+      },
+      "predict": {
+        "question": "A shell slice has volume:",
+        "options": [
+          "2π · radius · height · thickness",
+          "π · radius² · height",
+          "2π · radius² · thickness"
+        ],
+        "answer": 0,
+        "explain": "Unrolled, the shell is a slab of length 2πx, height f(x) and thickness dx. That gives 2πx f(x) dx."
+      }
+    }
   },
   {
     "label": "Example 2",

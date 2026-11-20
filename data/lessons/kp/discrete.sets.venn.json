@@ -6,7 +6,27 @@
       "Parse {x | x+3 IN N} by set-builder",
       "List {-3,-2,...} by enumeration",
       "Test -3+3 = 0 for membership"
-    ]
+    ],
+    "visual": {
+      "type": "discrete.lab",
+      "title": "Membership decides the result",
+      "caption": "The two sets are drawn from their actual members. A point is in the result when the set operation says its membership bit is on.",
+      "params": {
+        "mode": "sets",
+        "leftMask": 7,
+        "rightMask": 28
+      },
+      "predict": {
+        "question": "A is 1, 2, 3 and B is 3, 4, 5. What is their intersection?",
+        "options": [
+          "1, 2, 3, 4, 5",
+          "3",
+          "1, 2, 4, 5"
+        ],
+        "answer": 1,
+        "explain": "The only element in both sets is 3."
+      }
+    }
   },
   {
     "label": "Subsection  Notation",

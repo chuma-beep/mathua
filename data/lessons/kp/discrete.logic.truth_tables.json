@@ -6,7 +6,26 @@
       "Split the compound claim into atoms P and Q",
       "Enumerate the four T/F rows",
       "Evaluate each connective column by column"
-    ]
+    ],
+    "visual": {
+      "type": "discrete.lab",
+      "title": "Every row of an implication",
+      "caption": "A truth table enumerates all four assignments of P and Q. The implication is false only when P is true and Q is false.",
+      "params": {
+        "mode": "truth",
+        "op": "implies"
+      },
+      "predict": {
+        "question": "When is P implies Q false?",
+        "options": [
+          "When P is true and Q is false",
+          "When both are false",
+          "When P is false and Q is true"
+        ],
+        "answer": 0,
+        "explain": "An implication fails exactly on the row with a true premise and a false conclusion."
+      }
+    }
   },
   {
     "label": "Subsection  Truth Tables",

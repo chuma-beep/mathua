@@ -6,7 +6,27 @@
       "State Green's theorem",
       "Identify each side's integral",
       "Check the orientation convention"
-    ]
+    ],
+    "visual": {
+      "type": "calc.vectorfield",
+      "title": "The boundary and the interior agree",
+      "caption": "The red loop is the boundary. The circulation around it is compared with the curl times the enclosed area, and the two numbers match because the curl is constant.",
+      "params": {
+        "preset": "vortex",
+        "radius": 1.2,
+        "showStreamlines": true
+      },
+      "predict": {
+        "question": "Green's theorem relates the circulation to:",
+        "options": [
+          "The flux through the boundary",
+          "The double integral of the curl over the interior",
+          "The arc length of the boundary"
+        ],
+        "answer": 1,
+        "explain": "∮F·dr = ∬curl F dA. Here the circulation 2πr² equals the constant curl 2 times the area πr²."
+      }
+    }
   },
   {
     "label": "Area from a boundary integral",

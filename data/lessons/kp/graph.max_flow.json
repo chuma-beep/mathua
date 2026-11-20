@@ -6,7 +6,27 @@
       "Respect the capacities",
       "Conserve flow at interior vertices",
       "Bound any flow by any cut"
-    ]
+    ],
+    "visual": {
+      "type": "graph.network",
+      "title": "A flow is bounded by every cut",
+      "caption": "Each edge carries a flow no larger than its capacity, and every interior vertex conserves flow. The maximum flow equals the capacity of the minimum cut, and the cut separates the source from the sink.",
+      "params": {
+        "algorithm": "maxflow",
+        "start": "A",
+        "showTree": true
+      },
+      "predict": {
+        "question": "What is the maximum flow from S to T in this network?",
+        "options": [
+          "4",
+          "5",
+          "6"
+        ],
+        "answer": 1,
+        "explain": "The source sends 3 and 2, so at most 5 leaves S. The cut with source side S and sink side A, B, T also has capacity 5, so the maximum is 5."
+      }
+    }
   },
   {
     "label": "Worked: a small network",

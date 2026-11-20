@@ -6,7 +6,26 @@
       "Identify first term a and ratio r",
       "Require |r| < 1",
       "Sum to a/(1-r)"
-    ]
+    ],
+    "visual": {
+      "type": "calc.seriessum",
+      "title": "A ratio below one converges",
+      "caption": "Each term is half the one before. The partial sums climb toward 1 but never pass it, which is what a ratio below one guarantees.",
+      "params": {
+        "kind": "geometric",
+        "terms": 10
+      },
+      "predict": {
+        "question": "Σ (1/2)^k from k = 1 converges to:",
+        "options": [
+          "1/2",
+          "2",
+          "1"
+        ],
+        "answer": 2,
+        "explain": "The first term is 1/2 and the ratio is 1/2, so the sum is a/(1 − r) = (1/2)/(1/2) = 1."
+      }
+    }
   },
   {
     "label": "Worked geometric sums",

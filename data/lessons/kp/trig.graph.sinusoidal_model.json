@@ -6,7 +6,30 @@
       "A sinusoidal graph oscillates around a midline.",
       "If the maximum is 9 and the minimum is 3, the midline is 6 and the amplitude is 3.",
       "The midline is a vertical shift, so it appears as a constant added to the sine or cosine term."
-    ]
+    ],
+    "visual": {
+      "type": "trig.sinusoid",
+      "title": "Maximum and minimum recover the midline",
+      "caption": "A wave with maximum 9 and minimum 3 has midline (9 + 3)/2 = 6 and amplitude (9 − 3)/2 = 3. The graph shows y = 3 sin x + 6 oscillating about y = 6.",
+      "params": {
+        "form": "sin",
+        "amplitude": 3,
+        "frequency": 1,
+        "phase": 0,
+        "vertical": 6,
+        "showReference": true
+      },
+      "predict": {
+        "question": "A sinusoidal wave runs from a minimum of 3 to a maximum of 9. What are its midline and amplitude?",
+        "options": [
+          "Midline 6, amplitude 3",
+          "Midline 3, amplitude 6",
+          "Midline 12, amplitude 3"
+        ],
+        "answer": 0,
+        "explain": "The midline is the average of the maximum and minimum: (9 + 3)/2 = 6. The amplitude is half the distance between them: (9 − 3)/2 = 3."
+      }
+    }
   },
   {
     "label": "Period and Frequency",

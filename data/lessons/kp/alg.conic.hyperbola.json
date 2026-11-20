@@ -6,7 +6,30 @@
       "Recognize the hyperbola as a conic section",
       "Identify its two branches",
       "Locate the center"
-    ]
+    ],
+    "visual": {
+      "type": "geo.conic",
+      "title": "A positive x² term opens left and right",
+      "caption": "For x²/a² − y²/b² = 1 the positive squared term names the transverse direction. Here x²/4 − y²/9 = 1 opens left and right, with vertices at (±2, 0) and asymptotes y = ±(3/2)x.",
+      "params": {
+        "A": 0.25,
+        "B": 0,
+        "C": -0.1111111111111111,
+        "D": 0,
+        "E": 0,
+        "F": -1
+      },
+      "predict": {
+        "question": "Which way does x²/4 − y²/9 = 1 open?",
+        "options": [
+          "Up and down",
+          "Left and right",
+          "All four directions"
+        ],
+        "answer": 1,
+        "explain": "The x² term is positive, so the transverse axis is horizontal. The branches cross the x-axis at (±2, 0) and approach the two asymptotes, not all four directions."
+      }
+    }
   },
   {
     "label": "What is a hyperbola",

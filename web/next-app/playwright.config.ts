@@ -51,15 +51,15 @@ export default defineConfig({
       // desktop: the behaviour under investigation is touch-specific, and a desktop-only run
       // would measure a code path a phone never takes.
       testMatch: diagnosisOptIn
-        ? [/mobile(-math)?\.spec\.ts/, /-diagnosis\.spec\.ts$/]
-        : /mobile(-math)?\.spec\.ts/,
+        ? [/mobile(-math)?\.spec\.ts/, /visualFigure\.spec\.ts/, /-diagnosis\.spec\.ts$/]
+        : [/mobile(-math)?\.spec\.ts/, /visualFigure\.spec\.ts/],
     },
     {
       name: 'mobile-320',
       use: { ...devices['Pixel 7'], viewport: { width: 320, height: 568 } },
       testMatch: diagnosisOptIn
-        ? [/mobile(-math)?\.spec\.ts/, /-diagnosis\.spec\.ts$/]
-        : /mobile(-math)?\.spec\.ts/,
+        ? [/mobile(-math)?\.spec\.ts/, /visualFigure\.spec\.ts/, /-diagnosis\.spec\.ts$/]
+        : [/mobile(-math)?\.spec\.ts/, /visualFigure\.spec\.ts/],
     },
   ],
   webServer: {

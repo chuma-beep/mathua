@@ -6,7 +6,27 @@
       "Scale the gradient by the learning rate",
       "Step opposite the gradient",
       "Check the loss decreased"
-    ]
+    ],
+    "visual": {
+      "type": "ml.fit",
+      "title": "Eight exact gradient steps",
+      "caption": "The regression line starts at slope zero and intercept zero. Each step uses the exact mean-squared-error gradient and records the resulting line.",
+      "params": {
+        "mode": "regression",
+        "rate": 0.1,
+        "steps": 8
+      },
+      "predict": {
+        "question": "What does one gradient-descent step do to the mean squared error?",
+        "options": [
+          "It always increases the loss",
+          "It moves the parameters against the gradient to lower the loss",
+          "It changes the data points"
+        ],
+        "answer": 1,
+        "explain": "The update subtracts the learning rate times the gradient, so the loss decreases for a small enough rate."
+      }
+    }
   },
   {
     "label": "Worked: stochastic versus batch cost",

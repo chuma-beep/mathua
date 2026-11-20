@@ -6,7 +6,30 @@
       "Recognize the parabola as a conic section",
       "Identify the focus and directrix",
       "Locate the vertex"
-    ]
+    ],
+    "visual": {
+      "type": "geo.conic",
+      "title": "Vertex, focus and directrix",
+      "caption": "A parabola is the set of points equally far from its focus and its directrix. For x² = 4py the vertex is (0, 0), the focus is (0, p) and the directrix is y = -p. With p = 1 here, the focus is one unit above the vertex and the directrix one unit below it.",
+      "params": {
+        "A": 1,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": -4,
+        "F": 0
+      },
+      "predict": {
+        "question": "For x² = 4y, where is the focus?",
+        "options": [
+          "(0, 1)",
+          "(1, 0)",
+          "(0, 2)"
+        ],
+        "answer": 0,
+        "explain": "Compare x² = 4py with x² = 4y, so p = 1. The vertex is (0, 0) and the focus lies p units along the opening direction, at (0, 1). The directrix is y = -1."
+      }
+    }
   },
   {
     "label": "Coefficient geometry",

@@ -6,7 +6,27 @@
       "Read a triple integral as three",
       "Integrate the innermost variable first",
       "Evaluate over a box"
-    ]
+    ],
+    "visual": {
+      "type": "calc.region",
+      "title": "Three passes over the box",
+      "caption": "The grid is the base of the box. Each cell stands for one column, and the innermost integral runs along that column while the outer two passes move across the grid. The order changes which variable is integrated first, never the value.",
+      "params": {
+        "region": "rect",
+        "density": "x",
+        "n": 12
+      },
+      "predict": {
+        "question": "A triple integral over a box is evaluated:",
+        "options": [
+          "Innermost variable first",
+          "Outermost variable first",
+          "In any order, with a different answer each time"
+        ],
+        "answer": 0,
+        "explain": "Fubini lets the order change without changing the value, but each stage integrates the innermost variable with the others fixed."
+      }
+    }
   },
   {
     "label": "Separating the integrand",

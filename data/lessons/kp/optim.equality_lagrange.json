@@ -6,7 +6,33 @@
       "write the Lagrangian",
       "set all derivatives to zero",
       "substitute into the objective"
-    ]
+    ],
+    "visual": {
+      "type": "optim.path",
+      "title": "The gradient meets the constraint normal",
+      "caption": "The candidate stays on x plus y equals 2. At the constrained minimum the objective gradient is parallel to the constraint normal, and the multiplier is the common scale factor. The derivative along the line vanishes there.",
+      "params": {
+        "mode": "lagrange",
+        "startX": 1.5,
+        "startY": 2,
+        "rate": 0.15,
+        "steps": 6,
+        "candidateX": 0.5,
+        "candidateY": 1,
+        "rhs": "none",
+        "delta": 0
+      },
+      "predict": {
+        "question": "Minimise x squared plus y squared subject to x plus y equals 2. What is the multiplier at the optimum?",
+        "options": [
+          "1",
+          "2",
+          "4"
+        ],
+        "answer": 1,
+        "explain": "At (1, 1) the objective gradient is (2, 2) and the constraint normal is (1, 1). The multiplier is 2, and the minimum value is 2."
+      }
+    }
   },
   {
     "label": "Test a multiplier",

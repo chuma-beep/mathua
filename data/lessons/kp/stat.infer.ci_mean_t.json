@@ -6,7 +6,29 @@
       "Estimate the standard error with s",
       "Count n minus one degrees of freedom",
       "Explain the heavier tails"
-    ]
+    ],
+    "visual": {
+      "type": "stat.inference",
+      "title": "The t interval has heavier tails",
+      "caption": "With a small sample the standard error is estimated by s. The t distribution has heavier tails than the normal, so the same confidence level needs a larger critical value and gives a wider interval.",
+      "params": {
+        "dist": "t",
+        "df": 9,
+        "alpha": 0.05,
+        "effect": 0.8,
+        "observed": 2.262
+      },
+      "predict": {
+        "question": "Why is a 95 percent t interval wider than a 95 percent z interval?",
+        "options": [
+          "The t critical value is larger",
+          "The t interval uses a smaller confidence level",
+          "The t statistic is always negative"
+        ],
+        "answer": 0,
+        "explain": "The t critical value at 9 degrees of freedom is about 2.262, above the normal 1.96. The larger multiplier widens the interval."
+      }
+    }
   },
   {
     "label": "The margin of error",

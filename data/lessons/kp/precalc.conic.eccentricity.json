@@ -6,7 +6,30 @@
       "Eccentricity describes how far a conic departs from a circle.",
       "A circle has eccentricity zero.",
       "The value is the same for every point on the curve."
-    ]
+    ],
+    "visual": {
+      "type": "geo.conic",
+      "title": "Eccentricity belongs to the conic",
+      "caption": "Eccentricity describes the shape of a conic, not the position of a point on it. For this ellipse e = c/a = 1/√2 ≈ 0.707. Moving the probe changes PF1 and PF2, but their sum stays 2a and e stays 0.707.",
+      "params": {
+        "A": 1,
+        "B": 0,
+        "C": 0.5,
+        "D": 0,
+        "E": 0,
+        "F": -1
+      },
+      "predict": {
+        "question": "Move the probe around the ellipse. What happens to its eccentricity?",
+        "options": [
+          "It stays 0.707",
+          "It rises near a focus",
+          "It falls at a vertex"
+        ],
+        "answer": 0,
+        "explain": "Eccentricity is computed from a and b, so it is a constant of the conic. The focal distances change with the probe, but their sum stays 2a and e stays c/a."
+      }
+    }
   },
   {
     "label": "Ellipses and hyperbolas",

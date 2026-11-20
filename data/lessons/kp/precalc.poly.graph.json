@@ -6,7 +6,29 @@
       "The degree controls what happens far to the left and far to the right.",
       "An even degree sends both ends the same way.",
       "An odd degree sends the two ends in opposite directions."
-    ]
+    ],
+    "visual": {
+      "type": "function.graph",
+      "title": "The degree and the sign decide the ends",
+      "caption": "For y = −x³, the degree is odd, so the two ends go opposite ways. The negative leading coefficient sends the left end up and the right end down. Change the family and scale to watch the pattern; the readout names both ends.",
+      "params": {
+        "family": "cubic",
+        "a": -1,
+        "h": 0,
+        "k": 0,
+        "showInverse": false
+      },
+      "predict": {
+        "question": "For y = −x³, what happens at the far left and far right?",
+        "options": [
+          "Both ends go to +∞",
+          "Both ends go to −∞",
+          "The left end goes to +∞ and the right end to −∞"
+        ],
+        "answer": 2,
+        "explain": "An odd degree sends the ends opposite ways. The negative leading coefficient reverses the usual cubic pattern, so x → −∞ gives y → +∞ and x → +∞ gives y → −∞."
+      }
+    }
   },
   {
     "label": "Zeros and multiplicity",

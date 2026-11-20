@@ -6,7 +6,28 @@
       "State the governing relation for modular exponentiation",
       "Identify the quantities in the repeated squaring step",
       "Carry out the repeated squaring computation"
-    ]
+    ],
+    "visual": {
+      "type": "nt.modular",
+      "title": "Repeated squaring modulo five",
+      "caption": "Repeated squaring records the running residue at each bit of the exponent. The final value is the same as multiplying the base by itself the stated number of times.",
+      "params": {
+        "mode": "power",
+        "base": 2,
+        "exponent": 10,
+        "n": 5
+      },
+      "predict": {
+        "question": "What is 2 to the tenth power modulo 5?",
+        "options": [
+          "2",
+          "4",
+          "0"
+        ],
+        "answer": 1,
+        "explain": "Powers of 2 modulo 5 cycle 2, 4, 3, 1. The tenth power lands on 4."
+      }
+    }
   },
   {
     "label": "Reducing the exponent",

@@ -5,7 +5,30 @@
     "subgoals": [
       "Write the equation of a level curve",
       "Recognise when a level curve is empty"
-    ]
+    ],
+    "visual": {
+      "type": "calc.contour",
+      "title": "Level curves and the gradient",
+      "caption": "The probe sits on a level curve. The gradient is perpendicular to it and points uphill, and the curves crowd where the gradient is long.",
+      "params": {
+        "field": "bowl",
+        "levels": 7,
+        "probe": [
+          1,
+          1
+        ]
+      },
+      "predict": {
+        "question": "At a point on a level curve, which way does the gradient point?",
+        "options": [
+          "Along the curve",
+          "Straight across it, toward higher values",
+          "Nowhere: it is zero on a curve"
+        ],
+        "answer": 1,
+        "explain": "The gradient is perpendicular to the level curve and points toward increasing values. A zero gradient would mean a stationary point, not the whole curve."
+      }
+    }
   },
   {
     "label": "Circles, lines and hyperbolas",

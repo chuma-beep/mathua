@@ -6,7 +6,29 @@
       "locate the dual variable",
       "apply the sign convention",
       "check whether the constraint binds"
-    ]
+    ],
+    "visual": {
+      "type": "optim.path",
+      "title": "One bound, one price",
+      "caption": "Raising x + 2y ≤ 4 by 0.2 moves the optimum along the other active line. The value rises by 1/3 of 0.2, about 0.067, until the basis changes.",
+      "params": {
+        "mode": "feasible",
+        "candidateX": 1.9333333333333333,
+        "candidateY": 1.1333333333333333,
+        "rhs": "first",
+        "delta": 0.2
+      },
+      "predict": {
+        "question": "Raise the bound x + 2y ≤ 4 by 0.2. About how much does the optimum value rise?",
+        "options": [
+          "About 0.067",
+          "About 0.2",
+          "About 0.4"
+        ],
+        "answer": 0,
+        "explain": "The shadow price of x + 2y is 1/3, so a 0.2 increase adds about 0.067. The price stays valid while both resource constraints remain active, from a bound of 2.5 to 10."
+      }
+    }
   },
   {
     "label": "Estimate a change",

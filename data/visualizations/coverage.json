@@ -1,0 +1,397 @@
+{
+  "note": "Canonical coverage of the 31 topics in the visualization proposal. Templates are the implementation; topics are what a learner is taught. One template may teach several topics, and a topic may be partial or absent despite a related figure existing. scripts/audit_visuals.py reads this file and fails when a listed template does not exist, when an absent topic names one, or when a template teaches no topic at all.",
+  "source": "docs/adr/ADR-058-an-interactive-visualization-is-declared-data-and-the.md",
+  "topics": [
+    {
+      "id": "vector_add_sub",
+      "label": "vector addition and subtraction",
+      "domain": "linear_algebra",
+      "status": "complete",
+      "templates": [
+        "linalg.vector"
+      ]
+    },
+    {
+      "id": "scalar_multiple",
+      "label": "scalar multiplication",
+      "domain": "linear_algebra",
+      "status": "complete",
+      "templates": [
+        "linalg.vector"
+      ]
+    },
+    {
+      "id": "linear_transformations",
+      "label": "linear transformations",
+      "domain": "linear_algebra",
+      "status": "complete",
+      "templates": [
+        "linalg.matrix2d"
+      ]
+    },
+    {
+      "id": "matrix_multiplication",
+      "label": "matrix multiplication as a geometric action",
+      "domain": "linear_algebra",
+      "status": "complete",
+      "templates": [
+        "linalg.matrix2d"
+      ]
+    },
+    {
+      "id": "eigenvectors",
+      "label": "eigenvectors and eigenvalues",
+      "domain": "linear_algebra",
+      "status": "complete",
+      "templates": [
+        "linalg.eigen"
+      ]
+    },
+    {
+      "id": "basis_span",
+      "label": "basis, span and subspaces",
+      "domain": "linear_algebra",
+      "status": "complete",
+      "templates": [
+        "linalg.basis"
+      ]
+    },
+    {
+      "id": "determinants",
+      "label": "determinants as area and volume scaling",
+      "domain": "linear_algebra",
+      "status": "complete",
+      "templates": [
+        "linalg.matrix2d"
+      ],
+      "note": "area is drawn as the image of the unit square and changes continuously with det A; positive keeps orientation, negative reverses it, zero collapses the square onto a line. Volume scaling is a 3D claim and stays out of scope."
+    },
+    {
+      "id": "limits_continuity",
+      "label": "limits and continuity",
+      "domain": "calculus",
+      "status": "complete",
+      "templates": [
+        "calc.limit"
+      ]
+    },
+    {
+      "id": "derivatives_tangent",
+      "label": "derivatives and tangent lines",
+      "domain": "calculus",
+      "status": "complete",
+      "templates": [
+        "calc.tangent"
+      ]
+    },
+    {
+      "id": "instantaneous_rate",
+      "label": "instantaneous rates of change",
+      "domain": "calculus",
+      "status": "complete",
+      "templates": [
+        "calc.tangent"
+      ]
+    },
+    {
+      "id": "integration_area",
+      "label": "integration and accumulated area",
+      "domain": "calculus",
+      "status": "complete",
+      "templates": [
+        "calc.riemann"
+      ]
+    },
+    {
+      "id": "riemann_sums",
+      "label": "Riemann sums",
+      "domain": "calculus",
+      "status": "complete",
+      "templates": [
+        "calc.riemann"
+      ]
+    },
+    {
+      "id": "taylor_series",
+      "label": "Taylor series approximations",
+      "domain": "calculus",
+      "status": "complete",
+      "templates": [
+        "calc.taylor"
+      ]
+    },
+    {
+      "id": "multivariable_partials",
+      "label": "multivariable functions and partial derivatives",
+      "domain": "calculus",
+      "status": "complete",
+      "templates": [
+        "calc.contour"
+      ]
+    },
+    {
+      "id": "triangles_circles_polygons",
+      "label": "triangles, circles and polygons",
+      "domain": "geometry",
+      "status": "complete",
+      "templates": [
+        "geo.transform2d"
+      ],
+      "note": "the learner builds the polygon by adding, removing and dragging vertices, then applies a rotation, reflection, translation or dilation and reads the matrix, the vertex images, the largest side change and the area scale. There is no circle tool, no free-form curve and no 3D."
+    },
+    {
+      "id": "geometric_transformations",
+      "label": "geometric transformations",
+      "domain": "geometry",
+      "status": "complete",
+      "templates": [
+        "geo.transform2d"
+      ]
+    },
+    {
+      "id": "rotations_reflections",
+      "label": "rotations, reflections and translations",
+      "domain": "geometry",
+      "status": "complete",
+      "templates": [
+        "geo.transform2d"
+      ]
+    },
+    {
+      "id": "coordinate_geometry",
+      "label": "coordinate geometry",
+      "domain": "geometry",
+      "status": "partial",
+      "templates": [
+        "geo.coord"
+      ],
+      "note": "geo.coord lets a learner drag two points, read the distance and midpoint working with the substituted numbers, and move a second line to see where two lines meet, including parallel and coincident pairs. It does not cover polar coordinates, circles, rotated conics or three-dimensional distance."
+    },
+    {
+      "id": "solids_3d",
+      "label": "3D solids and spatial relationships",
+      "domain": "geometry",
+      "status": "partial",
+      "templates": [
+        "solid3d"
+      ],
+      "note": "One solid of revolution is drawn: r(x) = 1 + 0.35 sin(1.6x) about the x axis, with a movable disk cross-section, orbit by drag or slider, volume by disks and lateral area. Arbitrary surfaces, composed solids, 3D transformations and intersections are not shown."
+    },
+    {
+      "id": "conic_sections",
+      "label": "conic sections",
+      "domain": "geometry",
+      "status": "partial",
+      "templates": [
+        "geo.conic"
+      ],
+      "note": "The general six-term equation draws circles, ellipses, hyperbolas, parabolas and degenerate cases, and the probe now demonstrates foci, directrices, the constant ellipse focal sum and the constant hyperbola difference. Intersections, tangents and parametric or polar forms are still not shown, so the topic stays partial."
+    },
+    {
+      "id": "argand_plane",
+      "label": "complex plane and Argand diagrams",
+      "domain": "complex_analysis",
+      "status": "complete",
+      "templates": [
+        "complex.multiply"
+      ]
+    },
+    {
+      "id": "modulus_argument",
+      "label": "modulus and argument",
+      "domain": "complex_analysis",
+      "status": "complete",
+      "templates": [
+        "complex.multiply"
+      ]
+    },
+    {
+      "id": "complex_multiplication",
+      "label": "complex multiplication as rotation and scaling",
+      "domain": "complex_analysis",
+      "status": "complete",
+      "templates": [
+        "complex.multiply"
+      ]
+    },
+    {
+      "id": "complex_mappings",
+      "label": "complex functions and mappings",
+      "domain": "complex_analysis",
+      "status": "complete",
+      "templates": [
+        "complex.map"
+      ]
+    },
+    {
+      "id": "contour_integration",
+      "label": "contour visualisation",
+      "domain": "complex_analysis",
+      "status": "partial",
+      "templates": [
+        "complex.contour"
+      ],
+      "note": "five functions (1/z, z, z squared, conj z, e to the z) along four path families (circle, ellipse, wavy closed curve, line segment), with the running value I(t) drawn as a vector and trace in a second plane, direction reversible, and the crossing reported rather than a number when the path passes through the pole. Closed-path pole detection samples 4000 points, so it is approximate. Residue theory, winding numbers, images of the interior and arbitrary expressions are not shown."
+    },
+    {
+      "id": "analytic_geometry",
+      "label": "geometric interpretation of analytic functions",
+      "domain": "complex_analysis",
+      "status": "complete",
+      "templates": [
+        "complex.map",
+        "complex.levels"
+      ]
+    },
+    {
+      "id": "probability_distributions",
+      "label": "probability distributions",
+      "domain": "probability_statistics",
+      "status": "complete",
+      "templates": [
+        "stat.normal",
+        "stat.sampling",
+        "stat.family"
+      ],
+      "note": "normal, uniform and exponential densities on one axis at equal standard deviation, with the probability each gives the same interval; discrete families are not included"
+    },
+    {
+      "id": "normal_distribution",
+      "label": "normal distributions",
+      "domain": "probability_statistics",
+      "status": "complete",
+      "templates": [
+        "stat.normal"
+      ]
+    },
+    {
+      "id": "sampling_distributions",
+      "label": "sampling distributions",
+      "domain": "probability_statistics",
+      "status": "complete",
+      "templates": [
+        "stat.sampling"
+      ]
+    },
+    {
+      "id": "regression",
+      "label": "regression",
+      "domain": "probability_statistics",
+      "status": "complete",
+      "templates": [
+        "stat.regression"
+      ]
+    },
+    {
+      "id": "variance_standard_deviation",
+      "label": "variance and standard deviation",
+      "domain": "probability_statistics",
+      "status": "complete",
+      "templates": [
+        "stat.spread"
+      ]
+    }
+  ],
+  "supplementary": [
+    {
+      "id": "linalg.elimination",
+      "reason": "linear systems are not one of the proposal's 31 topics; the elimination figure is required by the linear-transformation brief and teaches a different activity, so it is recorded here rather than inflating the topic list"
+    },
+    {
+      "id": "trig.unitcircle",
+      "reason": "trigonometry is not one of the proposal's 31 topics; the unit-circle figure links the circle, the sine and cosine values and the graph position, so it is recorded here rather than inflating the topic list"
+    },
+    {
+      "id": "ode.slopefield",
+      "reason": "differential equations are not one of the proposal\u2019s 31 topics; the slope-field figure plots the actual right-hand side and integrates a solution, so it is recorded here rather than inflating the topic list"
+    },
+    {
+      "id": "numa.roots",
+      "reason": "numerical analysis is not one of the proposal\u2019s 31 topics; the root-iteration figure runs bisection and Newton on the actual function, so it is recorded here rather than inflating the topic list"
+    },
+    {
+      "id": "graph.network",
+      "reason": "graph theory is not one of the proposal\u2019s 31 topics; the graph figure runs traversal, shortest-path and spanning-tree algorithms on its own edges, so it is recorded here rather than inflating the topic list"
+    },
+    {
+      "id": "prob.tree",
+      "reason": "conditional probability and Bayes are not one of the proposal topics; the tree shows the sample-space partition, the joint leaves and the posterior, so it is recorded here rather than inventing a proposal topic"
+    },
+    {
+      "id": "frac.line",
+      "reason": "fractions are not one of the proposal topics; the number line and area bars share one exact fraction engine so equivalence and comparison are shown on the same whole"
+    },
+    {
+      "id": "function.graph",
+      "reason": "functions are a proposal topic, but the proposal has no separate graph-transformation entry; the figure links a function family, its end behaviour, its domain and range, and the reflection that gives the inverse, so it is recorded here rather than inflating the topic list"
+    },
+    {
+      "id": "arith.line",
+      "reason": "a shared number-line and balance model serves signed numbers, decimals, percentages, ratios and one-step equations outside the 31-topic proposal"
+    },
+    {
+      "id": "nt.modular",
+      "reason": "modular residues, repeated squaring, Euclid steps and factor trees are exact number-theory calculations not represented by an existing template"
+    },
+    {
+      "id": "abstract.group",
+      "reason": "operation tables and generated subgroups show finite groups without implying that every group is a geometric symmetry group"
+    },
+    {
+      "id": "discrete.lab",
+      "reason": "truth tables, set membership and k-subsets are discrete structures distinct from the probability and graph templates"
+    },
+    {
+      "id": "optim.path",
+      "reason": "gradient descent, feasible-region checks, active constraints, KKT multipliers and the dual value are read from the same drawn optimisation model rather than a decorative path"
+    },
+    {
+      "id": "analysis.lab",
+      "reason": "epsilon bands, partial sums and three explicit metrics support real-analysis and metric-space definitions"
+    },
+    {
+      "id": "ml.fit",
+      "reason": "the regression loss and logistic probability use the same gradient and sigmoid calculations taught in the machine-learning lessons"
+    },
+    {
+      "id": "trig.sinusoid",
+      "reason": "amplitude, period, phase and frequency are properties of the graph that the unit-circle figure cannot show; the same wave controls serve ten trigonometry and precalculus lessons"
+    },
+    {
+      "id": "stat.inference",
+      "reason": "statistical inference is not one of the 31 proposal topics; the figure draws the null and alternative distributions, the rejection region, the p-value, the error rates and the interval from the same test model"
+    },
+    {
+      "id": "ode.phase",
+      "reason": "phase lines and phase planes are not one of the 31 proposal topics; equilibria, stability, nullclines and trajectories are read from the same differential equation"
+    },
+    {
+      "id": "calc.vectorfield",
+      "reason": "divergence and curl are drawn from the same field the arrows and the loop integrals use, so Green and Stokes can be checked rather than asserted"
+    },
+    {
+      "id": "calc.surface",
+      "reason": "a tangent plane and a Hessian saddle test are not one of the 31 proposal topics; the picture carries the two partial slopes and the discriminant"
+    },
+    {
+      "id": "calc.region",
+      "reason": "partitioning a planar region into cells makes the double integral a counted sum, with the exact value and the error both reported"
+    },
+    {
+      "id": "calc.seriessum",
+      "reason": "terms and partial sums on one axis separate the test from the sum; the limit line shows convergence without a proof"
+    },
+    {
+      "id": "calc.accumulation",
+      "reason": "the area function and the integrand share an x axis, so the fundamental theorem is a slope comparison rather than a statement"
+    },
+    {
+      "id": "calc.solidrev",
+      "reason": "disk, washer and shell slices of the same body show why three formulas measure one volume"
+    },
+    {
+      "id": "prob.area",
+      "reason": "conditional probability as an area keeps the multiplication rule and independence visible in the same unit square"
+    }
+  ]
+}

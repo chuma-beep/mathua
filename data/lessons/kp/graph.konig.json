@@ -6,7 +6,27 @@
       "Bound a cover below by a matching",
       "Build a cover from a matching",
       "State the equality"
-    ]
+    ],
+    "visual": {
+      "type": "graph.network",
+      "title": "Two sides, no edge inside",
+      "caption": "The six-cycle splits into two sides with every edge crossing between them. A two-colouring exists because the cycle has even length, and the two sides are the colour classes.",
+      "params": {
+        "algorithm": "bipartite",
+        "start": "A",
+        "showTree": true
+      },
+      "predict": {
+        "question": "A graph is bipartite exactly when:",
+        "options": [
+          "It has no odd cycle",
+          "It has no even cycle",
+          "Every vertex has even degree"
+        ],
+        "answer": 0,
+        "explain": "A two-colouring exists exactly when no odd cycle can force a conflict. This six-cycle splits into A, C, E and B, D, F."
+      }
+    }
   },
   {
     "label": "Duality",

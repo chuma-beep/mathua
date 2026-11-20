@@ -6,7 +6,26 @@
       "Divide the unit interval into ten equal parts",
       "Count steps to the right of zero",
       "Name the decimal at the marked point"
-    ]
+    ],
+    "visual": {
+      "type": "arith.line",
+      "title": "Seven tenths on the line",
+      "caption": "The interval from 0 to 1 is split into ten equal parts. Counting seven parts from zero lands on the decimal 0.7.",
+      "params": {
+        "mode": "decimal",
+        "tenths": 7
+      },
+      "predict": {
+        "question": "Where does 0.7 sit on the line from 0 to 1?",
+        "options": [
+          "Three tenths from 0",
+          "Seven tenths from 0",
+          "Seven units from 0"
+        ],
+        "answer": 1,
+        "explain": "The tenths marks divide one unit into ten parts. Seven steps from zero reach 0.7."
+      }
+    }
   },
   {
     "label": "Place a decimal between integers",

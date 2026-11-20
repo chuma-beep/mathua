@@ -20,6 +20,37 @@
         }
       ],
       "note": "Horizontal first, always. The two orders give different points unless $x=y$."
+    },
+    "visual": {
+      "type": "geo.coord",
+      "title": "Two points, one distance, one midpoint",
+      "caption": "Drag a point: the legs show the gaps, the hypotenuse is the distance, and the midpoint is their average. Switch to the lines mode to see where two lines meet.",
+      "params": {
+        "mode": "measure",
+        "a": [
+          -3,
+          1
+        ],
+        "b": [
+          2,
+          4
+        ],
+        "c": [
+          1,
+          -2
+        ],
+        "slope": 1
+      },
+      "predict": {
+        "question": "Move B until it has the same x as A. What is the distance then?",
+        "options": [
+          "The vertical gap between them",
+          "Zero",
+          "The same as before"
+        ],
+        "answer": 0,
+        "explain": "Δx becomes zero, so the square root is √(0 + Δy²) = |Δy|: the distance is the vertical gap."
+      }
     }
   },
   {

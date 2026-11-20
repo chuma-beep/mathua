@@ -6,7 +6,26 @@
       "Verify r^n, s^2, and srs = r^-1",
       "Reduce every product to r^a s^i normal form",
       "Count 2n distinct elements"
-    ]
+    ],
+    "visual": {
+      "type": "abstract.group",
+      "title": "Six symmetries of a triangle",
+      "caption": "S3 is the symmetry group of a triangle. Its table is the composition of the six permutations, and it is not abelian.",
+      "params": {
+        "group": "s3",
+        "element": 1
+      },
+      "predict": {
+        "question": "How many elements does the symmetry group of a triangle have?",
+        "options": [
+          "3",
+          "6",
+          "9"
+        ],
+        "answer": 1,
+        "explain": "Three rotations and three reflections give six symmetries, matching the six permutations in S3."
+      }
+    }
   },
   {
     "label": "Center and element orders",

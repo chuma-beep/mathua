@@ -6,7 +6,34 @@
       "Match columns of A against rows of B",
       "Multiply row i of A by column j of B",
       "Sum the pairwise products for entry cij"
-    ]
+    ],
+    "visual": {
+      "type": "linalg.matrix2d",
+      "title": "Matrix multiplying a vector",
+      "caption": "The two columns are the arrows: drag a knob and you are editing A. The shaded parallelogram is the image of the unit square, so its area is |det A|, and the sign of det A says whether orientation is kept or flipped. A⁻¹ exists exactly when det A is not zero, even when the image is too thin to see.",
+      "params": {
+        "matrix": [
+          1.2,
+          0.6,
+          0.4,
+          1.4
+        ],
+        "vector": [
+          2,
+          1
+        ],
+        "showGrid": true
+      },
+      "predict": {
+        "question": "det A is 1.44. What does that say about the image of the unit square?",
+        "options": [
+          "Its area is unchanged",
+          "Its area is 1.44 times the original"
+        ],
+        "answer": 1,
+        "explain": "The determinant is the area scale factor, so the unit square's image has area 1.44."
+      }
+    }
   },
   {
     "label": "Vectors and the zero matrix",

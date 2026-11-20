@@ -6,7 +6,27 @@
       "evaluate each constraint",
       "compare with its bound",
       "apply the solver tolerance"
-    ]
+    ],
+    "visual": {
+      "type": "optim.path",
+      "title": "The binding constraints",
+      "caption": "At the optimum the point lies on both resource lines at once. An active constraint has zero slack; x ≥ 0 and y ≥ 0 still have room, so they are inactive.",
+      "params": {
+        "mode": "feasible",
+        "candidateX": 2,
+        "candidateY": 1
+      },
+      "predict": {
+        "question": "At the optimum (2, 1), which constraints are active?",
+        "options": [
+          "x ≥ 0 and y ≥ 0",
+          "x + 2y ≤ 4 and 2x + y ≤ 5",
+          "Only x + 2y ≤ 4"
+        ],
+        "answer": 1,
+        "explain": "At (2, 1), x + 2y = 4 and 2x + y = 5, so both resource constraints have zero slack. The bounds x ≥ 0 and y ≥ 0 are slack by 2 and 1."
+      }
+    }
   },
   {
     "label": "Test a candidate",

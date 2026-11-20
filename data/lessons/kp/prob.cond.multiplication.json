@@ -6,7 +6,27 @@
       "Define the conditional probability",
       "Restrict the sample space to A",
       "Multiply back to the joint probability"
-    ]
+    ],
+    "visual": {
+      "type": "prob.area",
+      "title": "The band inside the column",
+      "caption": "The B column has width P(B) and the A band inside it has height P(A|B). Their product is the area of the overlap, which is the multiplication rule drawn rather than asserted.",
+      "params": {
+        "pB": 0.4,
+        "pAgivenB": 0.8,
+        "pAgivenBc": 0.3
+      },
+      "predict": {
+        "question": "P(A ∩ B) equals:",
+        "options": [
+          "P(B) · P(A|B)",
+          "P(A) · P(B)",
+          "P(A|B) alone"
+        ],
+        "answer": 0,
+        "explain": "The overlap inside the B column has area P(B) × P(A|B), which is the multiplication rule. Here 0.4 × 0.8 = 0.32."
+      }
+    }
   },
   {
     "label": "Worked: drawing without replacement",

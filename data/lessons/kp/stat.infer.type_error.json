@@ -6,7 +6,29 @@
       "Name the Type I error",
       "Name the Type II error",
       "Separate alpha from beta"
-    ]
+    ],
+    "visual": {
+      "type": "stat.inference",
+      "title": "Two errors, two areas",
+      "caption": "Alpha is the area in the rejection region under the null. Beta is the area outside the rejection region under the alternative. Power is the remaining area of the alternative inside the rejection region.",
+      "params": {
+        "dist": "z",
+        "df": 10,
+        "alpha": 0.05,
+        "effect": 0.5,
+        "observed": 1.0
+      },
+      "predict": {
+        "question": "Which error is a Type II error?",
+        "options": [
+          "Rejecting a true null",
+          "Rejecting a false null",
+          "Failing to reject a false null"
+        ],
+        "answer": 2,
+        "explain": "A Type II error is failing to reject the null when the alternative is true. Its probability is beta, and power is one minus beta."
+      }
+    }
   },
   {
     "label": "Worked: the trade in one table",

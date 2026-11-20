@@ -6,7 +6,26 @@
       "Apply the sigmoid to w*x + b",
       "Minimise cross-entropy",
       "Keep predictions inside the unit interval"
-    ]
+    ],
+    "visual": {
+      "type": "ml.fit",
+      "title": "A score becomes a probability",
+      "caption": "The sigmoid maps the linear score 2x + b into the interval from zero to one. The marked point is the probability at x = 1.",
+      "params": {
+        "mode": "logistic",
+        "threshold": 0
+      },
+      "predict": {
+        "question": "What is the logistic probability at x = 1 when the score is 2x?",
+        "options": [
+          "Exactly 1",
+          "About 0.88",
+          "Exactly 0.5"
+        ],
+        "answer": 1,
+        "explain": "The score is 2, and the sigmoid of 2 is about 0.88, inside the unit interval."
+      }
+    }
   },
   {
     "label": "Worked: classifying at the 0.5 threshold",

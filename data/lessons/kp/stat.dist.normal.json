@@ -6,7 +6,28 @@
       "Center the bell at mu with spread sigma",
       "Split probability half-half around mu",
       "Mark inflection points at mu-sigma and mu+sigma"
-    ]
+    ],
+    "visual": {
+      "type": "stat.normal",
+      "title": "Area under the normal curve",
+      "caption": "Change mu, sigma or x: the shaded left tail is P(X <= x), and the probability inside one standard deviation stays about 0.6827.",
+      "params": {
+        "mu": 0,
+        "sigma": 1,
+        "x": 1,
+        "bands": true
+      },
+      "predict": {
+        "question": "If sigma doubles, the probability inside one standard deviation does what?",
+        "options": [
+          "Doubles",
+          "Stays about 0.6827",
+          "Halves"
+        ],
+        "answer": 1,
+        "explain": "The band widens with the curve, so the fraction of the area it holds is unchanged; only the spread on the x axis changes."
+      }
+    }
   },
   {
     "label": "Key features",

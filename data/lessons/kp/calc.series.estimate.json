@@ -5,7 +5,26 @@
     "subgoals": [
       "For an alternating series the remainder is bounded by the next term.",
       "The bound is tight enough for numerical estimates."
-    ]
+    ],
+    "visual": {
+      "type": "calc.seriessum",
+      "title": "The next term bounds the error",
+      "caption": "The alternating terms change sign, so the partial sums overshoot and undershoot the limit. The gap is never larger than the next term.",
+      "params": {
+        "kind": "alternating",
+        "terms": 12
+      },
+      "predict": {
+        "question": "For an alternating series, the remainder after N terms is bounded by:",
+        "options": [
+          "The next term",
+          "The partial sum",
+          "The limit"
+        ],
+        "answer": 0,
+        "explain": "The alternating remainder is at most the first omitted term in absolute value, so the partial sum is within one term of ln 2 here."
+      }
+    }
   },
   {
     "label": "The integral remainder",

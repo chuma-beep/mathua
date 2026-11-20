@@ -6,7 +6,26 @@
       "Set the exponent above one for convergence",
       "Recognise the harmonic boundary case",
       "Use the integral test"
-    ]
+    ],
+    "visual": {
+      "type": "calc.seriessum",
+      "title": "The exponent decides",
+      "caption": "At p = 2 the partial sums settle quickly toward π²/6. At p = 1 they do not settle at all, so the boundary sits exactly at one.",
+      "params": {
+        "kind": "p2",
+        "terms": 20
+      },
+      "predict": {
+        "question": "Σ 1/k^p converges exactly when:",
+        "options": [
+          "p > 0",
+          "p > 1",
+          "p ≥ 0"
+        ],
+        "answer": 1,
+        "explain": "The integral test gives convergence for p > 1. The case p = 1 is the harmonic series, which diverges."
+      }
+    }
   },
   {
     "label": "Why the boundary differs",

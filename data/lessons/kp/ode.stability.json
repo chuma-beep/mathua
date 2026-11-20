@@ -6,7 +6,28 @@
       "Solve to x(t) = x0 e^{-2t}",
       "Compute the ratio e^{-2} at t = 1",
       "Conclude asymptotic stability"
-    ]
+    ],
+    "visual": {
+      "type": "ode.phase",
+      "title": "Arrows point toward a stable equilibrium",
+      "caption": "The phase line draws the sign of x prime. Where the arrow points toward an equilibrium, nearby solutions approach it. The exponential decay equation has a single stable equilibrium at zero.",
+      "params": {
+        "mode": "line",
+        "lineModel": "decay",
+        "system": "saddle",
+        "showTrajectories": true
+      },
+      "predict": {
+        "question": "For x prime equals minus x, what happens to a solution that starts near zero?",
+        "options": [
+          "It moves away from zero",
+          "It approaches zero",
+          "It stays exactly at zero unless it starts there"
+        ],
+        "answer": 1,
+        "explain": "The slope is negative for positive x and positive for negative x. Both sides point toward zero, so the equilibrium is stable."
+      }
+    }
   },
   {
     "label": "Worked: counting equilibria of x' = 4 - x^2",

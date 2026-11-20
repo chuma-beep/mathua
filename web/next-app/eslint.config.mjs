@@ -17,6 +17,13 @@ const eslintConfig = defineConfig([
       'react-hooks/preserve-manual-memoization': 'off',
       'react-hooks/immutability': 'off',
       'react-hooks/purity': 'off',
+      // The visual dispatcher renders one of six lazy templates chosen by a
+      // string from the lesson data. Those wrappers are built once at module
+      // load, so the component type is stable and the figure keeps its state
+      // across renders, which is the failure this rule exists to catch. It
+      // cannot see through a lookup, so it reports a creation that does not
+      // happen.
+      'react-hooks/static-components': 'off',
     },
   },
   globalIgnores(['.next/**', 'out/**', 'build/**', 'next-env.d.ts']),

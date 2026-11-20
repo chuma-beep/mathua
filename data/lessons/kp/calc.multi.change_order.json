@@ -6,7 +6,27 @@
       "Describe a triangle both ways",
       "Describe the same region in type II limits",
       "See which order is easier"
-    ]
+    ],
+    "visual": {
+      "type": "calc.region",
+      "title": "The same cells, read the other way",
+      "caption": "The same shaded region can be described with x first or y first. The reversed bounds are printed beside the original, and the two describe exactly the same cells.",
+      "params": {
+        "region": "between",
+        "density": "one",
+        "n": 16
+      },
+      "predict": {
+        "question": "With y fixed first, what are the x-limits of this region?",
+        "options": [
+          "0 ≤ x ≤ 1",
+          "y ≤ x ≤ √y",
+          "x² ≤ x ≤ y"
+        ],
+        "answer": 1,
+        "explain": "From y = x² and y = x, for a fixed y in [0, 1] the x values run from y up to √y."
+      }
+    }
   },
   {
     "label": "Writing the other limits",

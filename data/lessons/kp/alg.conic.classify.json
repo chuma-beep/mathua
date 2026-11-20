@@ -4,9 +4,29 @@
     "section": "Count the squared terms",
     "subgoals": [
       "Check whether both variables are squared",
-      "One squared variable means a parabola",
+      "A linear term is what makes a parabola possible",
       "Two squared variables narrow it to three conics"
-    ]
+    ],
+    "visual": {
+      "type": "geo.conic",
+      "title": "One equation, several curves",
+      "caption": "The general equation Ax² + Bxy + Cy² + Dx + Ey + F = 0 covers every conic. A and C set the quadratic shape before rotation, and B turns the axes. When A and C have the same sign, raising |B| past 2√(AC) changes the sign of B² − 4AC, so an ellipse becomes a hyperbola; exactly at the boundary the curve is a pair of parallel lines. A linear term D or E is what makes a parabola possible.",
+      "params": {
+        "A": 1,
+        "B": 0,
+        "C": 0.5
+      },
+      "predict": {
+        "question": "With A = 1 and C = 0.5, raise the cross term B from 0. What happens when B passes √2?",
+        "options": [
+          "The ellipse becomes a hyperbola",
+          "The ellipse only rotates",
+          "The ellipse becomes a parabola"
+        ],
+        "answer": 0,
+        "explain": "B rotates the principal axes. The discriminant B² − 4AC changes sign at B = 2√(AC) = √2. Below it the curve is an ellipse, above it a hyperbola, and exactly at it the curve is two parallel lines. A parabola needs a linear term."
+      }
+    }
   },
   {
     "label": "Compare the coefficients",

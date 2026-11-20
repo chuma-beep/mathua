@@ -6,7 +6,27 @@
       "Place angle theta on the unit circle x^2 + y^2 = 1",
       "Orient positive counterclockwise, negative clockwise",
       "Identify theta + 2k*pi with the same circle point"
-    ]
+    ],
+    "visual": {
+      "type": "trig.unitcircle",
+      "title": "Height is sine, width is cosine",
+      "caption": "The unit circle makes the definitions visible. The horizontal coordinate of P is cos θ and the vertical coordinate is sin θ. The graph below plots those same two coordinates against the angle, so the circle point and the two curves always agree.",
+      "params": {
+        "angle": 30,
+        "showSin": true,
+        "showCos": true
+      },
+      "predict": {
+        "question": "At θ = 30°, which coordinate of P is 1/2?",
+        "options": [
+          "The x-coordinate, so cos 30° = 1/2",
+          "The y-coordinate, so sin 30° = 1/2",
+          "Neither coordinate is 1/2"
+        ],
+        "answer": 1,
+        "explain": "A 30° angle gives the point (√3/2, 1/2). The vertical coordinate is sin 30° = 1/2, while the horizontal coordinate is cos 30° = √3/2. The readout reports both from the same point."
+      }
+    }
   },
   {
     "label": "Definition of sine and cosine",

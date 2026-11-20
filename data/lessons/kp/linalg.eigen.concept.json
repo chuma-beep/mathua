@@ -6,7 +6,35 @@
       "Test whether A maps v onto its own line",
       "Write the scaling relation Av = lambda v",
       "Reject the zero vector as an eigenvector"
-    ]
+    ],
+    "visual": {
+      "type": "linalg.eigen",
+      "title": "An eigenvector is a direction that does not turn",
+      "caption": "Drag v around the circle. Where A v stays on the same line, the direction is an eigenvector and v·Av is its eigenvalue.",
+      "params": {
+        "matrix": [
+          2,
+          1,
+          1,
+          2
+        ],
+        "vector": [
+          1,
+          0
+        ],
+        "showCircle": true
+      },
+      "predict": {
+        "question": "For A = [[2, 1], [1, 2]], the direction (1, 1) is special because A does what to it?",
+        "options": [
+          "Turns it by 90 degrees",
+          "Keeps it on the same line",
+          "Sends it to zero"
+        ],
+        "answer": 1,
+        "explain": "A(1, 1) = (3, 3), which is 3 times (1, 1): same direction, scaled by the eigenvalue 3."
+      }
+    }
   },
   {
     "label": "The characteristic equation",

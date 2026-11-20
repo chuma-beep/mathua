@@ -6,7 +6,29 @@
       "Evaluate the right-hand side at a grid point",
       "Read a segment as a local slope",
       "Sketch a solution curve through a point"
-    ]
+    ],
+    "visual": {
+      "type": "ode.slopefield",
+      "title": "The field is the equation",
+      "caption": "Every short segment has slope f(x, y), so the field is the differential equation itself. The blue curve is integrated from the green starting point in both directions. Move the start, or change the method and step, to see the solution follow the local slopes.",
+      "params": {
+        "field": "exponential",
+        "x0": 0,
+        "y0": 1,
+        "step": 0.1,
+        "method": "rk4"
+      },
+      "predict": {
+        "question": "For y′ = y, what does the solution through (0, 1) do as x increases?",
+        "options": [
+          "It stays at 1",
+          "It grows",
+          "It decays"
+        ],
+        "answer": 1,
+        "explain": "The slope at a point is the value of y there. At (0, 1) the slope is 1, and the solution y = eˣ grows as x increases."
+      }
+    }
   },
   {
     "label": "Equilibrium solutions",

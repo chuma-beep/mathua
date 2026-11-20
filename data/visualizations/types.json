@@ -1,0 +1,190 @@
+[
+  {
+    "id": "linalg.matrix2d",
+    "status": "stable"
+  },
+  {
+    "id": "calc.tangent",
+    "status": "stable"
+  },
+  {
+    "id": "calc.riemann",
+    "status": "stable"
+  },
+  {
+    "id": "complex.multiply",
+    "status": "stable"
+  },
+  {
+    "id": "stat.normal",
+    "status": "stable"
+  },
+  {
+    "id": "geo.transform2d",
+    "status": "stable"
+  },
+  {
+    "id": "linalg.eigen",
+    "status": "stable"
+  },
+  {
+    "id": "calc.taylor",
+    "status": "stable"
+  },
+  {
+    "id": "calc.limit",
+    "status": "stable"
+  },
+  {
+    "id": "stat.sampling",
+    "status": "stable"
+  },
+  {
+    "id": "stat.regression",
+    "status": "stable"
+  },
+  {
+    "id": "linalg.vector",
+    "status": "stable"
+  },
+  {
+    "id": "linalg.basis",
+    "status": "stable"
+  },
+  {
+    "id": "stat.spread",
+    "status": "stable"
+  },
+  {
+    "id": "geo.conic",
+    "status": "stable"
+  },
+  {
+    "id": "calc.contour",
+    "status": "stable"
+  },
+  {
+    "id": "complex.map",
+    "status": "stable"
+  },
+  {
+    "id": "complex.levels",
+    "status": "stable"
+  },
+  {
+    "id": "geo.coord",
+    "status": "stable"
+  },
+  {
+    "id": "stat.family",
+    "status": "stable"
+  },
+  {
+    "id": "solid3d",
+    "status": "stable"
+  },
+  {
+    "id": "complex.contour",
+    "status": "stable"
+  },
+  {
+    "id": "linalg.elimination",
+    "status": "stable"
+  },
+  {
+    "id": "trig.unitcircle",
+    "status": "stable"
+  },
+  {
+    "id": "ode.slopefield",
+    "status": "stable"
+  },
+  {
+    "id": "numa.roots",
+    "status": "stable"
+  },
+  {
+    "id": "graph.network",
+    "status": "stable"
+  },
+  {
+    "id": "prob.tree",
+    "status": "stable"
+  },
+  {
+    "id": "frac.line",
+    "status": "stable"
+  },
+  {
+    "id": "function.graph",
+    "status": "stable"
+  },
+  {
+    "id": "arith.line",
+    "status": "stable"
+  },
+  {
+    "id": "nt.modular",
+    "status": "stable"
+  },
+  {
+    "id": "abstract.group",
+    "status": "stable"
+  },
+  {
+    "id": "discrete.lab",
+    "status": "stable"
+  },
+  {
+    "id": "optim.path",
+    "status": "stable"
+  },
+  {
+    "id": "analysis.lab",
+    "status": "stable"
+  },
+  {
+    "id": "ml.fit",
+    "status": "stable"
+  },
+  {
+    "id": "trig.sinusoid",
+    "status": "stable"
+  },
+  {
+    "id": "stat.inference",
+    "status": "stable"
+  },
+  {
+    "id": "ode.phase",
+    "status": "stable"
+  },
+  {
+    "id": "calc.vectorfield",
+    "status": "stable"
+  },
+  {
+    "id": "calc.surface",
+    "status": "stable"
+  },
+  {
+    "id": "calc.region",
+    "status": "stable"
+  },
+  {
+    "id": "calc.seriessum",
+    "status": "stable"
+  },
+  {
+    "id": "calc.accumulation",
+    "status": "stable"
+  },
+  {
+    "id": "calc.solidrev",
+    "status": "stable"
+  },
+  {
+    "id": "prob.area",
+    "status": "stable"
+  }
+]

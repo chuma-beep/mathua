@@ -6,7 +6,27 @@
       "substitute into every constraint",
       "include bounds as constraints",
       "report the first violation with values"
-    ]
+    ],
+    "visual": {
+      "type": "optim.path",
+      "title": "Test every constraint",
+      "caption": "A candidate is feasible only when every constraint value is nonnegative. The shaded polygon is the intersection of the stated half-planes.",
+      "params": {
+        "mode": "feasible",
+        "candidateX": 1,
+        "candidateY": 1
+      },
+      "predict": {
+        "question": "Does the point (1, 1) satisfy x + 2y at most 4 and 2x + y at most 5?",
+        "options": [
+          "Yes, both hold",
+          "No, the first fails",
+          "No, the second fails"
+        ],
+        "answer": 0,
+        "explain": "x + 2y = 3 at most 4 and 2x + y = 3 at most 5, so the point is feasible."
+      }
+    }
   },
   {
     "label": "Compute the feasible interval",

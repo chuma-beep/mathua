@@ -6,7 +6,30 @@
       "Simple harmonic motion is described by a sinusoidal displacement such as d = A cos(omega t).",
       "The angular frequency omega controls how quickly the motion repeats, and the period is 2 pi divided by omega.",
       "The equilibrium position is the midline of the motion, not necessarily zero."
-    ]
+    ],
+    "visual": {
+      "type": "trig.sinusoid",
+      "title": "The period of a harmonic motion model",
+      "caption": "Simple harmonic motion d = A cos(ωt) uses the angular frequency ω in place of B. Here d = 2 cos(2t) has amplitude 2, period 2π/2 = π and equilibrium at d = 0.",
+      "params": {
+        "form": "cos",
+        "amplitude": 2,
+        "frequency": 2,
+        "phase": 0,
+        "vertical": 0,
+        "showReference": true
+      },
+      "predict": {
+        "question": "For d = 2 cos(2t), what is the period?",
+        "options": [
+          "π/2",
+          "π",
+          "2π"
+        ],
+        "answer": 1,
+        "explain": "The period is 2π divided by the angular frequency. With ω = 2 the period is 2π/2 = π, so the motion repeats every π time units."
+      }
+    }
   },
   {
     "label": "Amplitude and Period",

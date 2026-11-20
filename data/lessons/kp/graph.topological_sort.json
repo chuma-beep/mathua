@@ -6,7 +6,27 @@
       "Find a vertex with in-degree zero",
       "Remove it and repeat",
       "Fail exactly when a cycle remains"
-    ]
+    ],
+    "visual": {
+      "type": "graph.network",
+      "title": "Remove a source, then repeat",
+      "caption": "A topological order puts every directed edge before its target. The algorithm repeatedly removes a vertex with in-degree zero. A cycle leaves no such vertex, so the order cannot exist.",
+      "params": {
+        "algorithm": "topological",
+        "start": "A",
+        "showTree": true
+      },
+      "predict": {
+        "question": "Which vertex can start a topological order of this DAG?",
+        "options": [
+          "A vertex with in-degree zero",
+          "A vertex with out-degree zero",
+          "Any vertex with the largest label"
+        ],
+        "answer": 0,
+        "explain": "A source has in-degree zero and no prerequisite. Removing it may expose another source, and the process repeats."
+      }
+    }
   },
   {
     "label": "Worked: Kahn's algorithm",

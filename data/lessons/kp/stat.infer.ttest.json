@@ -6,7 +6,29 @@
       "Estimate the standard error with s",
       "Widen the reference distribution",
       "Compare with the normal for large n"
-    ]
+    ],
+    "visual": {
+      "type": "stat.inference",
+      "title": "A small sample widens the reference",
+      "caption": "The t curve depends on the degrees of freedom. At 5 degrees of freedom its tails are heavy, so a statistic of 2.0 is not yet past the two-sided 5 percent critical value.",
+      "params": {
+        "dist": "t",
+        "df": 5,
+        "alpha": 0.05,
+        "effect": 0.8,
+        "observed": 2.0
+      },
+      "predict": {
+        "question": "At 5 degrees of freedom the two-sided critical value is about 2.571. What happens at t = 2.0?",
+        "options": [
+          "Reject the null at 5 percent",
+          "The p-value is exactly 0.05",
+          "Fail to reject at 5 percent"
+        ],
+        "answer": 2,
+        "explain": "The observed 2.0 is inside the critical value 2.571, so the two-sided p-value is above 0.05 and the null is not rejected."
+      }
+    }
   },
   {
     "label": "Worked: computing t",

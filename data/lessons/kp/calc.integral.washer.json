@@ -6,7 +6,26 @@
       "Subtract the inner disc from the outer disc for the annulus area",
       "Sum the washers into V = pi times the integral of f^2-g^2",
       "Split the integral where the boundary curves cross"
-    ]
+    ],
+    "visual": {
+      "type": "calc.solidrev",
+      "title": "Subtract the hole",
+      "caption": "The slice is an annulus, not a disk. Its area is the outer disk minus the inner disk, so the radii are squared before subtracting.",
+      "params": {
+        "mode": "washer",
+        "slice": 1.2
+      },
+      "predict": {
+        "question": "The area of a washer slice is:",
+        "options": [
+          "π(R − r)",
+          "π(R² − r²)",
+          "2π(R − r)"
+        ],
+        "answer": 1,
+        "explain": "The annulus area is the outer disk minus the inner disk, πR² − πr². Subtracting the radii first would give the wrong shape."
+      }
+    }
   },
   {
     "label": "Example 1",

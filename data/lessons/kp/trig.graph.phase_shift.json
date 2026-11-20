@@ -6,7 +6,30 @@
       "Separate the coefficient's job from the constant's",
       "Name the phase shift",
       "Keep the shift in the units of the axis"
-    ]
+    ],
+    "visual": {
+      "type": "trig.sinusoid",
+      "title": "The constant C slides the wave sideways",
+      "caption": "For y = sin(x − C), a positive C moves the wave to the right by C. With C = π/2 the sine wave starts a quarter turn later, so its value at x = π/2 is 0 instead of 1.",
+      "params": {
+        "form": "sin",
+        "amplitude": 1,
+        "frequency": 1,
+        "phase": 1.5707963267948966,
+        "vertical": 0,
+        "showReference": true
+      },
+      "predict": {
+        "question": "How does y = sin(x − π/2) move the graph of y = sin x?",
+        "options": [
+          "Right by π/2",
+          "Left by π/2",
+          "Up by π/2"
+        ],
+        "answer": 0,
+        "explain": "The inside expression is zero when x = π/2, so the cycle starts there. A subtraction inside the function shifts the graph to the right by π/2."
+      }
+    }
   },
   {
     "label": "Dividing by the coefficient",

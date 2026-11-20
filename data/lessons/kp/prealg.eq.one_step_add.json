@@ -6,7 +6,28 @@
       "Do the same to both sides",
       "Keep the equation balanced",
       "Undo addition with subtraction"
-    ]
+    ],
+    "visual": {
+      "type": "arith.line",
+      "title": "Keep the beam balanced",
+      "caption": "The balance shows x + 3 on the left and 8 on the right. Subtracting 3 from both sides keeps the beam level and leaves x = 5.",
+      "params": {
+        "mode": "balance",
+        "guess": 2,
+        "constant": 3,
+        "total": 8
+      },
+      "predict": {
+        "question": "If x + 3 = 8, what is x?",
+        "options": [
+          "3",
+          "5",
+          "11"
+        ],
+        "answer": 1,
+        "explain": "Subtract 3 from both sides: x = 8 - 3 = 5. The balance reads equal at that value."
+      }
+    }
   },
   {
     "label": "Solve one-step equations",

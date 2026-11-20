@@ -6,7 +6,33 @@
       "Split each factor into a + bi",
       "Read off the four pairwise products",
       "Replace i^2 by -1"
-    ]
+    ],
+    "visual": {
+      "type": "complex.multiply",
+      "title": "Multiplication rotates and scales",
+      "caption": "Drag z or w: the product's modulus is |z||w| and its argument is arg z + arg w, so multiplying by w rotates z by w's angle and scales it by w's length.",
+      "params": {
+        "z": [
+          1.5,
+          0.8
+        ],
+        "w": [
+          0.8,
+          1.2
+        ],
+        "showUnitCircle": true
+      },
+      "predict": {
+        "question": "If the modulus of w is 1, multiplying z by w does what?",
+        "options": [
+          "Scales z and leaves its angle alone",
+          "Reflects z across the real axis",
+          "Rotates z and leaves its length alone"
+        ],
+        "answer": 2,
+        "explain": "Multiplication adds arguments and multiplies moduli, so a unit modulus contributes only the rotation."
+      }
+    }
   },
   {
     "label": "Sum and difference of complex numbers",

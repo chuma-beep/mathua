@@ -1,4 +1,13 @@
 import { describe, it, expect, vi, beforeEach, afterAll } from 'vitest'
+
+// The default 5000 ms is too tight for this file, and it fails as a timeout rather
+// than as a wrong assertion. Each case mounts the welcome step, the review step, the
+// quiz host and the answer editor, which individually take 421-799 ms; under a full
+// parallel run the jsdom worker also waits behind other environments. Measured by
+// rerunning the suite with --testTimeout=3000, which failed exactly these cases.
+// `learnStepperDone.test.tsx` already grants comparable time to comparably heavy
+// cases. This is a budget for the environment, not a retry: a genuine hang still fails.
+vi.setConfig({ testTimeout: 20000 })
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import OnboardPage from '../app/onboard/page'
 import { submitGoalAnswer } from '../lib/api'

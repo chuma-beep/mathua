@@ -6,7 +6,27 @@
       "Write the curl in three dimensions",
       "Identify the cyclic pattern",
       "Explain why each component is planar"
-    ]
+    ],
+    "visual": {
+      "type": "calc.vectorfield",
+      "title": "Each component is planar",
+      "caption": "The vortex field has a single component of curl because it lies in one plane. In three dimensions each component of the curl is the planar curl of the other two components.",
+      "params": {
+        "preset": "vortex",
+        "radius": 1.2,
+        "showStreamlines": true
+      },
+      "predict": {
+        "question": "How does the three-dimensional curl treat its components?",
+        "options": [
+          "All three components are equal",
+          "Only the z component is ever nonzero",
+          "Each component is a planar curl in the plane normal to it"
+        ],
+        "answer": 2,
+        "explain": "curl F = (∂R/∂y − ∂Q/∂z, ∂P/∂z − ∂R/∂x, ∂Q/∂x − ∂P/∂y). Each entry differentiates the two components in the plane normal to that axis."
+      }
+    }
   },
   {
     "label": "Reading one component",

@@ -6,7 +6,27 @@
       "State the governing relation for breadth-first search",
       "Identify the quantities in the layers step",
       "Carry out the layers computation"
-    ]
+    ],
+    "visual": {
+      "type": "graph.network",
+      "title": "Breadth-first grows in layers",
+      "caption": "Breadth-first search visits every node at distance one before any node at distance two. The highlighted edges are the search tree, and each label is the order in which the node was visited.",
+      "params": {
+        "algorithm": "bfs",
+        "start": "A",
+        "showTree": true
+      },
+      "predict": {
+        "question": "Starting from A, which node is first reached at distance 2?",
+        "options": [
+          "F",
+          "C",
+          "B"
+        ],
+        "answer": 1,
+        "explain": "A is at distance 0. B and D are at distance 1. C and E are at distance 2, and C is visited before E because the neighbours are ordered by label."
+      }
+    }
   },
   {
     "label": "The queue order",

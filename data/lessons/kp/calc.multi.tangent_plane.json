@@ -6,7 +6,27 @@
       "Write the tangent plane",
       "Explain the two partial derivatives",
       "Compute one"
-    ]
+    ],
+    "visual": {
+      "type": "calc.surface",
+      "title": "Two slopes make one plane",
+      "caption": "The shaded patch touches the surface at the probe. Its two slopes are the partial derivatives, so the plane matches the surface value and both directional slopes there.",
+      "params": {
+        "field": "bowl",
+        "x0": 1,
+        "y0": 0.6
+      },
+      "predict": {
+        "question": "What supplies the coefficients of the tangent plane?",
+        "options": [
+          "The two partial derivatives",
+          "The two second derivatives",
+          "The function value alone"
+        ],
+        "answer": 0,
+        "explain": "z = f(x0, y0) + fx (x − x0) + fy (y − y0). The two slopes are the partial derivatives at the probe."
+      }
+    }
   },
   {
     "label": "Linear approximation",

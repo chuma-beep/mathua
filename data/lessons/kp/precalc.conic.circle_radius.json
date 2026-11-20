@@ -6,7 +6,30 @@
       "Complete the square in x",
       "Complete the square in y",
       "Read the centre from the coefficients"
-    ]
+    ],
+    "visual": {
+      "type": "geo.conic",
+      "title": "Completing the square recovers the radius",
+      "caption": "Starting from x² + y² − 4x + 2y − 4 = 0, complete the square in x and y. The equation becomes (x − 2)² + (y + 1)² = 9, so the centre is (2, −1) and the radius is 3.",
+      "params": {
+        "A": 1,
+        "B": 0,
+        "C": 1,
+        "D": -4,
+        "E": 2,
+        "F": -4
+      },
+      "predict": {
+        "question": "Complete the square for x² + y² − 4x + 2y − 4 = 0. What is the radius?",
+        "options": [
+          "9",
+          "3",
+          "4"
+        ],
+        "answer": 1,
+        "explain": "Move the constant to get x² − 4x + y² + 2y = 4. Add 4 and 1 to both sides, giving (x − 2)² + (y + 1)² = 9. The right side is r², so r = 3."
+      }
+    }
   },
   {
     "label": "Reading the radius",

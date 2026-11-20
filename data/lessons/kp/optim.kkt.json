@@ -6,7 +6,27 @@
       "check Lagrangian stationarity",
       "check primal feasibility",
       "check multiplier signs and slackness"
-    ]
+    ],
+    "visual": {
+      "type": "optim.path",
+      "title": "Stationarity, feasibility, sign",
+      "caption": "A KKT point is primal feasible, stationary against the active normals, and has nonnegative multipliers. The figure solves those multipliers from the drawn gradient and normals.",
+      "params": {
+        "mode": "feasible",
+        "candidateX": 2,
+        "candidateY": 1
+      },
+      "predict": {
+        "question": "At the optimum, what are the signs of the two resource multipliers?",
+        "options": [
+          "Both are negative",
+          "Both are positive",
+          "Both are zero"
+        ],
+        "answer": 1,
+        "explain": "The multipliers are 1/3 and 4/3. Both are positive, so increasing either bound can improve the objective, and the gradient is their nonnegative combination."
+      }
+    }
   },
   {
     "label": "Solve a small system",

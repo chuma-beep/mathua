@@ -6,7 +6,27 @@
       "Look at a contour of the equation",
       "Require a nonzero partial in the dependent variable",
       "Get a local single-valued branch"
-    ]
+    ],
+    "visual": {
+      "type": "calc.surface",
+      "title": "A level set as a graph",
+      "caption": "A contour of F(x, y) = 0 is locally a curve. When the partial in y is nonzero, that curve can be read as y as a function of x, which is what the implicit function theorem promises.",
+      "params": {
+        "field": "ripple",
+        "x0": 0,
+        "y0": 1
+      },
+      "predict": {
+        "question": "F(x, y) = 0 defines y locally as a function of x when:",
+        "options": [
+          "F_y ≠ 0",
+          "F_x = 0",
+          "F is zero everywhere"
+        ],
+        "answer": 0,
+        "explain": "The theorem needs a nonzero partial in the dependent variable. With F_y ≠ 0 the contour can be solved for y near the point."
+      }
+    }
   },
   {
     "label": "The derivative formula",

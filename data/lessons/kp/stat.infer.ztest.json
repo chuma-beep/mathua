@@ -6,7 +6,29 @@
       "Compute the standard error sigma/sqrt(n)",
       "Subtract the null mean",
       "Divide the gap by the standard error"
-    ]
+    ],
+    "visual": {
+      "type": "stat.inference",
+      "title": "A statistic measured in standard errors",
+      "caption": "The z statistic is the gap between the estimate and the null mean divided by the standard error. The curve is the standard normal, and the observed line is that number of standard errors from zero.",
+      "params": {
+        "dist": "z",
+        "df": 10,
+        "alpha": 0.05,
+        "effect": 0,
+        "observed": 2.2
+      },
+      "predict": {
+        "question": "A z statistic of 2.2 is tested at alpha 0.05. What is the decision?",
+        "options": [
+          "Fail to reject because 2.2 is below 1.96",
+          "Reject because the two-sided p-value is below 0.05",
+          "Reject because 2.2 is positive"
+        ],
+        "answer": 1,
+        "explain": "The two-sided p-value at 2.2 is about 0.028. It is below 0.05, so the null is rejected."
+      }
+    }
   },
   {
     "label": "Worked: computing z",
