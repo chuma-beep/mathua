@@ -6,7 +6,27 @@
       "Read a double integral as two",
       "Treat the inner variable's partner as constant",
       "Evaluate over a rectangle"
-    ]
+    ],
+    "visual": {
+      "type": "calc.region",
+      "title": "Inside first, outside second",
+      "caption": "The grid shows the cells the sum counts. In the inner integral the outer variable is a constant, so the inner sum only moves along one row of cells.",
+      "params": {
+        "region": "rect",
+        "density": "x",
+        "n": 12
+      },
+      "predict": {
+        "question": "In ∫₀²∫₀¹ x dy dx, which variable is constant during the inner integral?",
+        "options": [
+          "y",
+          "x",
+          "Both"
+        ],
+        "answer": 1,
+        "explain": "The inner integral is with respect to y, so x is held constant and ∫₀¹ x dy = x."
+      }
+    }
   },
   {
     "label": "Choosing the order",

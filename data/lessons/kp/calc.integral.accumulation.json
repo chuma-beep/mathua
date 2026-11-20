@@ -6,7 +6,27 @@
       "Read an accumulation function",
       "Use a dummy variable",
       "Explain the effect of the starting point"
-    ]
+    ],
+    "visual": {
+      "type": "calc.accumulation",
+      "title": "Area that grows with x",
+      "caption": "The shaded area depends on where the right end sits. The lower curve is that area plotted against x, so the starting point shifts the whole curve without changing its shape.",
+      "params": {
+        "fn": "square",
+        "a": 0.5,
+        "x": 2
+      },
+      "predict": {
+        "question": "The accumulation function A(x) = ∫ₐˣ f has derivative:",
+        "options": [
+          "F(x), the antiderivative",
+          "0",
+          "f(x), the integrand"
+        ],
+        "answer": 2,
+        "explain": "A′(x) = f(x). The rate at which area accumulates equals the height of the curve at the right end."
+      }
+    }
   },
   {
     "label": "The derivative",

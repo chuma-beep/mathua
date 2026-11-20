@@ -6,7 +6,28 @@
       "Read eigenvalues 2 and -3",
       "Assign approach vs departure axes",
       "Sketch the hyperbolic flow"
-    ]
+    ],
+    "visual": {
+      "type": "ode.phase",
+      "title": "One stable direction and one unstable direction",
+      "caption": "The phase plane draws the vector field of a linear system. A saddle has one eigenvalue positive and one negative, so solutions leave along one eigenvector and approach along the other.",
+      "params": {
+        "mode": "plane",
+        "lineModel": "logistic",
+        "system": "saddle",
+        "showTrajectories": true
+      },
+      "predict": {
+        "question": "The matrix diag(2, minus 3) has eigenvalues 2 and minus 3. What kind of equilibrium is the origin?",
+        "options": [
+          "A stable node",
+          "A centre",
+          "A saddle"
+        ],
+        "answer": 2,
+        "explain": "One eigenvalue is positive and one is negative. The origin is a saddle, with departure along the positive eigenvector and approach along the negative one."
+      }
+    }
   },
   {
     "label": "Worked: a node and a spiral",

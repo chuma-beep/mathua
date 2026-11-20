@@ -6,7 +6,28 @@
       "Set one component to zero",
       "Identify the curve",
       "State the flow direction on it"
-    ]
+    ],
+    "visual": {
+      "type": "ode.phase",
+      "title": "Where one component stops changing",
+      "caption": "The nullclines are the curves where one derivative is zero. On the x-prime nullcline the flow is vertical, and on the y-prime nullcline it is horizontal. Their intersection is the equilibrium.",
+      "params": {
+        "mode": "plane",
+        "lineModel": "logistic",
+        "system": "stable-node",
+        "showTrajectories": false
+      },
+      "predict": {
+        "question": "On the x-prime nullcline, which component of the velocity is zero?",
+        "options": [
+          "The y component",
+          "The x component",
+          "Both components"
+        ],
+        "answer": 1,
+        "explain": "The x-prime nullcline is defined by x prime equals zero. The velocity is then vertical, so only its x component vanishes."
+      }
+    }
   },
   {
     "label": "Reading the signs",

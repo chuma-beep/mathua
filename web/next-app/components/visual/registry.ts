@@ -17,6 +17,9 @@ import {
   gaussianSchema,
   graphSchema,
   groupSchema,
+  accumulationSchema,
+  conditionalAreaSchema,
+  inferenceSchema,
   limitSchema,
   matrix2dSchema,
   modelFitSchema,
@@ -25,19 +28,25 @@ import {
   numberLineSchema,
   odeSlopeSchema,
   optimizationSchema,
+  phaseSchema,
   probabilityTreeSchema,
   regressionSchema,
   riemannSchema,
   rootsSchema,
   samplingSchema,
+  seriesSumSchema,
   sinusoidSchema,
+  solidRevSchema,
   solid3dSchema,
   spreadSchema,
+  surfaceSchema,
   tangentSchema,
   taylorSchema,
   vectorCombinationSchema,
   transform2dSchema,
   unitCircleSchema,
+  vectorFieldSchema,
+  regionSchema,
 } from './schemas'
 
 // The closed registry. Adding a template is one entry here, one schema above,
@@ -198,6 +207,42 @@ export const VISUAL_TEMPLATES: Record<string, VisualTemplateEntry> = {
   'ml.fit': {
     schema: modelFitSchema,
     load: () => import('./templates/ModelFit'),
+  },
+  'stat.inference': {
+    schema: inferenceSchema,
+    load: () => import('./templates/InferenceLab'),
+  },
+  'ode.phase': {
+    schema: phaseSchema,
+    load: () => import('./templates/PhasePortrait'),
+  },
+  'calc.vectorfield': {
+    schema: vectorFieldSchema,
+    load: () => import('./templates/VectorFieldLab'),
+  },
+  'calc.surface': {
+    schema: surfaceSchema,
+    load: () => import('./templates/SurfaceLab'),
+  },
+  'calc.region': {
+    schema: regionSchema,
+    load: () => import('./templates/RegionIntegral'),
+  },
+  'calc.seriessum': {
+    schema: seriesSumSchema,
+    load: () => import('./templates/SeriesLab'),
+  },
+  'calc.accumulation': {
+    schema: accumulationSchema,
+    load: () => import('./templates/AccumulationLab'),
+  },
+  'calc.solidrev': {
+    schema: solidRevSchema,
+    load: () => import('./templates/SolidRevolution'),
+  },
+  'prob.area': {
+    schema: conditionalAreaSchema,
+    load: () => import('./templates/ConditionalArea'),
   },
 }
 

@@ -6,7 +6,28 @@
       "Read the velocity at a point",
       "Check the direction of the arrow",
       "Identify a stationary point"
-    ]
+    ],
+    "visual": {
+      "type": "ode.phase",
+      "title": "Every arrow is the right-hand side",
+      "caption": "Each arrow at a point is the vector of derivatives at that point, not a decorative direction. The field converges toward the origin for a stable node.",
+      "params": {
+        "mode": "plane",
+        "lineModel": "logistic",
+        "system": "stable-node",
+        "showTrajectories": true
+      },
+      "predict": {
+        "question": "At a stationary point of the vector field, what is the velocity?",
+        "options": [
+          "Zero in both components",
+          "Always positive in x",
+          "Equal to the trace"
+        ],
+        "answer": 0,
+        "explain": "A stationary point solves x prime equals zero and y prime equals zero. Both velocity components vanish there."
+      }
+    }
   },
   {
     "label": "The flow",

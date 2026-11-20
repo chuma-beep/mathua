@@ -6,7 +6,26 @@
       "Form partial sums S_N = sum_1^N a_n",
       "Take N to inf for the sum",
       "Compute sum (1/2)^n = 1 via S_N"
-    ]
+    ],
+    "visual": {
+      "type": "calc.seriessum",
+      "title": "Partial sums are the series",
+      "caption": "The bars are the terms and the curve is the running sum. A series is not its terms: it is the limit that curve approaches, if it approaches one.",
+      "params": {
+        "kind": "geometric",
+        "terms": 8
+      },
+      "predict": {
+        "question": "A series is defined as:",
+        "options": [
+          "The last term",
+          "The sum of finitely many terms",
+          "The limit of its partial sums"
+        ],
+        "answer": 2,
+        "explain": "The series is the limit of S_N as N grows. The lower curve in the figure is exactly the sequence of partial sums."
+      }
+    }
   },
   {
     "label": "Nature of a series",

@@ -6,7 +6,26 @@
       "Write sum 1/n partial sums",
       "Group 1/3+1/4 > 1/2 for divergence",
       "Estimate S_4 = 25/12"
-    ]
+    ],
+    "visual": {
+      "type": "calc.seriessum",
+      "title": "Terms to zero, sum to infinity",
+      "caption": "The terms shrink to nothing yet the partial sums keep growing. Grouping the terms into blocks shows each block already exceeds one half.",
+      "params": {
+        "kind": "harmonic",
+        "terms": 20
+      },
+      "predict": {
+        "question": "The harmonic series:",
+        "options": [
+          "Converges to ln 2",
+          "Diverges",
+          "Converges to π²/6"
+        ],
+        "answer": 1,
+        "explain": "The terms tend to zero but the partial sums grow without bound. Blocks 1/3 + 1/4, then the next four terms, and so on, each exceed 1/2."
+      }
+    }
   },
   {
     "label": "Generalized harmonic series (p-series)",

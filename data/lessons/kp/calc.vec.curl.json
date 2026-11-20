@@ -6,7 +6,27 @@
       "Write the scalar curl",
       "Compute it for a linear field",
       "Explain why a plane needs only a scalar"
-    ]
+    ],
+    "visual": {
+      "type": "calc.vectorfield",
+      "title": "Circulation to the left",
+      "caption": "The shear field pushes right where y is positive and left where y is negative. The loop integral does not vanish, and its sign is the sign of the scalar curl.",
+      "params": {
+        "preset": "shear",
+        "radius": 1.2,
+        "showStreamlines": true
+      },
+      "predict": {
+        "question": "For F = (y, 0), the scalar curl is:",
+        "options": [
+          "2",
+          "0",
+          "−1"
+        ],
+        "answer": 2,
+        "explain": "curl F = ∂Q/∂x − ∂P/∂y = 0 − 1 = −1. The negative sign means the circulation runs clockwise on the drawn loop."
+      }
+    }
   },
   {
     "label": "What non-zero curl means",

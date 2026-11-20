@@ -66,6 +66,71 @@ export function taylorValue(coeffs: number[], center: number, x: number): number
 }
 
 /** The largest |f(x) - P(x)| over a sampled window, which is the visual's claim. */
+export type SumKind = 'geometric' | 'harmonic' | 'p2' | 'alternating'
+
+export const SUM_LABELS: Record<SumKind, string> = {
+  geometric: 'Σ (1/2)^k',
+  harmonic: 'Σ 1/k',
+  p2: 'Σ 1/k²',
+  alternating: 'Σ (−1)^(k+1)/k',
+}
+
+export const SUM_NAMES: Record<SumKind, string> = {
+  geometric: 'Geometric',
+  harmonic: 'Harmonic',
+  p2: 'p-series, p = 2',
+  alternating: 'Alternating',
+}
+
+/** The kth term, with k counted from 1. */
+export function sumTerm(kind: SumKind, k: number): number {
+  if (!Number.isFinite(k) || k < 1) return Number.NaN
+  switch (kind) {
+    case 'geometric':
+      return Math.pow(0.5, k)
+    case 'harmonic':
+      return 1 / k
+    case 'p2':
+      return 1 / (k * k)
+    case 'alternating':
+      return (k % 2 === 1 ? 1 : -1) / k
+  }
+}
+
+/** The sum of the first n terms, accumulated in order so it matches the bars. */
+export function partialSum(kind: SumKind, n: number): number {
+  const count = Math.max(0, Math.floor(n))
+  let total = 0
+  for (let k = 1; k <= count; k++) total += sumTerm(kind, k)
+  return total
+}
+
+/** The value the partial sums approach, or Infinity when they do not. */
+export function seriesLimit(kind: SumKind): number {
+  switch (kind) {
+    case 'geometric':
+      return 1
+    case 'harmonic':
+      return Number.POSITIVE_INFINITY
+    case 'p2':
+      return (Math.PI * Math.PI) / 6
+    case 'alternating':
+      return Math.LN2
+  }
+}
+
+/** |a_{k+1}/a_k|, which is what the ratio test reads. */
+export function ratioTerm(kind: SumKind, k: number): number {
+  const next = Math.abs(sumTerm(kind, k + 1))
+  const current = Math.abs(sumTerm(kind, k))
+  if (current === 0) return Number.NaN
+  return next / current
+}
+
+export function sumStatus(kind: SumKind): 'converges' | 'diverges' {
+  return kind === 'harmonic' ? 'diverges' : 'converges'
+}
+
 export function maxError(fn: SeriesFn, center: number, degree: number, a: number, b: number, samples = 200): number {
   // A sample grid can step over the pole of 1/(1-x) and report a finite maximum for
   // a window where the function has no value. The pole is known in closed form, so

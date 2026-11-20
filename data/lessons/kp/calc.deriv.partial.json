@@ -6,7 +6,27 @@
       "Hold y fixed and differentiate in x for fx",
       "Hold x fixed and differentiate in y for fy",
       "Compute fx, fy of x^2 y + sin y"
-    ]
+    ],
+    "visual": {
+      "type": "calc.surface",
+      "title": "Hold one variable still",
+      "caption": "The tangent plane has two slopes because the surface can be sliced two ways. The probe sits on z = xy, and each partial derivative is the slope of one slice.",
+      "params": {
+        "field": "product",
+        "x0": 1,
+        "y0": 2
+      },
+      "predict": {
+        "question": "At (1, 2) for f = xy, the partial derivative fx is:",
+        "options": [
+          "1",
+          "2",
+          "3"
+        ],
+        "answer": 1,
+        "explain": "fx differentiates in x with y held fixed, so fx = y = 2 at that point."
+      }
+    }
   },
   {
     "label": "Higher-order partial derivatives",

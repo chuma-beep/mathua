@@ -6,7 +6,27 @@
       "Order the vertices",
       "Take the smallest available colour",
       "Compare two orders"
-    ]
+    ],
+    "visual": {
+      "type": "graph.network",
+      "title": "Greedy colouring, one vertex at a time",
+      "caption": "Each vertex takes the smallest colour no neighbour already has. The odd cycle forces a third colour, and the chord makes sure the greedy order cannot avoid it.",
+      "params": {
+        "algorithm": "colouring",
+        "start": "A",
+        "showTree": true
+      },
+      "predict": {
+        "question": "How many colours does the greedy colouring of this graph use?",
+        "options": [
+          "2",
+          "3",
+          "4"
+        ],
+        "answer": 1,
+        "explain": "An odd cycle needs three colours. The chord joins two vertices at distance two, so a two-colouring would give adjacent vertices the same colour."
+      }
+    }
   },
   {
     "label": "The definition",

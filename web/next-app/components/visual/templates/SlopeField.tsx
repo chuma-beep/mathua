@@ -12,7 +12,7 @@ import { useDrag } from '../useDrag'
 import type { TemplateProps } from '../types'
 
 const W = 360
-const H = 300
+const H = 360
 const PAD = 28
 const EXTENT = 3
 const BOUNDS = { x0: -EXTENT, x1: EXTENT, y0: -EXTENT, y1: EXTENT }
@@ -43,7 +43,8 @@ export default function SlopeField({ params, title, caption }: TemplateProps) {
   const Y = scaleLinear(EXTENT, -EXTENT, PAD, H - PAD)
   const toX = invertLinear(-EXTENT, EXTENT, PAD, W - PAD)
   const toY = invertLinear(EXTENT, -EXTENT, PAD, H - PAD)
-  const ticks = [-3, -2, -1, 0, 1, 2, 3]
+  // +-3 sit on the frame, so their labels were half outside it.
+  const ticks = [-2, -1, 0, 1, 2]
 
   useDrag(svgRef, (pointer) => {
     setX0(clamp(toX(pointer.x), -3, 3))
@@ -70,7 +71,10 @@ export default function SlopeField({ params, title, caption }: TemplateProps) {
         const length = Math.hypot(1, slope)
         const ux = 1 / length
         const uy = slope / length
-        const half = 5
+        // Half-length in data units, not pixels. It was 5, which in a window of
+        // +-3 drew every mark across the whole figure and turned the field into
+        // a web of crossing lines. One grid cell is 0.4, so 0.16 is a mark.
+        const half = 0.16
         result.push({
           x1: X(x - ux * half),
           y1: Y(y - uy * half),
@@ -119,6 +123,8 @@ export default function SlopeField({ params, title, caption }: TemplateProps) {
       >
         <line x1={PAD} y1={Y(0)} x2={W - PAD} y2={Y(0)} stroke="var(--text-muted)" strokeWidth="0.8" />
         <line x1={X(0)} y1={PAD} x2={X(0)} y2={H - PAD} stroke="var(--text-muted)" strokeWidth="0.8" />
+        <XAxisTicks ticks={ticks} scale={X} at={Y(0)} />
+        <YAxisTicks ticks={ticks} scale={Y} at={X(0)} />
 
         {segments.map((segment, index) => (
           <line
@@ -138,12 +144,17 @@ export default function SlopeField({ params, title, caption }: TemplateProps) {
         ) : null}
 
         <circle cx={X(x0)} cy={Y(y0)} r="4.5" fill="var(--accent-green)" />
-        <text x={X(x0) + 8} y={Y(y0) - 7} fontSize="9" fill="var(--text-primary)">
+        <text
+          x={X(x0) + 8}
+          y={Y(y0) - 7}
+          fontSize="9"
+          fill="var(--text-primary)"
+          stroke="var(--bg)"
+          strokeWidth="3"
+          paintOrder="stroke"
+        >
           start
         </text>
-
-        <XAxisTicks ticks={ticks} scale={X} at={Y(0)} />
-        <YAxisTicks ticks={ticks} scale={Y} at={X(0)} />
       </svg>
 
       <div className="mt-3 space-y-2">

@@ -6,7 +6,27 @@
       "State Stokes' theorem",
       "Identify each side",
       "See Green's theorem as the flat case"
-    ]
+    ],
+    "visual": {
+      "type": "calc.vectorfield",
+      "title": "A flat surface is Green's theorem",
+      "caption": "A vortex has circulation at every radius. Seen as a surface integral, the same number is the flux of the curl through the disk, which is the flat case of Stokes.",
+      "params": {
+        "preset": "vortex",
+        "radius": 1.2,
+        "showStreamlines": true
+      },
+      "predict": {
+        "question": "Stokes' theorem becomes Green's theorem when:",
+        "options": [
+          "The surface is flat and lies in a plane",
+          "The field is constant",
+          "The boundary shrinks to a point"
+        ],
+        "answer": 0,
+        "explain": "On a planar surface the flux of the curl through it is the double integral of the scalar curl, which is exactly Green's theorem."
+      }
+    }
   },
   {
     "label": "A flat surface",

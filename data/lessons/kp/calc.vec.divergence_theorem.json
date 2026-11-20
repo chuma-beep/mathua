@@ -6,7 +6,27 @@
       "State the divergence theorem",
       "Match it to Green's theorem",
       "Identify what each side measures"
-    ]
+    ],
+    "visual": {
+      "type": "calc.vectorfield",
+      "title": "Flux out of a closed surface",
+      "caption": "The source field leaves every closed loop. The outward flux grows with the radius, and the divergence times the enclosed area gives the same value, which is the divergence theorem in the plane.",
+      "params": {
+        "preset": "source",
+        "radius": 1.2,
+        "showStreamlines": true
+      },
+      "predict": {
+        "question": "The divergence theorem equates the flux out of a closed surface to:",
+        "options": [
+          "The circulation on the boundary",
+          "The triple integral of the divergence inside",
+          "The surface area of the boundary"
+        ],
+        "answer": 1,
+        "explain": "∮F·n dS = ∭div F dV. For F = (x, y) the outward flux 2πr² equals the divergence 2 times the area πr²."
+      }
+    }
   },
   {
     "label": "A box",

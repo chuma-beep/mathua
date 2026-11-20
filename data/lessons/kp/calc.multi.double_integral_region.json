@@ -6,7 +6,27 @@
       "Define a type I region",
       "Write its limits as functions",
       "Identify a region that is not type I"
-    ]
+    ],
+    "visual": {
+      "type": "calc.region",
+      "title": "A region with curved limits",
+      "caption": "The shaded cells are the ones whose centres lie between the two curves. The limits are functions of x, which is what makes this a type I region.",
+      "params": {
+        "region": "between",
+        "density": "one",
+        "n": 12
+      },
+      "predict": {
+        "question": "The area between y = x² and y = x on [0, 1] is:",
+        "options": [
+          "1/2",
+          "1/6",
+          "1/3"
+        ],
+        "answer": 1,
+        "explain": "Subtract the lower curve: ∫₀¹ (x − x²) dx = 1/2 − 1/3 = 1/6. The grid approaches that value as it refines."
+      }
+    }
   },
   {
     "label": "Setting the limits",

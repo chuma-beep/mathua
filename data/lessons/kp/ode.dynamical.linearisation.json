@@ -6,7 +6,28 @@
       "Differentiate both components",
       "Evaluate at the fixed point",
       "Write the linear system"
-    ]
+    ],
+    "visual": {
+      "type": "ode.phase",
+      "title": "A spiral from a complex eigenvalue",
+      "caption": "Near a fixed point the Jacobian gives a linear system. A negative real part with a nonzero imaginary part produces a stable spiral, and the trajectories rotate inward.",
+      "params": {
+        "mode": "plane",
+        "lineModel": "logistic",
+        "system": "spiral",
+        "showTrajectories": true
+      },
+      "predict": {
+        "question": "A linearisation has eigenvalues minus 0.5 plus or minus i. What is the local picture?",
+        "options": [
+          "A stable spiral",
+          "An unstable saddle",
+          "A neutral centre"
+        ],
+        "answer": 0,
+        "explain": "The real part is negative, so trajectories decay, and the imaginary part makes them rotate. The fixed point is a stable spiral."
+      }
+    }
   },
   {
     "label": "Trace and determinant",

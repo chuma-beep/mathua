@@ -6,7 +6,26 @@
       "Rotate the region and pick shells vs washers",
       "Set up 2 pi integral of radius*height dx",
       "Preview shell for rotation around y-axis"
-    ]
+    ],
+    "visual": {
+      "type": "calc.solidrev",
+      "title": "Two partitions, one volume",
+      "caption": "The body is swept from the drawn profile. A disk slice is a thin cylinder, a washer slice is a thin annulus and a shell slice is a thin tube. Each readout is the integral of that slice over the interval. Disks and washers share one body about the horizontal axis; the shell body is a second solid about the vertical axis, so its volume is not meant to match theirs.",
+      "params": {
+        "mode": "shell",
+        "slice": 1.2
+      },
+      "predict": {
+        "question": "In the shell formula V = 2π ∫ x f(x) dx, what is x?",
+        "options": [
+          "The height of the shell",
+          "The distance from the axis of rotation",
+          "The thickness of the shell"
+        ],
+        "answer": 1,
+        "explain": "The shell sits at radius x, so its circumference is 2πx. The height is f(x) and the thickness is dx; the radius is the distance from the axis."
+      }
+    }
   },
   {
     "label": "The Method of Cylindrical Shells",

@@ -303,15 +303,15 @@
     },
     {
       "id": "ode.slopefield",
-      "reason": "differential equations are not one of the proposal’s 31 topics; the slope-field figure plots the actual right-hand side and integrates a solution, so it is recorded here rather than inflating the topic list"
+      "reason": "differential equations are not one of the proposal\u2019s 31 topics; the slope-field figure plots the actual right-hand side and integrates a solution, so it is recorded here rather than inflating the topic list"
     },
     {
       "id": "numa.roots",
-      "reason": "numerical analysis is not one of the proposal’s 31 topics; the root-iteration figure runs bisection and Newton on the actual function, so it is recorded here rather than inflating the topic list"
+      "reason": "numerical analysis is not one of the proposal\u2019s 31 topics; the root-iteration figure runs bisection and Newton on the actual function, so it is recorded here rather than inflating the topic list"
     },
     {
       "id": "graph.network",
-      "reason": "graph theory is not one of the proposal’s 31 topics; the graph figure runs traversal, shortest-path and spanning-tree algorithms on its own edges, so it is recorded here rather than inflating the topic list"
+      "reason": "graph theory is not one of the proposal\u2019s 31 topics; the graph figure runs traversal, shortest-path and spanning-tree algorithms on its own edges, so it is recorded here rather than inflating the topic list"
     },
     {
       "id": "prob.tree",
@@ -356,6 +356,42 @@
     {
       "id": "trig.sinusoid",
       "reason": "amplitude, period, phase and frequency are properties of the graph that the unit-circle figure cannot show; the same wave controls serve ten trigonometry and precalculus lessons"
+    },
+    {
+      "id": "stat.inference",
+      "reason": "statistical inference is not one of the 31 proposal topics; the figure draws the null and alternative distributions, the rejection region, the p-value, the error rates and the interval from the same test model"
+    },
+    {
+      "id": "ode.phase",
+      "reason": "phase lines and phase planes are not one of the 31 proposal topics; equilibria, stability, nullclines and trajectories are read from the same differential equation"
+    },
+    {
+      "id": "calc.vectorfield",
+      "reason": "divergence and curl are drawn from the same field the arrows and the loop integrals use, so Green and Stokes can be checked rather than asserted"
+    },
+    {
+      "id": "calc.surface",
+      "reason": "a tangent plane and a Hessian saddle test are not one of the 31 proposal topics; the picture carries the two partial slopes and the discriminant"
+    },
+    {
+      "id": "calc.region",
+      "reason": "partitioning a planar region into cells makes the double integral a counted sum, with the exact value and the error both reported"
+    },
+    {
+      "id": "calc.seriessum",
+      "reason": "terms and partial sums on one axis separate the test from the sum; the limit line shows convergence without a proof"
+    },
+    {
+      "id": "calc.accumulation",
+      "reason": "the area function and the integrand share an x axis, so the fundamental theorem is a slope comparison rather than a statement"
+    },
+    {
+      "id": "calc.solidrev",
+      "reason": "disk, washer and shell slices of the same body show why three formulas measure one volume"
+    },
+    {
+      "id": "prob.area",
+      "reason": "conditional probability as an area keeps the multiplication rule and independence visible in the same unit square"
     }
   ]
 }

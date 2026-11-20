@@ -6,7 +6,27 @@
       "Write a line integral as a t-integral",
       "Substitute the parametrisation",
       "Notice that direction changes the sign"
-    ]
+    ],
+    "visual": {
+      "type": "calc.vectorfield",
+      "title": "Direction changes the sign",
+      "caption": "The line integral walks around the loop and adds the component of the field along the step. Reversing the walk reverses every step, so the whole sum changes sign.",
+      "params": {
+        "preset": "vortex",
+        "radius": 1.2,
+        "showStreamlines": true
+      },
+      "predict": {
+        "question": "Reversing the direction of a path changes a line integral how?",
+        "options": [
+          "It leaves it unchanged",
+          "It changes its sign",
+          "It doubles it"
+        ],
+        "answer": 1,
+        "explain": "Every step dr changes sign, so ∫F·dr changes sign. On this loop the circulation is 2πr² and the reverse walk gives −2πr²."
+      }
+    }
   },
   {
     "label": "Gradient fields",

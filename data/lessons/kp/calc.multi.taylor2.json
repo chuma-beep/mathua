@@ -6,7 +6,27 @@
       "Use the gradient for the linear term",
       "Use the Hessian for the quadratic term",
       "Add both to f at the point"
-    ]
+    ],
+    "visual": {
+      "type": "calc.surface",
+      "title": "From a plane to a bowl",
+      "caption": "The tangent plane is the linear model. Adding the Hessian term bends it into a quadratic that matches the curvature, which is the second-order Taylor model.",
+      "params": {
+        "field": "saddle",
+        "x0": 0,
+        "y0": 0
+      },
+      "predict": {
+        "question": "The quadratic term of the second-order model comes from:",
+        "options": [
+          "The gradient",
+          "The Hessian",
+          "The value of f alone"
+        ],
+        "answer": 1,
+        "explain": "f(x0 + h) ≈ f + ∇f·h + ½hᵀHh. The Hessian H supplies the quadratic term that the tangent plane omits."
+      }
+    }
   },
   {
     "label": "Worked: a quadratic expansion",

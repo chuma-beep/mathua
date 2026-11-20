@@ -6,7 +6,26 @@
       "Slice the solid into discs of radius f(x) and thickness dx",
       "Write each slice as pi times f(x)^2 times dx",
       "Sum the slices into V = pi times the integral of f(x)^2"
-    ]
+    ],
+    "visual": {
+      "type": "calc.solidrev",
+      "title": "A stack of thin cylinders",
+      "caption": "The body is cut into thin disks. Each disk is a cylinder whose radius is the profile at that x, so the volume is the sum of πR² dx.",
+      "params": {
+        "mode": "disk",
+        "slice": 1.2
+      },
+      "predict": {
+        "question": "A disk slice of radius R and thickness dx has volume:",
+        "options": [
+          "2πR dx",
+          "πR dx",
+          "πR² dx"
+        ],
+        "answer": 2,
+        "explain": "The slice is a thin cylinder: base area πR² times thickness dx. Summing those gives V = π∫R² dx."
+      }
+    }
   },
   {
     "label": "Example",

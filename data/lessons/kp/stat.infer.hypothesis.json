@@ -6,7 +6,29 @@
       "State the null and the alternative",
       "Choose one- or two-sided",
       "Fix alpha before the data"
-    ]
+    ],
+    "visual": {
+      "type": "stat.inference",
+      "title": "Two curves and one rejection region",
+      "caption": "The null curve is the distribution of the statistic when the null claim is true. Alpha sets the two tail areas that count as evidence against it. The observed statistic and the alternative curve are drawn from the same model.",
+      "params": {
+        "dist": "z",
+        "df": 10,
+        "alpha": 0.05,
+        "effect": 0.8,
+        "observed": 1.96
+      },
+      "predict": {
+        "question": "Before seeing the data, what does alpha fix?",
+        "options": [
+          "The total tail area used to reject the null",
+          "The probability that the null is true",
+          "The observed value of the statistic"
+        ],
+        "answer": 0,
+        "explain": "Alpha is chosen before the data. It is the Type I error rate, the total area in the two rejection tails when the null is true."
+      }
+    }
   },
   {
     "label": "Worked: writing the hypotheses",

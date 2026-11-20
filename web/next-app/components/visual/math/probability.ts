@@ -29,6 +29,46 @@ export interface ProbabilityTree {
 
 const clamp01 = (value: number) => Math.min(1, Math.max(0, value))
 
+export interface ConditionalArea {
+  pB: number
+  pAgivenB: number
+  pAgivenBc: number
+  pA: number
+  pAandB: number
+  pAandBc: number
+  pBc: number
+  /** true when the two conditional probabilities agree. */
+  independent: boolean
+}
+
+/**
+ * The area model behind conditioning: the unit square is split into a column
+ * for B of width P(B) and a column for its complement, and the event A is a
+ * horizontal band inside each column whose height is the conditional
+ * probability. The band's area inside the B column is P(B)·P(A|B), which is
+ * P(A ∩ B) by definition, so the picture cannot disagree with the formula.
+ */
+export function conditionalArea(pB: number, pAgivenB: number, pAgivenBc: number): ConditionalArea | null {
+  if (![pB, pAgivenB, pAgivenBc].every(Number.isFinite)) return null
+  const b = clamp01(pB)
+  const givenB = clamp01(pAgivenB)
+  const givenBc = clamp01(pAgivenBc)
+  const bc = 1 - b
+  const aAndB = b * givenB
+  const aAndBc = bc * givenBc
+  return {
+    pB: b,
+    pAgivenB: givenB,
+    pAgivenBc: givenBc,
+    pA: aAndB + aAndBc,
+    pAandB: aAndB,
+    pAandBc: aAndBc,
+    pBc: bc,
+    independent: Math.abs(givenB - givenBc) < 1e-9,
+  }
+}
+
+
 /**
  * Build the tree from a prior, a sensitivity and a specificity. Returns null
  * when a value is not finite, because there is no tree to draw in that case.

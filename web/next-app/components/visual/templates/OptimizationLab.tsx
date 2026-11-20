@@ -7,7 +7,11 @@ import { XAxisTicks, YAxisTicks } from '../Axis'
 import { optimizationSchema } from '../schemas'
 import {
   gradientDescent,
+  lagrangeModel,
   linearProgram,
+  newtonFirst,
+  newtonMinimise,
+  newtonObjective,
   objective,
   objectiveContour,
   type LpShiftWhich,
@@ -52,6 +56,8 @@ export default function OptimizationLab({ params, title, caption }: TemplateProp
     () => linearProgram(candidateX, candidateY, { which: rhs, delta }),
     [candidateX, candidateY, rhs, delta],
   )
+  const lagrange = useMemo(() => lagrangeModel(candidateX), [candidateX])
+  const newton = useMemo(() => newtonMinimise(startX, steps), [startX, steps])
   const X = scaleLinear(BOUNDS.x0, BOUNDS.x1, PAD, W - PAD)
   const Y = scaleLinear(BOUNDS.y0, BOUNDS.y1, H - PAD, PAD)
   const ticks = niceTicks(-3, 3, 4).filter((value) => Math.abs(value) > 1e-9)
@@ -89,6 +95,27 @@ export default function OptimizationLab({ params, title, caption }: TemplateProp
         : [],
     [mode],
   )
+  const lagrangeContours = useMemo(
+    () =>
+      mode === 'lagrange'
+        ? [0.5, 1, 1.5, 2, 2.5, 3].flatMap((level) =>
+            contourSegments((x, y) => x * x + y * y, BOUNDS, level, 60, 60),
+          )
+        : [],
+    [mode],
+  )
+  const newtonCurve = useMemo(() => {
+    const points: Array<[number, number]> = []
+    for (let index = 0; index <= 180; index++) {
+      const x = -2.6 + (5.2 * index) / 180
+      points.push([x, newtonObjective(x)])
+    }
+    return points
+  }, [])
+  const newtonYMin = Math.min(-4, ...newtonCurve.map(([, y]) => y)) - 0.5
+  const newtonYMax = Math.max(6, ...newtonCurve.map(([, y]) => y)) + 0.5
+  const NX = scaleLinear(-2.6, 2.6, PAD, W - PAD)
+  const NY = scaleLinear(newtonYMin, newtonYMax, H - PAD, PAD)
 
   const path = run.points.map((point) => `${X(point.x)},${Y(point.y)}`).join(' ')
   const last = run.points[run.points.length - 1]
@@ -166,11 +193,15 @@ export default function OptimizationLab({ params, title, caption }: TemplateProp
       hint={
         mode === 'descent'
           ? 'Change the step size and count. The path is the sequence of points the iteration computes.'
-          : 'Drag the candidate or use its sliders. The active constraints, KKT multipliers and dual value all come from the same drawn polygon.'
+          : mode === 'lagrange'
+            ? 'Slide the candidate along x + y = 2. The gradient points away from the level curves, and the derivative along the line vanishes at the optimum.'
+            : mode === 'newton'
+              ? 'Each dashed line is the tangent at the current guess. Its zero is the next guess, so a flat tangent stops the iteration.'
+              : 'Drag the candidate or use its sliders. The active constraints, KKT multipliers and dual value all come from the same drawn polygon.'
       }
       caption={
         caption ??
-        'The contour plot is the actual objective x² + 2y². Each dot is one gradient step. In the feasible-region mode the shaded polygon is the intersection of the half-planes, and the dual value is read from the multipliers of the active constraints.'
+        'The contour plot is the actual objective. Each dot is one gradient step. In the feasible-region mode the shaded polygon is the intersection of the half-planes. Lagrange mode moves along x + y = 2, and Newton mode uses the tangent of f(x) = x⁴ − 3x² + x.'
       }
       onReset={reset}
       readout={
@@ -187,29 +218,69 @@ export default function OptimizationLab({ params, title, caption }: TemplateProp
               { label: 'status', value: run.status },
               ...(run.note ? [{ label: 'note', value: run.note }] : []),
             ]
-          : [
-              { label: 'objective', value: 'maximise 3x + 2y' },
-              { label: 'candidate', value: `(${fmt(candidateX)}, ${fmt(candidateY)})` },
-              { label: 'value', value: fmt(lp.objectiveValue, 3) },
-              {
-                label: 'status',
-                value: lp.status === 'infeasible' ? 'no feasible polygon' : lp.feasible ? 'feasible' : 'violates a constraint',
-              },
-              { label: 'active at candidate', value: activeText },
-              { label: 'KKT at candidate', value: lp.kkt.kkt ? 'holds' : 'fails' },
-              { label: 'candidate multipliers', value: multiplierText },
-              { label: 'KKT residual', value: fmt(lp.kkt.residual, 4) },
-              { label: 'optimum', value: `(${fmt(optimum.x)}, ${fmt(optimum.y)}) = ${fmt(optimum.value, 3)}` },
-              { label: 'optimum multipliers', value: optimumMultiplierText },
-              { label: 'dual value', value: fmt(lp.dualValue, 3) },
-              { label: 'primal-dual gap', value: fmt(lp.gap, 3) },
-              { label: 'shadow price', value: shadowText },
-              { label: 'allowable range', value: rangeText },
-              {
-                label: 'constraints',
-                value: lp.candidate.map((item) => `${item.label}: ${fmt(item.value, 2)}`).join('; '),
-              },
-            ]
+          : mode === 'lagrange'
+            ? [
+                { label: 'objective', value: 'minimise x² + y²' },
+                { label: 'constraint', value: 'x + y = 2' },
+                { label: 'candidate', value: `(${fmt(lagrange.x)}, ${fmt(lagrange.y)})` },
+                { label: 'value', value: fmt(lagrange.objectiveValue, 3) },
+                { label: 'lambda', value: fmt(lagrange.lambda, 3) },
+                { label: 'gradient', value: `(${fmt(lagrange.gradient[0])}, ${fmt(lagrange.gradient[1])})` },
+                { label: 'along constraint', value: fmt(lagrange.along, 3) },
+                { label: 'status', value: lagrange.optimal ? 'stationary on the constraint' : 'not stationary' },
+                { label: 'optimum', value: `(${lagrange.optimum.x}, ${lagrange.optimum.y}) = ${fmt(lagrange.optimum.value, 3)}` },
+              ]
+            : mode === 'newton'
+              ? [
+                  { label: 'objective', value: 'x⁴ − 3x² + x' },
+                  { label: 'start', value: fmt(startX, 3) },
+                  { label: 'iterations', value: String(newton.points.length) },
+                  {
+                    label: 'last x',
+                    value: newton.points.length ? fmt(newton.points[newton.points.length - 1].x, 4) : '—',
+                  },
+                  {
+                    label: 'f(x)',
+                    value: newton.points.length ? fmt(newton.points[newton.points.length - 1].f, 4) : '—',
+                  },
+                  {
+                    label: 'f′(x)',
+                    value: newton.points.length ? fmt(newton.points[newton.points.length - 1].df, 4) : '—',
+                  },
+                  {
+                    label: 'f″(x)',
+                    value: newton.points.length ? fmt(newton.points[newton.points.length - 1].d2f, 4) : '—',
+                  },
+                  {
+                    label: 'next x',
+                    value: newton.points.length ? fmt(newton.points[newton.points.length - 1].next, 4) : '—',
+                  },
+                  { label: 'status', value: newton.status },
+                  ...(newton.note ? [{ label: 'note', value: newton.note }] : []),
+                ]
+              : [
+                  { label: 'objective', value: 'maximise 3x + 2y' },
+                  { label: 'candidate', value: `(${fmt(candidateX)}, ${fmt(candidateY)})` },
+                  { label: 'value', value: fmt(lp.objectiveValue, 3) },
+                  {
+                    label: 'status',
+                    value: lp.status === 'infeasible' ? 'no feasible polygon' : lp.feasible ? 'feasible' : 'violates a constraint',
+                  },
+                  { label: 'active at candidate', value: activeText },
+                  { label: 'KKT at candidate', value: lp.kkt.kkt ? 'holds' : 'fails' },
+                  { label: 'candidate multipliers', value: multiplierText },
+                  { label: 'KKT residual', value: fmt(lp.kkt.residual, 4) },
+                  { label: 'optimum', value: `(${fmt(optimum.x)}, ${fmt(optimum.y)}) = ${fmt(optimum.value, 3)}` },
+                  { label: 'optimum multipliers', value: optimumMultiplierText },
+                  { label: 'dual value', value: fmt(lp.dualValue, 3) },
+                  { label: 'primal-dual gap', value: fmt(lp.gap, 3) },
+                  { label: 'shadow price', value: shadowText },
+                  { label: 'allowable range', value: rangeText },
+                  {
+                    label: 'constraints',
+                    value: lp.candidate.map((item) => `${item.label}: ${fmt(item.value, 2)}`).join('; '),
+                  },
+                ]
       }
     >
       <svg
@@ -221,7 +292,11 @@ export default function OptimizationLab({ params, title, caption }: TemplateProp
         aria-label={
           mode === 'descent'
             ? 'Gradient descent path on contour lines'
-            : `Feasible region with the candidate at (${fmt(candidateX)}, ${fmt(candidateY)})`
+            : mode === 'lagrange'
+              ? `Lagrange candidate at (${fmt(lagrange.x)}, ${fmt(lagrange.y)}) on the constraint line`
+              : mode === 'newton'
+                ? `Newton iteration for f(x) = x⁴ − 3x² + x from ${fmt(startX)}`
+                : `Feasible region with the candidate at (${fmt(candidateX)}, ${fmt(candidateY)})`
         }
       >
         <defs>
@@ -233,8 +308,12 @@ export default function OptimizationLab({ params, title, caption }: TemplateProp
           </marker>
         </defs>
 
-        <line x1={PAD} y1={Y(0)} x2={W - PAD} y2={Y(0)} stroke="var(--text-muted)" strokeWidth="0.8" />
-        <line x1={X(0)} y1={PAD} x2={X(0)} y2={H - PAD} stroke="var(--text-muted)" strokeWidth="0.8" />
+        {mode !== 'newton' ? (
+          <>
+            <line x1={PAD} y1={Y(0)} x2={W - PAD} y2={Y(0)} stroke="var(--text-muted)" strokeWidth="0.8" />
+            <line x1={X(0)} y1={PAD} x2={X(0)} y2={H - PAD} stroke="var(--text-muted)" strokeWidth="0.8" />
+          </>
+        ) : null}
 
         <g clipPath={`url(#${clipId})`}>
           {mode === 'descent' ? (
@@ -255,6 +334,77 @@ export default function OptimizationLab({ params, title, caption }: TemplateProp
                 <circle key={point.index} cx={X(point.x)} cy={Y(point.y)} r={2.6} fill="var(--accent-blue)" />
               ))}
               <circle cx={X(startX)} cy={Y(startY)} r={5} fill="none" stroke="var(--accent-red)" strokeWidth={1.4} />
+            </>
+          ) : mode === 'lagrange' ? (
+            <>
+              {lagrangeContours.map((segment, index) => (
+                <line
+                  key={index}
+                  x1={X(segment[0][0])}
+                  y1={Y(segment[0][1])}
+                  x2={X(segment[1][0])}
+                  y2={Y(segment[1][1])}
+                  stroke="var(--chart-3)"
+                  strokeWidth={1}
+                />
+              ))}
+              {(() => {
+                const clipped = clipLineToRect([0, 2], [1, -1], BOUNDS)
+                return clipped ? (
+                  <line
+                    x1={X(clipped[0][0])}
+                    y1={Y(clipped[0][1])}
+                    x2={X(clipped[1][0])}
+                    y2={Y(clipped[1][1])}
+                    stroke="var(--accent-teal)"
+                    strokeWidth="2"
+                  />
+                ) : null
+              })()}
+              <line
+                x1={X(lagrange.x)}
+                y1={Y(lagrange.y)}
+                x2={X(lagrange.x + lagrange.gradient[0] * 0.18)}
+                y2={Y(lagrange.y + lagrange.gradient[1] * 0.18)}
+                stroke="var(--accent-red)"
+                strokeWidth="1.6"
+                markerEnd={`url(#${arrowId})`}
+              />
+              <circle cx={X(lagrange.x)} cy={Y(lagrange.y)} r="5" fill={lagrange.optimal ? 'var(--accent-green)' : 'var(--accent-teal)'} />
+              <circle cx={X(1)} cy={Y(1)} r="3.5" fill="var(--accent-blue)" />
+              <text x={X(1) + 6} y={Y(1) - 5} fontSize="8" fill="var(--accent-blue)">
+                optimum
+              </text>
+            </>
+          ) : mode === 'newton' ? (
+            <>
+              <line x1={NX(-2.6)} y1={NY(0)} x2={NX(2.6)} y2={NY(0)} stroke="var(--text-muted)" strokeWidth="0.8" />
+              <polyline
+                points={newtonCurve.map(([x, y]) => `${NX(x)},${NY(y)}`).join(' ')}
+                fill="none"
+                stroke="var(--accent-blue)"
+                strokeWidth="1.8"
+              />
+              {newton.points.map((point) => {
+                const tangentY = (x: number) => point.f + point.df * (x - point.x)
+                return (
+                  <g key={point.index}>
+                    <line
+                      x1={NX(point.x - 0.9)}
+                      y1={NY(tangentY(point.x - 0.9))}
+                      x2={NX(point.x + 0.9)}
+                      y2={NY(tangentY(point.x + 0.9))}
+                      stroke="var(--chart-3)"
+                      strokeWidth="1"
+                      strokeDasharray="4 3"
+                    />
+                    <circle cx={NX(point.x)} cy={NY(point.f)} r="3.2" fill="var(--accent-red)" />
+                    {Number.isFinite(point.next) ? (
+                      <circle cx={NX(point.next)} cy={NY(0)} r="2.2" fill="var(--accent-teal)" />
+                    ) : null}
+                  </g>
+                )
+              })}
             </>
           ) : (
             <>
@@ -316,8 +466,14 @@ export default function OptimizationLab({ params, title, caption }: TemplateProp
           )}
         </g>
 
-        <XAxisTicks ticks={ticks} scale={X} at={Y(0)} />
-        <YAxisTicks ticks={ticks} scale={Y} at={X(0)} />
+        {mode === 'newton' ? (
+          <XAxisTicks ticks={[-2, -1, 0, 1, 2]} scale={NX} at={NY(0)} />
+        ) : (
+          <>
+            <XAxisTicks ticks={ticks} scale={X} at={Y(0)} />
+            <YAxisTicks ticks={ticks} scale={Y} at={X(0)} />
+          </>
+        )}
       </svg>
 
       <div className="mt-3 space-y-2">
@@ -329,12 +485,24 @@ export default function OptimizationLab({ params, title, caption }: TemplateProp
         >
           <option value="descent">Gradient descent</option>
           <option value="feasible">Feasible region</option>
+          <option value="lagrange">Lagrange on a line</option>
+          <option value="newton">Newton step</option>
         </select>
         {mode === 'descent' ? (
           <div className="grid grid-cols-1 gap-2">
             <Slider label="Start x" value={startX} min={-3} max={3} step={0.1} onChange={setStartX} />
             <Slider label="Start y" value={startY} min={-3} max={3} step={0.1} onChange={setStartY} />
             <Slider label="Learning rate" value={rate} min={0.01} max={0.5} step={0.01} onChange={setRate} />
+            <Slider label="Steps" value={steps} min={1} max={20} step={1} onChange={setSteps} />
+          </div>
+        ) : mode === 'lagrange' ? (
+          <div className="grid grid-cols-1 gap-2">
+            <Slider label="Candidate x" value={candidateX} min={0} max={2} step={0.05} onChange={setCandidateX} />
+            <p className="font-mono text-[10px] text-mathua-muted">candidate is (x, 2 − x) on the constraint line</p>
+          </div>
+        ) : mode === 'newton' ? (
+          <div className="grid grid-cols-1 gap-2">
+            <Slider label="Start x" value={startX} min={-3} max={3} step={0.1} onChange={setStartX} />
             <Slider label="Steps" value={steps} min={1} max={20} step={1} onChange={setSteps} />
           </div>
         ) : (

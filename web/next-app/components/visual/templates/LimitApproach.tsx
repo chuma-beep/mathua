@@ -99,6 +99,7 @@ export default function LimitApproach({ params, title, caption }: TemplateProps)
         <rect x={X(a - delta)} y={PAD} width={Math.max(0, X(a + delta) - X(a - delta))} height={H - PAD * 2} fill="var(--accent-blue)" fillOpacity="0.09" />
         <line x1={PAD} y1={Y(0)} x2={W - PAD} y2={Y(0)} stroke="var(--text-muted)" strokeWidth="0.8" />
 
+        <XAxisTicks ticks={[a - 1, a, a + 1]} scale={X} at={Y(0)} format={(v) => fmt(v)} />
         {exists && Number.isFinite(sides.left) && (
           <line x1={PAD} y1={Y(sides.left)} x2={W - PAD} y2={Y(sides.left)} stroke="var(--accent-green)" strokeWidth="1" strokeDasharray="4 4" />
         )}
@@ -124,8 +125,6 @@ export default function LimitApproach({ params, title, caption }: TemplateProps)
         {kind === 'vertical_asymptote' && (
           <line x1={X(a)} y1={PAD} x2={X(a)} y2={H - PAD} stroke="var(--accent-blue)" strokeWidth="1.4" />
         )}
-
-        <XAxisTicks ticks={[a - 1, a, a + 1]} scale={X} at={Y(0)} format={(v) => fmt(v)} />
 
         <text x={PAD + 2} y={PAD + 10} fontSize="10" fill={exists ? 'var(--accent-green)' : 'var(--accent-teal)'} stroke="var(--bg)" strokeWidth="3" paintOrder="stroke">
           {exists ? 'both sides converge' : kind === 'jump' ? 'jump: no limit' : 'unbounded'}

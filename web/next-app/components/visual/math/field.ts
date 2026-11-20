@@ -46,6 +46,86 @@ export function gradientLength(field: Field, x: number, y: number): number {
   return Math.hypot(gx, gy)
 }
 
+export interface Hessian {
+  xx: number
+  xy: number
+  yx: number
+  yy: number
+}
+
+/** The exact second derivatives, so the saddle test is not a finite difference. */
+export function fieldHessian(field: Field, x: number, y: number): Hessian {
+  switch (field) {
+    case 'bowl':
+      return { xx: 2, xy: 0, yx: 0, yy: 2 }
+    case 'saddle':
+      return { xx: 2, xy: 0, yx: 0, yy: -2 }
+    case 'product':
+      return { xx: 0, xy: 1, yx: 1, yy: 0 }
+    case 'ripple':
+      return { xx: -Math.sin(x), xy: 0, yx: 0, yy: -Math.cos(y) }
+  }
+}
+
+/** The stationary points a figure may put its probe on. */
+export function fieldCritical(field: Field): Array<[number, number]> {
+  switch (field) {
+    case 'bowl':
+    case 'saddle':
+    case 'product':
+      return [[0, 0]]
+    case 'ripple':
+      return [
+        [Math.PI / 2, 0],
+        [-Math.PI / 2, 0],
+      ]
+  }
+}
+
+export interface TangentPlane {
+  z0: number
+  fx: number
+  fy: number
+  /** z = z0 + fx (x − x0) + fy (y − y0) */
+  at: (x: number, y: number) => number
+  equation: string
+}
+
+/** The plane that matches the surface's value and both slopes at (x0, y0). */
+export function tangentPlane(field: Field, x0: number, y0: number): TangentPlane {
+  const z0 = fieldValue(field, x0, y0)
+  const [fx, fy] = fieldGradient(field, x0, y0)
+  return {
+    z0,
+    fx,
+    fy,
+    at: (x, y) => z0 + fx * (x - x0) + fy * (y - y0),
+    equation: `z = ${z0.toFixed(2)} + ${fx.toFixed(2)}(x − ${x0.toFixed(2)}) + ${fy.toFixed(2)}(y − ${y0.toFixed(2)})`,
+  }
+}
+
+/** Rate of change in the direction (cos θ, sin θ). */
+export function directional(field: Field, x: number, y: number, angle: number): number {
+  const [gx, gy] = fieldGradient(field, x, y)
+  return gx * Math.cos(angle) + gy * Math.sin(angle)
+}
+
+export interface SaddleTest {
+  discriminant: number
+  xx: number
+  classification: 'minimum' | 'maximum' | 'saddle' | 'degenerate'
+}
+
+/** The second-derivative test at a point. */
+export function saddleTest(field: Field, x: number, y: number): SaddleTest {
+  const hessian = fieldHessian(field, x, y)
+  const discriminant = hessian.xx * hessian.yy - hessian.xy * hessian.yx
+  let classification: SaddleTest['classification'] = 'degenerate'
+  if (discriminant > 1e-12) classification = hessian.xx > 0 ? 'minimum' : 'maximum'
+  else if (discriminant < -1e-12) classification = 'saddle'
+  return { discriminant, xx: hessian.xx, classification }
+}
+
 /**
  * The levels to draw, spread between the field's range over the window.
  *

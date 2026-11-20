@@ -6,7 +6,27 @@
       "Contrast instantaneous variation with accumulated quantity",
       "State the two complementary claims",
       "Preview antiderivative construction vs endpoint evaluation"
-    ]
+    ],
+    "visual": {
+      "type": "calc.accumulation",
+      "title": "The two halves of one theorem",
+      "caption": "The upper panel is the integrand and the shaded area. The lower panel is the accumulated area. The tangent there has slope equal to the height above it, which is the theorem.",
+      "params": {
+        "fn": "square",
+        "a": 0.5,
+        "x": 2
+      },
+      "predict": {
+        "question": "The fundamental theorem of calculus connects:",
+        "options": [
+          "Area and antiderivatives",
+          "Limits and continuity",
+          "Derivatives and series"
+        ],
+        "answer": 0,
+        "explain": "It states ∫ₐᵇ f = F(b) − F(a) for a primitive F. The readout shows the slope of A matching f(x) at the same x."
+      }
+    }
   },
   {
     "label": "The First Fundamental Theorem of Calculus",

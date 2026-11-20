@@ -122,6 +122,10 @@ export default function ContourMap({ params, title, caption }: TemplateProps) {
           </marker>
         </defs>
 
+        <line x1={PAD} y1={cy} x2={SIZE - PAD} y2={cy} stroke="var(--text-muted)" strokeWidth="0.8" />
+        <line x1={cx} y1={PAD} x2={cx} y2={SIZE - PAD} stroke="var(--text-muted)" strokeWidth="0.8" />
+        <XAxisTicks ticks={[-2, -1, 1, 2]} scale={X} at={cy} />
+        <YAxisTicks ticks={[-2, -1, 1, 2]} scale={Y} at={cx} />
         {curves.map(({ level, segments }, index) => (
           <g key={level}>
             {segments.map((segment, i) => (
@@ -140,10 +144,6 @@ export default function ContourMap({ params, title, caption }: TemplateProps) {
           </g>
         ))}
 
-        <line x1={PAD} y1={cy} x2={SIZE - PAD} y2={cy} stroke="var(--text-muted)" strokeWidth="0.8" />
-        <line x1={cx} y1={PAD} x2={cx} y2={SIZE - PAD} stroke="var(--text-muted)" strokeWidth="0.8" />
-        <XAxisTicks ticks={[-2, -1, 1, 2]} scale={X} at={cy} />
-        <YAxisTicks ticks={[-2, -1, 1, 2]} scale={Y} at={cx} />
 
         {/* The level direction at the probe: perpendicular to the gradient, so the
             perpendicularity is visible rather than asserted in the caption. Hidden at a

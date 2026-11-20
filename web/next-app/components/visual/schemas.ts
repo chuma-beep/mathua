@@ -209,7 +209,9 @@ export const rootsSchema = z.object({
 })
 
 export const graphSchema = z.object({
-  algorithm: z.enum(['bfs', 'dfs', 'dijkstra', 'kruskal']).default('bfs'),
+  algorithm: z
+    .enum(['bfs', 'dfs', 'dijkstra', 'kruskal', 'topological', 'maxflow', 'bipartite', 'colouring'])
+    .default('bfs'),
   start: z.enum(['A', 'B', 'C', 'D', 'E', 'F']).default('A'),
   showTree: z.boolean().default(true),
 })
@@ -273,7 +275,7 @@ export const discreteSchema = z.object({
 })
 
 export const optimizationSchema = z.object({
-  mode: z.enum(['descent', 'feasible']).default('descent'),
+  mode: z.enum(['descent', 'feasible', 'lagrange', 'newton']).default('descent'),
   startX: z.number().finite().min(-3).max(3).default(2.5),
   startY: z.number().finite().min(-3).max(3).default(2),
   rate: z.number().finite().min(0.01).max(0.5).default(0.15),
@@ -308,4 +310,59 @@ export const sinusoidSchema = z.object({
   phase: z.number().finite().min(-3.14).max(3.14).default(0),
   vertical: z.number().finite().min(-8).max(8).default(0),
   showReference: z.boolean().default(true),
+})
+
+export const inferenceSchema = z.object({
+  dist: z.enum(['z', 't']).default('z'),
+  df: z.number().int().min(1).max(60).default(10),
+  alpha: z.number().finite().min(0.01).max(0.2).default(0.05),
+  effect: z.number().finite().min(-1).max(3).default(0.8),
+  observed: z.number().finite().min(-4).max(6).default(1.96),
+})
+
+export const phaseSchema = z.object({
+  mode: z.enum(['line', 'plane']).default('line'),
+  lineModel: z.enum(['decay', 'logistic', 'bistable', 'threshold']).default('logistic'),
+  system: z.enum(['saddle', 'stable-node', 'spiral', 'center']).default('saddle'),
+  showTrajectories: z.boolean().default(true),
+})
+
+export const vectorFieldSchema = z.object({
+  preset: z.enum(['source', 'vortex', 'saddle', 'shear']).default('vortex'),
+  radius: z.number().finite().min(0.4).max(2).default(1.2),
+  showStreamlines: z.boolean().default(true),
+})
+
+export const surfaceSchema = z.object({
+  field: z.enum(['bowl', 'saddle', 'product', 'ripple']).default('bowl'),
+  x0: z.number().finite().min(-2).max(2).default(1),
+  y0: z.number().finite().min(-2).max(2).default(0.6),
+})
+
+export const regionSchema = z.object({
+  region: z.enum(['rect', 'between', 'polar']).default('between'),
+  density: z.enum(['one', 'x', 'y']).default('one'),
+  n: z.number().int().min(4).max(40).default(10),
+})
+
+export const seriesSumSchema = z.object({
+  kind: z.enum(['geometric', 'harmonic', 'p2', 'alternating']).default('geometric'),
+  terms: z.number().int().min(2).max(40).default(12),
+})
+
+export const accumulationSchema = z.object({
+  fn: z.enum(['square', 'sine', 'decay']).default('square'),
+  a: z.number().finite().min(0).max(2).default(0.5),
+  x: z.number().finite().min(0).max(3).default(2),
+})
+
+export const solidRevSchema = z.object({
+  mode: z.enum(['disk', 'washer', 'shell']).default('washer'),
+  slice: z.number().finite().min(0.1).max(2).default(1.2),
+})
+
+export const conditionalAreaSchema = z.object({
+  pB: z.number().finite().min(0.1).max(0.9).default(0.4),
+  pAgivenB: z.number().finite().min(0).max(1).default(0.8),
+  pAgivenBc: z.number().finite().min(0).max(1).default(0.3),
 })

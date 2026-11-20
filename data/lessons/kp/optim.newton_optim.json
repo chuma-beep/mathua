@@ -6,7 +6,33 @@
       "evaluate gradient and Hessian",
       "solve the linear system",
       "subtract the solution"
-    ]
+    ],
+    "visual": {
+      "type": "optim.path",
+      "title": "Use curvature, not just the slope",
+      "caption": "Newton uses the second derivative to build the local quadratic model. The next guess is where that quadratic has zero slope, so a flat or negative curvature can stop or move the step away.",
+      "params": {
+        "mode": "newton",
+        "startX": 1.5,
+        "startY": 2,
+        "rate": 0.15,
+        "steps": 4,
+        "candidateX": 1,
+        "candidateY": 1,
+        "rhs": "none",
+        "delta": 0
+      },
+      "predict": {
+        "question": "Newton starts at x = 1.5 for f(x) = x^4 - 3x^2 + x. What does the next step use?",
+        "options": [
+          "Only the first derivative",
+          "The first and second derivatives",
+          "Only the function value"
+        ],
+        "answer": 1,
+        "explain": "The Newton step is minus f prime divided by f double prime. It needs both the slope and the curvature at the current guess."
+      }
+    }
   },
   {
     "label": "Test convergence",

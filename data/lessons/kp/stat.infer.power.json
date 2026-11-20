@@ -6,7 +6,29 @@
       "Define a Type II error",
       "Write power as one minus beta",
       "Explain the trade with alpha"
-    ]
+    ],
+    "visual": {
+      "type": "stat.inference",
+      "title": "A larger effect moves the alternative",
+      "caption": "The alternative curve is centred at the true effect. Moving it farther from zero puts more of its area inside the rejection region, so power rises without changing alpha.",
+      "params": {
+        "dist": "z",
+        "df": 10,
+        "alpha": 0.05,
+        "effect": 2.0,
+        "observed": 1.96
+      },
+      "predict": {
+        "question": "Holding alpha fixed, which change raises power?",
+        "options": [
+          "A larger true effect",
+          "A smaller sample size",
+          "A stricter smaller alpha"
+        ],
+        "answer": 0,
+        "explain": "A larger true effect shifts the alternative farther into the rejection region. A smaller sample or a stricter alpha usually lowers power."
+      }
+    }
   },
   {
     "label": "Recovering beta",

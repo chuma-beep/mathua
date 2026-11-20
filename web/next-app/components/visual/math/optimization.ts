@@ -356,3 +356,110 @@ export function objectiveContour(level: number): { point: [number, number]; dire
 }
 
 export { EMPTY_KKT }
+
+export interface LagrangeModel {
+  x: number
+  y: number
+  lambda: number
+  objectiveValue: number
+  constraintValue: number
+  gradient: [number, number]
+  /** Derivative of the objective along x + y = 2. Zero at the constrained minimum. */
+  along: number
+  optimal: boolean
+  optimum: { x: number; y: number; lambda: number; value: number }
+}
+
+/** Minimise x² + y² subject to x + y = 2. The candidate always lies on the line. */
+export function lagrangeModel(candidateX: number): LagrangeModel {
+  const x = Number.isFinite(candidateX) ? candidateX : 1
+  const y = 2 - x
+  const gradient: [number, number] = [2 * x, 2 * y]
+  const lambda = x + y
+  const along = (gradient[0] - gradient[1]) / Math.SQRT2
+  return {
+    x,
+    y,
+    lambda,
+    objectiveValue: x * x + y * y,
+    constraintValue: x + y,
+    gradient,
+    along,
+    optimal: Math.abs(along) <= 1e-9,
+    optimum: { x: 1, y: 1, lambda: 2, value: 2 },
+  }
+}
+
+export interface NewtonPoint {
+  index: number
+  x: number
+  f: number
+  df: number
+  d2f: number
+  next: number
+}
+
+export interface NewtonRun {
+  points: NewtonPoint[]
+  status: 'converged' | 'running' | 'stationary' | 'invalid'
+  note?: string
+}
+
+export function newtonObjective(x: number): number {
+  return x ** 4 - 3 * x * x + x
+}
+
+export function newtonFirst(x: number): number {
+  return 4 * x ** 3 - 6 * x + 1
+}
+
+export function newtonSecond(x: number): number {
+  return 12 * x * x - 6
+}
+
+/** Newton's method for a stationary point of the one-dimensional objective. */
+export function newtonMinimise(start: number, steps: number): NewtonRun {
+  if (!Number.isFinite(start) || !Number.isFinite(steps) || steps < 1) {
+    return { points: [], status: 'invalid', note: 'enter a finite start and at least one step' }
+  }
+  const points: NewtonPoint[] = []
+  let x = start
+  let status: NewtonRun['status'] = 'running'
+  for (let index = 0; index < Math.min(20, Math.floor(steps)); index++) {
+    const f = newtonObjective(x)
+    const df = newtonFirst(x)
+    const d2f = newtonSecond(x)
+    if (![f, df, d2f].every(Number.isFinite)) {
+      status = 'invalid'
+      break
+    }
+    if (Math.abs(df) <= 1e-9) {
+      points.push({ index, x, f, df, d2f, next: x })
+      status = 'converged'
+      break
+    }
+    if (d2f <= 1e-10) {
+      points.push({ index, x, f, df, d2f, next: Number.NaN })
+      status = 'stationary'
+      break
+    }
+    const next = x - df / d2f
+    points.push({ index, x, f, df, d2f, next })
+    if (!Number.isFinite(next) || Math.abs(next) > 1e6) {
+      status = 'invalid'
+      break
+    }
+    x = next
+    if (Math.abs(df) <= 1e-9) status = 'converged'
+  }
+  return {
+    points,
+    status,
+    note:
+      status === 'stationary'
+        ? 'the curvature is not positive, so the Newton step is not a descent step'
+        : status === 'invalid'
+          ? 'the iteration left the finite range'
+          : undefined,
+  }
+}

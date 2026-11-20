@@ -6,7 +6,27 @@
       "Subtract lower curve from upper: integral of (f-g)",
       "Split at intersection x-values",
       "Integrate x^2 vs x on [0,1] to get 1/6"
-    ]
+    ],
+    "visual": {
+      "type": "calc.region",
+      "title": "Subtract the lower curve",
+      "caption": "The shaded region is bounded above by y = x and below by y = x². Its area is the integral of the difference, not the difference of the two integrals taken separately.",
+      "params": {
+        "region": "between",
+        "density": "one",
+        "n": 20
+      },
+      "predict": {
+        "question": "The area between y = x and y = x² on [0, 1] is:",
+        "options": [
+          "1/2",
+          "1/6",
+          "1/3"
+        ],
+        "answer": 1,
+        "explain": "Integrate the upper minus the lower: ∫₀¹ (x − x²) dx = 1/6. The curves meet at x = 0 and x = 1, so no split is needed."
+      }
+    }
   },
   {
     "label": "Areas between intersecting curves",

@@ -6,7 +6,28 @@
       "Draw a random subset from the population",
       "Compute sample mean, variance, proportion as statistics",
       "Repeat sampling to trace the statistic's distribution"
-    ]
+    ],
+    "visual": {
+      "type": "stat.sampling",
+      "title": "The statistic has its own distribution",
+      "caption": "Each bar counts the mean of one sample. The population is fixed, yet the means spread less as the sample grows, which is why a statistic needs its own distribution.",
+      "params": {
+        "population": "skewed",
+        "n": 9,
+        "draws": 600,
+        "seed": 7
+      },
+      "predict": {
+        "question": "As the sample size grows, the sampling distribution of the mean:",
+        "options": [
+          "Narrows around the population mean",
+          "Widens",
+          "Keeps the population spread"
+        ],
+        "answer": 0,
+        "explain": "The standard error is σ/√n, so the histogram narrows as n grows. The dashed normal curve uses exactly that spread."
+      }
+    }
   },
   {
     "label": "Mean, mode, and median of a sampling distribution",

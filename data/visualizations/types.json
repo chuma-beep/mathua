@@ -150,5 +150,41 @@
   {
     "id": "trig.sinusoid",
     "status": "stable"
+  },
+  {
+    "id": "stat.inference",
+    "status": "stable"
+  },
+  {
+    "id": "ode.phase",
+    "status": "stable"
+  },
+  {
+    "id": "calc.vectorfield",
+    "status": "stable"
+  },
+  {
+    "id": "calc.surface",
+    "status": "stable"
+  },
+  {
+    "id": "calc.region",
+    "status": "stable"
+  },
+  {
+    "id": "calc.seriessum",
+    "status": "stable"
+  },
+  {
+    "id": "calc.accumulation",
+    "status": "stable"
+  },
+  {
+    "id": "calc.solidrev",
+    "status": "stable"
+  },
+  {
+    "id": "prob.area",
+    "status": "stable"
   }
 ]

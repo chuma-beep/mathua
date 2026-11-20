@@ -6,7 +6,26 @@
       "Form the ratio of consecutive terms",
       "Take its limit and read L<1, L>1 or L=1",
       "See why L<1 compares to a geometric series"
-    ]
+    ],
+    "visual": {
+      "type": "calc.seriessum",
+      "title": "Compare the tail to a geometric series",
+      "caption": "The ratio of consecutive terms is the number the test reads. When it settles below one, the tail is smaller than a geometric series that converges.",
+      "params": {
+        "kind": "geometric",
+        "terms": 12
+      },
+      "predict": {
+        "question": "The ratio test concludes convergence when the limit L of |aₙ₊₁/aₙ| is:",
+        "options": [
+          "L < 1",
+          "L > 1",
+          "L = 1"
+        ],
+        "answer": 0,
+        "explain": "L < 1 bounds the tail by a geometric series with ratio L. Here every ratio is 1/2, and the partial sums converge to 1."
+      }
+    }
   },
   {
     "label": "Worked examples",

@@ -6,7 +6,27 @@
       "Write the product rule",
       "Divide to get the conditional form",
       "Interpret it as no change under conditioning"
-    ]
+    ],
+    "visual": {
+      "type": "prob.area",
+      "title": "Level bands mean independence",
+      "caption": "When the two bands are the same height, conditioning on B does not change the chance of A. The right square is the B column stretched to full width, and it looks exactly like the conditional band.",
+      "params": {
+        "pB": 0.4,
+        "pAgivenB": 0.5,
+        "pAgivenBc": 0.5
+      },
+      "predict": {
+        "question": "The two conditional probabilities are equal. What follows?",
+        "options": [
+          "A and B are independent",
+          "A and B are disjoint",
+          "B has probability 1/2"
+        ],
+        "answer": 0,
+        "explain": "P(A|B) = P(A|Bᶜ) means conditioning on B leaves P(A) unchanged. That is the definition of independence, and it gives P(A ∩ B) = P(A)P(B)."
+      }
+    }
   },
   {
     "label": "Worked: pairwise is not mutual",

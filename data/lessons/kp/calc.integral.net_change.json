@@ -3,10 +3,30 @@
     "label": "First fundamental theorem",
     "section": "The First Fundamental Theorem of Calculus",
     "subgoals": [
-      "State \u222b_a^b f' = f(b) - f(a)",
+      "State ∫_a^b f' = f(b) - f(a)",
       "Recognize rates integrating to net change",
       "Check velocity 3t^2 over [0,2] gives 8"
-    ]
+    ],
+    "visual": {
+      "type": "calc.accumulation",
+      "title": "A rate integrates to a change",
+      "caption": "The shaded area is the accumulation of a rate. Its value is the difference between the quantity at the two endpoints, not the quantity at either one alone.",
+      "params": {
+        "fn": "sine",
+        "a": 0,
+        "x": 2
+      },
+      "predict": {
+        "question": "The integral of a rate f′ over [a, b] equals:",
+        "options": [
+          "f(b) − f(a)",
+          "f(a) − f(b)",
+          "f(b) + f(a)"
+        ],
+        "answer": 0,
+        "explain": "The net change theorem: ∫ₐᵇ f′ = f(b) − f(a). A velocity integrated over time gives displacement."
+      }
+    }
   },
   {
     "label": "Net change worked examples",

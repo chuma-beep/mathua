@@ -6,7 +6,26 @@
       "Replace each curve chord by a cone frustum",
       "Apply the mean value theorem to the chord length",
       "Take the limit to S = 2pi times the integral of f times sqrt(1+(f')^2)"
-    ]
+    ],
+    "visual": {
+      "type": "calc.solidrev",
+      "title": "Slant length, not thickness",
+      "caption": "A slice of the surface is a band, and its width is the slant length of the profile rather than dx. That extra factor is why surface area is not the derivative of volume.",
+      "params": {
+        "mode": "disk",
+        "slice": 1.2
+      },
+      "predict": {
+        "question": "The surface area element of a body of revolution is:",
+        "options": [
+          "2π f(x) dx",
+          "2π f(x) √(1 + f′(x)²) dx",
+          "π f(x)² dx"
+        ],
+        "answer": 1,
+        "explain": "The band width is the arc length ds = √(1 + f′²) dx. Replacing dx with ds is exactly what distinguishes surface area from volume."
+      }
+    }
   },
   {
     "label": "Slant correction",

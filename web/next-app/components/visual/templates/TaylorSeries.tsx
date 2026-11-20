@@ -113,6 +113,9 @@ export default function TaylorSeries({ params, title, caption }: TemplateProps) 
             <rect x={PAD} y={PAD} width={W - PAD * 2} height={H - PAD * 2} />
           </clipPath>
         </defs>
+        <XAxisTicks ticks={niceTicks(window[0], window[1], 5)} scale={X} at={Y(0)} />
+        <YAxisTicks ticks={niceTicks(yMin, yMax, 4).filter((v) => Math.abs(v) > 1e-9)} scale={Y} at={X(0)} />
+
         <g clipPath={`url(#${uid}-plot)`}>
           {samples.curve.map((segment, i) => (
             <path
@@ -142,9 +145,6 @@ export default function TaylorSeries({ params, title, caption }: TemplateProps) 
             pole at the centre
           </text>
         )}
-
-        <XAxisTicks ticks={niceTicks(window[0], window[1], 5)} scale={X} at={Y(0)} />
-        <YAxisTicks ticks={niceTicks(yMin, yMax, 4).filter((v) => Math.abs(v) > 1e-9)} scale={Y} at={X(0)} />
 
         <text x={PAD + 2} y={PAD + 10} fontSize="10" fill="var(--text-primary)" stroke="var(--bg)" strokeWidth="3" paintOrder="stroke">
           f

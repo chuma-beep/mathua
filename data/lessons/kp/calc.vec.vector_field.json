@@ -5,7 +5,27 @@
     "subgoals": [
       "Explain a vector at every point",
       "Apply a vector at every point in a worked problem"
-    ]
+    ],
+    "visual": {
+      "type": "calc.vectorfield",
+      "title": "An arrow at every point",
+      "caption": "The arrows are not a trajectory. Each one is the vector the field assigns to that point, and the streamlines are the curves that follow them. The loop is the path the integrals use.",
+      "params": {
+        "preset": "source",
+        "radius": 1.2,
+        "showStreamlines": true
+      },
+      "predict": {
+        "question": "What does one arrow in this figure represent?",
+        "options": [
+          "The value of a scalar function at that point",
+          "The vector assigned to that point",
+          "The path a particle has already travelled"
+        ],
+        "answer": 1,
+        "explain": "A vector field assigns a vector to each point. The arrow is that vector, so it shows direction and relative size, not a history of motion."
+      }
+    }
   },
   {
     "label": "Divergence and Curl",

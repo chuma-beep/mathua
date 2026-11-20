@@ -6,7 +6,27 @@
       "Write the cylindrical volume element",
       "Explain the r factor",
       "Evaluate it at a radius"
-    ]
+    ],
+    "visual": {
+      "type": "calc.region",
+      "title": "The r in r dr dθ",
+      "caption": "In polar coordinates equal steps in r and θ do not sweep equal areas. Cells near the origin are small, which is exactly what the factor r accounts for.",
+      "params": {
+        "region": "polar",
+        "density": "one",
+        "n": 16
+      },
+      "predict": {
+        "question": "In polar coordinates the area element dx dy becomes:",
+        "options": [
+          "dr dθ",
+          "r dr dθ",
+          "r² dr dθ"
+        ],
+        "answer": 1,
+        "explain": "The Jacobian of (r, θ) is r, so dx dy = r dr dθ. The quarter disk area is π/4."
+      }
+    }
   },
   {
     "label": "Spherical",

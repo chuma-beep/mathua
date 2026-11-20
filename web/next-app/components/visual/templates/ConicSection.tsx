@@ -40,10 +40,8 @@ const TYPE_LABELS: Record<ConicKind, string> = {
 }
 
 const W = 340
-const H = 300
+const H = 340
 const PAD = 30
-const EXTENT = 2.8
-const BOUNDS = { x0: -EXTENT, x1: EXTENT, y0: -EXTENT, y1: EXTENT }
 
 type Coefficients = [number, number, number, number, number, number]
 
@@ -92,6 +90,33 @@ export default function ConicSection({ params, title, caption }: TemplateProps) 
   const [A, B, C, D, E, F] = coefficients
 
   const geometry = useMemo(() => classifyGeneralConic(A, B, C, D, E, F), [A, B, C, D, E, F])
+  // The window is centred on the conic and sized from its own measurements.
+  // A fixed window cut the bottom off a circle of radius 2 centred at (1, -2),
+  // which is the lesson's own example.
+  const view = useMemo(() => {
+    const centre = geometry.center ?? [0, 0]
+    let half = 2.8
+    if (geometry.kind === 'circle' && geometry.a !== undefined) half = geometry.a * 1.3
+    else if (geometry.kind === 'ellipse' && geometry.a !== undefined && geometry.b !== undefined) {
+      half = Math.max(geometry.a, geometry.b) * 1.3
+    } else if (geometry.kind === 'hyperbola' && geometry.a !== undefined && geometry.b !== undefined) {
+      half = Math.max(geometry.a * 1.9, geometry.b * 1.1, 1.6)
+    } else if (geometry.kind === 'parabola' && geometry.p !== undefined) {
+      half = Math.max(geometry.p * 4.5, 1.6)
+    }
+    return { cx: centre[0], cy: centre[1], half: Math.min(12, Math.max(1.2, half)) }
+  }, [geometry])
+
+  const bounds = useMemo(
+    () => ({
+      x0: view.cx - view.half,
+      x1: view.cx + view.half,
+      y0: view.cy - view.half,
+      y1: view.cy + view.half,
+    }),
+    [view],
+  )
+
   const curve =
     geometry.kind === 'circle' ||
     geometry.kind === 'ellipse' ||
@@ -105,24 +130,24 @@ export default function ConicSection({ params, title, caption }: TemplateProps) 
   const measurements = probePoint ? focalMeasurements(geometry, probePoint) : null
   const probeOutside =
     probePoint !== null &&
-    (probePoint[0] < BOUNDS.x0 ||
-      probePoint[0] > BOUNDS.x1 ||
-      probePoint[1] < BOUNDS.y0 ||
-      probePoint[1] > BOUNDS.y1)
+    (probePoint[0] < bounds.x0 ||
+      probePoint[0] > bounds.x1 ||
+      probePoint[1] < bounds.y0 ||
+      probePoint[1] > bounds.y1)
 
   const segments = useMemo(
     () =>
       curve
-        ? contourSegments((x, y) => generalConic(A, B, C, D, E, F, x, y), BOUNDS, 0, 96, 96)
+        ? contourSegments((x, y) => generalConic(A, B, C, D, E, F, x, y), bounds, 0, 96, 96)
         : [],
-    [A, B, C, D, E, F, curve],
+    [A, B, C, D, E, F, curve, bounds],
   )
 
-  const X = scaleLinear(-EXTENT, EXTENT, PAD, W - PAD)
-  const Y = scaleLinear(EXTENT, -EXTENT, PAD, H - PAD)
-  const toX = invertLinear(-EXTENT, EXTENT, PAD, W - PAD)
-  const toY = invertLinear(EXTENT, -EXTENT, PAD, H - PAD)
-  const ticks = niceTicks(-EXTENT, EXTENT, 4).filter((value) => Math.abs(value) > 1e-9)
+  const X = scaleLinear(bounds.x0, bounds.x1, PAD, W - PAD)
+  const Y = scaleLinear(bounds.y1, bounds.y0, PAD, H - PAD)
+  const toX = invertLinear(bounds.x0, bounds.x1, PAD, W - PAD)
+  const toY = invertLinear(bounds.y1, bounds.y0, PAD, H - PAD)
+  const ticks = niceTicks(bounds.x0, bounds.x1, 4).filter((value) => Math.abs(value) > 1e-9)
 
   const drag = (point: { x: number; y: number }) => {
     if (!curve) return
@@ -157,7 +182,7 @@ export default function ConicSection({ params, title, caption }: TemplateProps) 
   }
 
   const line = (point: Vec2, direction: Vec2, key: string, dashed = false, color = 'var(--accent-blue)') => {
-    const clipped = clipLineToRect(point, direction, BOUNDS)
+    const clipped = clipLineToRect(point, direction, bounds)
     if (!clipped) return null
     return (
       <line
@@ -308,10 +333,11 @@ export default function ConicSection({ params, title, caption }: TemplateProps) 
           </clipPath>
         </defs>
 
-        <line x1={PAD} y1={Y(0)} x2={W - PAD} y2={Y(0)} stroke="var(--text-muted)" strokeWidth="0.8" />
-        <line x1={X(0)} y1={PAD} x2={X(0)} y2={H - PAD} stroke="var(--text-muted)" strokeWidth="0.8" />
-
         <g clipPath={`url(#${clipId})`}>
+          <line x1={PAD} y1={Y(0)} x2={W - PAD} y2={Y(0)} stroke="var(--text-muted)" strokeWidth="0.8" />
+          <line x1={X(0)} y1={PAD} x2={X(0)} y2={H - PAD} stroke="var(--text-muted)" strokeWidth="0.8" />
+          <XAxisTicks ticks={ticks} scale={X} at={Y(0)} />
+          <YAxisTicks ticks={ticks} scale={Y} at={X(0)} />
           {segments.map((segment, index) => (
             <line
               key={index}
@@ -420,30 +446,33 @@ export default function ConicSection({ params, title, caption }: TemplateProps) 
             </>
           ) : null}
 
-          {geometry.foci?.map((focus, index) => (
-            <g key={`focus-${index}`}>
-              <circle cx={X(focus[0])} cy={Y(focus[1])} r="3" fill="var(--accent-blue)" />
-              <text
-                x={X(focus[0]) + 5}
-                y={Y(focus[1]) - 4}
-                fontSize="9"
-                fill="var(--accent-blue)"
-                stroke="var(--bg)"
-                strokeWidth="3"
-                paintOrder="stroke"
-              >
-                {geometry.kind === 'circle' ? 'F' : `F${index + 1}`}
-              </text>
-            </g>
-          ))}
+          {geometry.foci?.map((focus, index) => {
+            // A focus near the right edge had its label clipped to "F", because
+            // the label is drawn inside the clip path. Flip it inward instead.
+            const nearRight = X(focus[0]) > W - PAD - 20
+            return (
+              <g key={`focus-${index}`}>
+                <circle cx={X(focus[0])} cy={Y(focus[1])} r="3" fill="var(--accent-blue)" />
+                <text
+                  x={X(focus[0]) + (geometry.kind === 'circle' ? 6 : nearRight ? -5 : 5)}
+                  y={Y(focus[1]) + (geometry.kind === 'circle' ? 14 : -4)}
+                  textAnchor={geometry.kind !== 'circle' && nearRight ? 'end' : 'start'}
+                  fontSize="9"
+                  fill="var(--accent-blue)"
+                  stroke="var(--bg)"
+                  strokeWidth="3"
+                  paintOrder="stroke"
+                >
+                  {geometry.kind === 'circle' ? 'F' : `F${index + 1}`}
+                </text>
+              </g>
+            )
+          })}
 
           {geometry.kind === 'point' && geometry.center ? (
             <circle cx={X(geometry.center[0])} cy={Y(geometry.center[1])} r="4" fill="var(--accent-blue)" />
           ) : null}
         </g>
-
-        <XAxisTicks ticks={ticks} scale={X} at={Y(0)} />
-        <YAxisTicks ticks={ticks} scale={Y} at={X(0)} />
 
         <text x={PAD + 2} y={PAD + 10} fontSize="10" fill="var(--accent-blue)" stroke="var(--bg)" strokeWidth="3" paintOrder="stroke">
           {TYPE_LABELS[geometry.kind]}
