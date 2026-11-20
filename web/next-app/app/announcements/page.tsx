@@ -7,6 +7,7 @@ import { useAnnouncementsFeed } from '@/components/announcements/useAnnouncement
 import { FEATURED_FIGURES } from '@/lib/featuredFigures'
 import { markAnnouncementsRead } from '@/lib/api'
 import { useAuthState } from '@/hooks/useAuthState'
+import { Skeleton } from '@/components/ui/skeleton'
 
 function fmtDate(value?: string): string {
   if (!value) return ''
@@ -67,7 +68,10 @@ export default function AnnouncementsPage() {
                 to see announcements for your account.
               </p>
             ) : loading ? (
-              <p className="font-mono text-[11px] text-mathua-muted">Loading…</p>
+              <div className="space-y-4" aria-hidden="true">
+                <Skeleton className="h-28 w-full" />
+                <Skeleton className="h-28 w-full" />
+              </div>
             ) : error ? (
               <div className="border border-mathua-border p-4">
                 <p className="font-mono text-[11px] text-mathua-secondary">{error}</p>
