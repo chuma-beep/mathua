@@ -67,6 +67,12 @@ ENV PATH=/opt/venv/bin:$PATH
 COPY --from=builder /mathua /mathua
 COPY data/concepts/ /app/data/concepts/
 COPY data/lessons/ /app/data/lessons/
+COPY data/visualizations/ /app/data/visualizations/
+# The lesson loader drops every visual whose type is not in this allowlist, and an
+# absent file leaves the list empty. The image shipped without it, so production
+# served lessons with no figures at all while every test passed. Fail the build
+# rather than deploy a figure-less site again.
+RUN test -s /app/data/visualizations/types.json
 COPY data/courses.json /app/data/courses.json
 COPY data/destinations.json /app/data/destinations.json
 COPY --from=webbuilder /app/web/next-app/out /app/web/next-app/out
