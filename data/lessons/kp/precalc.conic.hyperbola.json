@@ -6,7 +6,30 @@
       "Expand the conic into the six-term quadratic f(x,y) = 0",
       "Check the discriminant is positive and the curve is not a pair of lines",
       "Name the cone cut circle, parabola, ellipse, or hyperbola"
-    ]
+    ],
+    "visual": {
+      "type": "geo.conic",
+      "title": "A positive discriminant can still be a true hyperbola",
+      "caption": "The equation x² − 0.25y² − 1 = 0 has B² − 4AC = 1, so the discriminant is positive. Its right side is not zero, which keeps the two branches apart. Setting the constant to zero would give the intersecting lines x = ±0.5y instead.",
+      "params": {
+        "A": 1,
+        "B": 0,
+        "C": -0.25,
+        "D": 0,
+        "E": 0,
+        "F": -1
+      },
+      "predict": {
+        "question": "For x² − 0.25y² − 1 = 0, why is this a hyperbola rather than two intersecting lines?",
+        "options": [
+          "A positive discriminant always means lines",
+          "The x² coefficient is larger than the y² coefficient",
+          "The constant −1 keeps the branches away from the centre"
+        ],
+        "answer": 2,
+        "explain": "A positive discriminant only says the quadratic part has opposite signs. The constant term −1 moves the two branches away from the centre. If the constant were zero, the equation would factor into the two lines x = ±0.5y."
+      }
+    }
   },
   {
     "label": "What is a hyperbola",

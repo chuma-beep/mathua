@@ -6,7 +6,30 @@
       "Match each squared term to x minus h",
       "Handle a plus sign inside the square",
       "Read the center coordinates"
-    ]
+    ],
+    "visual": {
+      "type": "geo.conic",
+      "title": "The signs inside the squares flip",
+      "caption": "In (x − h)²/a² + (y − k)²/b² = 1 the centre is (h, k), not (−h, −k). The figure shows (x − 2)²/4 + (y + 1)² = 1, whose centre is (2, −1). A plus sign inside a square means a negative coordinate.",
+      "params": {
+        "A": 0.25,
+        "B": 0,
+        "C": 1,
+        "D": -1,
+        "E": 2,
+        "F": 1
+      },
+      "predict": {
+        "question": "What is the centre of (x − 2)²/4 + (y + 1)² = 1?",
+        "options": [
+          "(2, −1)",
+          "(−2, 1)",
+          "(2, 1)"
+        ],
+        "answer": 0,
+        "explain": "Read each square as x − h and y − k. Here h = 2 and k = −1, so the centre is (2, −1). The plus sign in y + 1 gives the negative y-coordinate."
+      }
+    }
   },
   {
     "label": "The standard form",

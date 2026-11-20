@@ -6,7 +6,26 @@
       "Divide by small primes",
       "Stop at the square root",
       "Count the divisions"
-    ]
+    ],
+    "visual": {
+      "type": "nt.modular",
+      "title": "Break sixty into primes",
+      "caption": "A factor tree splits the number until every leaf is prime. The product of the leaves is the original number.",
+      "params": {
+        "mode": "factor",
+        "a": 60
+      },
+      "predict": {
+        "question": "What is the prime factorisation of 60?",
+        "options": [
+          "2 times 3 times 10",
+          "2 squared times 3 times 5",
+          "6 times 10"
+        ],
+        "answer": 1,
+        "explain": "60 = 2 times 30 = 2 times 2 times 15 = 2 squared times 3 times 5."
+      }
+    }
   },
   {
     "label": "Fermat's method",

@@ -6,7 +6,27 @@
       "Count k-subsets ignoring order",
       "Compute n!/(k!(n-k)!)",
       "Return 0 when k > n"
-    ]
+    ],
+    "visual": {
+      "type": "discrete.lab",
+      "title": "List the two-subsets",
+      "caption": "A combination ignores order, so each k-subset is listed once. Counting the listed rows gives the binomial coefficient.",
+      "params": {
+        "mode": "combinations",
+        "n": 5,
+        "k": 2
+      },
+      "predict": {
+        "question": "How many two-element subsets does a five-element set have?",
+        "options": [
+          "10",
+          "20",
+          "25"
+        ],
+        "answer": 0,
+        "explain": "5 choose 2 is 10, and the figure lists exactly ten unordered pairs."
+      }
+    }
   },
   {
     "label": "Pascal's triangle",

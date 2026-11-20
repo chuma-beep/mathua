@@ -6,7 +6,29 @@
       "Read the slope f(0, 1) = 1",
       "Step to y_1 = 1.1",
       "Compare against e^0.1"
-    ]
+    ],
+    "visual": {
+      "type": "ode.slopefield",
+      "title": "Euler follows the tangent",
+      "caption": "Euler takes one straight step along the slope at the current point. RK4 samples the field several times per step. Both curves solve the same equation, and the gap between them is numerical error, not a different differential equation.",
+      "params": {
+        "field": "exponential",
+        "x0": 0,
+        "y0": 1,
+        "step": 0.25,
+        "method": "euler"
+      },
+      "predict": {
+        "question": "For y′ = y from (0, 1), one Euler step with h = 0.25 reaches which value?",
+        "options": [
+          "1.25",
+          "1.284",
+          "1"
+        ],
+        "answer": 0,
+        "explain": "Euler uses the slope at the start: y₁ = y₀ + h f(x₀, y₀) = 1 + 0.25 · 1 = 1.25. The exact value e^0.25 is about 1.284, so Euler lands below it."
+      }
+    }
   },
   {
     "label": "Worked: a second step and its error",

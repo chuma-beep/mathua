@@ -6,7 +6,29 @@
       "evaluate the gradient",
       "scale by the step size",
       "subtract and check the objective decreased"
-    ]
+    ],
+    "visual": {
+      "type": "optim.path",
+      "title": "Step against the gradient",
+      "caption": "The contour lines are the actual objective x squared plus 2 y squared. Each dot is one step opposite the gradient at the previous point.",
+      "params": {
+        "mode": "descent",
+        "startX": 2.5,
+        "startY": 2,
+        "rate": 0.15,
+        "steps": 6
+      },
+      "predict": {
+        "question": "Which direction does one gradient-descent step move?",
+        "options": [
+          "Along the gradient",
+          "Opposite the gradient",
+          "Along a contour line"
+        ],
+        "answer": 1,
+        "explain": "The update subtracts the scaled gradient, so it moves opposite the gradient and lowers the objective."
+      }
+    }
   },
   {
     "label": "Predict the second iterate",

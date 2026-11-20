@@ -6,7 +6,26 @@
       "Define the partial sums",
       "Form their sequence",
       "Recognise the sum as their limit"
-    ]
+    ],
+    "visual": {
+      "type": "analysis.lab",
+      "title": "Partial sums approach the limit",
+      "caption": "The partial sums add one term at a time. Their sequence is plotted in green and its limit is the sum of the series.",
+      "params": {
+        "mode": "series",
+        "sequence": "reciprocal"
+      },
+      "predict": {
+        "question": "What happens to the partial sums of 1/n?",
+        "options": [
+          "They converge to 1",
+          "They grow without bound",
+          "They alternate"
+        ],
+        "answer": 1,
+        "explain": "The harmonic series diverges, so its partial sums grow without bound even though the terms tend to zero."
+      }
+    }
   },
   {
     "label": "Worked: the geometric series",

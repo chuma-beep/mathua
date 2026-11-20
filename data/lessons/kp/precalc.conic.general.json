@@ -6,7 +6,30 @@
       "Read A, B and C",
       "Compute B^2 - 4AC",
       "Classify by its sign, then check for a degenerate curve"
-    ]
+    ],
+    "visual": {
+      "type": "geo.conic",
+      "title": "The discriminant sign names the conic",
+      "caption": "For Ax² + Bxy + Cy² + Dx + Ey + F = 0 the discriminant B² − 4AC separates the non-degenerate types. Here A = B = C = 1, so B² − 4AC = −3. The negative sign means an ellipse, and the xy term rotates its axes.",
+      "params": {
+        "A": 1,
+        "B": 1,
+        "C": 1,
+        "D": 0,
+        "E": 0,
+        "F": -1
+      },
+      "predict": {
+        "question": "For x² + xy + y² − 1 = 0, what are B² − 4AC and the type?",
+        "options": [
+          "3, hyperbola",
+          "−3, hyperbola",
+          "−3, ellipse"
+        ],
+        "answer": 2,
+        "explain": "Substitute A = 1, B = 1 and C = 1: B² − 4AC = 1 − 4 = −3. A negative discriminant gives an ellipse or a point. The curve is not a point here, so it is an ellipse."
+      }
+    }
   },
   {
     "label": "Worked: ellipse, parabola and hyperbola",

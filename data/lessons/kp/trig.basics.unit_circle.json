@@ -6,7 +6,27 @@
       "Center radius 1 at origin O",
       "Sweep theta counterclockwise positive, clockwise negative",
       "Read sin = PR, cos = OR, tan = ST off segments"
-    ]
+    ],
+    "visual": {
+      "type": "trig.unitcircle",
+      "title": "One point carries both coordinates",
+      "caption": "A point P on the unit circle has coordinates (cos θ, sin θ). The angle turns counterclockwise from the positive x-axis, and the same angle marks the sine and cosine values on the graph below. Drag P or change the angle: the point, the two coordinates and the graph move together.",
+      "params": {
+        "angle": 45,
+        "showSin": true,
+        "showCos": true
+      },
+      "predict": {
+        "question": "At θ = 90°, where is P and what are its coordinates?",
+        "options": [
+          "P is (0, 1), so cos θ = 0 and sin θ = 1",
+          "P is (1, 0), so cos θ = 1 and sin θ = 0",
+          "P leaves the unit circle because the angle is vertical"
+        ],
+        "answer": 0,
+        "explain": "A quarter turn reaches the top of the unit circle. The x-coordinate is 0, so cos 90° = 0, and the y-coordinate is 1, so sin 90° = 1. Every point stays on x² + y² = 1."
+      }
+    }
   },
   {
     "label": "Fundamental trigonometric identity",

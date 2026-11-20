@@ -6,7 +6,30 @@
       "Draw the tangent at the current guess",
       "Find its intercept with the axis",
       "Take that intercept as the next guess"
-    ]
+    ],
+    "visual": {
+      "type": "numa.roots",
+      "title": "Follow the tangent to the axis",
+      "caption": "Newton evaluates the function and its derivative at the current guess, draws the tangent, and takes its x-intercept as the next guess. The markers and tangent lines are the actual iterates, not an illustration of them.",
+      "params": {
+        "fn": "cubic",
+        "method": "newton",
+        "a": 0,
+        "b": 2,
+        "start": 1,
+        "iterations": 5
+      },
+      "predict": {
+        "question": "For x³ − x − 1, Newton starts at x = 1. What is the next guess?",
+        "options": [
+          "1.25",
+          "2",
+          "1.5"
+        ],
+        "answer": 2,
+        "explain": "f(1) = −1 and f′(1) = 2. The tangent intercept is x − f(x)/f′(x) = 1 − (−1)/2 = 1.5."
+      }
+    }
   },
   {
     "label": "Worked: one step for a square root",

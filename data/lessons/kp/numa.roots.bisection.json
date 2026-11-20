@@ -6,7 +6,30 @@
       "Check the signs at the two endpoints",
       "Evaluate the midpoint",
       "Keep the half with the sign change"
-    ]
+    ],
+    "visual": {
+      "type": "numa.roots",
+      "title": "Each step halves the bracket",
+      "caption": "Bisection keeps a bracket whose endpoint values have opposite signs. It evaluates the midpoint and replaces the endpoint with the same sign, so the root stays inside and the interval halves each time.",
+      "params": {
+        "fn": "quadratic",
+        "method": "bisection",
+        "a": 0,
+        "b": 2,
+        "start": 1,
+        "iterations": 5
+      },
+      "predict": {
+        "question": "For x² − 2 on [0, 2], which half remains after the first bisection?",
+        "options": [
+          "[0, 1]",
+          "[1, 2]",
+          "Both halves"
+        ],
+        "answer": 1,
+        "explain": "The midpoint is 1 and f(1) = −1. Since f(0) = −2 has the same sign, the left half is discarded. f(1) and f(2) = 2 have opposite signs, so the root stays in [1, 2]."
+      }
+    }
   },
   {
     "label": "Worked: counting the steps",

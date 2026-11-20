@@ -6,7 +6,30 @@
       "Recognize the circle as a conic section",
       "Identify the standard form",
       "Locate center and radius"
-    ]
+    ],
+    "visual": {
+      "type": "geo.conic",
+      "title": "The centre and radius sit in the standard form",
+      "caption": "A circle written as (x − h)² + (y − k)² = r² has centre (h, k) and radius r. Here (x − 1)² + (y + 2)² = 4, so the centre is (1, −2) and the radius is 2. The expanded equation in the figure has the same centre and radius.",
+      "params": {
+        "A": 1,
+        "B": 0,
+        "C": 1,
+        "D": -2,
+        "E": 4,
+        "F": 1
+      },
+      "predict": {
+        "question": "For (x − 1)² + (y + 2)² = 4, what are the centre and radius?",
+        "options": [
+          "Centre (−1, 2), radius 2",
+          "Centre (1, −2), radius 2",
+          "Centre (1, −2), radius 4"
+        ],
+        "answer": 1,
+        "explain": "The signs inside the squares flip when you read the centre: h = 1 and k = −2. The right side is r² = 4, so r = 2, not 4."
+      }
+    }
   },
   {
     "label": "What is a circumference",

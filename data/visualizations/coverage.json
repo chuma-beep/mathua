@@ -296,6 +296,62 @@
     {
       "id": "linalg.elimination",
       "reason": "linear systems are not one of the proposal's 31 topics; the elimination figure is required by the linear-transformation brief and teaches a different activity, so it is recorded here rather than inflating the topic list"
+    },
+    {
+      "id": "trig.unitcircle",
+      "reason": "trigonometry is not one of the proposal's 31 topics; the unit-circle figure links the circle, the sine and cosine values and the graph position, so it is recorded here rather than inflating the topic list"
+    },
+    {
+      "id": "ode.slopefield",
+      "reason": "differential equations are not one of the proposal\u2019s 31 topics; the slope-field figure plots the actual right-hand side and integrates a solution, so it is recorded here rather than inflating the topic list"
+    },
+    {
+      "id": "numa.roots",
+      "reason": "numerical analysis is not one of the proposal\u2019s 31 topics; the root-iteration figure runs bisection and Newton on the actual function, so it is recorded here rather than inflating the topic list"
+    },
+    {
+      "id": "graph.network",
+      "reason": "graph theory is not one of the proposal\u2019s 31 topics; the graph figure runs traversal, shortest-path and spanning-tree algorithms on its own edges, so it is recorded here rather than inflating the topic list"
+    },
+    {
+      "id": "prob.tree",
+      "reason": "conditional probability and Bayes are not one of the proposal topics; the tree shows the sample-space partition, the joint leaves and the posterior, so it is recorded here rather than inventing a proposal topic"
+    },
+    {
+      "id": "frac.line",
+      "reason": "fractions are not one of the proposal topics; the number line and area bars share one exact fraction engine so equivalence and comparison are shown on the same whole"
+    },
+    {
+      "id": "function.graph",
+      "reason": "functions are a proposal topic, but the proposal has no separate graph-transformation entry; the figure links a function family, its end behaviour, its domain and range, and the reflection that gives the inverse, so it is recorded here rather than inflating the topic list"
+    },
+    {
+      "id": "arith.line",
+      "reason": "a shared number-line and balance model serves signed numbers, decimals, percentages, ratios and one-step equations outside the 31-topic proposal"
+    },
+    {
+      "id": "nt.modular",
+      "reason": "modular residues, repeated squaring, Euclid steps and factor trees are exact number-theory calculations not represented by an existing template"
+    },
+    {
+      "id": "abstract.group",
+      "reason": "operation tables and generated subgroups show finite groups without implying that every group is a geometric symmetry group"
+    },
+    {
+      "id": "discrete.lab",
+      "reason": "truth tables, set membership and k-subsets are discrete structures distinct from the probability and graph templates"
+    },
+    {
+      "id": "optim.path",
+      "reason": "gradient descent and feasible-region checks show the actual iteration and constraint values rather than a decorative path"
+    },
+    {
+      "id": "analysis.lab",
+      "reason": "epsilon bands, partial sums and three explicit metrics support real-analysis and metric-space definitions"
+    },
+    {
+      "id": "ml.fit",
+      "reason": "the regression loss and logistic probability use the same gradient and sigmoid calculations taught in the machine-learning lessons"
     }
   ]
 }

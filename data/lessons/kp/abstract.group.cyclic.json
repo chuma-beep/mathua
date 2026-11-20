@@ -6,7 +6,26 @@
       "Compute powers of 2 mod 5",
       "Exhaust all four residues",
       "Certify cyclic of order 4"
-    ]
+    ],
+    "visual": {
+      "type": "abstract.group",
+      "title": "One element generates the table",
+      "caption": "The highlighted cells are the powers of the selected element. In Z4 the element 1 visits every residue, so the group is cyclic.",
+      "params": {
+        "group": "z4",
+        "element": 1
+      },
+      "predict": {
+        "question": "How many distinct elements does the element 1 generate in Z4?",
+        "options": [
+          "2",
+          "4",
+          "1"
+        ],
+        "answer": 1,
+        "explain": "The powers 1, 2, 3, 0 are all four residues, so the generated subgroup is the whole group."
+      }
+    }
   },
   {
     "label": "Worked: V_4 is not cyclic",

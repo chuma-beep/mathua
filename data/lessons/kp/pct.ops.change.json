@@ -6,7 +6,27 @@
       "Subtract the smaller value from the larger",
       "Keep the change positive",
       "Decide whether the new value is higher or lower"
-    ]
+    ],
+    "visual": {
+      "type": "arith.line",
+      "title": "A change of 25 percent",
+      "caption": "The bar starts at the base amount and the change is a fraction of that base. The result is the base plus the signed change.",
+      "params": {
+        "mode": "percent",
+        "percent": 25,
+        "base": 80
+      },
+      "predict": {
+        "question": "An 80 dollar price rises by 25 percent. What is the new price?",
+        "options": [
+          "20 dollars",
+          "100 dollars",
+          "105 dollars"
+        ],
+        "answer": 1,
+        "explain": "25 percent of 80 is 20. The new price is 80 + 20 = 100 dollars."
+      }
+    }
   },
   {
     "label": "Divide by the original value",

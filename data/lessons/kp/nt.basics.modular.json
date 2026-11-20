@@ -6,7 +6,27 @@
       "Split a = qn + r with 0 <= r < n",
       "Compute 17 = 3*5 + 2 for 17 mod 5 = 2",
       "Name n the modulus of the operation"
-    ]
+    ],
+    "visual": {
+      "type": "nt.modular",
+      "title": "Seventeen modulo five",
+      "caption": "The residue circle groups integers by their remainder after division by five. Seventeen makes three full turns and lands on residue 2.",
+      "params": {
+        "mode": "residue",
+        "a": 17,
+        "n": 5
+      },
+      "predict": {
+        "question": "What is 17 modulo 5?",
+        "options": [
+          "2",
+          "3",
+          "17"
+        ],
+        "answer": 0,
+        "explain": "17 = 3 times 5 + 2, and the remainder 2 is the residue."
+      }
+    }
   },
   {
     "label": "Modulo of a negative integer",

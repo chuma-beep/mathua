@@ -1,5 +1,6 @@
 import type { VisualTemplateEntry } from './types'
 import {
+  analysisSchema,
   basisChangeSchema,
   complexFieldSchema,
   coordinateSchema,
@@ -8,14 +9,26 @@ import {
   contourIntegralSchema,
   conicSchema,
   contourSchema,
+  discreteSchema,
   eigenSchema,
   familySchema,
+  fractionLineSchema,
+  functionGraphSchema,
   gaussianSchema,
+  graphSchema,
+  groupSchema,
   limitSchema,
   matrix2dSchema,
+  modelFitSchema,
+  modularSchema,
   normalSchema,
+  numberLineSchema,
+  odeSlopeSchema,
+  optimizationSchema,
+  probabilityTreeSchema,
   regressionSchema,
   riemannSchema,
+  rootsSchema,
   samplingSchema,
   solid3dSchema,
   spreadSchema,
@@ -23,6 +36,7 @@ import {
   taylorSchema,
   vectorCombinationSchema,
   transform2dSchema,
+  unitCircleSchema,
 } from './schemas'
 
 // The closed registry. Adding a template is one entry here, one schema above,
@@ -59,6 +73,10 @@ export const VISUAL_TEMPLATES: Record<string, VisualTemplateEntry> = {
   'geo.conic': {
     schema: conicSchema,
     load: () => import('./templates/ConicSection'),
+  },
+  'trig.unitcircle': {
+    schema: unitCircleSchema,
+    load: () => import('./templates/UnitCircle'),
   },
   'calc.contour': {
     schema: contourSchema,
@@ -123,6 +141,58 @@ export const VISUAL_TEMPLATES: Record<string, VisualTemplateEntry> = {
   'linalg.basis': {
     schema: basisChangeSchema,
     load: () => import('./templates/BasisChange'),
+  },
+  'arith.line': {
+    schema: numberLineSchema,
+    load: () => import('./templates/NumberLineLab'),
+  },
+  'ode.slopefield': {
+    schema: odeSlopeSchema,
+    load: () => import('./templates/SlopeField'),
+  },
+  'numa.roots': {
+    schema: rootsSchema,
+    load: () => import('./templates/RootIteration'),
+  },
+  'graph.network': {
+    schema: graphSchema,
+    load: () => import('./templates/GraphNetwork'),
+  },
+  'prob.tree': {
+    schema: probabilityTreeSchema,
+    load: () => import('./templates/ProbabilityTree'),
+  },
+  'frac.line': {
+    schema: fractionLineSchema,
+    load: () => import('./templates/FractionLine'),
+  },
+  'function.graph': {
+    schema: functionGraphSchema,
+    load: () => import('./templates/FunctionGraph'),
+  },
+  'nt.modular': {
+    schema: modularSchema,
+    load: () => import('./templates/ModularLab'),
+  },
+  'abstract.group': {
+    schema: groupSchema,
+    load: () => import('./templates/GroupTable'),
+  },
+  'discrete.lab': {
+    schema: discreteSchema,
+    load: () => import('./templates/DiscreteLab'),
+  },
+  'optim.path': {
+    schema: optimizationSchema,
+    load: () => import('./templates/OptimizationLab'),
+  },
+  'analysis.lab': {
+    schema: analysisSchema,
+    load: () => import('./templates/AnalysisLab'),
+  },
+  'ml.fit': {
+    schema: modelFitSchema,
+    load: () => import('./templates/ModelFit'),
   },
 }
 

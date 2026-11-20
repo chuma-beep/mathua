@@ -6,7 +6,28 @@
       "Model two fractions that name the same amount",
       "Split parts into smaller equal parts",
       "See the equivalence visually"
-    ]
+    ],
+    "visual": {
+      "type": "frac.line",
+      "title": "More parts, same point",
+      "caption": "Splitting every part into smaller equal parts multiplies the numerator and the denominator by the same number. The symbols change, but the number line point and the shaded area do not.",
+      "params": {
+        "numerator": 1,
+        "denominator": 2,
+        "otherNumerator": 2,
+        "otherDenominator": 4
+      },
+      "predict": {
+        "question": "Are 1/2 and 2/4 the same point on the number line?",
+        "options": [
+          "Yes, they name the same amount",
+          "No, 2/4 is larger",
+          "Only when the numerator is smaller"
+        ],
+        "answer": 0,
+        "explain": "Split each half into two equal parts. The same point is now two of four parts, so 2/4 equals 1/2. The cross products 1 \u00d7 4 and 2 \u00d7 2 are equal."
+      }
+    }
   },
   {
     "label": "Find equivalent fractions",

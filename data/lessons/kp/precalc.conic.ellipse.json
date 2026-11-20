@@ -6,7 +6,30 @@
       "Collect the six terms into f(x,y) = 0",
       "Check the discriminant is negative and the curve is not a point or empty",
       "Name the cone cut circle, parabola, ellipse, or hyperbola"
-    ]
+    ],
+    "visual": {
+      "type": "geo.conic",
+      "title": "A negative discriminant rules out a hyperbola",
+      "caption": "The six-term equation x² + 0.25y² − 2x + y + 1 = 0 has A = 1, B = 0 and C = 0.25. Its discriminant is B² − 4AC = −1, so the curve is an ellipse, not a hyperbola. The figure shows its centre at (1, −2).",
+      "params": {
+        "A": 1,
+        "B": 0,
+        "C": 0.25,
+        "D": -2,
+        "E": 1,
+        "F": 1
+      },
+      "predict": {
+        "question": "For x² + 0.25y² − 2x + y + 1 = 0, what is B² − 4AC?",
+        "options": [
+          "−1",
+          "1",
+          "0"
+        ],
+        "answer": 0,
+        "explain": "With B = 0, A = 1 and C = 0.25, B² − 4AC = 0 − 4(1)(0.25) = −1. A negative discriminant means an ellipse. The linear terms translate the centre but do not change the type."
+      }
+    }
   },
   {
     "label": "What is an ellipse",

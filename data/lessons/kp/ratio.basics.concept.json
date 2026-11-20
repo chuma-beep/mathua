@@ -6,7 +6,27 @@
       "Write the comparison as a fraction",
       "Order the quantities correctly",
       "Simplify when possible"
-    ]
+    ],
+    "visual": {
+      "type": "arith.line",
+      "title": "Six to four as a fraction",
+      "caption": "A ratio compares two quantities in order. The two tapes show six parts and four parts, and dividing both by two gives the simplified ratio 3 to 2.",
+      "params": {
+        "mode": "ratio",
+        "ratioA": 6,
+        "ratioB": 4
+      },
+      "predict": {
+        "question": "What is the ratio 6 to 4 in simplest form?",
+        "options": [
+          "2 to 3",
+          "3 to 2",
+          "6 to 2"
+        ],
+        "answer": 1,
+        "explain": "Both terms share the factor 2, so 6 to 4 simplifies to 3 to 2."
+      }
+    }
   },
   {
     "label": "Ratios",

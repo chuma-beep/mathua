@@ -6,7 +6,27 @@
       "Explain weighted paths",
       "Apply weighted paths to a concrete graph",
       "Check the result against the definitions"
-    ]
+    ],
+    "visual": {
+      "type": "graph.network",
+      "title": "Dijkstra keeps the shortest distances",
+      "caption": "Dijkstra settles the nearest unsettled node, then relaxes its edges. The labels are the shortest distances from the start, and the highlighted edges are the predecessor tree that produces them.",
+      "params": {
+        "algorithm": "dijkstra",
+        "start": "A",
+        "showTree": true
+      },
+      "predict": {
+        "question": "From A, what is the shortest-path distance to F?",
+        "options": [
+          "2",
+          "4",
+          "3"
+        ],
+        "answer": 2,
+        "explain": "One shortest route is A → B → E → F. Each edge has weight 1, so the distance is 3. The route through D is longer."
+      }
+    }
   },
   {
     "label": "Dijkstra's Algorithm",

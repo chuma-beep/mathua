@@ -6,7 +6,27 @@
       "Compute the Euclidean distance",
       "Solve center minus radius",
       "Solve center plus radius"
-    ]
+    ],
+    "visual": {
+      "type": "analysis.lab",
+      "title": "The metric decides the ball",
+      "caption": "The Manhattan metric adds coordinate distances, so its ball is a diamond. Changing the metric changes which lattice points lie inside the same radius.",
+      "params": {
+        "mode": "metric",
+        "metric": "manhattan",
+        "radius": 2
+      },
+      "predict": {
+        "question": "Which points lie in the Manhattan ball of radius 2 around the origin?",
+        "options": [
+          "Only points with x squared plus y squared at most 4",
+          "Points with absolute x plus absolute y at most 2",
+          "Every point in the square from -2 to 2"
+        ],
+        "answer": 1,
+        "explain": "The Manhattan distance is the sum of the absolute coordinates, giving a diamond rather than a Euclidean disk."
+      }
+    }
   },
   {
     "label": "Worked: balls in the line and the plane",

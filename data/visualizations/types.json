@@ -90,5 +90,61 @@
   {
     "id": "linalg.elimination",
     "status": "stable"
+  },
+  {
+    "id": "trig.unitcircle",
+    "status": "stable"
+  },
+  {
+    "id": "ode.slopefield",
+    "status": "stable"
+  },
+  {
+    "id": "numa.roots",
+    "status": "stable"
+  },
+  {
+    "id": "graph.network",
+    "status": "stable"
+  },
+  {
+    "id": "prob.tree",
+    "status": "stable"
+  },
+  {
+    "id": "frac.line",
+    "status": "stable"
+  },
+  {
+    "id": "function.graph",
+    "status": "stable"
+  },
+  {
+    "id": "arith.line",
+    "status": "stable"
+  },
+  {
+    "id": "nt.modular",
+    "status": "stable"
+  },
+  {
+    "id": "abstract.group",
+    "status": "stable"
+  },
+  {
+    "id": "discrete.lab",
+    "status": "stable"
+  },
+  {
+    "id": "optim.path",
+    "status": "stable"
+  },
+  {
+    "id": "analysis.lab",
+    "status": "stable"
+  },
+  {
+    "id": "ml.fit",
+    "status": "stable"
   }
 ]

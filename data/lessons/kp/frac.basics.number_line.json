@@ -6,7 +6,28 @@
       "Divide the interval into equal parts",
       "Count the parts from zero",
       "Place the fraction correctly"
-    ]
+    ],
+    "visual": {
+      "type": "frac.line",
+      "title": "One point, counted from zero",
+      "caption": "Each denominator divides the same unit interval into equal parts, and the numerator counts how many parts to the right of zero. The marker is the fraction, and the bar shows the same count as area.",
+      "params": {
+        "numerator": 3,
+        "denominator": 4,
+        "otherNumerator": 1,
+        "otherDenominator": 2
+      },
+      "predict": {
+        "question": "Which fraction sits farther to the right on the number line?",
+        "options": [
+          "3/4",
+          "1/2",
+          "They sit at the same point"
+        ],
+        "answer": 0,
+        "explain": "At the same scale, 3/4 is 0.75 and 1/2 is 0.5. Three quarter-steps from zero pass the halfway point, so 3/4 is farther right."
+      }
+    }
   },
   {
     "label": "Order fractions",

@@ -6,7 +6,30 @@
       "Recognize the ellipse as a conic section",
       "Identify the major and minor axes",
       "Locate the center"
-    ]
+    ],
+    "visual": {
+      "type": "geo.conic",
+      "title": "The larger denominator sets the major axis",
+      "caption": "For x²/a² + y²/b² = 1 the larger denominator belongs to the major axis. Here x²/4 + y² = 1 has a = 2 along x and b = 1 along y, so the major axis is horizontal and 4 units long.",
+      "params": {
+        "A": 0.25,
+        "B": 0,
+        "C": 1,
+        "D": 0,
+        "E": 0,
+        "F": -1
+      },
+      "predict": {
+        "question": "For x²/4 + y² = 1, which axis is major and how long is it?",
+        "options": [
+          "The vertical axis, length 2",
+          "Both axes are equal, length 2",
+          "The horizontal axis, length 4"
+        ],
+        "answer": 2,
+        "explain": "The denominator 4 is larger than 1, so the major axis lies along x. Its semi-axis is √4 = 2, which makes the full major axis 2a = 4."
+      }
+    }
   },
   {
     "label": "What is an ellipse",

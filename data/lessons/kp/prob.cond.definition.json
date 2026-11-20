@@ -6,7 +6,27 @@
       "Define the conditional probability",
       "Restrict the sample space to the conditioning event",
       "Explain why the denominator is P(B)"
-    ]
+    ],
+    "visual": {
+      "type": "prob.tree",
+      "title": "The conditioning event becomes the denominator",
+      "caption": "The tree splits the sample space by disease status, then by test result. A conditional probability restricts attention to one branch such as the positive result, so its denominator is the total probability of that branch, not the whole space.",
+      "params": {
+        "prior": 0.01,
+        "sensitivity": 0.95,
+        "specificity": 0.9
+      },
+      "predict": {
+        "question": "A person tests positive. Which quantity conditions on the test result?",
+        "options": [
+          "P(D), the prior",
+          "P(+ | D), the sensitivity",
+          "P(D | +), the posterior"
+        ],
+        "answer": 2,
+        "explain": "P(D | +) restricts the sample space to the positive test results. The positive leaves form the denominator, and the disease-positive leaf is the numerator."
+      }
+    }
   },
   {
     "label": "The conditional probability formula",

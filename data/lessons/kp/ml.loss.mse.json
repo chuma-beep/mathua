@@ -6,7 +6,27 @@
       "Square each prediction error",
       "Sum the squared errors",
       "Divide by the sample count"
-    ]
+    ],
+    "visual": {
+      "type": "ml.fit",
+      "title": "The loss after each step",
+      "caption": "Mean squared error averages the squared vertical gaps. The readout reports the actual loss at the current line, not a decorative score.",
+      "params": {
+        "mode": "regression",
+        "rate": 0.1,
+        "steps": 8
+      },
+      "predict": {
+        "question": "What does mean squared error average?",
+        "options": [
+          "The absolute errors",
+          "The squared prediction errors",
+          "The number of data points"
+        ],
+        "answer": 1,
+        "explain": "MSE sums each squared prediction error and divides by the sample count."
+      }
+    }
   },
   {
     "label": "Worked: one gradient step",

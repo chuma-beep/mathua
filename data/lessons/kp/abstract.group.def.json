@@ -6,7 +6,26 @@
       "Test closure of a.b inside G",
       "Check (a.b).c equals a.(b.c)",
       "Solve a.x = e for each inverse"
-    ]
+    ],
+    "visual": {
+      "type": "abstract.group",
+      "title": "The table is the group",
+      "caption": "Closure, identity and inverses are visible as entries in the operation table. The table for Z4 uses addition modulo four.",
+      "params": {
+        "group": "z4",
+        "element": 1
+      },
+      "predict": {
+        "question": "In Z4, what is 3 + 2 modulo 4?",
+        "options": [
+          "1",
+          "2",
+          "5"
+        ],
+        "answer": 0,
+        "explain": "3 + 2 = 5, and 5 modulo 4 is 1."
+      }
+    }
   },
   {
     "label": "Properties",

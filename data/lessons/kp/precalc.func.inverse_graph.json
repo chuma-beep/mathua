@@ -6,7 +6,29 @@
       "Swap x and y",
       "Plot the image point",
       "Check the pair"
-    ]
+    ],
+    "visual": {
+      "type": "function.graph",
+      "title": "Reflecting across y = x swaps the coordinates",
+      "caption": "Every point (x, y) on y = 2ˣ has a mirror point (y, x) on the dashed curve. The mirror is y = log₂ x: it is a function because each y has one x. Switch Show inverse off and on to compare.",
+      "params": {
+        "family": "exponential",
+        "a": 1,
+        "h": 0,
+        "k": 0,
+        "showInverse": true
+      },
+      "predict": {
+        "question": "The graph of y = 2ˣ is reflected in y = x. Which equation does the reflection follow?",
+        "options": [
+          "y = x²",
+          "y = log₂ x",
+          "y = 2^(−x)"
+        ],
+        "answer": 1,
+        "explain": "Reflecting swaps x and y, so y = 2ˣ becomes x = 2ʸ. Solving for y gives y = log₂ x, and every positive x has exactly one logarithm."
+      }
+    }
   },
   {
     "label": "Reflection",

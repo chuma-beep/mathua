@@ -6,7 +6,27 @@
       "Read x as cosine",
       "Read y as sine",
       "Check the identity"
-    ]
+    ],
+    "visual": {
+      "type": "trig.unitcircle",
+      "title": "Sine and cosine from one coordinate pair",
+      "caption": "On the unit circle, read the point first, then the functions. The angle places P in a quadrant, the signs of its coordinates give the signs of cosine and sine, and the reference angle gives the acute angle to the x-axis. The graph below shows the same values at the same angle.",
+      "params": {
+        "angle": 210,
+        "showSin": true,
+        "showCos": true
+      },
+      "predict": {
+        "question": "At θ = 210°, what are the signs of cos θ and sin θ?",
+        "options": [
+          "cos θ < 0 and sin θ < 0",
+          "cos θ > 0 and sin θ < 0",
+          "cos θ < 0 and sin θ > 0"
+        ],
+        "answer": 0,
+        "explain": "210° is in quadrant III, where both coordinates are negative. The reference angle is 30°, so the point is (−√3/2, −1/2). Therefore both cos 210° and sin 210° are negative."
+      }
+    }
   },
   {
     "label": "Quadrants",

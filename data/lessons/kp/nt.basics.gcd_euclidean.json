@@ -6,7 +6,27 @@
       "Divide a by b for quotient and remainder",
       "Replace the pair by b and the remainder",
       "Stop when the remainder hits 0"
-    ]
+    ],
+    "visual": {
+      "type": "nt.modular",
+      "title": "Euclid stops at zero",
+      "caption": "Each row replaces the pair by the divisor and the remainder. The last nonzero remainder is the greatest common divisor.",
+      "params": {
+        "mode": "euclid",
+        "a": 30,
+        "b": 17
+      },
+      "predict": {
+        "question": "What is the greatest common divisor of 30 and 17?",
+        "options": [
+          "1",
+          "2",
+          "17"
+        ],
+        "answer": 0,
+        "explain": "30 = 1 times 17 + 13, 17 = 1 times 13 + 4, and the chain ends at 1."
+      }
+    }
   },
   {
     "label": "Worked: gcd of 252 and 105",

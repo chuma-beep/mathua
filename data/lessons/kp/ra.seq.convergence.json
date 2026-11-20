@@ -6,7 +6,27 @@
       "Fix an arbitrary positive epsilon",
       "Find a threshold depending on it",
       "Keep every later term within epsilon"
-    ]
+    ],
+    "visual": {
+      "type": "analysis.lab",
+      "title": "The tail stays inside epsilon",
+      "caption": "The shaded band is the epsilon-neighbourhood of the limit. The threshold marks the first index after which every later term stays inside the band.",
+      "params": {
+        "mode": "sequence",
+        "sequence": "reciprocal",
+        "epsilon": 0.2
+      },
+      "predict": {
+        "question": "For 1/n with epsilon 0.2, from which n does every later term stay inside?",
+        "options": [
+          "n = 5",
+          "n = 2",
+          "n = 20"
+        ],
+        "answer": 0,
+        "explain": "1/n is below 0.2 exactly when n is greater than 5, so the tail from n = 5 stays inside."
+      }
+    }
   },
   {
     "label": "Worked: a ratio of polynomials",
