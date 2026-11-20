@@ -6,7 +6,30 @@
       "Read the outside coefficient as amplitude",
       "Read the inside coefficient as period",
       "Read the two constants as shifts"
-    ]
+    ],
+    "visual": {
+      "type": "trig.sinusoid",
+      "title": "Four parameters, four visible changes",
+      "caption": "The four numbers act independently: A = 2 doubles the height, B = 2 halves the period to π, C = π/2 shifts the wave right, and D = 1 raises the midline to y = 1.",
+      "params": {
+        "form": "sin",
+        "amplitude": 2,
+        "frequency": 2,
+        "phase": 1.5707963267948966,
+        "vertical": 1,
+        "showReference": true
+      },
+      "predict": {
+        "question": "For y = 2 sin(2(x − π/2)) + 1, which description is correct?",
+        "options": [
+          "Amplitude 1, period 2π, shift left π/2",
+          "Amplitude 2, period 2π, shift right 1",
+          "Amplitude 2, period π, shift right π/2"
+        ],
+        "answer": 2,
+        "explain": "The outside coefficient 2 is the amplitude. The inside coefficient 2 makes the period 2π/2 = π. Subtracting π/2 inside shifts the graph right by π/2, and the outside +1 moves the midline."
+      }
+    }
   },
   {
     "label": "Order of application",

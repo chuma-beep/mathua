@@ -280,6 +280,8 @@ export const optimizationSchema = z.object({
   steps: z.number().int().min(1).max(20).default(6),
   candidateX: z.number().finite().min(0).max(3).default(1),
   candidateY: z.number().finite().min(0).max(3).default(1),
+  rhs: z.enum(['none', 'first', 'second']).default('none'),
+  delta: z.number().finite().min(-1).max(1).default(0),
 })
 
 export const analysisSchema = z.object({
@@ -295,4 +297,15 @@ export const modelFitSchema = z.object({
   rate: z.number().finite().min(0.01).max(0.5).default(0.1),
   steps: z.number().int().min(1).max(20).default(8),
   threshold: z.number().finite().min(-2).max(2).default(0),
+})
+
+// y = A f(B(x − C)) + D. B is positive in the figure, so the period is 2π/B
+// and a negative A is the reflection the amplitude lesson talks about.
+export const sinusoidSchema = z.object({
+  form: z.enum(['sin', 'cos']).default('sin'),
+  amplitude: z.number().finite().min(-3).max(3).default(1),
+  frequency: z.number().finite().min(0.25).max(4).default(1),
+  phase: z.number().finite().min(-3.14).max(3.14).default(0),
+  vertical: z.number().finite().min(-8).max(8).default(0),
+  showReference: z.boolean().default(true),
 })

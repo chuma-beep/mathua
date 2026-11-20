@@ -6,7 +6,30 @@
       "For y = sin(bx), the period is 360/b degrees, or 2 pi/b radians.",
       "For y = cos(bx), the same rule applies.",
       "The period is always positive, so use the absolute value of b."
-    ]
+    ],
+    "visual": {
+      "type": "trig.sinusoid",
+      "title": "Frequency counts the cycles in one turn",
+      "caption": "The coefficient B is the angular frequency. On 0 ≤ x ≤ 2π the graph of y = sin(3x) completes three full cycles, while y = sin x completes one.",
+      "params": {
+        "form": "sin",
+        "amplitude": 1,
+        "frequency": 3,
+        "phase": 0,
+        "vertical": 0,
+        "showReference": true
+      },
+      "predict": {
+        "question": "How many full cycles does y = sin(3x) complete on 0 ≤ x ≤ 2π?",
+        "options": [
+          "3",
+          "1/3",
+          "6"
+        ],
+        "answer": 0,
+        "explain": "One cycle takes 2π/3, and three of those fit in 2π. The coefficient 3 multiplies the number of cycles, not the period directly."
+      }
+    }
   },
   {
     "label": "Frequency",

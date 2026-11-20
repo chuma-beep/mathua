@@ -6,7 +6,30 @@
       "Read the coefficient B in y = A sin(Bx)",
       "Divide 360 degrees by the absolute value of B",
       "Count the x-distance from one peak to the next"
-    ]
+    ],
+    "visual": {
+      "type": "trig.sinusoid",
+      "title": "A larger B packs more cycles into the window",
+      "caption": "For y = A sin(Bx), one full cycle spans 2π/|B|. Doubling B from 1 to 2 halves the period from 2π to π, so two complete waves fit between 0 and 2π.",
+      "params": {
+        "form": "sin",
+        "amplitude": 1,
+        "frequency": 2,
+        "phase": 0,
+        "vertical": 0,
+        "showReference": true
+      },
+      "predict": {
+        "question": "For y = sin(2x), what is the period?",
+        "options": [
+          "4π",
+          "π",
+          "2π"
+        ],
+        "answer": 1,
+        "explain": "The period is 2π divided by |B|. With B = 2 the period is 2π/2 = π, so the wave repeats twice as often as sin x."
+      }
+    }
   },
   {
     "label": "Determining Amplitude",

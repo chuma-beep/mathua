@@ -6,7 +6,30 @@
       "Read the amplitude",
       "Read the period",
       "Read the shifts"
-    ]
+    ],
+    "visual": {
+      "type": "trig.sinusoid",
+      "title": "Read all four parameters from one equation",
+      "caption": "In y = 2 sin(3(x + π/4)) − 1 the amplitude is 2, the period is 2π/3, the phase shift is π/4 to the left and the midline is y = −1.",
+      "params": {
+        "form": "sin",
+        "amplitude": 2,
+        "frequency": 3,
+        "phase": -0.7853981633974483,
+        "vertical": -1,
+        "showReference": true
+      },
+      "predict": {
+        "question": "For y = 2 sin(3(x + π/4)) − 1, what is the phase shift?",
+        "options": [
+          "π/4 left",
+          "π/4 right",
+          "π/12 left"
+        ],
+        "answer": 0,
+        "explain": "The inside is 3(x + π/4), which is 3(x − (−π/4)). The phase shift is C = −π/4, so the graph moves π/4 to the left; the 3 changes the period, not the size of the shift."
+      }
+    }
   },
   {
     "label": "Five key points",

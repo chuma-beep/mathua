@@ -30,6 +30,7 @@ import {
   riemannSchema,
   rootsSchema,
   samplingSchema,
+  sinusoidSchema,
   solid3dSchema,
   spreadSchema,
   tangentSchema,
@@ -77,6 +78,10 @@ export const VISUAL_TEMPLATES: Record<string, VisualTemplateEntry> = {
   'trig.unitcircle': {
     schema: unitCircleSchema,
     load: () => import('./templates/UnitCircle'),
+  },
+  'trig.sinusoid': {
+    schema: sinusoidSchema,
+    load: () => import('./templates/SinusoidExplorer'),
   },
   'calc.contour': {
     schema: contourSchema,

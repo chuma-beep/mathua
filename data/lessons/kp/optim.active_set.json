@@ -6,7 +6,27 @@
       "start from a feasible point",
       "select active constraints",
       "solve the equality subproblem"
-    ]
+    ],
+    "visual": {
+      "type": "optim.path",
+      "title": "The working set at the optimum",
+      "caption": "The working set is the list of constraints treated as equalities. Here both resource constraints are in it, and solving stationarity with those two normals gives positive multipliers.",
+      "params": {
+        "mode": "feasible",
+        "candidateX": 2,
+        "candidateY": 1
+      },
+      "predict": {
+        "question": "How many constraints are in the working set at (2, 1)?",
+        "options": [
+          "None",
+          "One",
+          "Two"
+        ],
+        "answer": 2,
+        "explain": "Both resource constraints hold with equality at (2, 1), so the working set has two members. The two nonnegativity bounds hold strictly and stay out of the set."
+      }
+    }
   },
   {
     "label": "Take an active-set step",

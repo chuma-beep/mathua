@@ -2,7 +2,9 @@
 //
 // The descent path is the sequence the algorithm actually produces, not an
 // interpolated curve. The linear program reports every constraint at the
-// candidate point and the exact vertex optimum of the fixed feasible polygon.
+// candidate point, the exact vertex optimum, and the KKT multipliers of the
+// active set. The multipliers are solved from the same normals and objective
+// gradient the figure draws, so the dual readout cannot drift from the picture.
 
 export interface DescentPoint {
   index: number
@@ -61,8 +63,19 @@ export function gradientDescent(
   }
 }
 
+export type LpShiftWhich = 'none' | 'first' | 'second'
+
+export interface LpShift {
+  which: LpShiftWhich
+  delta: number
+}
+
 export interface Constraint {
   label: string
+  /** The left-hand normal of a·(x, y) ≤ b. */
+  normal: [number, number]
+  bound: number
+  /** The slack b − a·(x, y). Nonnegative exactly when the point is feasible. */
   evaluate: (x: number, y: number) => number
 }
 
@@ -70,44 +83,276 @@ export interface ConstraintCheck {
   label: string
   value: number
   satisfied: boolean
+  active: boolean
+}
+
+export interface KktMultiplier {
+  label: string
+  value: number
+  normal: [number, number]
+}
+
+export interface KktCheck {
+  active: string[]
+  multipliers: KktMultiplier[]
+  residual: number
+  stationary: boolean
+  dualFeasible: boolean
+  kkt: boolean
+  note?: string
+}
+
+export interface ShadowPrice {
+  label: string
+  value: number
+}
+
+export interface AllowableRange {
+  label: string
+  min: number
+  max: number
+}
+
+export interface LpVertex {
+  x: number
+  y: number
+  value: number
 }
 
 export interface LinearProgram {
   constraints: Constraint[]
-  vertices: Array<{ x: number; y: number; value: number }>
-  optimum: { x: number; y: number; value: number }
+  vertices: LpVertex[]
+  optimum: LpVertex
   candidate: ConstraintCheck[]
   feasible: boolean
   objectiveValue: number
+  status: 'optimal' | 'infeasible'
+  active: string[]
+  kkt: KktCheck
+  optimumKkt: KktCheck
+  dualValue: number
+  gap: number
+  shadow: ShadowPrice | null
+  allowable: AllowableRange | null
 }
 
-const LP_CONSTRAINTS: Constraint[] = [
-  { label: 'x ≥ 0', evaluate: (x) => x },
-  { label: 'y ≥ 0', evaluate: (_x, y) => y },
-  { label: 'x + 2y ≤ 4', evaluate: (x, y) => 4 - x - 2 * y },
-  { label: '2x + y ≤ 5', evaluate: (x, y) => 5 - 2 * x - y },
-]
+const TOLERANCE = 1e-9
 
-const VERTICES = [
-  { x: 0, y: 0 },
-  { x: 2.5, y: 0 },
-  { x: 2, y: 1 },
-  { x: 0, y: 2 },
-]
-
-export function linearProgram(x: number, y: number): LinearProgram {
-  const candidate = LP_CONSTRAINTS.map((constraint) => {
-    const value = constraint.evaluate(x, y)
-    return { label: constraint.label, value, satisfied: value >= -1e-12 }
-  })
-  const vertices = VERTICES.map((vertex) => ({ ...vertex, value: 3 * vertex.x + 2 * vertex.y }))
-  const optimum = vertices.reduce((best, vertex) => (vertex.value > best.value ? vertex : best))
+function constraint(label: string, normal: [number, number], bound: number): Constraint {
   return {
-    constraints: LP_CONSTRAINTS,
+    label,
+    normal,
+    bound,
+    evaluate: (x, y) => bound - normal[0] * x - normal[1] * y,
+  }
+}
+
+function constraintsFor(shift: LpShift): Constraint[] {
+  const delta = Number.isFinite(shift.delta) ? shift.delta : 0
+  const firstBound = 4 + (shift.which === 'first' ? delta : 0)
+  const secondBound = 5 + (shift.which === 'second' ? delta : 0)
+  return [
+    constraint('x ≥ 0', [-1, 0], 0),
+    constraint('y ≥ 0', [0, -1], 0),
+    constraint(`x + 2y ≤ ${firstBound}`, [1, 2], firstBound),
+    constraint(`2x + y ≤ ${secondBound}`, [2, 1], secondBound),
+  ]
+}
+
+function intersection(first: Constraint, second: Constraint): [number, number] | null {
+  const determinant =
+    first.normal[0] * second.normal[1] - first.normal[1] * second.normal[0]
+  if (Math.abs(determinant) <= 1e-12) return null
+  const x =
+    (first.bound * second.normal[1] - first.normal[1] * second.bound) / determinant
+  const y =
+    (first.normal[0] * second.bound - first.bound * second.normal[0]) / determinant
+  return [x, y]
+}
+
+function solveMultipliers(
+  active: Constraint[],
+  target: [number, number],
+): { multipliers: KktMultiplier[]; residual: number } {
+  if (active.length === 0) {
+    return { multipliers: [], residual: Math.hypot(target[0], target[1]) }
+  }
+  if (active.length === 1) {
+    const item = active[0]
+    const lengthSquared =
+      item.normal[0] * item.normal[0] + item.normal[1] * item.normal[1]
+    if (lengthSquared <= 1e-15) {
+      return { multipliers: [], residual: Math.hypot(target[0], target[1]) }
+    }
+    const value =
+      (target[0] * item.normal[0] + target[1] * item.normal[1]) / lengthSquared
+    const residual = Math.hypot(
+      target[0] - value * item.normal[0],
+      target[1] - value * item.normal[1],
+    )
+    return { multipliers: [{ label: item.label, value, normal: item.normal }], residual }
+  }
+
+  let best: { multipliers: KktMultiplier[]; residual: number } | null = null
+  for (let i = 0; i < active.length; i++) {
+    for (let j = i + 1; j < active.length; j++) {
+      const first = active[i]
+      const second = active[j]
+      const determinant =
+        first.normal[0] * second.normal[1] - first.normal[1] * second.normal[0]
+      if (Math.abs(determinant) <= 1e-12) continue
+      const firstValue =
+        (target[0] * second.normal[1] - target[1] * second.normal[0]) / determinant
+      const secondValue =
+        (first.normal[0] * target[1] - first.normal[1] * target[0]) / determinant
+      const residual = Math.hypot(
+        target[0] -
+          firstValue * first.normal[0] -
+          secondValue * second.normal[0],
+        target[1] -
+          firstValue * first.normal[1] -
+          secondValue * second.normal[1],
+      )
+      if (!best || residual < best.residual) {
+        best = {
+          multipliers: [
+            { label: first.label, value: firstValue, normal: first.normal },
+            { label: second.label, value: secondValue, normal: second.normal },
+          ],
+          residual,
+        }
+      }
+    }
+  }
+  return best ?? { multipliers: [], residual: Math.hypot(target[0], target[1]) }
+}
+
+function kktCheck(
+  x: number,
+  y: number,
+  feasible: boolean,
+  constraints: Constraint[],
+): KktCheck {
+  const activeConstraints = constraints.filter(
+    (item) => Math.abs(item.evaluate(x, y)) <= TOLERANCE,
+  )
+  const { multipliers, residual } = solveMultipliers(activeConstraints, [3, 2])
+  const stationary = residual <= 1e-8
+  const dualFeasible = multipliers.every((item) => item.value >= -1e-8)
+  const kkt = feasible && stationary && dualFeasible
+  let note: string | undefined
+  if (!feasible) note = 'candidate is not primal feasible'
+  else if (!stationary) note = 'gradient is not a combination of the active normals'
+  else if (!dualFeasible) note = 'an active multiplier is negative'
+  return {
+    active: activeConstraints.map((item) => item.label),
+    multipliers,
+    residual,
+    stationary,
+    dualFeasible,
+    kkt,
+    note,
+  }
+}
+
+const EMPTY_KKT: KktCheck = {
+  active: [],
+  multipliers: [],
+  residual: Number.NaN,
+  stationary: false,
+  dualFeasible: false,
+  kkt: false,
+}
+
+export function linearProgram(
+  x: number,
+  y: number,
+  shift: LpShift = { which: 'none', delta: 0 },
+): LinearProgram {
+  const constraints = constraintsFor(shift)
+  const candidate = constraints.map((item) => {
+    const value = item.evaluate(x, y)
+    return {
+      label: item.label,
+      value,
+      satisfied: value >= -TOLERANCE,
+      active: Math.abs(value) <= TOLERANCE,
+    }
+  })
+  const feasible = candidate.every((item) => item.satisfied)
+
+  const vertices: LpVertex[] = []
+  for (let i = 0; i < constraints.length; i++) {
+    for (let j = i + 1; j < constraints.length; j++) {
+      const point = intersection(constraints[i], constraints[j])
+      if (!point) continue
+      if (constraints.every((item) => item.evaluate(point[0], point[1]) >= -TOLERANCE)) {
+        const duplicate = vertices.some(
+          (vertex) =>
+            Math.abs(vertex.x - point[0]) <= TOLERANCE &&
+            Math.abs(vertex.y - point[1]) <= TOLERANCE,
+        )
+        if (!duplicate) {
+          vertices.push({ x: point[0], y: point[1], value: 3 * point[0] + 2 * point[1] })
+        }
+      }
+    }
+  }
+
+  const status: LinearProgram['status'] = vertices.length > 0 ? 'optimal' : 'infeasible'
+  const optimum = vertices.length
+    ? vertices.reduce((best, vertex) => (vertex.value > best.value ? vertex : best))
+    : { x: 0, y: 0, value: 0 }
+
+  const kkt = kktCheck(x, y, feasible, constraints)
+  const optimumKkt = kktCheck(optimum.x, optimum.y, status === 'optimal', constraints)
+  const dualValue = optimumKkt.multipliers.reduce((total, multiplier) => {
+    const item = constraints.find((constraintItem) => constraintItem.label === multiplier.label)
+    return total + (item ? multiplier.value * item.bound : 0)
+  }, 0)
+
+  let shadow: ShadowPrice | null = null
+  let allowable: AllowableRange | null = null
+  if (shift.which !== 'none' && status === 'optimal') {
+    const firstBound = constraints[2].bound
+    const secondBound = constraints[3].bound
+    if (shift.which === 'first') {
+      shadow = {
+        label: 'x + 2y',
+        value: optimumKkt.multipliers.find((item) => item.label === constraints[2].label)?.value ?? 0,
+      }
+      allowable = { label: 'x + 2y', min: secondBound / 2, max: 2 * secondBound }
+    } else {
+      shadow = {
+        label: '2x + y',
+        value: optimumKkt.multipliers.find((item) => item.label === constraints[3].label)?.value ?? 0,
+      }
+      allowable = { label: '2x + y', min: firstBound / 2, max: 2 * firstBound }
+    }
+  }
+
+  return {
+    constraints,
     vertices,
     optimum,
     candidate,
-    feasible: candidate.every((item) => item.satisfied),
+    feasible,
     objectiveValue: 3 * x + 2 * y,
+    status,
+    active: kkt.active,
+    kkt,
+    optimumKkt,
+    dualValue: status === 'optimal' ? dualValue : 0,
+    gap: status === 'optimal' ? optimum.value - dualValue : Number.NaN,
+    shadow,
+    allowable,
   }
 }
+
+/** The contour 3x + 2y = level, as a point and a direction. */
+export function objectiveContour(level: number): { point: [number, number]; direction: [number, number] } {
+  if (!Number.isFinite(level)) return { point: [0, 0], direction: [-2, 3] }
+  return { point: [level / 3, 0], direction: [-2, 3] }
+}
+
+export { EMPTY_KKT }

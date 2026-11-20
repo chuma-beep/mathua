@@ -303,15 +303,15 @@
     },
     {
       "id": "ode.slopefield",
-      "reason": "differential equations are not one of the proposal\u2019s 31 topics; the slope-field figure plots the actual right-hand side and integrates a solution, so it is recorded here rather than inflating the topic list"
+      "reason": "differential equations are not one of the proposal’s 31 topics; the slope-field figure plots the actual right-hand side and integrates a solution, so it is recorded here rather than inflating the topic list"
     },
     {
       "id": "numa.roots",
-      "reason": "numerical analysis is not one of the proposal\u2019s 31 topics; the root-iteration figure runs bisection and Newton on the actual function, so it is recorded here rather than inflating the topic list"
+      "reason": "numerical analysis is not one of the proposal’s 31 topics; the root-iteration figure runs bisection and Newton on the actual function, so it is recorded here rather than inflating the topic list"
     },
     {
       "id": "graph.network",
-      "reason": "graph theory is not one of the proposal\u2019s 31 topics; the graph figure runs traversal, shortest-path and spanning-tree algorithms on its own edges, so it is recorded here rather than inflating the topic list"
+      "reason": "graph theory is not one of the proposal’s 31 topics; the graph figure runs traversal, shortest-path and spanning-tree algorithms on its own edges, so it is recorded here rather than inflating the topic list"
     },
     {
       "id": "prob.tree",
@@ -343,7 +343,7 @@
     },
     {
       "id": "optim.path",
-      "reason": "gradient descent and feasible-region checks show the actual iteration and constraint values rather than a decorative path"
+      "reason": "gradient descent, feasible-region checks, active constraints, KKT multipliers and the dual value are read from the same drawn optimisation model rather than a decorative path"
     },
     {
       "id": "analysis.lab",
@@ -352,6 +352,10 @@
     {
       "id": "ml.fit",
       "reason": "the regression loss and logistic probability use the same gradient and sigmoid calculations taught in the machine-learning lessons"
+    },
+    {
+      "id": "trig.sinusoid",
+      "reason": "amplitude, period, phase and frequency are properties of the graph that the unit-circle figure cannot show; the same wave controls serve ten trigonometry and precalculus lessons"
     }
   ]
 }

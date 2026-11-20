@@ -6,7 +6,30 @@
       "Meet sine and cosine as circle coordinates",
       "Set radius 1 so legs equal sin and cos",
       "Let theta + 2k*pi revisit each point"
-    ]
+    ],
+    "visual": {
+      "type": "trig.sinusoid",
+      "title": "The cosine starts at its peak",
+      "caption": "Cosine is the x-coordinate on the unit circle. At angle 0 the point is (1, 0), so the cosine wave starts at 1, falls to 0 at a quarter turn and reaches −1 at a half turn.",
+      "params": {
+        "form": "cos",
+        "amplitude": 1,
+        "frequency": 1,
+        "phase": 0,
+        "vertical": 0,
+        "showReference": true
+      },
+      "predict": {
+        "question": "For y = cos x, what is y at x = 0?",
+        "options": [
+          "0",
+          "1",
+          "−1"
+        ],
+        "answer": 1,
+        "explain": "At angle 0 the unit-circle point is (1, 0), so the x-coordinate and cos 0 are 1."
+      }
+    }
   },
   {
     "label": "Definition of sine and cosine",

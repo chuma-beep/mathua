@@ -6,7 +6,30 @@
       "Name the midline the wave oscillates about",
       "Measure the peak above the midline",
       "Give the amplitude as that distance"
-    ]
+    ],
+    "visual": {
+      "type": "trig.sinusoid",
+      "title": "The midline sits halfway between the peaks",
+      "caption": "The coefficient A sets how far the wave rises above and falls below its midline. For y = 3 sin x + 1 the midline is y = 1, the maximum is 4 and the minimum is −2, so the amplitude is 3.",
+      "params": {
+        "form": "sin",
+        "amplitude": 3,
+        "frequency": 1,
+        "phase": 0,
+        "vertical": 1,
+        "showReference": true
+      },
+      "predict": {
+        "question": "For y = 3 sin x + 1, what are the midline and the amplitude?",
+        "options": [
+          "Midline 1, amplitude 3",
+          "Midline 3, amplitude 1",
+          "Midline 0, amplitude 4"
+        ],
+        "answer": 0,
+        "explain": "The added constant 1 moves the midline to y = 1. The coefficient 3 gives a peak 3 units above that midline, so the amplitude is 3 and the values run from −2 to 4."
+      }
+    }
   },
   {
     "label": "Amplitude is a distance",

@@ -6,7 +6,30 @@
       "Meet sine and cosine on the unit circle",
       "Set radius 1 so coordinates equal sin and cos",
       "Allow theta + 2k*pi to revisit each point"
-    ]
+    ],
+    "visual": {
+      "type": "trig.sinusoid",
+      "title": "One wave, read from the unit circle",
+      "caption": "A point on the unit circle has height sin θ. Plotting that height against the angle traces the sine wave, which starts at 0, rises to 1 at a quarter turn and returns to 0 at a half turn.",
+      "params": {
+        "form": "sin",
+        "amplitude": 1,
+        "frequency": 1,
+        "phase": 0,
+        "vertical": 0,
+        "showReference": true
+      },
+      "predict": {
+        "question": "For y = sin x, what is y at x = π/2?",
+        "options": [
+          "1",
+          "0",
+          "−1"
+        ],
+        "answer": 0,
+        "explain": "A quarter turn is π/2. At that angle the unit-circle point is (0, 1), so the height and therefore sin(π/2) is 1."
+      }
+    }
   },
   {
     "label": "Definition of sine and cosine",
