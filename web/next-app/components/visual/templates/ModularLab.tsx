@@ -79,7 +79,7 @@ export default function ModularLab({ params, title, caption }: TemplateProps) {
         role="img"
         aria-label={`${mode} model for ${a} modulo ${n}`}
       >
-        {mode === 'residue' && (
+        {(mode === 'residue' || mode === 'power') && (
           <>
             <circle cx="180" cy="128" r="78" fill="none" stroke="var(--text-muted)" strokeWidth="1" />
             {circle.map((point) => (
@@ -135,39 +135,11 @@ export default function ModularLab({ params, title, caption }: TemplateProps) {
 
         {mode === 'power' && power && (
           <>
-            <text x={PAD} y={PAD + 8} fontSize="10" fill="var(--accent-blue)">
-              repeated squaring mod {n}
-            </text>
-            <text x={PAD} y={PAD + 30} fontSize="9" fill="var(--text-muted)">
-              e
-            </text>
-            <text x={PAD + 80} y={PAD + 30} fontSize="9" fill="var(--text-muted)">
-              base
-            </text>
-            <text x={PAD + 190} y={PAD + 30} fontSize="9" fill="var(--text-muted)">
-              result
-            </text>
             {power.steps.slice(0, 8).map((step, index) => (
-              <g key={index}>
-                <text x={PAD} y={PAD + 48 + index * 18} fontSize="10" fill="var(--text-secondary)">
-                  {step.exponent}
-                </text>
-                <text x={PAD + 80} y={PAD + 48 + index * 18} fontSize="10" fill="var(--text-secondary)">
-                  {step.base}
-                </text>
-                <text x={PAD + 190} y={PAD + 48 + index * 18} fontSize="10" fill="var(--text-secondary)">
-                  {step.result}
-                </text>
-              </g>
+              <text key={index} x={PAD} y={20 + index * 18} fontSize="10" fill="var(--text-secondary)">
+                e {step.exponent}: base {step.base}, result {step.result}
+              </text>
             ))}
-            <text
-              x={PAD}
-              y={PAD + 48 + Math.min(power.steps.length, 8) * 18 + 8}
-              fontSize="10"
-              fill="var(--accent-green)"
-            >
-              {base}^{exponent} ≡ {power.value} (mod {n})
-            </text>
           </>
         )}
       </svg>

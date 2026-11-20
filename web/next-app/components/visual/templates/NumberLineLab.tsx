@@ -233,7 +233,7 @@ export default function NumberLineLab({ params, title, caption }: TemplateProps)
                 </g>
               )
             })}
-            <text x={W / 2} y={252} textAnchor="middle" fontSize="12" fill="var(--text-primary)">
+            <text x={W / 2} y={230} textAnchor="middle" fontSize="12" fill="var(--text-primary)">
               {ratio.sentence}
             </text>
           </>
