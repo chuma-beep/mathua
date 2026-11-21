@@ -39,6 +39,50 @@ func TestDecimalOrderUsesDistinctTenths(t *testing.T) {
 	}
 }
 
+// Reports 495-497: anything below one half was labelled closest to 0, so 3/8
+// was marked as closer to 0 than to 1/2.
+func TestEstimateProductUsesNearestBenchmark(t *testing.T) {
+	re := regexp.MustCompile(`Is (\d+)/(\d+) times (\d+)/(\d+) closest to 0, 1/2 or 1`)
+	for i := 0; i < 500; i++ {
+		p := w10EstimateProduct(1)
+		m := re.FindStringSubmatch(p.Question)
+		if m == nil {
+			t.Fatalf("unexpected estimate product question: %q", p.Question)
+		}
+		a, _ := strconv.Atoi(m[1])
+		b, _ := strconv.Atoi(m[2])
+		c, _ := strconv.Atoi(m[3])
+		d, _ := strconv.Atoi(m[4])
+		num := a * c
+		den := b * d
+		if 4*num == den || 4*num == 3*den {
+			t.Fatalf("%q lands on a tie between benchmarks", p.Question)
+		}
+		want := 0
+		if 4*num > den {
+			want = 1
+		}
+		if 4*num > 3*den {
+			want = 2
+		}
+		if p.Answer != strconv.Itoa(want) {
+			t.Fatalf("%q answered %s, want %d", p.Question, p.Answer, want)
+		}
+	}
+}
+
+// Report 489: 114/100 was rejected when the prompt asked for the numerator
+// 114, though 114/100 is the sum the learner was told to write over 100.
+func TestAddDecimalAcceptsFractionOverHundred(t *testing.T) {
+	g := &w10Gen{kind: "add_decimal"}
+	for i := 0; i < 200; i++ {
+		p := g.Generate(generatorContext(1))
+		if res := g.Grade(p.Answer, p.Answer+"/100"); !res.Correct {
+			t.Fatalf("%q rejected the fraction %s/%d", p.Question, p.Answer, 100)
+		}
+	}
+}
+
 // Reports 454 and 460: 57/100 and 1 were marked wrong because the generator
 // counted every fraction above 1/2 instead of every fraction above 3/4.
 func TestFractionEstimateCountsCloserToOne(t *testing.T) {
