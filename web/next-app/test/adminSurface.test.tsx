@@ -211,7 +211,7 @@ describe('the client offers administration without enforcing it', () => {
   it('shows whether an account has a password, without ever showing one', async () => {
     render(<AdminUsersPage />)
     await screen.findByText('ada@example.com')
-    expect(screen.getByText(/provider, not a password/)).toBeTruthy()
+    expect(screen.getByTitle('Signed in with a provider, not a password')).toBeTruthy()
     expect(document.body.innerHTML).not.toMatch(/\$argon2|\$2[aby]\$/)
   })
 
@@ -455,7 +455,7 @@ describe('role changes are confirmed before they happen', () => {
     const adminRow = within(screen.getByRole('table')).getByText('root@example.com').closest('tr')!
     expect(adminRow.textContent).toMatch(/admin/)
     const learnerRow = within(screen.getByRole('table')).getByText('ada@example.com').closest('tr')!
-    expect(learnerRow.textContent).toMatch(/student/)
+    expect(learnerRow.textContent).toMatch(/learner/)
   })
 
   it('renders no credential-shaped value', async () => {

@@ -5,7 +5,11 @@ import { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
 import SectionHeader from '../../../components/SectionHeader'
 import ConfirmDialog from '../../../components/ConfirmDialog'
-import { searchAdminUsers, setUserRole, getErrorMessage, type AdminUser, type Role } from '../../../lib/api'
+import Avatar from '../../../components/Avatar'
+import { Skeleton } from '../../../components/ui/skeleton'
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '../../../components/ui/table'
+import { API_BASE, searchAdminUsers, setUserRole, getErrorMessage, type AdminUser, type Role } from '../../../lib/api'
+import { dicebearUrl, isDicebearStyle } from '../../../lib/dicebear'
 import { useAuthState } from '../../../hooks/useAuthState'
 import { useAdminMe } from '../../../hooks/useAdminMe'
 
@@ -37,6 +41,48 @@ function labelFor(u: AdminUser): string {
 
 function roleLabel(role: Role): string {
   return role === 'owner' ? 'owner' : role === 'admin' ? 'administrator' : role === 'moderator' ? 'moderator' : 'learner'
+}
+
+// The list is a scan, not a form. A joined date read as `2026-10-20` is precise and
+// unreadable at a glance, so the row shows the day in the reader's locale and keeps
+// the exact stamp in `dateTime`/`title`.
+function fmtJoined(value: string): string {
+  if (!value) return ''
+  const d = new Date(value)
+  if (Number.isNaN(d.getTime())) return value.slice(0, 10)
+  return d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })
+}
+
+function roleTone(role: Role): string {
+  switch (role) {
+    case 'owner':
+      return 'border-mathua-blue bg-mathua-blue-faint text-mathua-blue'
+    case 'admin':
+      return 'border-mathua-blue text-mathua-blue'
+    case 'moderator':
+      return 'border-mathua-green-faint text-mathua-green'
+    default:
+      return 'border-mathua-border text-mathua-muted'
+  }
+}
+
+// The same precedence the sidebar, profile and account detail use: custom upload,
+// Google photo, DiceBear pick, then the generated initial drawn by Avatar.
+function avatarURL(u: AdminUser): string | undefined {
+  const avatar = u.avatar
+  if (!avatar) return undefined
+  const stored = avatar.avatar_url
+  if (stored) return stored.startsWith('/') ? `${API_BASE}${stored}` : stored
+  const pick = avatar.avatar_dicebear
+  return pick && isDicebearStyle(pick.style) ? dicebearUrl(pick.style, pick.seed) : undefined
+}
+
+function RoleBadge({ role }: { role: Role }) {
+  return (
+    <span className={`inline-flex items-center border px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-wider ${roleTone(role)}`}>
+      {roleLabel(role)}
+    </span>
+  )
 }
 
 export default function AdminUsersPage() {
@@ -98,7 +144,11 @@ export default function AdminUsersPage() {
     <AdminShell>
       <main className="mx-auto w-full max-w-[1200px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 overflow-x-hidden">
         <SectionHeader label="Administration" title="Users" />
-  
+        <p className="-mt-3 mb-6 font-mono text-[11px] text-mathua-muted">
+          Find an account, check its role and change it. Every change is recorded at{' '}
+          <Link href="/admin/audit" className="text-mathua-secondary hover:text-mathua-blue hover:underline">/admin/audit</Link>.
+        </p>
+
         {!isStaff && (
           <p role="status" className="border border-mathua-border bg-mathua-surface p-4 font-mono text-xs text-mathua-secondary">
             This area needs a staff role. If you hold one, sign in with that account.
@@ -106,7 +156,7 @@ export default function AdminUsersPage() {
         )}
 
         <form
-          className="mb-4 flex gap-2"
+          className="mb-3 flex gap-2"
           onSubmit={(e) => { e.preventDefault(); setActionError(''); load(query) }}
         >
           <label htmlFor="admin-user-search" className="sr-only">Search accounts</label>
@@ -116,11 +166,20 @@ export default function AdminUsersPage() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search by email, id, username or name…"
-            className="flex-1 min-w-0 border border-mathua-border bg-mathua-surface px-3 h-11 font-mono text-xs text-mathua-primary placeholder:text-mathua-muted focus:border-mathua-blue focus:outline-none"
+            className="flex-1 min-w-0 border border-mathua-border bg-mathua-surface px-3 h-10 font-mono text-xs text-mathua-primary placeholder:text-mathua-muted focus:border-mathua-blue focus:outline-none"
           />
-          <button type="submit" className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-4 h-11 font-mono text-xs">
+          <button type="submit" className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-4 h-10 font-mono text-xs">
             Search
           </button>
+          {query && (
+            <button
+              type="button"
+              onClick={() => { setQuery(''); setActionError(''); load('') }}
+              className="border border-mathua-border px-3 h-10 font-mono text-xs text-mathua-secondary hover:text-mathua-primary"
+            >
+              Clear
+            </button>
+          )}
         </form>
 
         {actionError && (
@@ -144,56 +203,94 @@ export default function AdminUsersPage() {
             "Loading accounts…" underneath it, a page claiming to be busy while it had already
             given up, and would keep claiming indefinitely. */}
         {users === null && !listError && !actionError && (
-          <p className="font-mono text-xs text-mathua-muted">Loading accounts…</p>
+          <>
+            <p role="status" className="sr-only">Loading accounts…</p>
+            <div className="border border-mathua-border" aria-hidden="true">
+              {[0, 1, 2].map((i) => (
+                <div key={i} className="flex items-center gap-3 border-b border-mathua-border p-3 last:border-b-0">
+                  <Skeleton className="h-9 w-9 rounded-full" />
+                  <div className="flex-1 space-y-2">
+                    <Skeleton className="h-2.5 w-40" />
+                    <Skeleton className="h-2 w-64 max-w-full" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
         )}
 
         {users !== null && users.length === 0 && (
-          <p className="font-mono text-xs text-mathua-muted">No accounts match that search.</p>
+          <p className="font-mono text-xs text-mathua-muted">
+            {query ? `No accounts match “${query}”.` : 'No accounts have been created yet.'}
+          </p>
         )}
 
         {users !== null && users.length > 0 && (
-          <div className="border border-mathua-border overflow-x-hidden">
-            <table className="w-full font-mono text-xs">
-              <caption className="sr-only">Accounts, their roles, and the action available on each</caption>
-              <thead>
-                <tr className="border-b border-mathua-border text-mathua-muted text-left">
-                  <th scope="col" className="px-3 py-2 font-normal">Name</th>
-                  <th scope="col" className="px-3 py-2 font-normal">Email</th>
-                  <th scope="col" className="px-3 py-2 font-normal">Role</th>
-                  <th scope="col" className="px-3 py-2 font-normal text-right">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
+          <div className="border border-mathua-border bg-mathua-surface">
+            <Table>
+              <TableCaption className="sr-only">Accounts, their roles, and the action available on each</TableCaption>
+              <TableHeader>
+                <TableRow className="hover:bg-transparent">
+                  <TableHead className="px-4 py-2">Account</TableHead>
+                  <TableHead className="hidden px-4 py-2 md:table-cell">Role</TableHead>
+                  <TableHead className="px-4 py-2 text-right">Actions</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
                 {users.map((u) => {
                   const self = u.id === user?.student_id
                   return (
-                    <tr key={u.id} className="border-b border-mathua-border last:border-b-0 align-top">
-                      <td className="px-3 py-2 min-w-0">
-                        <Link
-                          href={`/admin/users/detail?id=${encodeURIComponent(u.id)}`}
-                          className="block text-mathua-primary truncate hover:underline"
-                        >
-                          {labelFor(u)}
-                        </Link>
-                        {/* The id is how an administrator names a person over chat, and the
-                            provider flag answers "why can't they sign in with a password", 
-                            both are facts about the account, not credentials. */}
-                        <div className="text-mathua-muted truncate" title={u.id}>{u.id}</div>
-                        {u.username && <div className="text-mathua-muted truncate">@{u.username}</div>}
-                        {u.created_at && (
-                          <div className="text-mathua-muted">Joined {u.created_at.slice(0, 10)}</div>
-                        )}
-                        {!u.has_password && (
-                          <div className="text-mathua-muted">Signed in with a provider, not a password</div>
-                        )}
-                      </td>
-                      <td className="px-3 py-2 min-w-0 text-mathua-secondary break-all">{u.email || ', '}</td>
-                      <td className="px-3 py-2 whitespace-nowrap">
-                        <span className={u.role === 'student' ? 'text-mathua-muted' : 'text-mathua-blue'}>
-                          {u.role}{self ? ' (you)' : ''}
-                        </span>
-                      </td>
-                      <td className="px-3 py-2 text-right whitespace-nowrap">
+                    <TableRow key={u.id} className="align-top">
+                      <TableCell className="px-4 py-3">
+                        <div className="flex items-start gap-3">
+                          <Avatar
+                            seed={u.id}
+                            name={labelFor(u)}
+                            size={38}
+                            url={avatarURL(u)}
+                            preset={u.avatar?.avatar_preset ?? null}
+                          />
+                          <div className="min-w-0">
+                            <div className="flex flex-wrap items-center gap-2">
+                              <Link
+                                href={`/admin/users/detail?id=${encodeURIComponent(u.id)}`}
+                                className="truncate font-mono text-xs text-mathua-primary hover:text-mathua-blue hover:underline"
+                              >
+                                {labelFor(u)}
+                              </Link>
+                              <span className="md:hidden"><RoleBadge role={u.role} /></span>
+                              {self && (
+                                <span className="border border-mathua-blue px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-wider text-mathua-blue">
+                                  you
+                                </span>
+                              )}
+                            </div>
+                            <div className="mt-0.5 truncate font-mono text-[11px] text-mathua-secondary" title={u.email}>
+                              {u.email || 'no email'}
+                            </div>
+                            {/* The id is how an administrator names a person over chat, and the
+                                provider flag answers "why can't they sign in with a password",
+                                both are facts about the account, not credentials. */}
+                            <div className="mt-0.5 truncate font-mono text-[10px] text-mathua-muted" title={u.id}>
+                              @{u.username || 'no username'} · {u.id}
+                            </div>
+                            <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[10px] text-mathua-muted">
+                              {u.created_at && (
+                                <time dateTime={u.created_at} title={u.created_at}>
+                                  Joined {fmtJoined(u.created_at)}
+                                </time>
+                              )}
+                              {!u.has_password && (
+                                <span title="Signed in with a provider, not a password">provider sign-in</span>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      </TableCell>
+                      <TableCell className="hidden px-4 py-3 md:table-cell">
+                        <RoleBadge role={u.role} />
+                      </TableCell>
+                      <TableCell className="px-4 py-3 text-right whitespace-nowrap">
                         {canManage && !self ? (
                           <label className="sr-only" htmlFor={`role-${u.id}`}>Change role for {labelFor(u)}</label>
                         ) : null}
@@ -212,22 +309,31 @@ export default function AdminUsersPage() {
                           >
                             <option value="">Change role…</option>
                             {(me?.assignable_roles ?? []).filter((r) => r !== u.role).map((r) => (
-                              <option key={r} value={r}>{r}</option>
+                              <option key={r} value={r}>{roleLabel(r)}</option>
                             ))}
                           </select>
                         ) : (
-                          <span className="font-mono text-[11px] text-mathua-muted">, </span>
+                          <span className="font-mono text-[10px] text-mathua-muted">
+                            {self ? 'your account' : '—'}
+                          </span>
                         )}
-                      </td>
-                    </tr>
+                      </TableCell>
+                    </TableRow>
                   )
                 })}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
           </div>
         )}
 
-        <p className="mt-4 font-mono text-[11px] text-mathua-muted">
+        {users !== null && users.length > 0 && (
+          <p className="mt-3 font-mono text-[10px] text-mathua-muted">
+            {users.length} {users.length === 1 ? 'account' : 'accounts'} shown
+            {users.length >= 50 ? '. Refine the search to see more.' : '.'}
+          </p>
+        )}
+
+        <p className="mt-6 font-mono text-[11px] text-mathua-muted">
           Learning state, XP, mastery, attempts, concept progress, is not editable here. It is
           the learning system&apos;s record, and every change is visible at /admin/audit.
         </p>
