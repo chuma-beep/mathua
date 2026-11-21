@@ -72,11 +72,11 @@ export default function CountryGlobe({ countries }: { countries: GlobeCountry[] 
     <div className="relative mx-auto aspect-square w-full max-w-[560px]">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-[7%] rounded-full bg-mathua-blue/5 blur-2xl"
+        className="pointer-events-none absolute inset-[7%] rounded-full bg-mathua-blue-faint blur-2xl"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-[2%] rounded-full border border-mathua-border/70"
+        className="pointer-events-none absolute inset-[2%] rounded-full border border-mathua-border"
       />
       <canvas
         ref={canvas}

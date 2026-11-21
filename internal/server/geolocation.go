@@ -80,8 +80,8 @@ func validCountryCode(code string) bool {
 	if len(code) != 2 {
 		return false
 	}
-	for i := 0; i < len(code); i++ {
-		if code[i] < 'A' || code[i] > 'Z' {
+	for _, r := range code {
+		if r < 'A' || r > 'Z' {
 			return false
 		}
 	}
