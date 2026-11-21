@@ -291,6 +291,37 @@ test.describe('administrator management', () => {
     await expect(row.getByRole('combobox')).toHaveCount(0)
   })
 
+  test('stacks the account list into cards on a phone', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 })
+    stubApi(page, [ROOT, CONTRIBUTOR], 'owner')
+    await signIn(page, 'owner')
+
+    await page.goto('/admin/users')
+    const row = rowFor(page, 'ada@example.com')
+    await expect(row).toBeVisible()
+    await expect(page.locator('thead')).toBeHidden()
+    // The role badge moves next to the name when the role column is gone.
+    await expect(row).toContainText('learner')
+
+    const picker = row.getByRole('combobox')
+    await expect(picker).toBeVisible()
+    const box = await picker.boundingBox()
+    expect(box).not.toBeNull()
+    expect(box!.x).toBeGreaterThanOrEqual(0)
+    expect(box!.x + box!.width).toBeLessThanOrEqual(390)
+    // Touch target, not the 36px desktop control.
+    expect(box!.height).toBeGreaterThanOrEqual(44)
+
+    // The list must not scroll sideways on a 390px screen.
+    const overflow = await page.evaluate(() =>
+      document.documentElement.scrollWidth - document.documentElement.clientWidth)
+    expect(overflow).toBeLessThanOrEqual(1)
+
+    await setRole(page, 'ada@example.com', 'admin')
+    await page.getByRole('dialog').getByRole('button', { name: 'Make administrator' }).click()
+    await expect(page.getByRole('status').filter({ hasText: 'Ada is now administrator' })).toBeVisible()
+  })
+
   test('cancelling a role change records nothing', async ({ page }) => {
     stubApi(page, [ROOT, CONTRIBUTOR], 'owner')
     await signIn(page, 'owner')

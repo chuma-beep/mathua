@@ -156,7 +156,7 @@ export default function AdminUsersPage() {
         )}
 
         <form
-          className="mb-3 flex gap-2"
+          className="mb-3 flex flex-wrap items-center gap-2"
           onSubmit={(e) => { e.preventDefault(); setActionError(''); load(query) }}
         >
           <label htmlFor="admin-user-search" className="sr-only">Search accounts</label>
@@ -166,16 +166,16 @@ export default function AdminUsersPage() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search by email, id, username or name…"
-            className="flex-1 min-w-0 border border-mathua-border bg-mathua-surface px-3 h-10 font-mono text-xs text-mathua-primary placeholder:text-mathua-muted focus:border-mathua-blue focus:outline-none"
+            className="h-11 w-full min-w-0 border border-mathua-border bg-mathua-surface px-3 font-mono text-xs text-mathua-primary placeholder:text-mathua-muted focus:border-mathua-blue focus:outline-none sm:h-10 sm:w-auto sm:flex-1"
           />
-          <button type="submit" className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-4 h-10 font-mono text-xs">
+          <button type="submit" className="h-11 flex-1 border border-mathua-blue px-4 font-mono text-xs text-mathua-blue hover:bg-mathua-blue-faint sm:h-10 sm:flex-none">
             Search
           </button>
           {query && (
             <button
               type="button"
               onClick={() => { setQuery(''); setActionError(''); load('') }}
-              className="border border-mathua-border px-3 h-10 font-mono text-xs text-mathua-secondary hover:text-mathua-primary"
+              className="h-11 flex-1 border border-mathua-border px-3 font-mono text-xs text-mathua-secondary hover:text-mathua-primary sm:h-10 sm:flex-none"
             >
               Clear
             </button>
@@ -227,21 +227,21 @@ export default function AdminUsersPage() {
 
         {users !== null && users.length > 0 && (
           <div className="border border-mathua-border bg-mathua-surface">
-            <Table>
+            <Table className="block md:table" role="table">
               <TableCaption className="sr-only">Accounts, their roles, and the action available on each</TableCaption>
-              <TableHeader>
-                <TableRow className="hover:bg-transparent">
-                  <TableHead className="px-4 py-2">Account</TableHead>
-                  <TableHead className="hidden px-4 py-2 md:table-cell">Role</TableHead>
-                  <TableHead className="px-4 py-2 text-right">Actions</TableHead>
+              <TableHeader className="hidden md:table-header-group" role="rowgroup">
+                <TableRow className="hover:bg-transparent" role="row">
+                  <TableHead className="px-4 py-2" role="columnheader">Account</TableHead>
+                  <TableHead className="hidden px-4 py-2 md:table-cell" role="columnheader">Role</TableHead>
+                  <TableHead className="px-4 py-2 text-right" role="columnheader">Actions</TableHead>
                 </TableRow>
               </TableHeader>
-              <TableBody>
+              <TableBody className="block md:table-row-group" role="rowgroup">
                 {users.map((u) => {
                   const self = u.id === user?.student_id
                   return (
-                    <TableRow key={u.id} className="align-top">
-                      <TableCell className="px-4 py-3">
+                    <TableRow key={u.id} className="block px-4 py-3 align-top md:table-row md:px-0 md:py-0" role="row">
+                      <TableCell className="block p-0 md:table-cell md:px-4 md:py-3" role="cell">
                         <div className="flex items-start gap-3">
                           <Avatar
                             seed={u.id}
@@ -287,10 +287,10 @@ export default function AdminUsersPage() {
                           </div>
                         </div>
                       </TableCell>
-                      <TableCell className="hidden px-4 py-3 md:table-cell">
+                      <TableCell className="hidden p-0 md:table-cell md:px-4 md:py-3" role="cell">
                         <RoleBadge role={u.role} />
                       </TableCell>
-                      <TableCell className="px-4 py-3 text-right whitespace-nowrap">
+                      <TableCell className="mt-3 block p-0 md:mt-0 md:table-cell md:px-4 md:py-3 md:text-right md:whitespace-nowrap" role="cell">
                         {canManage && !self ? (
                           <label className="sr-only" htmlFor={`role-${u.id}`}>Change role for {labelFor(u)}</label>
                         ) : null}
@@ -305,7 +305,7 @@ export default function AdminUsersPage() {
                               setNotice('')
                               setPending({ user: u, next })
                             }}
-                            className="border border-mathua-border bg-mathua-surface px-2 h-9 font-mono text-[11px] text-mathua-secondary"
+                            className="mt-2 h-11 w-full border border-mathua-border bg-mathua-surface px-2 font-mono text-[11px] text-mathua-secondary md:mt-0 md:h-9 md:w-auto"
                           >
                             <option value="">Change role…</option>
                             {(me?.assignable_roles ?? []).filter((r) => r !== u.role).map((r) => (
