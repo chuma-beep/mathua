@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { listAnnouncements, markAnnouncementRead, type Announcement } from '@/lib/api'
-import { ensureGuestToken } from '@/lib/auth'
+import { ensureGuestToken, getToken } from '@/lib/auth'
 
 interface Feed {
   items: Announcement[]
@@ -45,7 +45,10 @@ export function useAnnouncementsFeed(enabled = true) {
   }, [])
 
   useEffect(() => {
-    if (!enabled) {
+    // A visitor with no session has nothing to read. Asking anyway 404s on the
+    // static export, and the request can come from the service worker where a
+    // test stub cannot see it.
+    if (!enabled || !getToken()) {
       setLoading(false)
       return
     }
