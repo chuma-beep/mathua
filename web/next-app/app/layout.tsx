@@ -5,6 +5,7 @@ import { Toaster } from '@/components/ui/sonner'
 import ServiceWorkerRegistrar from '@/components/ServiceWorkerRegistrar'
 import ChromeToggle from '@/components/ChromeToggle'
 import AssistantDock from '@/components/AssistantDock'
+import NotificationToasts from '@/components/notifications/NotificationToasts'
 import ScrollToTopOnNavigate from '@/components/ScrollToTopOnNavigate'
 import { SITE_URL } from '@/lib/site'
 // MathLive's own stylesheet for the <math-field> rendering (MathML). Loaded here,
@@ -122,6 +123,10 @@ export default function RootLayout({
         {/* Mounted once here rather than per page so a conversation survives
             navigation; it renders nothing when the server reports AI is off. */}
         <AssistantDock />
+        {/* The inboxes are global, so their unread items toast from the root
+            layout rather than only on pages that use the signed-in shell. It
+            renders nothing. */}
+        <NotificationToasts />
         {/* A route change starts at the top, including on iOS Safari, where the
             browser can otherwise leave the old offset in place until the new
             page has laid out. Back and forward keep their restored position. */}
