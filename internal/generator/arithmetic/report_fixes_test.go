@@ -152,3 +152,49 @@ func TestCompositeExplanationDefinesComposite(t *testing.T) {
 		}
 	}
 }
+
+// Report 493: 70×84 was read as 70×80 because the prompt did not say that
+// only 71 is split and 84 stays whole.
+func TestPartialProductTensPromptKeepsSecondFactorWhole(t *testing.T) {
+	g := &w8ArithGen{kind: "partial_products"}
+	for i := 0; i < 100; i++ {
+		p := g.Generate(generator.GeneratorContext{KPOrdinal: 1})
+		a, _ := strconv.Atoi(p.Facts["a"])
+		b, _ := strconv.Atoi(p.Facts["b"])
+		if !strings.Contains(p.Question, "split only") {
+			t.Fatalf("prompt does not say only the first factor splits: %q", p.Question)
+		}
+		if !strings.Contains(p.Explanation, "stays whole") {
+			t.Fatalf("explanation does not keep the second factor whole: %q", p.Explanation)
+		}
+		want := (a / 10 * 10) * b
+		if p.Answer != strconv.Itoa(want) {
+			t.Fatalf("%q answered %s, want %d", p.Question, p.Answer, want)
+		}
+	}
+}
+
+// Report 492: a wrong divisor count got only the pairing rule, so the learner
+// had no list to check their answer against.
+func TestDivisorCountExplanationListsDivisors(t *testing.T) {
+	g := &w12Gen{kind: "divisor_count"}
+	for kp := 1; kp <= 3; kp++ {
+		for i := 0; i < 60; i++ {
+			p := g.Generate(generator.GeneratorContext{KPOrdinal: kp})
+			n, _ := strconv.Atoi(p.Facts["n"])
+			var divisors []string
+			for d := 1; d <= n; d++ {
+				if n%d == 0 {
+					divisors = append(divisors, strconv.Itoa(d))
+				}
+			}
+			if p.Answer != strconv.Itoa(len(divisors)) {
+				t.Fatalf("%d answered %s, want %d", n, p.Answer, len(divisors))
+			}
+			want := strings.Join(divisors[:len(divisors)-1], ", ") + " and " + divisors[len(divisors)-1]
+			if !strings.Contains(p.Explanation, want) {
+				t.Fatalf("explanation does not list the divisors of %d as %q: %q", n, want, p.Explanation)
+			}
+		}
+	}
+}

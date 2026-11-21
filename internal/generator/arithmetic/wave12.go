@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"math/rand"
 	"strconv"
+	"strings"
 
 	"github.com/chuma-beep/mathua/internal/generator"
 )
@@ -731,17 +732,41 @@ func w12DivisorCount(kp int) generator.Problem {
 	default:
 		n = w12R(201, 1000)
 	}
-	count := 0
-	for i := 1; i*i <= n; i++ {
-		if n%i == 0 {
-			count++
-			if i*i != n {
-				count++
-			}
-		}
-	}
+	divisors := w12Divisors(n)
 	f := map[string]string{}
 	w12I(f, "n", n)
 	return w12P(kp, fmt.Sprintf("How many positive divisors does %d have? (enter a number)", n),
-		strconv.Itoa(count), fmt.Sprintf("Pair each divisor below the square root with one above it. Counting the pairs and the square root if it is exact gives %d divisors.", count), f)
+		strconv.Itoa(len(divisors)), fmt.Sprintf("The divisors of %d are %s, so there are %d.", n, w12JoinDivisors(divisors), len(divisors)), f)
+}
+
+// w12Divisors lists the positive divisors of n in ascending order. Report 492
+// asked for the list itself: the pairing rule alone left a wrong answer with
+// nothing concrete to check.
+func w12Divisors(n int) []int {
+	var low, high []int
+	for i := 1; i*i <= n; i++ {
+		if n%i == 0 {
+			low = append(low, i)
+			if i*i != n {
+				high = append(high, n/i)
+			}
+		}
+	}
+	for i := len(high) - 1; i >= 0; i-- {
+		low = append(low, high[i])
+	}
+	return low
+}
+
+// w12JoinDivisors follows the house list style: commas between items, "and"
+// before the last, no Oxford comma.
+func w12JoinDivisors(divisors []int) string {
+	parts := make([]string, len(divisors))
+	for i, d := range divisors {
+		parts[i] = strconv.Itoa(d)
+	}
+	if len(parts) < 2 {
+		return strings.Join(parts, "")
+	}
+	return strings.Join(parts[:len(parts)-1], ", ") + " and " + parts[len(parts)-1]
 }
