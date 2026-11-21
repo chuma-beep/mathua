@@ -151,4 +151,21 @@ describe('the report queue groups by concept', () => {
     expect(screen.getByText('(Ada Example)')).toBeTruthy()
     expect(screen.queryByText('stu_0123456789abcdef')).toBeNull()
   })
+
+  it('shows when a report arrived without opening it', async () => {
+    vi.mocked(listAdminReports).mockResolvedValue({
+      reports: [report({ id: 7, created_at: '2026-10-20T13:45:00Z' })],
+    })
+    render(<AdminReportsPage />)
+    await screen.findByRole('heading', { name: 'algebra.linear' })
+
+    // The stamp is on the collapsed row, so triage does not require opening
+    // every card. It is formatted for reading, not the raw RFC 3339 the API
+    // returns, which stays available as the machine value and the tooltip.
+    const shown = document.querySelector('time[datetime="2026-10-20T13:45:00Z"]')
+    expect(shown).toBeTruthy()
+    expect(shown?.textContent).toBeTruthy()
+    expect(shown?.textContent).not.toContain('2026-10-20T')
+    expect(shown?.closest('button')).toBeTruthy()
+  })
 })
