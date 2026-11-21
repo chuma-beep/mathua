@@ -138,8 +138,8 @@ func w8PartialProducts(kp int) generator.Problem {
 	w8AI(f, "w", w)
 	switch kp {
 	case 1:
-		return w8A(kp, fmt.Sprintf("For \\(%d\\times%d\\), what is the tens partial product \\(%d0\\times%d\\)? (enter a number)", a, b, t, b), strconv.Itoa(10*t*b),
-			fmt.Sprintf("The tens part of %d is %d0, so the partial product is \\(%d0\\times%d=%d\\).", a, t, t, b, 10*t*b), f)
+		return w8A(kp, fmt.Sprintf("For \\(%d\\times%d\\), split only %d into %d0 + %d. What is the tens partial product \\(%d0\\times%d\\)? (enter a number)", a, b, a, t, u, t, b), strconv.Itoa(10*t*b),
+			fmt.Sprintf("Only %d splits: its tens part is %d0, while %d stays whole, so \\(%d0\\times%d=%d\\).", a, t, b, t, b, 10*t*b), f)
 	case 2:
 		return w8A(kp, fmt.Sprintf("For \\(%d\\times%d\\), what is the ones partial product \\(%d\\times%d\\)? (enter a number)", a, b, u, b), strconv.Itoa(u*b),
 			fmt.Sprintf("The ones digit of %d is %d, so the partial product is \\(%d\\times%d=%d\\).", a, u, u, b, u*b), f)
