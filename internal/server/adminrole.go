@@ -198,6 +198,15 @@ func (s *Server) handleAdminOverview(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
+// adminUserListRow is one account in the search list, with the same avatar
+// projection the account page uses. The picture is not part of storage.AdminUser
+// because that projection is also written into audit snapshots, and a role
+// change has no reason to record a picture.
+type adminUserListRow struct {
+	storage.AdminUser
+	Avatar adminAccountAvatar `json:"avatar"`
+}
+
 // GET /api/admin/users?q=&limit=&offset=, search and list accounts.
 func (s *Server) handleAdminUsers(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
@@ -210,7 +219,23 @@ func (s *Server) handleAdminUsers(w http.ResponseWriter, r *http.Request) {
 		writeError(w, "failed to search users", 500)
 		return
 	}
-	writeJSON(w, map[string]interface{}{"users": users})
+	// One point read per row, because the search projection has no avatar fields.
+	// The page is staff-only and capped at 200 rows; at the default 50 that is
+	// fifty indexed reads, and widening the audit snapshot to avoid them would
+	// put a picture in every role-change record.
+	rows := make([]adminUserListRow, 0, len(users))
+	for _, u := range users {
+		row := adminUserListRow{AdminUser: u}
+		student, err := s.repo.GetStudent(u.ID)
+		if err != nil {
+			log.Printf("admin user list avatar %s: %v", u.ID, err)
+		} else if student != nil {
+			row.Avatar.AvatarURL, row.Avatar.AvatarDicebear, row.Avatar.AvatarPreset =
+				adminAvatar(student.ID, student.AvatarURL, student.Settings)
+		}
+		rows = append(rows, row)
+	}
+	writeJSON(w, map[string]interface{}{"users": rows})
 }
 
 // PATCH /api/admin/users/{id} {"role":"admin"|"student"}, the only mutation V1 has.

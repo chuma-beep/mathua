@@ -238,7 +238,7 @@ test.describe('administrator management', () => {
 
     await page.getByPlaceholder(/Search by/).fill('ada@example.com')
     await page.getByRole('button', { name: 'Search' }).click()
-    await expect(rowFor(page, 'ada@example.com')).toContainText('student')
+    await expect(rowFor(page, 'ada@example.com')).toContainText('learner')
 
     // Choosing a role opens the confirmation; nothing is sent until it is confirmed.
     await setRole(page, 'ada@example.com', 'admin')
@@ -282,7 +282,8 @@ test.describe('administrator management', () => {
 
     await page.goto('/admin/users')
     const row = rowFor(page, 'root@example.com')
-    await expect(row).toContainText('owner (you)')
+    await expect(row).toContainText('owner')
+    await expect(row.getByText('you', { exact: true })).toBeVisible()
 
     // The owner cannot act on itself in the UI (no picker on the "you" row), so the refusal is
     // asserted through the audit trail path instead: the server is the boundary, and the client
@@ -299,7 +300,7 @@ test.describe('administrator management', () => {
     await page.getByRole('dialog').getByRole('button', { name: 'Cancel' }).click()
 
     await expect(page.getByRole('dialog')).toHaveCount(0)
-    await expect(rowFor(page, 'ada@example.com')).toContainText('student')
+    await expect(rowFor(page, 'ada@example.com')).toContainText('learner')
   })
 
   test('a moderation decision is recorded and shown in the queue', async ({ page }) => {

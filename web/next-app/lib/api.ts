@@ -1983,6 +1983,19 @@ export async function submitReport(rawInput: SubmitReportInput): Promise<SubmitR
 
 const RoleSchema = z.enum(['student', 'moderator', 'admin', 'owner'])
 
+// The account preview shows the same picture the learner sees in their profile.
+// The server resolves the precedence once: a custom upload becomes a relative
+// by-id route, a Google photo stays absolute, and DiceBear or a legacy preset
+// travels as data for the client to draw. Optional because the role-change
+// response carries the account without a picture.
+const AdminUserAvatarSchema = z.object({
+	avatar_url: z.string().optional(),
+	avatar_dicebear: z.object({ style: z.string(), seed: z.string() }).nullable().optional(),
+	avatar_preset: z.number().nullable().optional(),
+})
+
+export type AdminUserAvatar = z.infer<typeof AdminUserAvatarSchema>
+
 // AdminUser mirrors the server's AdminUser projection. It has no field for a password hash, a
 // share token or learning state, and the schema is the reason: a response carrying a field this
 // type does not name cannot reach a page, whatever the server sends.
@@ -1994,6 +2007,7 @@ const AdminUserSchema = z.object({
 	role: RoleSchema,
 	created_at: z.string(),
 	has_password: z.boolean(),
+	avatar: AdminUserAvatarSchema.optional(),
 })
 
 export type AdminUser = z.infer<typeof AdminUserSchema>
@@ -2220,17 +2234,7 @@ export type AdminUserReport = z.infer<typeof AdminUserReportSchema>
 export type AdminActivity = z.infer<typeof AdminActivitySchema>
 
 // The account detail page shows the same picture the learner sees in their
-// profile. The server resolves the precedence once: a custom upload becomes a
-// relative by-id route, a Google photo stays absolute, and DiceBear or a
-// legacy preset travels as data for the client to draw.
-const AdminUserAvatarSchema = z.object({
-	avatar_url: z.string().optional(),
-	avatar_dicebear: z.object({ style: z.string(), seed: z.string() }).nullable().optional(),
-	avatar_preset: z.number().nullable().optional(),
-})
-
-export type AdminUserAvatar = z.infer<typeof AdminUserAvatarSchema>
-
+// profile, from the same schema the list uses.
 export interface AdminUserDetail {
 	user: AdminUser
 	avatar: AdminUserAvatar

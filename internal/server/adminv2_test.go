@@ -51,6 +51,39 @@ func TestAdminUserDetailReturnsArraysForAnEmptyAccount(t *testing.T) {
 	}
 }
 
+func TestAdminUsersListCarriesAvatars(t *testing.T) {
+	e := newAdminEnv(t)
+	if err := e.store.UpdateSettings(e.studentID, `{"avatar_dicebear":{"style":"notionists","seed":"ada-seed"}}`); err != nil {
+		t.Fatalf("set dicebear avatar: %v", err)
+	}
+	rec := e.do(t, "GET", "/api/admin/users", e.adminTok, "")
+	if rec.Code != 200 {
+		t.Fatalf("list: %d %s", rec.Code, rec.Body.String())
+	}
+	var body struct {
+		Users []struct {
+			ID     string             `json:"id"`
+			Avatar adminAccountAvatar `json:"avatar"`
+		} `json:"users"`
+	}
+	if err := json.Unmarshal(rec.Body.Bytes(), &body); err != nil {
+		t.Fatalf("decode: %v", err)
+	}
+	for _, u := range body.Users {
+		if u.ID != e.studentID {
+			continue
+		}
+		if u.Avatar.AvatarDicebear == nil {
+			t.Fatalf("learner avatar = %+v, want a dicebear pick", u.Avatar)
+		}
+		if u.Avatar.AvatarDicebear.Style != "notionists" || u.Avatar.AvatarDicebear.Seed != "ada-seed" {
+			t.Fatalf("dicebear = %+v, want notionists/ada-seed", u.Avatar.AvatarDicebear)
+		}
+		return
+	}
+	t.Fatalf("learner %s missing from the list", e.studentID)
+}
+
 func TestAdminUserDetailCarriesActivityAndReports(t *testing.T) {
 	e := newAdminEnv(t)
 
