@@ -191,7 +191,12 @@ func (g *bayesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 
 	pa := float64(aA) / float64(tA)
 	pb := float64(aB) / float64(tB)
-	answer := decimal6(pa / (pa + pb))
+	// Report 488: six places meant a learner who rounded 4/11 to 0.3636 was
+	// marked wrong, because the tolerance is half a unit in the printed place.
+	// Four places is the precision the question asks a learner to give.
+	const places = 4
+	scale := math.Pow(10, places)
+	answer := decimal6(math.Round(pa/(pa+pb)*scale) / scale)
 
 	question := fmt.Sprintf("Two boxes are equally likely to be chosen. Box one holds %d red marbles out of %d; box two holds %d red out of %d. A red marble is drawn. What is P(box one | red)? (enter a decimal)", aA, tA, aB, tB)
 	explanation := fmt.Sprintf("Subgoal 1: State governing formula. By Bayes' theorem with equal priors, P(box one | red) = P(red | box one) / (P(red | box one) + P(red | box two)).\nSubgoal 2: Substitute parameters. Substitute conditional probabilities %d/%d and %d/%d.\nSubgoal 3: Evaluate and simplify. Evaluating the ratio yields (%d/%d)/((%d/%d) + (%d/%d)) = %s.", aA, tA, aB, tB, aA, tA, aA, tA, aB, tB, answer)

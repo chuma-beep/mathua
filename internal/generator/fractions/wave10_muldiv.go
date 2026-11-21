@@ -32,22 +32,33 @@ func w10MultWholeCancel(kp int) generator.Problem {
 }
 
 func w10EstimateProduct(kp int) generator.Problem {
-	b := []int{2, 3, 4, 6}[w10R(0, 3)]
-	d := []int{2, 3, 4, 6}[w10R(0, 3)]
-	a := w10R(1, b-1)
-	c := w10R(1, d-1)
-	num := a * c
-	den := b * d
+	draw := func() (a, b, c, d, num, den int) {
+		b = []int{2, 3, 4, 6}[w10R(0, 3)]
+		d = []int{2, 3, 4, 6}[w10R(0, 3)]
+		a = w10R(1, b-1)
+		c = w10R(1, d-1)
+		return a, b, c, d, a * c, b * d
+	}
+	a, b, c, d, num, den := draw()
 	switch kp {
 	case 1:
+		// Reports 495-497: the old code asked "closest to" but answered
+		// "less than, equal to or greater than one half", so 3/8 was labelled
+		// closest to 0. Compare distances to 0, 1/2 and 1, and redraw an exact
+		// quarter or three quarters, where two benchmarks are equidistant.
+		for 4*num == den || 4*num == 3*den {
+			a, b, c, d, num, den = draw()
+		}
 		code := 0
-		if num*2 > den {
-			code = 2
-		} else if num*2 == den {
+		if 4*num > den {
 			code = 1
 		}
+		if 4*num > 3*den {
+			code = 2
+		}
+		label := []string{"0", "1/2", "1"}[code]
 		return w10Problem(kp, fmt.Sprintf("Is %d/%d times %d/%d closest to 0, 1/2 or 1? Enter 0, 1 or 2.", a, b, c, d), code,
-			fmt.Sprintf("The product is %d/%d, which is closest to benchmark code %d.", num, den, code), "a", a, "b", b, "c", c, "d", d)
+			fmt.Sprintf("The product is %d/%d, which is closest to %s.", num, den, label), "a", a, "b", b, "c", c, "d", d)
 	case 2:
 		code := 0
 		if num*2 < den {

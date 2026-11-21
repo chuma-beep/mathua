@@ -7,8 +7,10 @@ package fractions
 import (
 	"math/rand"
 	"strconv"
+	"strings"
 
 	"github.com/chuma-beep/mathua/internal/generator"
+	"github.com/chuma-beep/mathua/internal/grader"
 )
 
 var w10Kinds = map[string]string{
@@ -74,6 +76,19 @@ func registerWave10(reg *generator.Registry) {
 }
 
 type w10Gen struct{ kind string }
+
+var w10Grader = grader.NewRouter()
+
+// Grade accepts the complete fraction over 100 for add_decimal. Report 489:
+// the prompt says "Give the numerator over 100", the learner typed 114/100,
+// and the numeric grader compared that with the numerator 114. Every other
+// kind keeps the numeric grader's behaviour.
+func (g *w10Gen) Grade(expected, userAnswer string) grader.Result {
+	if g.kind == "add_decimal" && strings.TrimSpace(userAnswer) == expected+"/100" {
+		return grader.Result{Correct: true, Score: 1}
+	}
+	return w10Grader.Grade(grader.GradingNumeric, expected, userAnswer)
+}
 
 func (g *w10Gen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	kp := ctx.KPOrdinal

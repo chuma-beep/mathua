@@ -295,7 +295,9 @@ func TestBatchBayesRecomputes(t *testing.T) {
 		p := probSample(t, reg, "prob.bayes.prior", i)
 		pa := float64(probFactInt(t, p, "aA")) / float64(probFactInt(t, p, "tA"))
 		pb := float64(probFactInt(t, p, "aB")) / float64(probFactInt(t, p, "tB"))
-		want := decimal6(pa / (pa + pb))
+		// Report 488: the answer is given to four places, not six, so a learner
+		// who rounds 4/11 to 0.3636 is not marked wrong.
+		want := decimal6(math.Round(pa/(pa+pb)*1e4) / 1e4)
 		if p.Answer != want {
 			t.Fatalf("bayes: facts %v answers %s, want %s", p.Facts, p.Answer, want)
 		}
