@@ -201,6 +201,10 @@ type Server struct {
 	// minutes. The database-backed active counter only moves when a learner
 	// answers, so it cannot say who is browsing now.
 	presence *presenceTracker
+	// countrySeen remembers the UTC day each account was last
+	// written, so the edge header and device class cost one small upsert per learner per day
+	// rather than one write on every authenticated request. See noteActivity.
+	countrySeen sync.Map
 	// turnstileSecret enables the Cloudflare Turnstile check on signup and
 	// password login. An empty value disables it, so a deployment without a
 	// widget keeps working. The URL and client are fields for tests.
@@ -630,6 +634,9 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/admin/reports/bulk", logRequest(cors(s.writeLimiter.middleware(s.requirePermission(admin.ReportsModerate, s.handleAdminReportsBulk)))))
 	mux.HandleFunc("/api/admin/reports/", logRequest(cors(s.requirePermission(admin.ReportsRead, s.handleAdminReport))))
 	mux.HandleFunc("/api/admin/users", logRequest(cors(s.requirePermission(admin.UsersRead, s.handleAdminUsers))))
+	// Location is country-level only, and it is read under the same account
+	// grant as Users: it is an aggregate about accounts, not a new dataset.
+	mux.HandleFunc("/api/admin/locations", logRequest(cors(s.requirePermission(admin.UsersRead, s.handleAdminLocations))))
 	mux.HandleFunc("/api/admin/users/", logRequest(cors(s.requirePermission(admin.UsersRead, s.handleAdminUser))))
 	// Leagues are read under the same grant as accounts because a league row is an account plus
 	// its week: an administrator who may not look an account up does not get to enumerate the
@@ -3444,6 +3451,7 @@ func (s *Server) authMiddleware(next http.HandlerFunc) http.HandlerFunc {
 			return
 		}
 		s.presence.Touch(studentID)
+		s.noteActivity(r, studentID)
 		ctx := r.Context()
 		r = r.WithContext(context.WithValue(ctx, authStudentKey{}, studentID))
 		next(w, r)
@@ -3469,6 +3477,7 @@ func (s *Server) optionalAuthMiddleware(next http.HandlerFunc) http.HandlerFunc 
 			return
 		}
 		s.presence.Touch(studentID)
+		s.noteActivity(r, studentID)
 		ctx := r.Context()
 		r = r.WithContext(context.WithValue(ctx, authStudentKey{}, studentID))
 		next(w, r)

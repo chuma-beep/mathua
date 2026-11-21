@@ -143,6 +143,21 @@ func authMigrate(db *sql.DB) error {
 		"ALTER TABLE students ADD COLUMN google_id TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE students ADD COLUMN avatar_url TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE students ADD COLUMN email_verified INTEGER NOT NULL DEFAULT 0",
+		// Coarse location from the Cloudflare edge. Country only, never a city
+		// or a coordinate, and never alongside a stored IP address.
+		"ALTER TABLE students ADD COLUMN country TEXT NOT NULL DEFAULT ''",
+		"ALTER TABLE students ADD COLUMN country_at TEXT NOT NULL DEFAULT ''",
+		"ALTER TABLE students ADD COLUMN device TEXT NOT NULL DEFAULT ''",
+		"ALTER TABLE students ADD COLUMN last_seen_at TEXT NOT NULL DEFAULT ''",
+		`CREATE TABLE IF NOT EXISTS learner_country_days (
+			student_id TEXT NOT NULL,
+			day        TEXT NOT NULL,
+			country    TEXT NOT NULL,
+			device     TEXT NOT NULL DEFAULT '',
+			PRIMARY KEY (student_id, day)
+		)`,
+		"ALTER TABLE learner_country_days ADD COLUMN device TEXT NOT NULL DEFAULT ''",
+		"CREATE INDEX IF NOT EXISTS idx_learner_country_days_day ON learner_country_days(day)",
 		"ALTER TABLE notification_preferences ADD COLUMN push_enabled INTEGER NOT NULL DEFAULT 0",
 		"ALTER TABLE league_members ADD COLUMN movement TEXT NOT NULL DEFAULT 'new'",
 		"ALTER TABLE league_members ADD COLUMN from_tier TEXT NOT NULL DEFAULT ''",

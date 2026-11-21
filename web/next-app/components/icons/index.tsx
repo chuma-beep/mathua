@@ -37,6 +37,7 @@ import {
   EllipsisVerticalIcon,
   FileTextIcon,
   GithubIcon,
+  GlobeIcon,
   HandshakeIcon,
   HouseIcon,
   LayersIcon,
@@ -153,6 +154,9 @@ export const User = wrap(UserIcon as never)
 // The friends destination. A pair rather than one person: the surface is about
 // the relationship, and a single user icon would read as the profile page.
 export const Users = wrap(UsersIcon as never)
+// The admin locations page. A globe rather than a pin: the surface is an
+// aggregate of countries, not one place.
+export const Globe = wrap(GlobeIcon as never)
 export const ChevronLeft = wrap(ChevronLeftIcon as never)
 export const ChevronDown = wrap(ChevronDownIcon as never)
 export const ChevronUp = wrap(ChevronUpIcon as never)
@@ -207,6 +211,7 @@ export const ICON_NAMES = [
   'Shield',
   'SunMoon',
   'Trophy',
+  'Globe',
   'User',
   'Users',
   'ChevronDown',

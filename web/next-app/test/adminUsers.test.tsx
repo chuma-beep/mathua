@@ -48,7 +48,13 @@ beforeEach(() => {
   vi.clearAllMocks()
   vi.mocked(searchAdminUsers).mockResolvedValue({
     users: [
-      user({ id: 's1', avatar: { avatar_dicebear: { style: 'notionists', seed: 'ada-seed' } } }),
+      user({
+        id: 's1',
+        avatar: { avatar_dicebear: { style: 'notionists', seed: 'ada-seed' } },
+        last_seen_at: '2026-11-20T18:30:00Z',
+        device: 'mobile',
+        country: 'NG',
+      }),
       user({ id: 's2', name: 'Bob', username: 'bob', email: 'bob@example.com', role: 'owner' }),
     ],
   })
@@ -82,5 +88,17 @@ describe('the account list', () => {
 
     expect(screen.getAllByText('learner').length).toBeGreaterThan(0)
     expect(screen.getAllByText('owner').length).toBeGreaterThan(0)
+  })
+
+  it('shows the last visit, device class and country without opening the account', async () => {
+    render(<AdminUsersPage />)
+    await screen.findByText('Ada')
+
+    const seen = document.querySelector('time[datetime="2026-11-20T18:30:00Z"]')
+    expect(seen).toBeTruthy()
+    expect(seen?.textContent).toMatch(/Last seen/)
+    expect(seen?.textContent).not.toContain('2026-11-20T')
+    expect(screen.getByText('mobile')).toBeTruthy()
+    expect(screen.getByText('Nigeria')).toBeTruthy()
   })
 })
