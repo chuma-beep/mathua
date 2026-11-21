@@ -3,8 +3,10 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
+import type { DateRange } from 'react-day-picker'
 import AdminShell from '@/components/admin/AdminShell'
 import SectionHeader from '@/components/SectionHeader'
+import { DateRangePicker, dateKey } from '@/components/ui/date-range-picker'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { useAdminMe } from '@/hooks/useAdminMe'
@@ -86,6 +88,16 @@ function growthNote(d: Delta, days: number): string {
   if (d.label === 'first recorded window') return `No previous ${days}-day window to compare`
   if (d.label === 'no activity yet') return 'No activity recorded yet'
   return `${d.label} against the previous ${days} days`
+}
+
+// A window is a UTC day range, so both ends must be read in UTC or a browser
+// west of the line prints yesterday for a day the API already answered for.
+function fmtDay(value: string): string {
+  const date = new Date(`${value}T00:00:00Z`)
+  if (Number.isNaN(date.getTime())) return value
+  return date.toLocaleDateString('en-GB', {
+    day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC',
+  })
 }
 
 function shortDay(day: string): string {
@@ -221,29 +233,42 @@ function fmt(value: number): string {
 
 // The page is one window, not three overlapping ones: the stat cards, the
 // country table, the globe, the sparkline and the device series all describe the
-// same number of days, and the comparison is always the equally long window
-// before it. Ninety days is the widest offer because the daily series is drawn
-// in full at every width, and a year of points would collapse to noise.
+// same dates, and the comparison is always the equally long window before them.
+// The presets end today and the picker names both ends; a custom range is
+// capped at a year by the API because the daily series is drawn in full.
 const RANGES = [7, 30, 90] as const
 
 export default function AdminAudiencePage() {
   const { isStaff } = useAdminMe()
   const [days, setDays] = useState(30)
+  const [custom, setCustom] = useState<DateRange | undefined>()
   const [data, setData] = useState<AdminLocations | null>(null)
   const [error, setError] = useState('')
+
+  // A range with only a start is a draft in the calendar, not a window the
+  // API can answer for, so the query stays on the preset until both ends are
+  // chosen. Deriving the keys also keeps the effect off the Date objects,
+  // which are a new identity on every render.
+  const customFrom = custom?.from && custom.to ? dateKey(custom.from) : undefined
+  const customTo = custom?.from && custom.to ? dateKey(custom.to) : undefined
 
   useEffect(() => {
     if (!isStaff) return
     let live = true
-    fetchAdminLocations(days)
+    const query = customFrom && customTo ? { from: customFrom, to: customTo } : { days }
+    fetchAdminLocations(query)
       .then((res) => { if (live) { setData(res); setError('') } })
       .catch((e) => { if (live) setError(getErrorMessage(e)) })
     return () => { live = false }
-  }, [isStaff, days])
+  }, [isStaff, days, customFrom, customTo])
 
   // The visible numbers and the labels must agree even while a new window is
   // loading, so labels follow the data that is on screen, not the pending pick.
   const windowDays = data?.days ?? days
+  const customWindow = Boolean(customFrom && customTo)
+  const windowLabel = data && customWindow
+    ? `${fmtDay(data.from)} to ${fmtDay(data.to)}`
+    : `last ${windowDays} days`
   const activeDelta = data ? delta(data.active, data.active_prev) : null
   const newDelta = data ? delta(data.new, data.new_prev) : null
   const visitsDelta = data ? delta(data.visits, data.visits_prev) : null
@@ -279,10 +304,10 @@ export default function AdminAudiencePage() {
               <button
                 key={value}
                 type="button"
-                onClick={() => setDays(value)}
-                aria-pressed={days === value}
+                onClick={() => { setCustom(undefined); setDays(value) }}
+                aria-pressed={!customWindow && days === value}
                 className={`h-8 border-l border-mathua-border px-3 font-mono text-[11px] first:border-l-0 ${
-                  days === value
+                  !customWindow && days === value
                     ? 'bg-mathua-blue text-mathua-bg'
                     : 'text-mathua-secondary hover:text-mathua-primary'
                 }`}
@@ -291,8 +316,16 @@ export default function AdminAudiencePage() {
               </button>
             ))}
           </div>
+          <DateRangePicker
+            value={custom}
+            onChange={(next) => {
+              if (!next?.from) { setCustom(undefined); return }
+              setCustom(next)
+            }}
+            max={new Date()}
+          />
           <span className="font-mono text-[10px] text-mathua-muted">
-            Compared with the {days} days before
+            Compared with the {windowDays} days before
           </span>
         </div>
 
@@ -330,19 +363,19 @@ export default function AdminAudiencePage() {
                 note={data.total > 0 ? `${Math.round((data.located / data.total) * 100)}% have a recorded country` : 'No accounts yet'}
               />
               <StatCard
-                label={`Active, last ${windowDays} days`}
+                label={`Active, ${windowLabel}`}
                 value={fmt(data.active)}
                 note={growthNote(activeDelta ?? { label: 'no activity yet', tone: 'flat' }, windowDays)}
                 tone={activeDelta?.tone}
               />
               <StatCard
-                label={`Visits, last ${windowDays} days`}
+                label={`Visits, ${windowLabel}`}
                 value={fmt(data.visits)}
                 note={growthNote(visitsDelta ?? { label: 'no activity yet', tone: 'flat' }, windowDays)}
                 tone={visitsDelta?.tone}
               />
               <StatCard
-                label={`New accounts, last ${windowDays} days`}
+                label={`New accounts, ${windowLabel}`}
                 value={fmt(data.new)}
                 note={growthNote(newDelta ?? { label: 'no activity yet', tone: 'flat' }, windowDays)}
                 tone={newDelta?.tone}
@@ -405,7 +438,7 @@ export default function AdminAudiencePage() {
                     {newcomers.length > 0 && (
                       <div className="mt-4 border-t border-mathua-border pt-3">
                         <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-mathua-muted">
-                          New accounts, last {windowDays} days
+                          New accounts, {windowLabel}
                         </p>
                         <ol className="mt-2 space-y-2">
                           {newcomers.map((c) => (
@@ -439,7 +472,7 @@ export default function AdminAudiencePage() {
                 <div className="mt-3 grid gap-3 lg:grid-cols-5">
                   <div className="flex flex-col border border-mathua-border bg-mathua-surface p-4 lg:col-span-2">
                     <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
-                      <h3 className="font-mono text-[10px] uppercase tracking-[0.15em] text-mathua-muted">Activity, last {windowDays} days</h3>
+                      <h3 className="font-mono text-[10px] uppercase tracking-[0.15em] text-mathua-muted">Activity, {windowLabel}</h3>
                       <span className="font-mono text-[10px] text-mathua-muted" title="A visit is one signed-in learner-day.">
                         {fmt(data.visits)} visits
                       </span>
@@ -465,7 +498,7 @@ export default function AdminAudiencePage() {
 
                   <div className="border border-mathua-border bg-mathua-surface p-4 lg:col-span-3">
                     <div className="mb-1 flex flex-wrap items-baseline justify-between gap-2">
-                      <h3 className="font-mono text-[10px] uppercase tracking-[0.15em] text-mathua-muted">Devices, last {windowDays} days</h3>
+                      <h3 className="font-mono text-[10px] uppercase tracking-[0.15em] text-mathua-muted">Devices, {windowLabel}</h3>
                       <span className="font-mono text-[10px] text-mathua-muted">Drag the gallery to turn it</span>
                     </div>
                     {data.devices.length === 0 ? (

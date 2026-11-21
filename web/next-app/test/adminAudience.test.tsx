@@ -40,6 +40,26 @@ vi.mock('../components/admin/DeviceGallery', () => ({
   ),
 }))
 
+// The real picker is a calendar popover. The page only needs a range in and a
+// range out, so a button that emits one keeps the test about the window and
+// not about react-day-picker's keyboard model.
+vi.mock('../components/ui/date-range-picker', () => ({
+  dateKey: (value: Date) => value.toISOString().slice(0, 10),
+  DateRangePicker: ({ onChange }: { onChange: (range: { from: Date; to: Date }) => void }) => (
+    <button
+      type="button"
+      onClick={() =>
+        onChange({
+          from: new Date('2026-10-01T00:00:00Z'),
+          to: new Date('2026-10-10T00:00:00Z'),
+        })
+      }
+    >
+      Pick custom range
+    </button>
+  ),
+}))
+
 function locations(over: Partial<AdminLocations> = {}): AdminLocations {
   const daily = Array.from({ length: 30 }, (_, i) => ({
     day: `2026-11-${String(i + 1).padStart(2, '0')}`,
@@ -53,6 +73,8 @@ function locations(over: Partial<AdminLocations> = {}): AdminLocations {
   }))
   return {
     days: 30,
+    from: '2026-11-01',
+    to: '2026-11-30',
     countries: [
       { code: 'NG', known: 5, active: 4, active_prev: 2, new: 2, new_prev: 0 },
       { code: 'GB', known: 2, active: 2, active_prev: 1, new: 0, new_prev: 0 },
@@ -117,13 +139,28 @@ describe('the admin audience page', () => {
   it('moves every number when the window changes', async () => {
     render(<AdminAudiencePage />)
     await screen.findByText('7 of 10')
-    expect(fetchAdminLocations).toHaveBeenCalledWith(30)
+    expect(fetchAdminLocations).toHaveBeenCalledWith({ days: 30 })
 
     vi.mocked(fetchAdminLocations).mockResolvedValueOnce(locations({ days: 90 }))
     fireEvent.click(screen.getByRole('button', { name: '90 days' }))
 
     expect((await screen.findAllByText('New accounts, last 90 days')).length).toBeGreaterThan(0)
-    expect(fetchAdminLocations).toHaveBeenLastCalledWith(90)
+    expect(fetchAdminLocations).toHaveBeenLastCalledWith({ days: 90 })
+  })
+
+  it('asks for the exact days a custom range names', async () => {
+    render(<AdminAudiencePage />)
+    await screen.findByText('7 of 10')
+
+    vi.mocked(fetchAdminLocations).mockResolvedValueOnce(
+      locations({ days: 10, from: '2026-10-01', to: '2026-10-10' }),
+    )
+    fireEvent.click(screen.getByRole('button', { name: 'Pick custom range' }))
+
+    // The label must name the dates the server answered for, not the preset
+    // that happens to be closest in length.
+    expect(await screen.findByText('Active, 1 Oct 2026 to 10 Oct 2026')).toBeTruthy()
+    expect(fetchAdminLocations).toHaveBeenLastCalledWith({ from: '2026-10-01', to: '2026-10-10' })
   })
 
   it('says recording starts now rather than drawing an empty globe', async () => {

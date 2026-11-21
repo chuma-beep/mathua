@@ -161,6 +161,77 @@ func TestAdminLocationsHonoursTheWindow(t *testing.T) {
 	}
 }
 
+func TestAdminLocationsAcceptsACustomRange(t *testing.T) {
+	e := newAdminEnv(t)
+	now := time.Now().UTC()
+	today := now.Format("2006-01-02")
+	eightDaysAgo := now.AddDate(0, 0, -8).Format("2006-01-02")
+
+	if err := e.store.RecordStudentActivity(e.studentID, "NG", "mobile", today, now); err != nil {
+		t.Fatalf("record student activity: %v", err)
+	}
+	if err := e.store.RecordStudentActivity(e.thirdID, "NG", "desktop", eightDaysAgo, now); err != nil {
+		t.Fatalf("record third activity: %v", err)
+	}
+
+	// Four days ending today: today is inside, eight days ago is not, and the
+	// prior four days start seven days back, so the older visit is outside both.
+	fourDaysAgo := now.AddDate(0, 0, -3).Format("2006-01-02")
+	rec := e.do(t, "GET", "/api/admin/locations?from="+fourDaysAgo+"&to="+today, e.adminTok, "")
+	if rec.Code != 200 {
+		t.Fatalf("custom range: %d %s", rec.Code, rec.Body.String())
+	}
+	var body adminLocationsResponse
+	if err := json.Unmarshal(rec.Body.Bytes(), &body); err != nil {
+		t.Fatalf("decode: %v", err)
+	}
+	if body.Days != 4 || len(body.Daily) != 4 || len(body.DeviceDaily) != 4 {
+		t.Fatalf("range = %d days with %d/%d points, want 4",
+			body.Days, len(body.Daily), len(body.DeviceDaily))
+	}
+	if body.From != fourDaysAgo || body.To != today {
+		t.Fatalf("range = %s..%s, want %s..%s", body.From, body.To, fourDaysAgo, today)
+	}
+	if body.Active != 1 || body.ActivePrev != 0 {
+		t.Fatalf("range totals = %d/%d, want 1/0", body.Active, body.ActivePrev)
+	}
+	if body.Daily[len(body.Daily)-1].Day != today {
+		t.Fatalf("series ends %s, want %s", body.Daily[len(body.Daily)-1].Day, today)
+	}
+
+	// Eleven days reaches the older visit, which proves the custom range is
+	// not silently floored to the presets the page offers.
+	elevenDaysAgo := now.AddDate(0, 0, -10).Format("2006-01-02")
+	rec = e.do(t, "GET", "/api/admin/locations?from="+elevenDaysAgo+"&to="+today, e.adminTok, "")
+	if rec.Code != 200 {
+		t.Fatalf("wide custom range: %d %s", rec.Code, rec.Body.String())
+	}
+	if err := json.Unmarshal(rec.Body.Bytes(), &body); err != nil {
+		t.Fatalf("decode: %v", err)
+	}
+	if body.Days != 11 || body.Active != 2 {
+		t.Fatalf("wide range = %d days, active %d, want 11 and 2", body.Days, body.Active)
+	}
+
+	dayAfterTomorrow := now.AddDate(0, 0, 2).Format("2006-01-02")
+	tooWide := now.AddDate(0, 0, -365).Format("2006-01-02")
+	for _, query := range []string{
+		"?from=" + today,
+		"?to=" + today,
+		"?from=week&to=" + today,
+		"?from=" + today + "&to=week",
+		"?from=" + today + "&to=" + fourDaysAgo,
+		"?from=" + dayAfterTomorrow + "&to=" + dayAfterTomorrow,
+		"?from=" + tooWide + "&to=" + today,
+		"?days=7&from=" + fourDaysAgo + "&to=" + today,
+	} {
+		rec := e.do(t, "GET", "/api/admin/locations"+query, e.adminTok, "")
+		if rec.Code != 400 {
+			t.Fatalf("%s: %d %s, want 400", query, rec.Code, rec.Body.String())
+		}
+	}
+}
+
 func TestValidCountryCodeRejectsNonPlaces(t *testing.T) {
 	cases := map[string]bool{
 		"NG":  true,

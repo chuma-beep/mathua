@@ -2052,6 +2052,10 @@ const AdminLocationDeviceDaySchema = z.object({
 const AdminLocationsSchema = z.object({
 	// Length of the selected window, and the exact number of daily points.
 	days: z.number(),
+	// The first and last day of the window, so a custom range can be labelled
+	// with the dates the server actually answered for.
+	from: z.string(),
+	to: z.string(),
 	countries: z.array(AdminLocationCountrySchema),
 	located: z.number(),
 	total: z.number(),
@@ -2567,12 +2571,24 @@ export async function searchAdminUsers(q: string): Promise<AdminUsersRes> {
 }
 
 /**
- * The admin location aggregate: known accounts by country, activity in the
- * current and previous seven-day windows, new accounts and a thirty-day
- * series. Country only; see the server handler for why no address is stored.
+ * The admin audience aggregate: known accounts by country, activity in the
+ * selected and previous equally long windows, new accounts and a daily series.
+ * Country only; see the server handler for why no address is stored.
+ *
+ * A caller names one window, either a number of days ending today or a
+ * `from`/`to` pair. The pair is used as given and both ends are inclusive.
  */
-export async function fetchAdminLocations(days = 30): Promise<AdminLocations> {
-	const res = await authedFetch(`${API_BASE}/api/admin/locations?days=${days}`, { cache: 'no-store' })
+export async function fetchAdminLocations(
+	query: { days?: number; from?: string; to?: string } = { days: 30 },
+): Promise<AdminLocations> {
+	const params = new URLSearchParams()
+	if (query.from && query.to) {
+		params.set('from', query.from)
+		params.set('to', query.to)
+	} else {
+		params.set('days', String(query.days ?? 30))
+	}
+	const res = await authedFetch(`${API_BASE}/api/admin/locations?${params.toString()}`, { cache: 'no-store' })
 	if (!res.ok) await throwWithResponse(res, 'Could not load locations')
 	const data = (await res.json()) as unknown
 	return validateResponse(AdminLocationsSchema, data, 'adminLocations')

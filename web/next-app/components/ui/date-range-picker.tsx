@@ -40,6 +40,18 @@ export function DateRangePicker({
   align?: 'start' | 'center' | 'end'
 }) {
   const [open, setOpen] = React.useState(false)
+  // Two months fit a desktop popover but not a phone. One month keeps every
+  // day reachable without horizontal scroll, which is the only way the control
+  // works on a 390px screen.
+  const [months, setMonths] = React.useState(2)
+  React.useEffect(() => {
+    if (typeof window.matchMedia !== 'function') return
+    const query = window.matchMedia('(max-width: 639px)')
+    const apply = () => setMonths(query.matches ? 1 : 2)
+    apply()
+    query.addEventListener('change', apply)
+    return () => query.removeEventListener('change', apply)
+  }, [])
   const selected = React.useMemo(
     () => ({
       from: value?.from ? toCalendarDay(value.from) : undefined,
@@ -70,7 +82,7 @@ export function DateRangePicker({
           mode="range"
           selected={selected}
           onSelect={select}
-          numberOfMonths={2}
+          numberOfMonths={months}
           disabled={[{ before: min ?? new Date('2026-10-19T00:00:00Z') }, ...(max ? [{ after: max }] : [])]}
         />
         <div className="flex items-center justify-between border-t border-mathua-border px-3 py-2">

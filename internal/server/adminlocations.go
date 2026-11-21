@@ -52,7 +52,12 @@ type adminLocationsResponse struct {
 	// Days is the length of the selected window. Every active, new, visits and
 	// device count on the page refers to it, and daily holds exactly this many
 	// points, so a client never has to infer the range from a field name.
-	Days        int                      `json:"days"`
+	Days int `json:"days"`
+	// From and To are the first and last day of the window. The page prints
+	// them when the operator picked a range, so a label can never describe a
+	// different window from the numbers under it.
+	From        string                   `json:"from"`
+	To          string                   `json:"to"`
 	Countries   []adminLocationCountry   `json:"countries"`
 	Located     int                      `json:"located"`
 	Total       int                      `json:"total"`
@@ -80,9 +85,16 @@ func (s *Server) handleAdminLocations(w http.ResponseWriter, r *http.Request) {
 		writeError(w, "method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
-	// The page offers 7, 30 and 90 days. The endpoint accepts any 1 to 365 so a
-	// range can be linked or scripted without a second contract, but a year is
-	// the ceiling: the daily series is returned in full and the page draws it.
+	// The page offers 7, 30 and 90 day presets and an arbitrary range. The
+	// endpoint accepts `days`, which ends today, or `from` and `to`, never
+	// both: a result has one window, and accepting two descriptions of it
+	// invites the page and the series to disagree.
+	now := time.Now().UTC()
+	midnight := func(t time.Time) time.Time {
+		return time.Date(t.Year(), t.Month(), t.Day(), 0, 0, 0, 0, time.UTC)
+	}
+	start := midnight(now).AddDate(0, 0, -29)
+	end := midnight(now)
 	days := 30
 	if raw := r.URL.Query().Get("days"); raw != "" {
 		n, parseErr := strconv.Atoi(raw)
@@ -91,15 +103,50 @@ func (s *Server) handleAdminLocations(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		days = n
+		start = midnight(now).AddDate(0, 0, -(days - 1))
 	}
-	now := time.Now().UTC()
-	today := now.Format("2006-01-02")
-	recentFrom := now.AddDate(0, 0, -(days - 1))
+	fromRaw, toRaw := r.URL.Query().Get("from"), r.URL.Query().Get("to")
+	if fromRaw != "" || toRaw != "" {
+		if r.URL.Query().Get("days") != "" {
+			writeError(w, "give either days or from and to, not both", http.StatusBadRequest)
+			return
+		}
+		if fromRaw == "" || toRaw == "" {
+			writeError(w, "from and to must be given together", http.StatusBadRequest)
+			return
+		}
+		var parseErr error
+		start, parseErr = time.Parse("2006-01-02", fromRaw)
+		if parseErr != nil {
+			writeError(w, "from must be a date as YYYY-MM-DD", http.StatusBadRequest)
+			return
+		}
+		end, parseErr = time.Parse("2006-01-02", toRaw)
+		if parseErr != nil {
+			writeError(w, "to must be a date as YYYY-MM-DD", http.StatusBadRequest)
+			return
+		}
+		if start.After(end) {
+			writeError(w, "from must not be after to", http.StatusBadRequest)
+			return
+		}
+		// Tomorrow's date is not a window, and a future end would make the
+		// zero-filled series claim days that have not happened.
+		if end.After(now) {
+			writeError(w, "to must not be in the future", http.StatusBadRequest)
+			return
+		}
+		days = int(end.Sub(start).Hours()/24) + 1
+		if days > 365 {
+			writeError(w, "window must be 365 days or fewer", http.StatusBadRequest)
+			return
+		}
+	}
 	window := storage.LocationWindow{
-		RecentFrom: recentFrom.Format("2006-01-02"),
-		PriorFrom:  recentFrom.AddDate(0, 0, -days).Format("2006-01-02"),
-		DailyFrom:  recentFrom.Format("2006-01-02"),
-		Today:      today,
+		RecentFrom: start.Format("2006-01-02"),
+		PriorFrom:  start.AddDate(0, 0, -days).Format("2006-01-02"),
+		DailyFrom:  start.Format("2006-01-02"),
+		Today:      end.Format("2006-01-02"),
 	}
 	locations, err := s.repo.StudentLocations(window)
 	if err != nil {
@@ -146,16 +193,6 @@ func (s *Server) handleAdminLocations(w http.ResponseWriter, r *http.Request) {
 		byDay[d.Day] = d.Active
 	}
 	daily := make([]adminLocationDay, 0, days)
-	start, err := time.Parse("2006-01-02", window.DailyFrom)
-	if err != nil {
-		writeError(w, "failed to load locations", http.StatusInternalServerError)
-		return
-	}
-	end, err := time.Parse("2006-01-02", window.Today)
-	if err != nil {
-		writeError(w, "failed to load locations", http.StatusInternalServerError)
-		return
-	}
 	// Zero-fill the series. A missing day is a day with no activity, and a
 	// sparkline that joins two active days across a gap draws a lie.
 	for day := start; !day.After(end); day = day.AddDate(0, 0, 1) {
@@ -196,6 +233,8 @@ func (s *Server) handleAdminLocations(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Cache-Control", "private, max-age=60")
 	writeJSON(w, adminLocationsResponse{
 		Days:        days,
+		From:        window.RecentFrom,
+		To:          window.Today,
 		Countries:   countries,
 		Located:     locations.Located,
 		Total:       locations.Total,
