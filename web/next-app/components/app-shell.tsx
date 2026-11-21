@@ -8,8 +8,7 @@ import BottomTabs from './BottomTabs'
 import { SidebarInset, SidebarProvider, SidebarTrigger } from './ui/sidebar'
 import { useAuthState } from '../hooks/useAuthState'
 import { canOpenAdminConsole } from '../lib/auth'
-import { adminOverview, getConfig, getDueReviews, getNotificationUnreadCount, getSettings, listAnnouncements, listMyReports, type Announcement } from '../lib/api'
-import AnnouncementToast from './announcements/AnnouncementToast'
+import { adminOverview, getConfig, getDueReviews, getNotificationUnreadCount, getSettings, listAnnouncements, listMyReports } from '../lib/api'
 import { ensureGuestToken } from '../lib/auth'
 import { resolveAvatar } from '../lib/dicebear'
 
@@ -32,7 +31,6 @@ export default function AppShell({ children, ...overrides }: AppShellProps) {
   const [showLeaderboards, setShowLeaderboards] = useState(true)
   const [showFriends, setShowFriends] = useState(false)
   const [notificationUnread, setNotificationUnread] = useState(0)
-  const [newestUnread, setNewestUnread] = useState<Announcement | null>(null)
   const [adminReports, setAdminReports] = useState(0)
 
   useEffect(() => {
@@ -186,7 +184,6 @@ export default function AppShell({ children, ...overrides }: AppShellProps) {
       }
       if (announcements.status === 'fulfilled') {
         total += announcements.value.unread
-        setNewestUnread((announcements.value.announcements ?? []).find((item) => !item.read) ?? null)
         loaded = true
       }
       if (notifications.status === 'fulfilled') {
@@ -247,7 +244,6 @@ export default function AppShell({ children, ...overrides }: AppShellProps) {
 
   return (
     <>
-      <AnnouncementToast announcement={newestUnread} />
       <SidebarProvider>
         <AppSidebar
           name={overrides.name ?? user?.name ?? 'Guest'}
