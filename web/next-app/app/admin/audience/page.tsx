@@ -13,6 +13,7 @@ import {
   getErrorMessage,
   type AdminLocationCountry,
   type AdminLocationDay,
+  type AdminLocationDeviceDay,
   type AdminLocations,
 } from '../../../lib/api'
 
@@ -126,6 +127,70 @@ function Sparkline({ daily }: { daily: AdminLocationDay[] }) {
   )
 }
 
+// Three lines, one per device class, over the same thirty days as the activity
+// sparkline. The classes overlap: a learner who signs in on a phone and a
+// laptop counts on both lines that day, so the lines add up above the daily
+// total. The caption says so rather than letting the reader assume a split.
+function DeviceLines({ daily }: { daily: AdminLocationDeviceDay[] }) {
+  const width = 640
+  const height = 132
+  const pad = 10
+  const max = Math.max(
+    1,
+    ...daily.flatMap((d) => [d.mobile, d.tablet, d.desktop]),
+  )
+  const step = daily.length > 1 ? (width - pad * 2) / (daily.length - 1) : 0
+  const series = [
+    { key: 'mobile', label: 'Mobile', tone: 'text-mathua-blue' },
+    { key: 'desktop', label: 'Desktop', tone: 'text-mathua-teal' },
+    { key: 'tablet', label: 'Tablet', tone: 'text-mathua-green' },
+  ] as const
+  const path = (key: 'mobile' | 'desktop' | 'tablet') =>
+    daily
+      .map((d, i) => {
+        const x = pad + i * step
+        const y = height - pad - (d[key] / max) * (height - pad * 2)
+        return `${i === 0 ? 'M' : 'L'}${x.toFixed(1)} ${y.toFixed(1)}`
+      })
+      .join(' ')
+
+  return (
+    <div>
+      <ul className="mb-2 flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[10px] text-mathua-muted">
+        {series.map((s) => (
+          <li key={s.key} className="flex items-center gap-1.5">
+            <span aria-hidden="true" className={`h-0.5 w-4 ${s.tone} bg-current`} />
+            <span>{s.label}</span>
+          </li>
+        ))}
+      </ul>
+      <svg viewBox={`0 0 ${width} ${height}`} className="h-32 w-full" aria-hidden="true" preserveAspectRatio="none">
+        <line x1={pad} y1={height - pad} x2={width - pad} y2={height - pad} stroke="var(--border)" strokeWidth="1" />
+        {series.map((s) => (
+          <path
+            key={s.key}
+            d={path(s.key)}
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            vectorEffect="non-scaling-stroke"
+            className={s.tone}
+          />
+        ))}
+      </svg>
+      <div className="mt-2 flex justify-between font-mono text-[10px] text-mathua-muted">
+        <span>{daily.length > 0 ? shortDay(daily[0].day) : ''}</span>
+        <span>One class per learner per day</span>
+        <span>{daily.length > 0 ? shortDay(daily[daily.length - 1].day) : ''}</span>
+      </div>
+      <p className="sr-only">
+        Distinct signed-in learners per day for mobile, desktop and tablet over the last thirty
+        days. A learner who uses two classes on one day appears on both lines.
+      </p>
+    </div>
+  )
+}
+
 function StatCard({ label, value, note, tone }: { label: string; value: string; note: string; tone?: Delta['tone'] }) {
   return (
     <div className="border border-mathua-border bg-mathua-surface p-4">
@@ -145,7 +210,7 @@ function fmt(value: number): string {
   return value.toLocaleString()
 }
 
-export default function AdminLocationsPage() {
+export default function AdminAudiencePage() {
   const { isStaff } = useAdminMe()
   const [data, setData] = useState<AdminLocations | null>(null)
   const [error, setError] = useState('')
@@ -180,11 +245,12 @@ export default function AdminLocationsPage() {
   return (
     <AdminShell>
       <main className="mx-auto w-full max-w-[1200px] min-w-0 px-4 py-8 sm:px-6 sm:py-12 overflow-x-hidden">
-        <SectionHeader label="Administration" title="Locations" />
+        <SectionHeader label="Administration" title="Audience" />
         <p className="-mt-3 mb-6 font-mono text-[11px] text-mathua-muted">
-          Where accounts are and where activity is growing. Country comes from the Cloudflare edge,
-          refreshed at most once a day per signed-in learner. A VPN or mobile carrier can place
-          someone elsewhere; no IP address or city is stored.
+          Who is using Mathua, on what and where activity is growing. Country comes from the
+          Cloudflare edge and the device class from the sign-in request, both refreshed at most
+          once a day per signed-in learner. A VPN or mobile carrier can place someone elsewhere;
+          no IP address, city or user agent is stored.
         </p>
 
         {!isStaff && (
@@ -201,7 +267,7 @@ export default function AdminLocationsPage() {
 
         {!data && !error && isStaff && (
           <div className="space-y-3" aria-busy="true">
-            <p role="status" className="sr-only">Loading locations…</p>
+            <p role="status" className="sr-only">Loading audience…</p>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
               {[0, 1, 2, 3].map((i) => <Skeleton key={i} className="h-28 w-full" />)}
             </div>
@@ -255,7 +321,12 @@ export default function AdminLocationsPage() {
                   <div className="border border-mathua-border bg-mathua-surface p-4 lg:col-span-2">
                     <div className="mb-1 flex flex-wrap items-baseline justify-between gap-2">
                       <h3 className="font-mono text-[10px] uppercase tracking-[0.15em] text-mathua-muted">Where learners are</h3>
-                      <span className="hidden font-mono text-[10px] text-mathua-muted sm:inline">Marker size: active this week</span>
+                      <span
+                        className="hidden font-mono text-[10px] text-mathua-muted sm:inline"
+                        title="Arcs run from the busiest country to the next six by activity; they rank activity, not travel."
+                      >
+                        Marker size: active this week · arcs: busiest six
+                      </span>
                     </div>
                     <CountryGlobe countries={data.countries} />
                   </div>
@@ -350,14 +421,30 @@ export default function AdminLocationsPage() {
                   </div>
                 </div>
 
-                <div className="mt-3 border border-mathua-border bg-mathua-surface p-4">
-                  <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
-                    <h3 className="font-mono text-[10px] uppercase tracking-[0.15em] text-mathua-muted">Activity, last 30 days</h3>
-                    <span className="font-mono text-[10px] text-mathua-muted" title="A visit is one signed-in learner-day.">
-                      {fmt(data.visits_30d)} visits
-                    </span>
+                <div className="mt-3 grid gap-3 lg:grid-cols-2">
+                  <div className="border border-mathua-border bg-mathua-surface p-4">
+                    <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
+                      <h3 className="font-mono text-[10px] uppercase tracking-[0.15em] text-mathua-muted">Activity, last 30 days</h3>
+                      <span className="font-mono text-[10px] text-mathua-muted" title="A visit is one signed-in learner-day.">
+                        {fmt(data.visits_30d)} visits
+                      </span>
+                    </div>
+                    <Sparkline daily={data.daily} />
                   </div>
-                  <Sparkline daily={data.daily} />
+
+                  <div className="border border-mathua-border bg-mathua-surface p-4">
+                    <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
+                      <h3 className="font-mono text-[10px] uppercase tracking-[0.15em] text-mathua-muted">Devices, last 30 days</h3>
+                      <span className="font-mono text-[10px] text-mathua-muted">Distinct learners per day</span>
+                    </div>
+                    {data.device_daily.every((d) => d.mobile + d.desktop + d.tablet === 0) ? (
+                      <p className="font-mono text-[11px] text-mathua-muted">
+                        Devices are recorded from the next signed-in visit.
+                      </p>
+                    ) : (
+                      <DeviceLines daily={data.device_daily} />
+                    )}
+                  </div>
                 </div>
 
                 <div className="mt-3 border border-mathua-border bg-mathua-surface">

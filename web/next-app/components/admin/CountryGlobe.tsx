@@ -45,6 +45,7 @@ const PALETTE = {
     atmosphere: '#3b82f6',
     marker: '#a5f3fc',
     ring: '165, 243, 252',
+    arc: 'rgba(125, 211, 252, 0.7)',
   },
   light: {
     ocean: '#e9f1fa',
@@ -53,6 +54,7 @@ const PALETTE = {
     atmosphere: '#93c5fd',
     marker: '#1d4ed8',
     ring: '37, 99, 235',
+    arc: 'rgba(37, 99, 235, 0.55)',
   },
 }
 
@@ -76,19 +78,33 @@ export default function CountryGlobe({ countries }: { countries: GlobeCountry[] 
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const max = Math.max(1, ...countries.map((c) => c.active_7d))
 
-    const markers = countries.flatMap((c) => {
-      const [lat, lng] = COUNTRY_CENTROIDS[c.code] ?? []
-      if (lat === undefined || lng === undefined) return []
-      return [{
-        lat,
-        lng,
-        radius: 0.45 + 1.25 * Math.sqrt(c.active_7d / max),
-      }]
-    })
-    const rings = [...markers].slice(0, 5).map((m) => ({
+    const placed = countries
+      .flatMap((c) => {
+        const at = COUNTRY_CENTROIDS[c.code]
+        return at ? [{ active: c.active_7d, lat: at[0], lng: at[1] }] : []
+      })
+      .sort((a, b) => b.active - a.active)
+    const markers = placed.map((p) => ({
+      lat: p.lat,
+      lng: p.lng,
+      radius: 0.45 + 1.25 * Math.sqrt(p.active / max),
+    }))
+    const rings = markers.slice(0, 5).map((m) => ({
       ...m,
       radius: 2.5 + 4.5 * Math.sqrt((m.radius - 0.45) / 1.25),
     }))
+    // The lines are a ranking, not a journey: every arc leaves the busiest
+    // country for the next six by activity. Dashes travel that path to show
+    // direction; they never claim two countries share learners.
+    const hub = placed[0]
+    const arcs = hub
+      ? placed.slice(1, 7).map((p) => ({
+          startLat: hub.lat,
+          startLng: hub.lng,
+          endLat: p.lat,
+          endLng: p.lng,
+        }))
+      : []
 
     const scene = new THREE.Scene()
     const camera = new THREE.PerspectiveCamera(40, 1, 1, 3000)
@@ -135,6 +151,17 @@ export default function CountryGlobe({ countries }: { countries: GlobeCountry[] 
       .ringPropagationSpeed(1.6)
       .ringRepeatPeriod(1800)
       .ringColor(() => (t: number) => `rgba(${palette.ring}, ${Math.max(0, 1 - t)})`)
+      .arcsData(arcs)
+      .arcStartLat('startLat')
+      .arcStartLng('startLng')
+      .arcEndLat('endLat')
+      .arcEndLng('endLng')
+      .arcAltitudeAutoScale(0.45)
+      .arcStroke(0.5)
+      .arcDashLength(reduced ? 1 : 0.35)
+      .arcDashGap(reduced ? 0 : 0.3)
+      .arcDashAnimateTime(3200)
+      .arcColor(() => palette.arc)
     group.add(globe)
 
     scene.add(new THREE.AmbientLight(0xffffff, dark ? 1.8 : 2.1))
@@ -241,8 +268,9 @@ export default function CountryGlobe({ countries }: { countries: GlobeCountry[] 
       />
       <p className="sr-only">
         A globe with the countries that have known accounts, a point sized by this week&apos;s
-        active learners and a ring for the busiest countries. The table below lists the same
-        countries with their account and activity counts.
+        active learners and a ring for the busiest countries. Dashed arcs run from the busiest
+        country to the next six by activity; they rank activity and do not show travel. The table
+        below lists the same countries with their account and activity counts.
       </p>
     </div>
   )

@@ -35,20 +35,31 @@ type adminLocationDevice struct {
 	ActivePrev7 int    `json:"active_prev_7d"`
 }
 
+// adminLocationDeviceDay is one day of the per-class trend. The three numbers
+// are independent distinct-learner counts, so they can sum above the day's
+// active total when someone uses more than one class that day.
+type adminLocationDeviceDay struct {
+	Day     string `json:"day"`
+	Mobile  int    `json:"mobile"`
+	Tablet  int    `json:"tablet"`
+	Desktop int    `json:"desktop"`
+}
+
 type adminLocationsResponse struct {
-	Countries   []adminLocationCountry `json:"countries"`
-	Located     int                    `json:"located"`
-	Total       int                    `json:"total"`
-	Active7     int                    `json:"active_7d"`
-	ActivePrev7 int                    `json:"active_prev_7d"`
-	New7        int                    `json:"new_7d"`
-	NewPrev7    int                    `json:"new_prev_7d"`
-	Visits7     int                    `json:"visits_7d"`
-	VisitsPrev7 int                    `json:"visits_prev_7d"`
-	Visits30    int                    `json:"visits_30d"`
-	Devices     []adminLocationDevice  `json:"devices"`
-	Daily       []adminLocationDay     `json:"daily"`
-	GeneratedAt string                 `json:"generated_at"`
+	Countries   []adminLocationCountry   `json:"countries"`
+	Located     int                      `json:"located"`
+	Total       int                      `json:"total"`
+	Active7     int                      `json:"active_7d"`
+	ActivePrev7 int                      `json:"active_prev_7d"`
+	New7        int                      `json:"new_7d"`
+	NewPrev7    int                      `json:"new_prev_7d"`
+	Visits7     int                      `json:"visits_7d"`
+	VisitsPrev7 int                      `json:"visits_prev_7d"`
+	Visits30    int                      `json:"visits_30d"`
+	Devices     []adminLocationDevice    `json:"devices"`
+	DeviceDaily []adminLocationDeviceDay `json:"device_daily"`
+	Daily       []adminLocationDay       `json:"daily"`
+	GeneratedAt string                   `json:"generated_at"`
 }
 
 // handleAdminLocations answers "where are my learners" with country granularity.
@@ -157,6 +168,16 @@ func (s *Server) handleAdminLocations(w http.ResponseWriter, r *http.Request) {
 		})
 	}
 
+	deviceDaily := make([]adminLocationDeviceDay, 0, len(locations.DeviceDaily))
+	for _, d := range locations.DeviceDaily {
+		deviceDaily = append(deviceDaily, adminLocationDeviceDay{
+			Day:     d.Day,
+			Mobile:  d.Mobile,
+			Tablet:  d.Tablet,
+			Desktop: d.Desktop,
+		})
+	}
+
 	w.Header().Set("Cache-Control", "private, max-age=60")
 	writeJSON(w, adminLocationsResponse{
 		Countries:   countries,
@@ -170,6 +191,7 @@ func (s *Server) handleAdminLocations(w http.ResponseWriter, r *http.Request) {
 		VisitsPrev7: locations.VisitsPrev7,
 		Visits30:    visits30,
 		Devices:     devices,
+		DeviceDaily: deviceDaily,
 		Daily:       daily,
 		GeneratedAt: now.Format(time.RFC3339),
 	})

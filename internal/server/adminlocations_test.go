@@ -66,6 +66,19 @@ func TestAdminLocationsAggregatesCountryActivity(t *testing.T) {
 	if len(body.Daily) != 30 {
 		t.Fatalf("daily has %d days, want 30", len(body.Daily))
 	}
+	if len(body.DeviceDaily) != 30 {
+		t.Fatalf("device daily has %d days, want 30", len(body.DeviceDaily))
+	}
+	deviceDays := make(map[string]adminLocationDeviceDay, len(body.DeviceDaily))
+	for _, d := range body.DeviceDaily {
+		deviceDays[d.Day] = d
+	}
+	if deviceDays[today].Mobile != 1 {
+		t.Fatalf("mobile on %s = %d, want 1", today, deviceDays[today].Mobile)
+	}
+	if deviceDays[lastWeek].Desktop != 1 {
+		t.Fatalf("desktop on %s = %d, want 1", lastWeek, deviceDays[lastWeek].Desktop)
+	}
 	if body.Daily[len(body.Daily)-1].Day != today {
 		t.Fatalf("daily ends %s, want %s", body.Daily[len(body.Daily)-1].Day, today)
 	}

@@ -2038,6 +2038,15 @@ const AdminLocationDeviceSchema = z.object({
 	active_prev_7d: z.number(),
 })
 
+// Each field is distinct learners on that class that day, so the three lines
+// can add up to more than the day's active total.
+const AdminLocationDeviceDaySchema = z.object({
+	day: z.string(),
+	mobile: z.number(),
+	tablet: z.number(),
+	desktop: z.number(),
+})
+
 const AdminLocationsSchema = z.object({
 	countries: z.array(AdminLocationCountrySchema),
 	located: z.number(),
@@ -2052,6 +2061,7 @@ const AdminLocationsSchema = z.object({
 	visits_prev_7d: z.number(),
 	visits_30d: z.number(),
 	devices: z.array(AdminLocationDeviceSchema),
+	device_daily: z.array(AdminLocationDeviceDaySchema),
 	daily: z.array(AdminLocationDaySchema),
 	generated_at: z.string(),
 })
@@ -2059,6 +2069,7 @@ const AdminLocationsSchema = z.object({
 export type AdminLocationCountry = z.infer<typeof AdminLocationCountrySchema>
 export type AdminLocationDay = z.infer<typeof AdminLocationDaySchema>
 export type AdminLocationDevice = z.infer<typeof AdminLocationDeviceSchema>
+export type AdminLocationDeviceDay = z.infer<typeof AdminLocationDeviceDaySchema>
 export type AdminLocations = z.infer<typeof AdminLocationsSchema>
 
 // One definition, used by the overview's "recent activity" and by the audit page. Two schemas
