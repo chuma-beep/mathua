@@ -1125,3 +1125,30 @@ body {
     content: '';
   }
 }
+
+
+/* Toasts sit above the phone tab bar and the support bubble. Sonner 1.7 has no
+   mobile offset prop, so the offset variable it already reads is raised here. */
+@media (max-width: 640px) {
+  /* sonner-tab-bar-lift */
+  ol[data-sonner-toaster] {
+    --offset: 76px !important;
+    bottom: 76px !important;
+  }
+}
+
+
+/* Native select menus are drawn by the browser, not by the page. The templates
+   give the closed control bg-transparent, and Chromium carries that into the
+   popup, which paints it white even in dark mode. The options are given the page
+   surface and ink explicitly, and the control itself is kept on the theme when
+   it is focused. select-option-surface */
+option {
+  background-color: var(--bg);
+  color: var(--text-primary);
+}
+
+select:focus {
+  background-color: var(--bg);
+  color: var(--text-primary);
+}

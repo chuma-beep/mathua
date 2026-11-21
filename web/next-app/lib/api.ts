@@ -2650,6 +2650,13 @@ export async function listAnnouncements(): Promise<MyAnnouncementsResponse> {
 	}
 }
 
+export async function markAnnouncementRead(id: string): Promise<void> {
+	const res = await authedFetch(`${API_BASE}/api/announcements/${encodeURIComponent(id)}/read`, {
+		method: 'POST',
+	})
+	if (!res.ok) await throwWithResponse(res, 'Could not mark the announcement as read')
+}
+
 export async function markAnnouncementsRead(): Promise<void> {
 	const res = await authedFetch(`${API_BASE}/api/announcements/read`, { method: 'POST' })
 	if (!res.ok) await throwWithResponse(res, 'Could not mark announcements as read')

@@ -13,7 +13,15 @@ export function resolveAPIBase(
   // .env with localhost must never be baked into a Worker or Docker build.
   if (sameOrigin) return ''
   const base = (configured ?? '').trim().replace(/\/+$/, '')
-  if (base) return base
+  if (base) {
+    // A development build opened from a phone is served on the LAN address while
+    // the API is still configured as localhost. On the phone that address is the
+    // phone itself, so every request fails. Reuse the page's host instead.
+    if (typeof window !== 'undefined' && /localhost|127\.0\.0\.1/.test(base)) {
+      return base.replace(/localhost|127\.0\.0\.1/, window.location.hostname)
+    }
+    return base
+  }
   // The Go image serves the static export and the API on one origin, so an
   // empty base is correct there. It has to be declared, because the same empty
   // value on a static host is the 404-everything failure this guard exists for.

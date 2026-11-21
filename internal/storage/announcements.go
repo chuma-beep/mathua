@@ -33,6 +33,12 @@ func (s *SQLiteStore) MarkAnnouncementsRead(studentID string, now time.Time) err
 func (s *PostgresStore) MarkAnnouncementsRead(studentID string, now time.Time) error {
 	return s.announcement().markRead(studentID, now)
 }
+func (s *SQLiteStore) MarkAnnouncementRead(studentID, announcementID string, now time.Time) error {
+	return s.announcement().markOneRead(studentID, announcementID, now)
+}
+func (s *PostgresStore) MarkAnnouncementRead(studentID, announcementID string, now time.Time) error {
+	return s.announcement().markOneRead(studentID, announcementID, now)
+}
 func (s *SQLiteStore) ClearAnnouncements(studentID string, clearedAt time.Time) error {
 	return s.announcement().clear(studentID, clearedAt)
 }
@@ -108,6 +114,20 @@ func (a *announcementAccess) markRead(studentID string, now time.Time) error {
 		ON CONFLICT (student_id, announcement_id) DO NOTHING`)
 	if _, err := a.db.Exec(q, studentID, now.UTC().UnixNano()); err != nil {
 		return fmt.Errorf("mark announcements read: %w", err)
+	}
+	return nil
+}
+
+// markOneRead records one announcement, not the whole feed. The toast dismisses
+// a single item, and marking every announcement read would clear unrelated ones
+// from the badge.
+func (a *announcementAccess) markOneRead(studentID, announcementID string, now time.Time) error {
+	q := a.rebind(`
+		INSERT INTO announcement_reads (student_id, announcement_id, read_at)
+		SELECT ?, id, ? FROM announcements WHERE id = ? AND published = 1
+		ON CONFLICT (student_id, announcement_id) DO NOTHING`)
+	if _, err := a.db.Exec(q, studentID, now.UTC().UnixNano(), announcementID); err != nil {
+		return fmt.Errorf("mark announcement read: %w", err)
 	}
 	return nil
 }

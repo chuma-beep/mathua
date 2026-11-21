@@ -79,6 +79,7 @@ const NAV_ITEMS: SidebarNavItem[] = [
   // duplication). The glossary is a standalone reference with no progress,
   // XP or gating, so it sits here rather than beside Learn.
   const RESOURCE_ITEMS: SidebarNavItem[] = [
+    { label: "What's new", href: '/announcements', icon: Bell },
     { label: 'Docs', href: '/docs', icon: FileText },
     { label: 'Glossary', href: '/glossary', icon: BookOpen },
     { label: 'Contribute', href: '/docs/contributing', icon: Handshake },

@@ -13,6 +13,7 @@ import type { Shelf } from '../../lib/nextUp'
 import { fetchShelf } from '../../lib/recommendations'
 import { parseReturnStack } from '../../lib/learnReturn'
 import { ensureGuestToken } from '../../lib/auth'
+import { Skeleton } from '@/components/ui/skeleton'
 
 /**
  * The learner's entry point: whatever the engine recommends, rendered as one card plus the
@@ -75,7 +76,16 @@ function LearnEntry() {
   }
 
   if (loading) {
-    return <div className="p-6 font-mono text-xs text-mathua-muted">Loading…</div>
+    return (
+      <div className="mt-6 mb-16 px-4">
+        <div className="mx-auto max-w-2xl space-y-3">
+          <Skeleton className="h-3 w-20" />
+          <Skeleton className="h-40 w-full" />
+          <Skeleton className="h-12 w-full" />
+          <Skeleton className="h-3 w-32" />
+        </div>
+      </div>
+    )
   }
 
   return (

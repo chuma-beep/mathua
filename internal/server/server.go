@@ -590,6 +590,7 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/reports/mine/clear", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleMyReportsClear)))))
 	mux.HandleFunc("/api/announcements", logRequest(cors(s.authMiddleware(s.handleAnnouncements))))
 	mux.HandleFunc("/api/announcements/read", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleAnnouncementsRead)))))
+	mux.HandleFunc("/api/announcements/", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleAnnouncementRead)))))
 	mux.HandleFunc("/api/announcements/clear", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleAnnouncementsClear)))))
 	mux.HandleFunc("/api/notifications", logRequest(cors(s.authMiddleware(s.handleNotifications))))
 	mux.HandleFunc("/api/notifications/unread-count", logRequest(cors(s.authMiddleware(s.handleNotificationUnreadCount))))
