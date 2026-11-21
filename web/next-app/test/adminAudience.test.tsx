@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import AdminAudiencePage from '../app/admin/audience/page'
 import { fetchAdminLocations } from '../lib/api'
 import type { AdminLocations } from '../lib/api'
@@ -52,22 +52,22 @@ function locations(over: Partial<AdminLocations> = {}): AdminLocations {
     tablet: i % 5 === 0 ? 1 : 0,
   }))
   return {
+    days: 30,
     countries: [
-      { code: 'NG', known: 5, active_7d: 4, active_prev_7d: 2, new_7d: 2, new_prev_7d: 0 },
-      { code: 'GB', known: 2, active_7d: 2, active_prev_7d: 1, new_7d: 0, new_prev_7d: 0 },
+      { code: 'NG', known: 5, active: 4, active_prev: 2, new: 2, new_prev: 0 },
+      { code: 'GB', known: 2, active: 2, active_prev: 1, new: 0, new_prev: 0 },
     ],
     located: 7,
     total: 10,
-    active_7d: 6,
-    active_prev_7d: 3,
-    new_7d: 2,
-    new_prev_7d: 0,
-    visits_7d: 9,
-    visits_prev_7d: 4,
-    visits_30d: 42,
+    active: 6,
+    active_prev: 3,
+    new: 2,
+    new_prev: 0,
+    visits: 9,
+    visits_prev: 4,
     devices: [
-      { device: 'mobile', active_7d: 4, active_prev_7d: 2 },
-      { device: 'desktop', active_7d: 2, active_prev_7d: 1 },
+      { device: 'mobile', active: 4, active_prev: 2 },
+      { device: 'desktop', active: 2, active_prev: 1 },
     ],
     daily,
     device_daily: deviceDaily,
@@ -86,12 +86,12 @@ describe('the admin audience page', () => {
     render(<AdminAudiencePage />)
     await screen.findByText('7 of 10')
 
-    expect(screen.getByText('Active this week')).toBeTruthy()
-    expect(screen.getByText('+100% against the previous 7 days')).toBeTruthy()
-    expect(screen.getByText('First recorded week, no prior week to compare')).toBeTruthy()
-    expect(screen.getByText('Visits this week')).toBeTruthy()
-    expect(screen.getByText('+125% against the previous 7 days')).toBeTruthy()
-    expect(screen.getByText('42 visits')).toBeTruthy()
+    expect(screen.getByText('Active, last 30 days')).toBeTruthy()
+    expect(screen.getByText('+100% against the previous 30 days')).toBeTruthy()
+    expect(screen.getByText('No previous 30-day window to compare')).toBeTruthy()
+    expect(screen.getByText('Visits, last 30 days')).toBeTruthy()
+    expect(screen.getByText('+125% against the previous 30 days')).toBeTruthy()
+    expect(screen.getByText('9 visits')).toBeTruthy()
 
     // The globe is decorative; the same two countries must be readable in
     // plain text, with the prior window and the change beside the count.
@@ -99,23 +99,35 @@ describe('the admin audience page', () => {
     expect((await screen.findByTestId('globe')).textContent).toBe('2 markers')
     expect(screen.getAllByText('Nigeria').length).toBeGreaterThan(0)
     expect(screen.getAllByText('United Kingdom').length).toBeGreaterThan(0)
-    expect(screen.getByText('Previous 7d')).toBeTruthy()
+    expect(screen.getByText('Previous')).toBeTruthy()
     expect(screen.getByText('Peak 3 learners in a day')).toBeTruthy()
 
     // A visit is a learner-day, so it is reported beside the head count and
     // the device split, never instead of it.
-    expect(screen.getByText('Devices this week')).toBeTruthy()
+    expect(screen.getByText('Devices, last 30 days')).toBeTruthy()
     expect(screen.getByText('Visits per active learner')).toBeTruthy()
     expect(screen.getByText('1.5')).toBeTruthy()
     // The gallery loads through next/dynamic, like the globe.
     expect((await screen.findByTestId('devices-3d')).textContent).toBe('2 devices')
-    expect(screen.getByText('Last 30 days')).toBeTruthy()
+    expect(screen.getByText('Daily trend')).toBeTruthy()
     expect(screen.getByText('Distinct learners per day')).toBeTruthy()
     expect(screen.getByText('One class per learner per day')).toBeTruthy()
   })
 
+  it('moves every number when the window changes', async () => {
+    render(<AdminAudiencePage />)
+    await screen.findByText('7 of 10')
+    expect(fetchAdminLocations).toHaveBeenCalledWith(30)
+
+    vi.mocked(fetchAdminLocations).mockResolvedValueOnce(locations({ days: 90 }))
+    fireEvent.click(screen.getByRole('button', { name: '90 days' }))
+
+    expect((await screen.findAllByText('New accounts, last 90 days')).length).toBeGreaterThan(0)
+    expect(fetchAdminLocations).toHaveBeenLastCalledWith(90)
+  })
+
   it('says recording starts now rather than drawing an empty globe', async () => {
-    vi.mocked(fetchAdminLocations).mockResolvedValue(locations({ countries: [], located: 0, total: 4, active_7d: 0, active_prev_7d: 0, new_7d: 0, visits_7d: 0, visits_prev_7d: 0, visits_30d: 0, devices: [] }))
+    vi.mocked(fetchAdminLocations).mockResolvedValue(locations({ countries: [], located: 0, total: 4, active: 0, active_prev: 0, new: 0, visits: 0, visits_prev: 0, devices: [] }))
     render(<AdminAudiencePage />)
 
     await screen.findByText('No countries recorded yet.')

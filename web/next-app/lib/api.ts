@@ -2020,22 +2020,24 @@ export type AdminUser = z.infer<typeof AdminUserSchema>
 export type Role = z.infer<typeof RoleSchema>
 
 // Country-level only. The server resolves the country at the edge and this
-// client never sees an address, a city or a coordinate.
+// client never sees an address, a city or a coordinate. Field names carry no
+// length: the window is `days`, chosen by the range control, and every count on
+// the page moves with it.
 const AdminLocationCountrySchema = z.object({
 	code: z.string(),
 	known: z.number(),
-	active_7d: z.number(),
-	active_prev_7d: z.number(),
-	new_7d: z.number(),
-	new_prev_7d: z.number(),
+	active: z.number(),
+	active_prev: z.number(),
+	new: z.number(),
+	new_prev: z.number(),
 })
 
 const AdminLocationDaySchema = z.object({ day: z.string(), active: z.number() })
 
 const AdminLocationDeviceSchema = z.object({
 	device: z.string(),
-	active_7d: z.number(),
-	active_prev_7d: z.number(),
+	active: z.number(),
+	active_prev: z.number(),
 })
 
 // Each field is distinct learners on that class that day, so the three lines
@@ -2048,18 +2050,19 @@ const AdminLocationDeviceDaySchema = z.object({
 })
 
 const AdminLocationsSchema = z.object({
+	// Length of the selected window, and the exact number of daily points.
+	days: z.number(),
 	countries: z.array(AdminLocationCountrySchema),
 	located: z.number(),
 	total: z.number(),
-	active_7d: z.number(),
-	active_prev_7d: z.number(),
-	new_7d: z.number(),
-	new_prev_7d: z.number(),
+	active: z.number(),
+	active_prev: z.number(),
+	new: z.number(),
+	new_prev: z.number(),
 	// A visit is one signed-in learner-day. Visits therefore count repeat
-	// activity, while active_7d counts distinct learners.
-	visits_7d: z.number(),
-	visits_prev_7d: z.number(),
-	visits_30d: z.number(),
+	// activity, while active counts distinct learners.
+	visits: z.number(),
+	visits_prev: z.number(),
 	devices: z.array(AdminLocationDeviceSchema),
 	device_daily: z.array(AdminLocationDeviceDaySchema),
 	daily: z.array(AdminLocationDaySchema),
@@ -2568,8 +2571,8 @@ export async function searchAdminUsers(q: string): Promise<AdminUsersRes> {
  * current and previous seven-day windows, new accounts and a thirty-day
  * series. Country only; see the server handler for why no address is stored.
  */
-export async function fetchAdminLocations(): Promise<AdminLocations> {
-	const res = await authedFetch(`${API_BASE}/api/admin/locations`, { cache: 'no-store' })
+export async function fetchAdminLocations(days = 30): Promise<AdminLocations> {
+	const res = await authedFetch(`${API_BASE}/api/admin/locations?days=${days}`, { cache: 'no-store' })
 	if (!res.ok) await throwWithResponse(res, 'Could not load locations')
 	const data = (await res.json()) as unknown
 	return validateResponse(AdminLocationsSchema, data, 'adminLocations')
