@@ -53,7 +53,20 @@ CREATE TABLE IF NOT EXISTS students (
     google_id            TEXT NOT NULL DEFAULT '',
     avatar_url           TEXT NOT NULL DEFAULT '',
     email_verified       INTEGER NOT NULL DEFAULT 0,
-    role                 TEXT NOT NULL DEFAULT 'student'
+    role                 TEXT NOT NULL DEFAULT 'student',
+    country              TEXT NOT NULL DEFAULT '',
+    country_at           TEXT NOT NULL DEFAULT '',
+    device               TEXT NOT NULL DEFAULT '',
+    last_seen_at         TEXT NOT NULL DEFAULT ''
+);
+
+-- Mirrors the SQLite table: one row per learner per UTC day, no IP address.
+CREATE TABLE IF NOT EXISTS learner_country_days (
+    student_id TEXT NOT NULL,
+    day        TEXT NOT NULL,
+    country    TEXT NOT NULL,
+    device     TEXT NOT NULL DEFAULT '',
+    PRIMARY KEY (student_id, day)
 );
 
 -- The XP ledger; see the SQLite schema for why UNIQUE(student_id, event_key)
@@ -790,6 +803,19 @@ func pgAuthMigrate(db *sql.DB) error {
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS google_id TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS avatar_url TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS email_verified INTEGER NOT NULL DEFAULT 0",
+		"ALTER TABLE students ADD COLUMN IF NOT EXISTS country TEXT NOT NULL DEFAULT ''",
+		"ALTER TABLE students ADD COLUMN IF NOT EXISTS country_at TEXT NOT NULL DEFAULT ''",
+		"ALTER TABLE students ADD COLUMN IF NOT EXISTS device TEXT NOT NULL DEFAULT ''",
+		"ALTER TABLE students ADD COLUMN IF NOT EXISTS last_seen_at TEXT NOT NULL DEFAULT ''",
+		`CREATE TABLE IF NOT EXISTS learner_country_days (
+			student_id TEXT NOT NULL,
+			day        TEXT NOT NULL,
+			country    TEXT NOT NULL,
+			device     TEXT NOT NULL DEFAULT '',
+			PRIMARY KEY (student_id, day)
+		)`,
+		"ALTER TABLE learner_country_days ADD COLUMN IF NOT EXISTS device TEXT NOT NULL DEFAULT ''",
+		"CREATE INDEX IF NOT EXISTS idx_learner_country_days_day ON learner_country_days(day)",
 		"ALTER TABLE notification_preferences ADD COLUMN IF NOT EXISTS push_enabled INTEGER NOT NULL DEFAULT 0",
 		"ALTER TABLE league_members ADD COLUMN IF NOT EXISTS movement TEXT NOT NULL DEFAULT 'new'",
 		"ALTER TABLE league_members ADD COLUMN IF NOT EXISTS from_tier TEXT NOT NULL DEFAULT ''",

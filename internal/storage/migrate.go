@@ -23,8 +23,27 @@ CREATE TABLE IF NOT EXISTS students (
     email                TEXT NOT NULL DEFAULT '',
     google_id            TEXT NOT NULL DEFAULT '',
     avatar_url           TEXT NOT NULL DEFAULT '',
-    email_verified       INTEGER NOT NULL DEFAULT 0
+    email_verified       INTEGER NOT NULL DEFAULT 0,
+    country              TEXT NOT NULL DEFAULT '',
+    country_at           TEXT NOT NULL DEFAULT '',
+    device               TEXT NOT NULL DEFAULT '',
+    last_seen_at         TEXT NOT NULL DEFAULT ''
 );
+
+-- One row per learner per UTC day, written when the learner is first seen that
+-- day. The students row remembers only the latest country and device, so
+-- without this table "where was activity last week" has no answer. The device
+-- is a coarse class (mobile, tablet or desktop), never a user agent, and no IP
+-- address is stored: the edge resolves the country and the origin keeps only
+-- the code it was given.
+CREATE TABLE IF NOT EXISTS learner_country_days (
+    student_id TEXT NOT NULL,
+    day        TEXT NOT NULL,
+    country    TEXT NOT NULL,
+    device     TEXT NOT NULL DEFAULT '',
+    PRIMARY KEY (student_id, day)
+);
+CREATE INDEX IF NOT EXISTS idx_learner_country_days_day ON learner_country_days(day);
 
 -- The XP ledger. xp_total and xp_today are running counters for the profile;
 -- this table is the history behind them, and the only honest source for "XP

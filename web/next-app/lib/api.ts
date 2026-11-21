@@ -2008,10 +2008,58 @@ const AdminUserSchema = z.object({
 	created_at: z.string(),
 	has_password: z.boolean(),
 	avatar: AdminUserAvatarSchema.optional(),
+	// Absent for an account that has not made a signed-in request since the
+	// activity capture shipped. The server sends a country code, a coarse
+	// device class and a day, never a raw address or user agent.
+	country: z.string().optional(),
+	device: z.string().optional(),
+	last_seen_at: z.string().optional(),
 })
 
 export type AdminUser = z.infer<typeof AdminUserSchema>
 export type Role = z.infer<typeof RoleSchema>
+
+// Country-level only. The server resolves the country at the edge and this
+// client never sees an address, a city or a coordinate.
+const AdminLocationCountrySchema = z.object({
+	code: z.string(),
+	known: z.number(),
+	active_7d: z.number(),
+	active_prev_7d: z.number(),
+	new_7d: z.number(),
+	new_prev_7d: z.number(),
+})
+
+const AdminLocationDaySchema = z.object({ day: z.string(), active: z.number() })
+
+const AdminLocationDeviceSchema = z.object({
+	device: z.string(),
+	active_7d: z.number(),
+	active_prev_7d: z.number(),
+})
+
+const AdminLocationsSchema = z.object({
+	countries: z.array(AdminLocationCountrySchema),
+	located: z.number(),
+	total: z.number(),
+	active_7d: z.number(),
+	active_prev_7d: z.number(),
+	new_7d: z.number(),
+	new_prev_7d: z.number(),
+	// A visit is one signed-in learner-day. Visits therefore count repeat
+	// activity, while active_7d counts distinct learners.
+	visits_7d: z.number(),
+	visits_prev_7d: z.number(),
+	visits_30d: z.number(),
+	devices: z.array(AdminLocationDeviceSchema),
+	daily: z.array(AdminLocationDaySchema),
+	generated_at: z.string(),
+})
+
+export type AdminLocationCountry = z.infer<typeof AdminLocationCountrySchema>
+export type AdminLocationDay = z.infer<typeof AdminLocationDaySchema>
+export type AdminLocationDevice = z.infer<typeof AdminLocationDeviceSchema>
+export type AdminLocations = z.infer<typeof AdminLocationsSchema>
 
 // One definition, used by the overview's "recent activity" and by the audit page. Two schemas
 // for one row type is how the two surfaces come to disagree about what an event looks like.
@@ -2502,6 +2550,18 @@ export async function searchAdminUsers(q: string): Promise<AdminUsersRes> {
 	if (!res.ok) await throwWithResponse(res, 'Could not load users')
 	const data = (await res.json()) as { users?: unknown }
 	return { users: validateResponse(z.array(AdminUserSchema), data.users ?? [], 'adminUsers') }
+}
+
+/**
+ * The admin location aggregate: known accounts by country, activity in the
+ * current and previous seven-day windows, new accounts and a thirty-day
+ * series. Country only; see the server handler for why no address is stored.
+ */
+export async function fetchAdminLocations(): Promise<AdminLocations> {
+	const res = await authedFetch(`${API_BASE}/api/admin/locations`, { cache: 'no-store' })
+	if (!res.ok) await throwWithResponse(res, 'Could not load locations')
+	const data = (await res.json()) as unknown
+	return validateResponse(AdminLocationsSchema, data, 'adminLocations')
 }
 
 /**

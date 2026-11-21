@@ -53,6 +53,18 @@ function fmtJoined(value: string): string {
   return d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })
 }
 
+// The country arrives as an ISO code because that is what the edge sends. The
+// list is read by people, so it is spelled out here; an unknown code is shown
+// as-is rather than silently dropped.
+function countryName(code: string): string {
+  if (!code) return ''
+  try {
+    return new Intl.DisplayNames(undefined, { type: 'region' }).of(code) ?? code
+  } catch {
+    return code
+  }
+}
+
 function roleTone(role: Role): string {
   switch (role) {
     case 'owner':
@@ -284,6 +296,18 @@ export default function AdminUsersPage() {
                                 <span title="Signed in with a provider, not a password">provider sign-in</span>
                               )}
                             </div>
+                            {/* The same once-a-day capture that records the country records
+                                this. Both are coarse on purpose: a date, a device class and a
+                                country, never a time series, a user agent or an address. */}
+                            {u.last_seen_at && (
+                              <div className="mt-0.5 flex flex-wrap items-center gap-x-2 font-mono text-[10px] text-mathua-muted">
+                                <time dateTime={u.last_seen_at} title={u.last_seen_at}>
+                                  Last seen {fmtJoined(u.last_seen_at)}
+                                </time>
+                                {u.device && <span title="Device class from the sign-in request">{u.device}</span>}
+                                {u.country && <span title="Country from the last signed-in visit">{countryName(u.country)}</span>}
+                              </div>
+                            )}
                           </div>
                         </div>
                       </TableCell>

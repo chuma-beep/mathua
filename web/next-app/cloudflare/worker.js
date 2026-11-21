@@ -13,6 +13,7 @@
 const ORIGIN = 'https://mathua.fly.dev'
 const APEX = 'mathua.com'
 const EDGE_SECRET_HEADER = 'X-Mathua-Edge-Secret'
+const COUNTRY_HEADER = 'X-Mathua-Country'
 
 function isAPI(pathname) {
   return pathname === '/api' || pathname.startsWith('/api/')
@@ -25,6 +26,15 @@ async function proxyAPI(request, env) {
 
   const headers = new Headers(request.headers)
   headers.set(EDGE_SECRET_HEADER, env.EDGE_SECRET)
+  // The country is resolved by Cloudflare from the connection. Delete any
+  // inbound copy first: a caller that sets this header must not be able to
+  // choose the country the admin map records. An unknown country (XX) is not
+  // forwarded at all, so the origin never stores a placeholder as a place.
+  headers.delete(COUNTRY_HEADER)
+  const country = request.cf && request.cf.country
+  if (country && country !== 'XX' && country !== 'T1') {
+    headers.set(COUNTRY_HEADER, String(country).toUpperCase())
+  }
   // Fly's edge overwrites Fly-Client-IP with the Worker's address. The Go
   // server reads CF-Connecting-IP instead, which Cloudflare sets for the real
   // client and which the guard makes safe to trust.

@@ -1136,6 +1136,16 @@ type Repository interface {
 	CreateGoogleUser(name, email, googleID, avatarURL string) (*Student, error)
 	CreateOAuthUser(provider, providerID, name, email string, emailVerified bool, avatarURL string) (*Student, error)
 	SetAvatarURL(studentID, avatarURL string) error
+	// RecordStudentActivity stores the edge-reported country and coarse device
+	// class for an account and marks that account active for one UTC day. The
+	// server calls it at most once a day per account, never once per request.
+	RecordStudentActivity(studentID, country, device, day string, at time.Time) error
+	// StudentActivities reads the last stored country, device class and seen
+	// stamp for a batch of accounts, used by the admin user list.
+	StudentActivities(ids []string) (map[string]StudentActivity, error)
+	// StudentLocations aggregates known, active and newly created accounts by
+	// country over the windows the admin map asks for.
+	StudentLocations(window LocationWindow) (*StudentLocations, error)
 	SetCourseID(studentID, courseID string) error
 	UpdateStudentName(studentID, name string) error
 	SetEmail(studentID, email string) error

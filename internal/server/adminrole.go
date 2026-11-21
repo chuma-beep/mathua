@@ -204,7 +204,10 @@ func (s *Server) handleAdminOverview(w http.ResponseWriter, r *http.Request) {
 // change has no reason to record a picture.
 type adminUserListRow struct {
 	storage.AdminUser
-	Avatar adminAccountAvatar `json:"avatar"`
+	Avatar     adminAccountAvatar `json:"avatar"`
+	Country    string             `json:"country,omitempty"`
+	Device     string             `json:"device,omitempty"`
+	LastSeenAt string             `json:"last_seen_at,omitempty"`
 }
 
 // GET /api/admin/users?q=&limit=&offset=, search and list accounts.
@@ -223,6 +226,19 @@ func (s *Server) handleAdminUsers(w http.ResponseWriter, r *http.Request) {
 	// The page is staff-only and capped at 200 rows; at the default 50 that is
 	// fifty indexed reads, and widening the audit snapshot to avoid them would
 	// put a picture in every role-change record.
+	//
+	// Country, device and last-seen come from one batch read instead: they are
+	// three short strings per row, and a column each on the audit projection
+	// would record a learner's location in every role-change snapshot.
+	ids := make([]string, len(users))
+	for i, u := range users {
+		ids[i] = u.ID
+	}
+	activity, err := s.repo.StudentActivities(ids)
+	if err != nil {
+		log.Printf("admin user list activity: %v", err)
+		activity = nil
+	}
 	rows := make([]adminUserListRow, 0, len(users))
 	for _, u := range users {
 		row := adminUserListRow{AdminUser: u}
@@ -232,6 +248,11 @@ func (s *Server) handleAdminUsers(w http.ResponseWriter, r *http.Request) {
 		} else if student != nil {
 			row.Avatar.AvatarURL, row.Avatar.AvatarDicebear, row.Avatar.AvatarPreset =
 				adminAvatar(student.ID, student.AvatarURL, student.Settings)
+		}
+		if a, ok := activity[u.ID]; ok {
+			row.Country = a.Country
+			row.Device = a.Device
+			row.LastSeenAt = a.LastSeenAt
 		}
 		rows = append(rows, row)
 	}
