@@ -1,11 +1,11 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
-import AdminLocationsPage from '../app/admin/locations/page'
+import AdminAudiencePage from '../app/admin/audience/page'
 import { fetchAdminLocations } from '../lib/api'
 import type { AdminLocations } from '../lib/api'
 
 vi.mock('next/navigation', () => ({
-  usePathname: () => '/admin/locations',
+  usePathname: () => '/admin/audience',
 }))
 
 vi.mock('../lib/api', async (importOriginal) => ({
@@ -34,10 +34,22 @@ vi.mock('../components/admin/CountryGlobe', () => ({
   ),
 }))
 
+vi.mock('../components/admin/DeviceGallery', () => ({
+  default: ({ devices }: { devices: unknown[] }) => (
+    <div data-testid="devices-3d">{devices.length} devices</div>
+  ),
+}))
+
 function locations(over: Partial<AdminLocations> = {}): AdminLocations {
   const daily = Array.from({ length: 30 }, (_, i) => ({
     day: `2026-11-${String(i + 1).padStart(2, '0')}`,
     active: i % 4,
+  }))
+  const deviceDaily = daily.map((d, i) => ({
+    day: d.day,
+    mobile: i % 3,
+    desktop: i % 2,
+    tablet: i % 5 === 0 ? 1 : 0,
   }))
   return {
     countries: [
@@ -58,6 +70,7 @@ function locations(over: Partial<AdminLocations> = {}): AdminLocations {
       { device: 'desktop', active_7d: 2, active_prev_7d: 1 },
     ],
     daily,
+    device_daily: deviceDaily,
     generated_at: '2026-11-21T10:00:00Z',
     ...over,
   }
@@ -68,9 +81,9 @@ beforeEach(() => {
   vi.mocked(fetchAdminLocations).mockResolvedValue(locations())
 })
 
-describe('the admin locations page', () => {
+describe('the admin audience page', () => {
   it('separates where accounts are, where activity grew, and where signups came from', async () => {
-    render(<AdminLocationsPage />)
+    render(<AdminAudiencePage />)
     await screen.findByText('7 of 10')
 
     expect(screen.getByText('Active this week')).toBeTruthy()
@@ -82,7 +95,8 @@ describe('the admin locations page', () => {
 
     // The globe is decorative; the same two countries must be readable in
     // plain text, with the prior window and the change beside the count.
-    expect(screen.getByTestId('globe').textContent).toBe('2 markers')
+    // It loads through next/dynamic, so the first paint has no canvas.
+    expect((await screen.findByTestId('globe')).textContent).toBe('2 markers')
     expect(screen.getAllByText('Nigeria').length).toBeGreaterThan(0)
     expect(screen.getAllByText('United Kingdom').length).toBeGreaterThan(0)
     expect(screen.getByText('Previous 7d')).toBeTruthy()
@@ -91,13 +105,18 @@ describe('the admin locations page', () => {
     // A visit is a learner-day, so it is reported beside the head count and
     // the device split, never instead of it.
     expect(screen.getByText('Devices this week')).toBeTruthy()
-    expect(screen.getByText('mobile')).toBeTruthy()
-    expect(screen.getByText('desktop')).toBeTruthy()
+    expect(screen.getByText('Visits per active learner')).toBeTruthy()
+    expect(screen.getByText('1.5')).toBeTruthy()
+    // The gallery loads through next/dynamic, like the globe.
+    expect((await screen.findByTestId('devices-3d')).textContent).toBe('2 devices')
+    expect(screen.getByText('Last 30 days')).toBeTruthy()
+    expect(screen.getByText('Distinct learners per day')).toBeTruthy()
+    expect(screen.getByText('One class per learner per day')).toBeTruthy()
   })
 
   it('says recording starts now rather than drawing an empty globe', async () => {
     vi.mocked(fetchAdminLocations).mockResolvedValue(locations({ countries: [], located: 0, total: 4, active_7d: 0, active_prev_7d: 0, new_7d: 0, visits_7d: 0, visits_prev_7d: 0, visits_30d: 0, devices: [] }))
-    render(<AdminLocationsPage />)
+    render(<AdminAudiencePage />)
 
     await screen.findByText('No countries recorded yet.')
     expect(screen.queryByTestId('globe')).toBeNull()
@@ -106,7 +125,7 @@ describe('the admin locations page', () => {
 
   it('reports a failed read instead of rendering zeroes as fact', async () => {
     vi.mocked(fetchAdminLocations).mockRejectedValue(new Error('Could not load locations'))
-    render(<AdminLocationsPage />)
+    render(<AdminAudiencePage />)
 
     const alert = await screen.findByRole('alert')
     expect(alert.textContent).toContain('Could not load locations')

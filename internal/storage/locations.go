@@ -13,6 +13,16 @@ type CountryDay struct {
 	Active int
 }
 
+// DeviceDay is one UTC day in the per-class series. Each number is distinct
+// learners on that class that day, so a learner who uses a phone and a laptop
+// appears once in each line, not twice in one.
+type DeviceDay struct {
+	Day     string
+	Mobile  int
+	Tablet  int
+	Desktop int
+}
+
 // StudentLocations is the aggregate the admin map renders.
 //
 // Every map is keyed by an ISO 3166-1 alpha-2 code. An account that has never
@@ -27,6 +37,7 @@ type StudentLocations struct {
 	New7        map[string]int
 	NewPrev7    map[string]int
 	Daily       []CountryDay
+	DeviceDaily []DeviceDay
 	Located     int
 	Total       int
 	// The country maps count a learner once per country. Someone who appears
@@ -220,13 +231,13 @@ func queryStudentLocations(q locationQuerier, rebind func(string) string, w Loca
 
 	if err := queryCounts(q, rebind,
 		`SELECT country, COUNT(DISTINCT student_id) FROM learner_country_days
-		 WHERE day >= ? GROUP BY country`,
+		 WHERE day >= ? AND country <> '' GROUP BY country`,
 		[]any{w.RecentFrom}, out.Active7); err != nil {
 		return nil, err
 	}
 	if err := queryCounts(q, rebind,
 		`SELECT country, COUNT(DISTINCT student_id) FROM learner_country_days
-		 WHERE day >= ? AND day < ? GROUP BY country`,
+		 WHERE day >= ? AND day < ? AND country <> '' GROUP BY country`,
 		[]any{w.PriorFrom, w.RecentFrom}, out.ActivePrev7); err != nil {
 		return nil, err
 	}
@@ -300,10 +311,72 @@ func queryStudentLocations(q locationQuerier, rebind func(string) string, w Loca
 		return nil, fmt.Errorf("locations: daily rows: %w", err)
 	}
 
+	// The device series is separate from the country series because a learner
+	// can change class between days; each line is its own count. Zero-fill the
+	// day list for the same reason as the activity sparkline: a gap is a day
+	// with no visits, not a straight line between two active days.
+	deviceRows, err := q.Query(rebind(
+		`SELECT day, device, COUNT(DISTINCT student_id) FROM learner_country_days
+		 WHERE day >= ? AND day <= ? AND device <> '' GROUP BY day, device ORDER BY day`),
+		w.DailyFrom, w.Today)
+	if err != nil {
+		return nil, fmt.Errorf("locations: device daily: %w", err)
+	}
+	defer deviceRows.Close()
+	byDeviceDay := make(map[string]*DeviceDay)
+	for deviceRows.Next() {
+		var day, device string
+		var n int
+		if err := deviceRows.Scan(&day, &device, &n); err != nil {
+			return nil, fmt.Errorf("locations: device daily scan: %w", err)
+		}
+		row := byDeviceDay[day]
+		if row == nil {
+			row = &DeviceDay{Day: day}
+			byDeviceDay[day] = row
+		}
+		switch device {
+		case "mobile":
+			row.Mobile = n
+		case "tablet":
+			row.Tablet = n
+		case "desktop":
+			row.Desktop = n
+		}
+	}
+	if err := deviceRows.Err(); err != nil {
+		return nil, fmt.Errorf("locations: device daily rows: %w", err)
+	}
+	for _, day := range locationDays(w.DailyFrom, w.Today) {
+		if row, ok := byDeviceDay[day]; ok {
+			out.DeviceDaily = append(out.DeviceDaily, *row)
+		} else {
+			out.DeviceDaily = append(out.DeviceDaily, DeviceDay{Day: day})
+		}
+	}
+
 	if err := q.QueryRow("SELECT COUNT(*) FROM students").Scan(&out.Total); err != nil {
 		return nil, fmt.Errorf("locations: total: %w", err)
 	}
 	return out, nil
+}
+
+// locationDays returns every UTC day from `from` to `to`, inclusive. An
+// unparseable boundary yields no days rather than a partial series.
+func locationDays(from, to string) []string {
+	start, err := time.Parse("2006-01-02", from)
+	if err != nil {
+		return nil
+	}
+	end, err := time.Parse("2006-01-02", to)
+	if err != nil {
+		return nil
+	}
+	days := make([]string, 0, 30)
+	for day := start; !day.After(end); day = day.AddDate(0, 0, 1) {
+		days = append(days, day.Format("2006-01-02"))
+	}
+	return days
 }
 
 func queryCounts(q locationQuerier, rebind func(string) string, query string, args []any, into map[string]int) error {

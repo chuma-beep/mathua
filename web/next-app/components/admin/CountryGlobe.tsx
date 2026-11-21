@@ -1,7 +1,8 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import createGlobe from 'cobe'
+import * as THREE from 'three'
+import ThreeGlobe from 'three-globe'
 import { COUNTRY_CENTROIDS } from '../../lib/countryCentroids'
 import { useTheme } from '../../hooks/useTheme'
 
@@ -10,13 +11,59 @@ export type GlobeCountry = {
   active_7d: number
 }
 
-// A cobe globe with one marker per country, sized by this week's active
-// learners. The canvas is decorative: the country table below it carries the
-// same numbers as text, so a screen reader and a keyboard user lose nothing.
+type CountryFeature = {
+  type: string
+  properties: Record<string, unknown>
+  geometry: unknown
+}
+
+// The polygon data is 488 KB and never changes, so the module keeps one
+// promise for every mount instead of refetching on a theme toggle.
+let countriesPromise: Promise<CountryFeature[]> | null = null
+function loadCountries(): Promise<CountryFeature[]> {
+  if (!countriesPromise) {
+    countriesPromise = fetch('/globe/countries.geojson')
+      .then((res) => {
+        if (!res.ok) throw new Error(`countries ${res.status}`)
+        return res.json()
+      })
+      .then((data: { features?: CountryFeature[] }) =>
+        Array.isArray(data.features) ? data.features : [],
+      )
+      // A failed polygon fetch leaves the plain sphere and markers, which is
+      // still a usable summary; the table below is the authoritative data.
+      .catch(() => [])
+  }
+  return countriesPromise
+}
+
+const PALETTE = {
+  dark: {
+    ocean: '#0b1526',
+    oceanEmissive: '#091120',
+    land: '#5a9bdc',
+    atmosphere: '#3b82f6',
+    marker: '#a5f3fc',
+    ring: '165, 243, 252',
+    arc: 'rgba(125, 211, 252, 0.7)',
+  },
+  light: {
+    ocean: '#e9f1fa',
+    oceanEmissive: '#dde9f6',
+    land: '#8fb8dd',
+    atmosphere: '#93c5fd',
+    marker: '#1d4ed8',
+    ring: '37, 99, 235',
+    arc: 'rgba(37, 99, 235, 0.55)',
+  },
+}
+
+// A polygon globe with the Natural Earth outlines, one point per country and
+// a pulsing ring for the busiest few. The canvas is decorative: the country
+// table below carries the same numbers as text.
 //
-// Rotation stops under prefers-reduced-motion rather than slowing down. A
-// globe that keeps drifting is exactly the motion that preference asks us not
-// to draw.
+// Rotation stops under prefers-reduced-motion. Dragging still works because
+// that motion is the reader's, not the page's.
 export default function CountryGlobe({ countries }: { countries: GlobeCountry[] }) {
   const canvas = useRef<HTMLCanvasElement>(null)
   const { theme, mounted } = useTheme()
@@ -25,66 +72,204 @@ export default function CountryGlobe({ countries }: { countries: GlobeCountry[] 
   useEffect(() => {
     const element = canvas.current
     if (!element || !mounted) return
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const max = Math.max(1, ...countries.map((c) => c.active_7d))
-    const markers = countries.flatMap((c) => {
-      const location = COUNTRY_CENTROIDS[c.code]
-      if (!location) return []
-      // Square root keeps a single very busy country from flattening every
-      // other marker into the same dot.
-      const size = 0.03 + 0.06 * Math.sqrt(c.active_7d / max)
-      return [{ location, size }]
-    })
 
     const dark = theme === 'dark'
-    // cobe's README documents onRender but its bundled types omit it, so the
-    // option object is cast to the call signature rather than dropping the
-    // rotation. The cast is narrow: createGlobe still checks every other field.
-    const options = {
-      devicePixelRatio: 2,
-      width: 640,
-      height: 640,
-      phi: -0.6,
-      theta: 0.25,
-      dark: dark ? 1 : 0,
-      diffuse: 1.25,
-      mapSamples: 22000,
-      // The first build used near-white on near-white, so the land texture
-      // disappeared and the globe read as a blank ball. A deeper base gives the
-      // dotted continents something to sit against in both themes.
-      mapBrightness: dark ? 8 : 5.5,
-      baseColor: dark ? [0.11, 0.12, 0.15] : [0.76, 0.81, 0.88],
-      markerColor: dark ? [0.42, 0.66, 1] : [0.16, 0.38, 0.9],
-      glowColor: dark ? [0.07, 0.08, 0.11] : [0.91, 0.94, 0.98],
-      markers,
-      onRender: (state: { phi: number }) => {
-        if (!reduced) state.phi += 0.002
-      },
+    const palette = dark ? PALETTE.dark : PALETTE.light
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const max = Math.max(1, ...countries.map((c) => c.active_7d))
+
+    const placed = countries
+      .flatMap((c) => {
+        const at = COUNTRY_CENTROIDS[c.code]
+        return at ? [{ active: c.active_7d, lat: at[0], lng: at[1] }] : []
+      })
+      .sort((a, b) => b.active - a.active)
+    const markers = placed.map((p) => ({
+      lat: p.lat,
+      lng: p.lng,
+      radius: 0.45 + 1.25 * Math.sqrt(p.active / max),
+    }))
+    const rings = markers.slice(0, 5).map((m) => ({
+      ...m,
+      radius: 2.5 + 4.5 * Math.sqrt((m.radius - 0.45) / 1.25),
+    }))
+    // The lines are a ranking, not a journey: every arc leaves the busiest
+    // country for the next six by activity. Dashes travel that path to show
+    // direction; they never claim two countries share learners.
+    const hub = placed[0]
+    const arcs = hub
+      ? placed.slice(1, 7).map((p) => ({
+          startLat: hub.lat,
+          startLng: hub.lng,
+          endLat: p.lat,
+          endLng: p.lng,
+        }))
+      : []
+
+    const scene = new THREE.Scene()
+    const camera = new THREE.PerspectiveCamera(40, 1, 1, 3000)
+    camera.position.set(0, 0, 360)
+
+    const renderer = new THREE.WebGLRenderer({ canvas: element, antialias: true, alpha: true })
+    renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1))
+    renderer.setClearColor(0x000000, 0)
+
+    const group = new THREE.Group()
+    group.rotation.set(0.32, -0.55, 0)
+    scene.add(group)
+
+    const globe = new ThreeGlobe({ animateIn: false })
+      .globeMaterial(new THREE.MeshPhongMaterial({
+        color: palette.ocean,
+        emissive: palette.oceanEmissive,
+        emissiveIntensity: dark ? 0.45 : 0.35,
+        shininess: 14,
+      }))
+      .showAtmosphere(true)
+      .atmosphereColor(palette.atmosphere)
+      .atmosphereAltitude(0.18)
+      // Fine hexagons at a small margin tile into solid continents. At the
+      // original 0.72 margin the land read as a faint texture on dark.
+      .hexPolygonsData([])
+      .hexPolygonResolution(3)
+      .hexPolygonMargin(0.16)
+      .hexPolygonUseDots(false)
+      // Accessors treat a bare string as a property name, so the palette
+      // colors need a function even though they are constant.
+      .hexPolygonColor(() => palette.land)
+      .pointsData(markers)
+      .pointLat('lat')
+      .pointLng('lng')
+      .pointAltitude(0.012)
+      .pointRadius('radius')
+      .pointColor(() => palette.marker)
+      .ringsData(rings)
+      .ringLat('lat')
+      .ringLng('lng')
+      .ringAltitude(0.01)
+      .ringMaxRadius('radius')
+      .ringPropagationSpeed(1.6)
+      .ringRepeatPeriod(1800)
+      .ringColor(() => (t: number) => `rgba(${palette.ring}, ${Math.max(0, 1 - t)})`)
+      .arcsData(arcs)
+      .arcStartLat('startLat')
+      .arcStartLng('startLng')
+      .arcEndLat('endLat')
+      .arcEndLng('endLng')
+      .arcAltitudeAutoScale(0.45)
+      .arcStroke(0.5)
+      .arcDashLength(reduced ? 1 : 0.35)
+      .arcDashGap(reduced ? 0 : 0.3)
+      .arcDashAnimateTime(3200)
+      .arcColor(() => palette.arc)
+    group.add(globe)
+
+    scene.add(new THREE.AmbientLight(0xffffff, dark ? 1.8 : 2.1))
+    const key = new THREE.DirectionalLight(0xffffff, dark ? 1.4 : 1.0)
+    key.position.set(-160, 90, 180)
+    scene.add(key)
+    const rim = new THREE.DirectionalLight(0x60a5fa, dark ? 1.2 : 0.4)
+    rim.position.set(150, -70, -160)
+    scene.add(rim)
+
+    let live = true
+    let needsRender = true
+    let dragging = false
+    let lastX = 0
+    let lastY = 0
+
+    void loadCountries().then((features) => {
+      if (!live || features.length === 0) return
+      globe.hexPolygonsData(features)
+      needsRender = true
+    })
+
+    const resize = () => {
+      const width = Math.max(1, element.clientWidth)
+      const height = Math.max(1, element.clientHeight)
+      renderer.setSize(width, height, false)
+      camera.aspect = width / height
+      camera.updateProjectionMatrix()
+      needsRender = true
     }
-    const globe = createGlobe(element, options as unknown as Parameters<typeof createGlobe>[1])
-    return () => globe.destroy()
+    const observer = new ResizeObserver(resize)
+    observer.observe(element)
+    resize()
+
+    const onDown = (event: PointerEvent) => {
+      dragging = true
+      lastX = event.clientX
+      lastY = event.clientY
+      element.setPointerCapture(event.pointerId)
+    }
+    const onMove = (event: PointerEvent) => {
+      if (!dragging) return
+      group.rotation.y += (event.clientX - lastX) * 0.005
+      group.rotation.x = Math.max(-0.9, Math.min(0.9, group.rotation.x + (event.clientY - lastY) * 0.005))
+      lastX = event.clientX
+      lastY = event.clientY
+      needsRender = true
+    }
+    const onUp = (event: PointerEvent) => {
+      dragging = false
+      if (element.hasPointerCapture(event.pointerId)) element.releasePointerCapture(event.pointerId)
+    }
+    element.addEventListener('pointerdown', onDown)
+    element.addEventListener('pointermove', onMove)
+    element.addEventListener('pointerup', onUp)
+    element.addEventListener('pointercancel', onUp)
+
+    let frame = 0
+    const tick = () => {
+      frame = requestAnimationFrame(tick)
+      if (!reduced && !dragging) {
+        group.rotation.y += 0.0016
+        needsRender = true
+      }
+      if (needsRender) {
+        renderer.render(scene, camera)
+        needsRender = false
+      }
+    }
+    tick()
+
+    return () => {
+      live = false
+      cancelAnimationFrame(frame)
+      observer.disconnect()
+      element.removeEventListener('pointerdown', onDown)
+      element.removeEventListener('pointermove', onMove)
+      element.removeEventListener('pointerup', onUp)
+      element.removeEventListener('pointercancel', onUp)
+      scene.traverse((object) => {
+        const mesh = object as THREE.Mesh
+        mesh.geometry?.dispose()
+        const material = mesh.material
+        if (Array.isArray(material)) material.forEach((m) => m.dispose())
+        else material?.dispose()
+      })
+      renderer.dispose()
+    }
     // signature carries every value the markers depend on; countries is a new
     // array on each parent render and would rebuild the WebGL context.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [theme, mounted, signature])
 
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-[560px]">
+    <div className="relative mx-auto aspect-square w-full max-w-[480px]">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-[7%] rounded-full bg-mathua-blue-faint blur-2xl"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-[2%] rounded-full border border-mathua-border"
+        className="pointer-events-none absolute inset-[8%] rounded-full bg-mathua-blue-faint blur-2xl"
       />
       <canvas
         ref={canvas}
         aria-hidden="true"
-        className="relative h-full w-full drop-shadow-[0_22px_50px_rgba(15,23,42,0.18)]"
+        className="relative h-full w-full touch-none cursor-grab active:cursor-grabbing"
       />
       <p className="sr-only">
-        A globe with one marker for each country that has at least one known account. The table
+        A globe with the countries that have known accounts, a point sized by this week&apos;s
+        active learners and a ring for the busiest countries. Dashed arcs run from the busiest
+        country to the next six by activity; they rank activity and do not show travel. The table
         below lists the same countries with their account and activity counts.
       </p>
     </div>
