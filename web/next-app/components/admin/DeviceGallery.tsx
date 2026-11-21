@@ -197,7 +197,7 @@ export default function DeviceGallery({ devices }: { devices: AdminLocationDevic
   const host = useRef<HTMLDivElement>(null)
   const { theme, mounted } = useTheme()
 
-  const counts = ORDER.map((kind) => devices.find((d) => d.device === kind)?.active_7d ?? 0)
+  const counts = ORDER.map((kind) => devices.find((d) => d.device === kind)?.active ?? 0)
   const total = counts.reduce((sum, n) => sum + n, 0)
   const signature = counts.join(':')
 

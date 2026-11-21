@@ -48,11 +48,11 @@ func TestAuthMiddlewareRecordsOneCountryPerDay(t *testing.T) {
 	if locations.Known["GB"] != 0 {
 		t.Fatalf("known GB = %d, want 0: the second same-day capture must be ignored", locations.Known["GB"])
 	}
-	if locations.Active7Total != 1 {
-		t.Fatalf("active total = %d, want 1", locations.Active7Total)
+	if locations.ActiveTotal != 1 {
+		t.Fatalf("active total = %d, want 1", locations.ActiveTotal)
 	}
-	if locations.Device7["mobile"] != 1 {
-		t.Fatalf("mobile learners = %d, want 1 (devices %v)", locations.Device7["mobile"], locations.Device7)
+	if locations.Device["mobile"] != 1 {
+		t.Fatalf("mobile learners = %d, want 1 (devices %v)", locations.Device["mobile"], locations.Device)
 	}
 }
 

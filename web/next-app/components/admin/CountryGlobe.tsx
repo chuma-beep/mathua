@@ -8,7 +8,7 @@ import { useTheme } from '../../hooks/useTheme'
 
 export type GlobeCountry = {
   code: string
-  active_7d: number
+  active: number
 }
 
 type CountryFeature = {
@@ -67,7 +67,7 @@ const PALETTE = {
 export default function CountryGlobe({ countries }: { countries: GlobeCountry[] }) {
   const canvas = useRef<HTMLCanvasElement>(null)
   const { theme, mounted } = useTheme()
-  const signature = countries.map((c) => `${c.code}:${c.active_7d}`).join(',')
+  const signature = countries.map((c) => `${c.code}:${c.active}`).join(',')
 
   useEffect(() => {
     const element = canvas.current
@@ -76,12 +76,12 @@ export default function CountryGlobe({ countries }: { countries: GlobeCountry[] 
     const dark = theme === 'dark'
     const palette = dark ? PALETTE.dark : PALETTE.light
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const max = Math.max(1, ...countries.map((c) => c.active_7d))
+    const max = Math.max(1, ...countries.map((c) => c.active))
 
     const placed = countries
       .flatMap((c) => {
         const at = COUNTRY_CENTROIDS[c.code]
-        return at ? [{ active: c.active_7d, lat: at[0], lng: at[1] }] : []
+        return at ? [{ active: c.active, lat: at[0], lng: at[1] }] : []
       })
       .sort((a, b) => b.active - a.active)
     const markers = placed.map((p) => ({

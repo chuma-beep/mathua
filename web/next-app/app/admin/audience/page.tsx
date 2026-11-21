@@ -3,8 +3,10 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
+import type { DateRange } from 'react-day-picker'
 import AdminShell from '@/components/admin/AdminShell'
 import SectionHeader from '@/components/SectionHeader'
+import { DateRangePicker, dateKey } from '@/components/ui/date-range-picker'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { useAdminMe } from '@/hooks/useAdminMe'
@@ -43,8 +45,8 @@ const DeviceGallery = dynamic(() => import('@/components/admin/DeviceGallery'), 
 // they are not, and a country is a coarse answer to "where" by construction.
 //
 // Growth is shown as two separate facts, because they are different questions:
-// activity growth (distinct learners practising this week against last week) and
-// new accounts (signups this week against last week). A country can grow in
+// activity growth (distinct learners in the selected window against the window
+// before it) and new accounts (signups in the window against the one before it). A country can grow in
 // practice without a single new account, and a country can add accounts that
 // have not returned yet.
 
@@ -68,7 +70,7 @@ type Delta = { label: string; tone: 'up' | 'down' | 'flat' }
 
 function delta(current: number, previous: number): Delta {
   if (previous === 0) {
-    return current === 0 ? { label: 'no activity yet', tone: 'flat' } : { label: 'first recorded week', tone: 'up' }
+    return current === 0 ? { label: 'no activity yet', tone: 'flat' } : { label: 'first recorded window', tone: 'up' }
   }
   if (current === previous) return { label: 'no change', tone: 'flat' }
   const change = current - previous
@@ -82,10 +84,20 @@ function deltaTone(tone: Delta['tone']): string {
   return 'text-mathua-muted'
 }
 
-function growthNote(d: Delta): string {
-  if (d.label === 'first recorded week') return 'First recorded week, no prior week to compare'
+function growthNote(d: Delta, days: number): string {
+  if (d.label === 'first recorded window') return `No previous ${days}-day window to compare`
   if (d.label === 'no activity yet') return 'No activity recorded yet'
-  return `${d.label} against the previous 7 days`
+  return `${d.label} against the previous ${days} days`
+}
+
+// A window is a UTC day range, so both ends must be read in UTC or a browser
+// west of the line prints yesterday for a day the API already answered for.
+function fmtDay(value: string): string {
+  const date = new Date(`${value}T00:00:00Z`)
+  if (Number.isNaN(date.getTime())) return value
+  return date.toLocaleDateString('en-GB', {
+    day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC',
+  })
 }
 
 function shortDay(day: string): string {
@@ -130,13 +142,13 @@ function Sparkline({ daily }: { daily: AdminLocationDay[] }) {
         <span>{daily.length > 0 ? shortDay(daily[daily.length - 1].day) : ''}</span>
       </div>
       <p className="sr-only">
-        Distinct active learners per day over the last thirty days, ending at {peak} at the peak.
+        Distinct active learners per day over the selected window, ending at {peak} at the peak.
       </p>
     </div>
   )
 }
 
-// Three lines, one per device class, over the same thirty days as the activity
+// Three lines, one per device class, over the same window as the activity
 // sparkline. The classes overlap: a learner who signs in on a phone and a
 // laptop counts on both lines that day, so the lines add up above the daily
 // total. The caption says so rather than letting the reader assume a split.
@@ -193,8 +205,8 @@ function DeviceLines({ daily }: { daily: AdminLocationDeviceDay[] }) {
         <span>{daily.length > 0 ? shortDay(daily[daily.length - 1].day) : ''}</span>
       </div>
       <p className="sr-only">
-        Distinct signed-in learners per day for mobile, desktop and tablet over the last thirty
-        days. A learner who uses two classes on one day appears on both lines.
+        Distinct signed-in learners per day for mobile, desktop and tablet over the selected
+        window. A learner who uses two classes on one day appears on both lines.
       </p>
     </div>
   )
@@ -211,42 +223,66 @@ function StatCard({ label, value, note, tone }: { label: string; value: string; 
 }
 
 function activityBar(country: AdminLocationCountry, max: number): number {
-  if (max <= 0 || country.active_7d <= 0) return 0
-  return Math.max(3, Math.round((country.active_7d / max) * 100))
+  if (max <= 0 || country.active <= 0) return 0
+  return Math.max(3, Math.round((country.active / max) * 100))
 }
 
 function fmt(value: number): string {
   return value.toLocaleString()
 }
 
+// The page is one window, not three overlapping ones: the stat cards, the
+// country table, the globe, the sparkline and the device series all describe the
+// same dates, and the comparison is always the equally long window before them.
+// The presets end today and the picker names both ends; a custom range is
+// capped at a year by the API because the daily series is drawn in full.
+const RANGES = [7, 30, 90] as const
+
 export default function AdminAudiencePage() {
   const { isStaff } = useAdminMe()
+  const [days, setDays] = useState(30)
+  const [custom, setCustom] = useState<DateRange | undefined>()
   const [data, setData] = useState<AdminLocations | null>(null)
   const [error, setError] = useState('')
+
+  // A range with only a start is a draft in the calendar, not a window the
+  // API can answer for, so the query stays on the preset until both ends are
+  // chosen. Deriving the keys also keeps the effect off the Date objects,
+  // which are a new identity on every render.
+  const customFrom = custom?.from && custom.to ? dateKey(custom.from) : undefined
+  const customTo = custom?.from && custom.to ? dateKey(custom.to) : undefined
 
   useEffect(() => {
     if (!isStaff) return
     let live = true
-    fetchAdminLocations()
+    const query = customFrom && customTo ? { from: customFrom, to: customTo } : { days }
+    fetchAdminLocations(query)
       .then((res) => { if (live) { setData(res); setError('') } })
       .catch((e) => { if (live) setError(getErrorMessage(e)) })
     return () => { live = false }
-  }, [isStaff])
+  }, [isStaff, days, customFrom, customTo])
 
-  const activeDelta = data ? delta(data.active_7d, data.active_prev_7d) : null
-  const newDelta = data ? delta(data.new_7d, data.new_prev_7d) : null
-  const visitsDelta = data ? delta(data.visits_7d, data.visits_prev_7d) : null
-  const maxActive = data ? Math.max(0, ...data.countries.map((c) => c.active_7d)) : 0
+  // The visible numbers and the labels must agree even while a new window is
+  // loading, so labels follow the data that is on screen, not the pending pick.
+  const windowDays = data?.days ?? days
+  const customWindow = Boolean(customFrom && customTo)
+  const windowLabel = data && customWindow
+    ? `${fmtDay(data.from)} to ${fmtDay(data.to)}`
+    : `last ${windowDays} days`
+  const activeDelta = data ? delta(data.active, data.active_prev) : null
+  const newDelta = data ? delta(data.new, data.new_prev) : null
+  const visitsDelta = data ? delta(data.visits, data.visits_prev) : null
+  const maxActive = data ? Math.max(0, ...data.countries.map((c) => c.active)) : 0
   const movers = data
     ? [...data.countries]
-        .filter((c) => c.active_7d > c.active_prev_7d && c.active_7d > 0)
-        .sort((a, b) => (b.active_7d - b.active_prev_7d) - (a.active_7d - a.active_prev_7d))
+        .filter((c) => c.active > c.active_prev && c.active > 0)
+        .sort((a, b) => (b.active - b.active_prev) - (a.active - a.active_prev))
         .slice(0, 3)
     : []
   const newcomers = data
     ? [...data.countries]
-        .filter((c) => c.new_7d > 0)
-        .sort((a, b) => b.new_7d - a.new_7d || a.code.localeCompare(b.code))
+        .filter((c) => c.new > 0)
+        .sort((a, b) => b.new - a.new || a.code.localeCompare(b.code))
         .slice(0, 3)
     : []
 
@@ -260,6 +296,38 @@ export default function AdminAudiencePage() {
           once a day per signed-in learner. A VPN or mobile carrier can place someone elsewhere;
           no IP address, city or user agent is stored.
         </p>
+
+        <div className="mb-6 flex flex-wrap items-center gap-2">
+          <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-mathua-muted">Window</span>
+          <div role="group" aria-label="Audience window" className="flex border border-mathua-border">
+            {RANGES.map((value) => (
+              <button
+                key={value}
+                type="button"
+                onClick={() => { setCustom(undefined); setDays(value) }}
+                aria-pressed={!customWindow && days === value}
+                className={`h-8 border-l border-mathua-border px-3 font-mono text-[11px] first:border-l-0 ${
+                  !customWindow && days === value
+                    ? 'bg-mathua-blue text-mathua-bg'
+                    : 'text-mathua-secondary hover:text-mathua-primary'
+                }`}
+              >
+                {value} days
+              </button>
+            ))}
+          </div>
+          <DateRangePicker
+            value={custom}
+            onChange={(next) => {
+              if (!next?.from) { setCustom(undefined); return }
+              setCustom(next)
+            }}
+            max={new Date()}
+          />
+          <span className="font-mono text-[10px] text-mathua-muted">
+            Compared with the {windowDays} days before
+          </span>
+        </div>
 
         {!isStaff && (
           <p role="status" className="mb-6 border border-mathua-border bg-mathua-surface p-4 font-mono text-xs text-mathua-secondary">
@@ -295,21 +363,21 @@ export default function AdminAudiencePage() {
                 note={data.total > 0 ? `${Math.round((data.located / data.total) * 100)}% have a recorded country` : 'No accounts yet'}
               />
               <StatCard
-                label="Active this week"
-                value={fmt(data.active_7d)}
-                note={growthNote(activeDelta ?? { label: 'no activity yet', tone: 'flat' })}
+                label={`Active, ${windowLabel}`}
+                value={fmt(data.active)}
+                note={growthNote(activeDelta ?? { label: 'no activity yet', tone: 'flat' }, windowDays)}
                 tone={activeDelta?.tone}
               />
               <StatCard
-                label="Visits this week"
-                value={fmt(data.visits_7d)}
-                note={growthNote(visitsDelta ?? { label: 'no activity yet', tone: 'flat' })}
+                label={`Visits, ${windowLabel}`}
+                value={fmt(data.visits)}
+                note={growthNote(visitsDelta ?? { label: 'no activity yet', tone: 'flat' }, windowDays)}
                 tone={visitsDelta?.tone}
               />
               <StatCard
-                label="New accounts this week"
-                value={fmt(data.new_7d)}
-                note={growthNote(newDelta ?? { label: 'no activity yet', tone: 'flat' })}
+                label={`New accounts, ${windowLabel}`}
+                value={fmt(data.new)}
+                note={growthNote(newDelta ?? { label: 'no activity yet', tone: 'flat' }, windowDays)}
                 tone={newDelta?.tone}
               />
             </div>
@@ -333,7 +401,7 @@ export default function AdminAudiencePage() {
                         className="hidden font-mono text-[10px] text-mathua-muted sm:inline"
                         title="Arcs run from the busiest country to the next six by activity; they rank activity, not travel."
                       >
-                        Marker size: active this week · arcs: busiest six
+                        Marker size: active in the window · arcs: busiest six
                       </span>
                     </div>
                     <CountryGlobe countries={data.countries} />
@@ -343,19 +411,19 @@ export default function AdminAudiencePage() {
                     <h3 className="font-mono text-[10px] uppercase tracking-[0.15em] text-mathua-muted">Fastest growing</h3>
                     {movers.length === 0 ? (
                       <p className="mt-3 font-mono text-[11px] text-mathua-muted">
-                        No country has grown against last week yet. Growth compares the last seven
-                        days with the seven before them.
+                        No country has grown in this window yet. Growth compares the last
+                        {windowDays} days with the {windowDays} before them.
                       </p>
                     ) : (
                       <ol className="mt-3 space-y-3">
                         {movers.map((c) => {
-                          const d = delta(c.active_7d, c.active_prev_7d)
+                          const d = delta(c.active, c.active_prev)
                           return (
                             <li key={c.code} className="flex items-baseline justify-between gap-3">
                               <span className="min-w-0">
                                 <span className="block truncate font-mono text-xs text-mathua-primary">{countryName(c.code)}</span>
                                 <span className="block font-mono text-[10px] text-mathua-muted">
-                                  {c.active_prev_7d} to {c.active_7d} active
+                                  {c.active_prev} to {c.active} active
                                 </span>
                               </span>
                               <span className={`shrink-0 font-mono text-sm ${deltaTone(d.tone)}`}>{d.label}</span>
@@ -370,13 +438,13 @@ export default function AdminAudiencePage() {
                     {newcomers.length > 0 && (
                       <div className="mt-4 border-t border-mathua-border pt-3">
                         <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-mathua-muted">
-                          New accounts this week
+                          New accounts, {windowLabel}
                         </p>
                         <ol className="mt-2 space-y-2">
                           {newcomers.map((c) => (
                             <li key={c.code} className="flex items-baseline justify-between gap-3">
                               <span className="truncate font-mono text-[11px] text-mathua-secondary">{countryName(c.code)}</span>
-                              <span className="shrink-0 font-mono text-[11px] text-mathua-primary">+{fmt(c.new_7d)}</span>
+                              <span className="shrink-0 font-mono text-[11px] text-mathua-primary">+{fmt(c.new)}</span>
                             </li>
                           ))}
                         </ol>
@@ -404,9 +472,9 @@ export default function AdminAudiencePage() {
                 <div className="mt-3 grid gap-3 lg:grid-cols-5">
                   <div className="flex flex-col border border-mathua-border bg-mathua-surface p-4 lg:col-span-2">
                     <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
-                      <h3 className="font-mono text-[10px] uppercase tracking-[0.15em] text-mathua-muted">Activity, last 30 days</h3>
+                      <h3 className="font-mono text-[10px] uppercase tracking-[0.15em] text-mathua-muted">Activity, {windowLabel}</h3>
                       <span className="font-mono text-[10px] text-mathua-muted" title="A visit is one signed-in learner-day.">
-                        {fmt(data.visits_30d)} visits
+                        {fmt(data.visits)} visits
                       </span>
                     </div>
                     <Sparkline daily={data.daily} />
@@ -414,7 +482,7 @@ export default function AdminAudiencePage() {
                       <div>
                         <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-mathua-muted">Visits per active learner</p>
                         <p className="mt-1 font-mono text-lg text-mathua-primary">
-                          {data.active_7d > 0 ? (data.visits_7d / data.active_7d).toFixed(1) : '—'}
+                          {data.active > 0 ? (data.visits / data.active).toFixed(1) : '—'}
                         </p>
                         <p className="font-mono text-[10px] text-mathua-muted">One learner-day each</p>
                       </div>
@@ -430,7 +498,7 @@ export default function AdminAudiencePage() {
 
                   <div className="border border-mathua-border bg-mathua-surface p-4 lg:col-span-3">
                     <div className="mb-1 flex flex-wrap items-baseline justify-between gap-2">
-                      <h3 className="font-mono text-[10px] uppercase tracking-[0.15em] text-mathua-muted">Devices this week</h3>
+                      <h3 className="font-mono text-[10px] uppercase tracking-[0.15em] text-mathua-muted">Devices, {windowLabel}</h3>
                       <span className="font-mono text-[10px] text-mathua-muted">Drag the gallery to turn it</span>
                     </div>
                     {data.devices.length === 0 ? (
@@ -442,7 +510,7 @@ export default function AdminAudiencePage() {
                         <DeviceGallery devices={data.devices} />
                         <div className="mt-4 border-t border-mathua-border pt-3">
                           <div className="mb-2 flex flex-wrap items-baseline justify-between gap-2">
-                            <h4 className="font-mono text-[10px] uppercase tracking-[0.12em] text-mathua-muted">Last 30 days</h4>
+                            <h4 className="font-mono text-[10px] uppercase tracking-[0.12em] text-mathua-muted">Daily trend</h4>
                             <span className="font-mono text-[10px] text-mathua-muted">Distinct learners per day</span>
                           </div>
                           <DeviceLines daily={data.device_daily} />
@@ -455,44 +523,44 @@ export default function AdminAudiencePage() {
                 <div className="mt-3 border border-mathua-border bg-mathua-surface">
                   <Table className="block md:table" role="table">
                     <TableCaption className="sr-only">
-                      Countries with known accounts, active learners this week and last week, and new accounts
+                      Countries with known accounts, active learners in the selected window and the window before it, and new accounts
                     </TableCaption>
                     <TableHeader className="hidden md:table-header-group" role="rowgroup">
                       <TableRow className="hover:bg-transparent" role="row">
                         <TableHead className="px-4 py-2">Country</TableHead>
                         <TableHead className="px-4 py-2 text-right">Known</TableHead>
-                        <TableHead className="px-4 py-2 text-right">Active 7d</TableHead>
-                        <TableHead className="px-4 py-2 text-right">Previous 7d</TableHead>
+                        <TableHead className="px-4 py-2 text-right">Active</TableHead>
+                        <TableHead className="px-4 py-2 text-right">Previous</TableHead>
                         <TableHead className="px-4 py-2 text-right">Change</TableHead>
-                        <TableHead className="px-4 py-2 text-right">New 7d</TableHead>
+                        <TableHead className="px-4 py-2 text-right">New</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody className="block md:table-row-group" role="rowgroup">
                       {data.countries.map((c) => {
-                        const d = delta(c.active_7d, c.active_prev_7d)
+                        const d = delta(c.active, c.active_prev)
                         return (
                           <TableRow
                             key={c.code}
                             role="row"
-                            className="grid grid-cols-2 gap-x-4 gap-y-2 border-b border-mathua-border px-4 py-3 last:border-0 hover:bg-transparent md:table-row md:px-0 md:py-0"
+                            className="grid grid-cols-3 gap-x-4 gap-y-2 border-b border-mathua-border px-4 py-3 last:border-0 hover:bg-transparent md:table-row md:px-0 md:py-0"
                           >
-                            <TableCell role="cell" className="col-span-2 px-0 py-0 md:table-cell md:px-4 md:py-3">
+                            <TableCell role="cell" className="col-span-3 px-0 py-0 md:table-cell md:px-4 md:py-3">
                               <span className="font-mono text-xs text-mathua-primary">{countryName(c.code)}</span>
                               <span className="ml-2 font-mono text-[10px] text-mathua-muted">{c.code}</span>
                             </TableCell>
                             <TableCell
                               role="cell"
-                              className="flex items-baseline justify-between gap-2 px-0 py-0 md:table-cell md:px-4 md:py-3 md:text-right"
+                              className="flex flex-col gap-1 px-0 py-0 md:table-cell md:px-4 md:py-3 md:text-right"
                             >
                               <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-mathua-muted md:hidden">Known</span>
                               <span className="font-mono text-xs text-mathua-secondary">{fmt(c.known)}</span>
                             </TableCell>
-                            <TableCell role="cell" className="px-0 py-0 md:table-cell md:px-4 md:py-3">
+                            <TableCell role="cell" className="flex flex-col gap-1 px-0 py-0 md:table-cell md:px-4 md:py-3">
+                              <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-mathua-muted md:hidden">Active</span>
                               <div className="flex items-baseline justify-between gap-2 md:items-center md:justify-end">
-                                <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-mathua-muted md:hidden">Active 7d</span>
                                 <span className="flex items-center gap-2">
-                                  <span className="font-mono text-xs text-mathua-primary">{fmt(c.active_7d)}</span>
-                                  <span aria-hidden="true" className="h-1 w-12 bg-mathua-border md:w-16">
+                                  <span className="font-mono text-xs text-mathua-primary">{fmt(c.active)}</span>
+                                  <span aria-hidden="true" className="hidden h-1 w-16 bg-mathua-border sm:block">
                                     <span className="block h-full bg-mathua-blue" style={{ width: `${activityBar(c, maxActive)}%` }} />
                                   </span>
                                 </span>
@@ -502,28 +570,28 @@ export default function AdminAudiencePage() {
                               role="cell"
                               className="hidden px-0 py-0 md:table-cell md:px-4 md:py-3 md:text-right"
                             >
-                              <span className="font-mono text-xs text-mathua-secondary">{fmt(c.active_prev_7d)}</span>
+                              <span className="font-mono text-xs text-mathua-secondary">{fmt(c.active_prev)}</span>
                             </TableCell>
                             <TableCell
                               role="cell"
-                              className="flex items-baseline justify-between gap-2 px-0 py-0 md:table-cell md:px-4 md:py-3 md:text-right"
+                              className="hidden px-0 py-0 md:table-cell md:px-4 md:py-3 md:text-right"
                             >
                               <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-mathua-muted md:hidden">Change</span>
                               <span className={`font-mono text-xs ${deltaTone(d.tone)}`}>{d.label}</span>
                             </TableCell>
                             <TableCell
                               role="cell"
-                              className="flex items-baseline justify-between gap-2 px-0 py-0 md:table-cell md:px-4 md:py-3 md:text-right"
+                              className="flex flex-col gap-1 px-0 py-0 md:table-cell md:px-4 md:py-3 md:text-right"
                             >
-                              <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-mathua-muted md:hidden">New 7d</span>
+                              <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-mathua-muted md:hidden">New</span>
                               <span className="font-mono text-xs text-mathua-secondary">
-                                {fmt(c.new_7d)}
-                                {c.new_prev_7d > 0 && (
+                                {fmt(c.new)}
+                                {c.new_prev > 0 && (
                                   <span
                                     className="ml-1 text-mathua-muted"
-                                    title={`${c.new_prev_7d} in the previous seven days`}
+                                    title={`${c.new_prev} in the previous ${windowDays} days`}
                                   >
-                                    ({c.new_7d - c.new_prev_7d >= 0 ? '+' : ''}{c.new_7d - c.new_prev_7d})
+                                    ({c.new - c.new_prev >= 0 ? '+' : ''}{c.new - c.new_prev})
                                   </span>
                                 )}
                               </span>

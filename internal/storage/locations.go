@@ -32,10 +32,10 @@ type DeviceDay struct {
 // the new windows say where the newest accounts came from.
 type StudentLocations struct {
 	Known       map[string]int
-	Active7     map[string]int
-	ActivePrev7 map[string]int
-	New7        map[string]int
-	NewPrev7    map[string]int
+	Active      map[string]int
+	ActivePrev  map[string]int
+	New         map[string]int
+	NewPrev     map[string]int
 	Daily       []CountryDay
 	DeviceDaily []DeviceDay
 	Located     int
@@ -44,25 +44,27 @@ type StudentLocations struct {
 	// under two countries in one window (travel, a VPN switch) must not be
 	// counted twice in the headline, so the window totals are queried
 	// separately rather than summed from the maps.
-	Active7Total     int
-	ActivePrev7Total int
+	ActiveTotal     int
+	ActivePrevTotal int
 	// Visits count learner-days, not people: a learner who practises on three
 	// days is three visits. They answer "how much did people come back" while
-	// Active7Total answers "how many people", and the two are deliberately not
+	// ActiveTotal answers "how many people", and the two are deliberately not
 	// the same number.
-	Visits7     int
-	VisitsPrev7 int
+	Visits     int
+	VisitsPrev int
 	// Device maps count distinct learners per coarse class in each window. The
 	// class is derived from the user agent and the agent itself is never kept.
-	Device7     map[string]int
-	DevicePrev7 map[string]int
+	Device     map[string]int
+	DevicePrev map[string]int
 }
 
 // LocationWindow names the day boundaries of one admin locations read.
 //
-// RecentFrom is the first day of the current seven-day window. PriorFrom is the
-// first day of the previous window, which ends the day before RecentFrom.
-// DailyFrom and Today bound the thirty-day series. Days are YYYY-MM-DD in UTC.
+// RecentFrom is the first day of the selected window and Today is its last.
+// PriorFrom is the first day of the window immediately before it, which ends
+// the day before RecentFrom, so the two windows are the same length. DailyFrom
+// and Today bound the series the page draws. Days are YYYY-MM-DD in UTC, and
+// the length is chosen by the caller, not fixed here.
 type LocationWindow struct {
 	RecentFrom string
 	PriorFrom  string
@@ -211,13 +213,13 @@ func (s *PostgresStore) StudentLocations(window LocationWindow) (*StudentLocatio
 
 func queryStudentLocations(q locationQuerier, rebind func(string) string, w LocationWindow) (*StudentLocations, error) {
 	out := &StudentLocations{
-		Known:       map[string]int{},
-		Active7:     map[string]int{},
-		ActivePrev7: map[string]int{},
-		New7:        map[string]int{},
-		NewPrev7:    map[string]int{},
-		Device7:     map[string]int{},
-		DevicePrev7: map[string]int{},
+		Known:      map[string]int{},
+		Active:     map[string]int{},
+		ActivePrev: map[string]int{},
+		New:        map[string]int{},
+		NewPrev:    map[string]int{},
+		Device:     map[string]int{},
+		DevicePrev: map[string]int{},
 	}
 
 	if err := queryCounts(q, rebind,
@@ -231,48 +233,48 @@ func queryStudentLocations(q locationQuerier, rebind func(string) string, w Loca
 
 	if err := queryCounts(q, rebind,
 		`SELECT country, COUNT(DISTINCT student_id) FROM learner_country_days
-		 WHERE day >= ? AND country <> '' GROUP BY country`,
-		[]any{w.RecentFrom}, out.Active7); err != nil {
+		 WHERE day >= ? AND day <= ? AND country <> '' GROUP BY country`,
+		[]any{w.RecentFrom, w.Today}, out.Active); err != nil {
 		return nil, err
 	}
 	if err := queryCounts(q, rebind,
 		`SELECT country, COUNT(DISTINCT student_id) FROM learner_country_days
 		 WHERE day >= ? AND day < ? AND country <> '' GROUP BY country`,
-		[]any{w.PriorFrom, w.RecentFrom}, out.ActivePrev7); err != nil {
+		[]any{w.PriorFrom, w.RecentFrom}, out.ActivePrev); err != nil {
 		return nil, err
 	}
 	if err := q.QueryRow(rebind(
-		`SELECT COUNT(DISTINCT student_id) FROM learner_country_days WHERE day >= ?`),
-		w.RecentFrom).Scan(&out.Active7Total); err != nil {
+		`SELECT COUNT(DISTINCT student_id) FROM learner_country_days WHERE day >= ? AND day <= ?`),
+		w.RecentFrom, w.Today).Scan(&out.ActiveTotal); err != nil {
 		return nil, fmt.Errorf("locations: active total: %w", err)
 	}
 	if err := q.QueryRow(rebind(
 		`SELECT COUNT(DISTINCT student_id) FROM learner_country_days WHERE day >= ? AND day < ?`),
-		w.PriorFrom, w.RecentFrom).Scan(&out.ActivePrev7Total); err != nil {
+		w.PriorFrom, w.RecentFrom).Scan(&out.ActivePrevTotal); err != nil {
 		return nil, fmt.Errorf("locations: prior active total: %w", err)
 	}
 
 	// Visits are learner-days, so one row per learner per day is one visit.
 	if err := q.QueryRow(rebind(
-		`SELECT COUNT(*) FROM learner_country_days WHERE day >= ?`),
-		w.RecentFrom).Scan(&out.Visits7); err != nil {
+		`SELECT COUNT(*) FROM learner_country_days WHERE day >= ? AND day <= ?`),
+		w.RecentFrom, w.Today).Scan(&out.Visits); err != nil {
 		return nil, fmt.Errorf("locations: visits: %w", err)
 	}
 	if err := q.QueryRow(rebind(
 		`SELECT COUNT(*) FROM learner_country_days WHERE day >= ? AND day < ?`),
-		w.PriorFrom, w.RecentFrom).Scan(&out.VisitsPrev7); err != nil {
+		w.PriorFrom, w.RecentFrom).Scan(&out.VisitsPrev); err != nil {
 		return nil, fmt.Errorf("locations: prior visits: %w", err)
 	}
 	if err := queryCounts(q, rebind,
 		`SELECT device, COUNT(DISTINCT student_id) FROM learner_country_days
-		 WHERE day >= ? AND device <> '' GROUP BY device`,
-		[]any{w.RecentFrom}, out.Device7); err != nil {
+		 WHERE day >= ? AND day <= ? AND device <> '' GROUP BY device`,
+		[]any{w.RecentFrom, w.Today}, out.Device); err != nil {
 		return nil, err
 	}
 	if err := queryCounts(q, rebind,
 		`SELECT device, COUNT(DISTINCT student_id) FROM learner_country_days
 		 WHERE day >= ? AND day < ? AND device <> '' GROUP BY device`,
-		[]any{w.PriorFrom, w.RecentFrom}, out.DevicePrev7); err != nil {
+		[]any{w.PriorFrom, w.RecentFrom}, out.DevicePrev); err != nil {
 		return nil, err
 	}
 
@@ -280,15 +282,16 @@ func queryStudentLocations(q locationQuerier, rebind func(string) string, w Loca
 	// are the UTC day, so a string comparison is the day comparison.
 	if err := queryCounts(q, rebind,
 		`SELECT country, COUNT(*) FROM students
-		 WHERE country <> '' AND substr(created_at, 1, 10) >= ? GROUP BY country`,
-		[]any{w.RecentFrom}, out.New7); err != nil {
+		 WHERE country <> '' AND substr(created_at, 1, 10) >= ? AND substr(created_at, 1, 10) <= ?
+		 GROUP BY country`,
+		[]any{w.RecentFrom, w.Today}, out.New); err != nil {
 		return nil, err
 	}
 	if err := queryCounts(q, rebind,
 		`SELECT country, COUNT(*) FROM students
 		 WHERE country <> '' AND substr(created_at, 1, 10) >= ? AND substr(created_at, 1, 10) < ?
 		 GROUP BY country`,
-		[]any{w.PriorFrom, w.RecentFrom}, out.NewPrev7); err != nil {
+		[]any{w.PriorFrom, w.RecentFrom}, out.NewPrev); err != nil {
 		return nil, err
 	}
 
