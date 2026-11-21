@@ -82,7 +82,8 @@ describe('the admin locations page', () => {
 
     // The globe is decorative; the same two countries must be readable in
     // plain text, with the prior window and the change beside the count.
-    expect(screen.getByTestId('globe').textContent).toBe('2 markers')
+    // It loads through next/dynamic, so the first paint has no canvas.
+    expect((await screen.findByTestId('globe')).textContent).toBe('2 markers')
     expect(screen.getAllByText('Nigeria').length).toBeGreaterThan(0)
     expect(screen.getAllByText('United Kingdom').length).toBeGreaterThan(0)
     expect(screen.getByText('Previous 7d')).toBeTruthy()
