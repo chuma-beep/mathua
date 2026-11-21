@@ -386,6 +386,20 @@ footer .link-underline:hover {
   box-shadow: none !important;
 }
 
+/* Tailwind's preflight sets `color: inherit` on buttons, so sonner's dark
+   close glyph took the toast's white text and disappeared on its own near-white
+   background in dark mode. Both faces are pinned to theme tokens here. */
+[data-sonner-toast] [data-close-button] {
+  color: var(--text-primary) !important;
+  background: var(--surface-elevated) !important;
+  border-color: var(--border) !important;
+}
+
+[data-sonner-toast] [data-close-button]:hover {
+  background: var(--surface-highlight) !important;
+  border-color: var(--text-secondary) !important;
+}
+
 /* Concept graph edge flow animations */
 .react-flow__edge-path.edge-flow {
   stroke-dasharray: 6 8;
