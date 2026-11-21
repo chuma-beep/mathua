@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
 import AdminShell from '@/components/admin/AdminShell'
-import CountryGlobe from '@/components/admin/CountryGlobe'
 import SectionHeader from '@/components/SectionHeader'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
@@ -15,6 +15,14 @@ import {
   type AdminLocationDay,
   type AdminLocations,
 } from '../../../lib/api'
+
+// three-globe builds a WebGL scene when its module is evaluated, and that
+// touches `window`. The page is still prerendered, so the globe loads only in
+// the browser and the server render keeps the card's shape.
+const CountryGlobe = dynamic(() => import('@/components/admin/CountryGlobe'), {
+  ssr: false,
+  loading: () => <div className="aspect-square w-full max-w-[560px] animate-pulse bg-mathua-surface" aria-hidden />,
+})
 
 // Where learners are, at country granularity.
 //
