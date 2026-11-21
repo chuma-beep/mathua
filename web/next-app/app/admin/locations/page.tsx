@@ -182,10 +182,9 @@ export default function AdminLocationsPage() {
       <main className="mx-auto w-full max-w-[1200px] min-w-0 px-4 py-8 sm:px-6 sm:py-12 overflow-x-hidden">
         <SectionHeader label="Administration" title="Locations" />
         <p className="-mt-3 mb-6 font-mono text-[11px] text-mathua-muted">
-          Countries where accounts are and where activity is growing. The country comes from
-          Cloudflare&apos;s edge, is refreshed for a signed-in learner at most once a day, and is
-          approximate: a VPN or a mobile carrier can place a learner elsewhere. No IP address or city
-          is stored.
+          Where accounts are and where activity is growing. Country comes from the Cloudflare edge,
+          refreshed at most once a day per signed-in learner. A VPN or mobile carrier can place
+          someone elsewhere; no IP address or city is stored.
         </p>
 
         {!isStaff && (
@@ -261,7 +260,7 @@ export default function AdminLocationsPage() {
                     <CountryGlobe countries={data.countries} />
                   </div>
 
-                  <div className="border border-mathua-border bg-mathua-surface p-4">
+                  <div className="flex flex-col border border-mathua-border bg-mathua-surface p-4">
                     <h3 className="font-mono text-[10px] uppercase tracking-[0.15em] text-mathua-muted">Fastest growing</h3>
                     {movers.length === 0 ? (
                       <p className="mt-3 font-mono text-[11px] text-mathua-muted">
@@ -304,6 +303,50 @@ export default function AdminLocationsPage() {
                         </ol>
                       </div>
                     )}
+                    <div className="mt-4 border-t border-mathua-border pt-3">
+                      <div className="flex flex-wrap items-baseline justify-between gap-2">
+                        <h4 className="font-mono text-[10px] uppercase tracking-[0.12em] text-mathua-muted">Devices this week</h4>
+                        <span className="font-mono text-[10px] text-mathua-muted">One class per learner</span>
+                      </div>
+                      {data.devices.length === 0 ? (
+                        <p className="mt-2 font-mono text-[11px] text-mathua-muted">
+                          Devices are recorded from the next signed-in visit.
+                        </p>
+                      ) : (
+                        <ul className="mt-2 space-y-2">
+                          {data.devices.map((device) => (
+                            <li key={device.device}>
+                              <div className="flex items-baseline justify-between gap-2 font-mono text-[11px]">
+                                <span className="capitalize text-mathua-secondary">{device.device}</span>
+                                <span className="text-mathua-primary">{fmt(device.active_7d)}</span>
+                              </div>
+                              <div className="mt-1 h-1 w-full bg-mathua-border">
+                                <div
+                                  className="h-full bg-mathua-blue"
+                                  style={{ width: `${maxDevice > 0 ? Math.max(3, Math.round((device.active_7d / maxDevice) * 100)) : 0}%` }}
+                                />
+                              </div>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                    <div className="mt-auto border-t border-mathua-border pt-3">
+                      <div className="flex items-baseline justify-between gap-2 font-mono text-[10px] uppercase tracking-[0.12em] text-mathua-muted">
+                        <span>Coverage</span>
+                        <span>{Math.round((data.located / data.total) * 100)}%</span>
+                      </div>
+                      <div className="mt-2 h-1 w-full bg-mathua-border">
+                        <div
+                          className="h-full bg-mathua-blue"
+                          style={{ width: `${Math.max(3, Math.round((data.located / data.total) * 100))}%` }}
+                        />
+                      </div>
+                      <p className="mt-2 font-mono text-[10px] text-mathua-muted">
+                        {fmt(data.total - data.located)} accounts have no country yet. The next
+                        signed-in visit records one.
+                      </p>
+                    </div>
                   </div>
                 </div>
 
@@ -315,34 +358,6 @@ export default function AdminLocationsPage() {
                     </span>
                   </div>
                   <Sparkline daily={data.daily} />
-                  <div className="mt-4 border-t border-mathua-border pt-3">
-                    <div className="flex flex-wrap items-baseline justify-between gap-2">
-                      <h4 className="font-mono text-[10px] uppercase tracking-[0.12em] text-mathua-muted">Devices this week</h4>
-                      <span className="font-mono text-[10px] text-mathua-muted">One class per learner</span>
-                    </div>
-                    {data.devices.length === 0 ? (
-                      <p className="mt-2 font-mono text-[11px] text-mathua-muted">
-                        Devices are recorded from the next signed-in visit.
-                      </p>
-                    ) : (
-                      <ul className="mt-2 grid gap-2 sm:grid-cols-3">
-                        {data.devices.map((device) => (
-                          <li key={device.device}>
-                            <div className="flex items-baseline justify-between gap-2 font-mono text-[11px]">
-                              <span className="capitalize text-mathua-secondary">{device.device}</span>
-                              <span className="text-mathua-primary">{fmt(device.active_7d)}</span>
-                            </div>
-                            <div className="mt-1 h-1 w-full bg-mathua-border">
-                              <div
-                                className="h-full bg-mathua-blue"
-                                style={{ width: `${maxDevice > 0 ? Math.max(3, Math.round((device.active_7d / maxDevice) * 100)) : 0}%` }}
-                              />
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
                 </div>
 
                 <div className="mt-3 border border-mathua-border bg-mathua-surface">

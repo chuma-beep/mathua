@@ -39,17 +39,17 @@ function loadCountries(): Promise<CountryFeature[]> {
 
 const PALETTE = {
   dark: {
-    ocean: '#0f172a',
-    oceanEmissive: '#0b1220',
-    land: '#2f6fae',
+    ocean: '#0b1526',
+    oceanEmissive: '#091120',
+    land: '#5a9bdc',
     atmosphere: '#3b82f6',
-    marker: '#7dd3fc',
-    ring: '96, 165, 250',
+    marker: '#a5f3fc',
+    ring: '165, 243, 252',
   },
   light: {
-    ocean: '#e7eef8',
-    oceanEmissive: '#dbe6f4',
-    land: '#7fa9d8',
+    ocean: '#e9f1fa',
+    oceanEmissive: '#dde9f6',
+    land: '#8fb8dd',
     atmosphere: '#93c5fd',
     marker: '#1d4ed8',
     ring: '37, 99, 235',
@@ -82,12 +82,12 @@ export default function CountryGlobe({ countries }: { countries: GlobeCountry[] 
       return [{
         lat,
         lng,
-        radius: 0.35 + 1.1 * Math.sqrt(c.active_7d / max),
+        radius: 0.45 + 1.25 * Math.sqrt(c.active_7d / max),
       }]
     })
     const rings = [...markers].slice(0, 5).map((m) => ({
       ...m,
-      radius: 2 + 4 * Math.sqrt((m.radius - 0.35) / 1.1),
+      radius: 2.5 + 4.5 * Math.sqrt((m.radius - 0.45) / 1.25),
     }))
 
     const scene = new THREE.Scene()
@@ -112,17 +112,21 @@ export default function CountryGlobe({ countries }: { countries: GlobeCountry[] 
       .showAtmosphere(true)
       .atmosphereColor(palette.atmosphere)
       .atmosphereAltitude(0.18)
+      // Fine hexagons at a small margin tile into solid continents. At the
+      // original 0.72 margin the land read as a faint texture on dark.
       .hexPolygonsData([])
       .hexPolygonResolution(3)
-      .hexPolygonMargin(0.72)
+      .hexPolygonMargin(0.16)
       .hexPolygonUseDots(false)
-      .hexPolygonColor(palette.land)
+      // Accessors treat a bare string as a property name, so the palette
+      // colors need a function even though they are constant.
+      .hexPolygonColor(() => palette.land)
       .pointsData(markers)
       .pointLat('lat')
       .pointLng('lng')
       .pointAltitude(0.012)
       .pointRadius('radius')
-      .pointColor(palette.marker)
+      .pointColor(() => palette.marker)
       .ringsData(rings)
       .ringLat('lat')
       .ringLng('lng')
@@ -133,11 +137,11 @@ export default function CountryGlobe({ countries }: { countries: GlobeCountry[] 
       .ringColor(() => (t: number) => `rgba(${palette.ring}, ${Math.max(0, 1 - t)})`)
     group.add(globe)
 
-    scene.add(new THREE.AmbientLight(0xffffff, dark ? 1.15 : 1.7))
-    const key = new THREE.DirectionalLight(0xffffff, dark ? 2.4 : 1.7)
+    scene.add(new THREE.AmbientLight(0xffffff, dark ? 1.8 : 2.1))
+    const key = new THREE.DirectionalLight(0xffffff, dark ? 1.4 : 1.0)
     key.position.set(-160, 90, 180)
     scene.add(key)
-    const rim = new THREE.DirectionalLight(0x60a5fa, dark ? 1.1 : 0.5)
+    const rim = new THREE.DirectionalLight(0x60a5fa, dark ? 1.2 : 0.4)
     rim.position.set(150, -70, -160)
     scene.add(rim)
 
@@ -225,7 +229,7 @@ export default function CountryGlobe({ countries }: { countries: GlobeCountry[] 
   }, [theme, mounted, signature])
 
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-[560px]">
+    <div className="relative mx-auto aspect-square w-full max-w-[480px]">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-[8%] rounded-full bg-mathua-blue-faint blur-2xl"
