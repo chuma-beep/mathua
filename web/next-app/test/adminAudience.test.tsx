@@ -34,6 +34,12 @@ vi.mock('../components/admin/CountryGlobe', () => ({
   ),
 }))
 
+vi.mock('../components/admin/DeviceGallery', () => ({
+  default: ({ devices }: { devices: unknown[] }) => (
+    <div data-testid="devices-3d">{devices.length} devices</div>
+  ),
+}))
+
 function locations(over: Partial<AdminLocations> = {}): AdminLocations {
   const daily = Array.from({ length: 30 }, (_, i) => ({
     day: `2026-11-${String(i + 1).padStart(2, '0')}`,
@@ -99,9 +105,11 @@ describe('the admin audience page', () => {
     // A visit is a learner-day, so it is reported beside the head count and
     // the device split, never instead of it.
     expect(screen.getByText('Devices this week')).toBeTruthy()
-    expect(screen.getByText('mobile')).toBeTruthy()
-    expect(screen.getByText('desktop')).toBeTruthy()
-    expect(screen.getByText('Devices, last 30 days')).toBeTruthy()
+    expect(screen.getByText('Visits per active learner')).toBeTruthy()
+    expect(screen.getByText('1.5')).toBeTruthy()
+    // The gallery loads through next/dynamic, like the globe.
+    expect((await screen.findByTestId('devices-3d')).textContent).toBe('2 devices')
+    expect(screen.getByText('Last 30 days')).toBeTruthy()
     expect(screen.getByText('Distinct learners per day')).toBeTruthy()
     expect(screen.getByText('One class per learner per day')).toBeTruthy()
   })

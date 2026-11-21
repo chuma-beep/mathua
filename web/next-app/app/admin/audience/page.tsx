@@ -25,6 +25,15 @@ const CountryGlobe = dynamic(() => import('@/components/admin/CountryGlobe'), {
   loading: () => <div className="aspect-square w-full max-w-[560px] animate-pulse bg-mathua-surface" aria-hidden />,
 })
 
+// The device gallery builds its scene the same way, and is only meaningful in a
+// browser with WebGL, so it follows the globe behind a dynamic import.
+const DeviceGallery = dynamic(() => import('@/components/admin/DeviceGallery'), {
+  ssr: false,
+  loading: () => (
+    <div className="mx-auto h-[218px] w-full max-w-[620px] animate-pulse bg-mathua-surface sm:h-[236px]" aria-hidden />
+  ),
+})
+
 // Where learners are, at country granularity.
 //
 // The country is resolved by Cloudflare at the edge and stored once a day for a
@@ -101,8 +110,8 @@ function Sparkline({ daily }: { daily: AdminLocationDay[] }) {
   const peak = daily.length > 0 ? Math.max(...daily.map((d) => d.active)) : 0
 
   return (
-    <div className="text-mathua-blue">
-      <svg viewBox={`0 0 ${width} ${height}`} className="h-32 w-full" aria-hidden="true" preserveAspectRatio="none">
+    <div className="flex flex-1 flex-col text-mathua-blue">
+      <svg viewBox={`0 0 ${width} ${height}`} className="min-h-32 max-h-48 w-full flex-1 sm:max-h-64" aria-hidden="true" preserveAspectRatio="none">
         <defs>
           <linearGradient id="locations-fill" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="currentColor" stopOpacity="0.28" />
@@ -227,7 +236,6 @@ export default function AdminAudiencePage() {
   const activeDelta = data ? delta(data.active_7d, data.active_prev_7d) : null
   const newDelta = data ? delta(data.new_7d, data.new_prev_7d) : null
   const visitsDelta = data ? delta(data.visits_7d, data.visits_prev_7d) : null
-  const maxDevice = data ? Math.max(0, ...data.devices.map((d) => d.active_7d)) : 0
   const maxActive = data ? Math.max(0, ...data.countries.map((c) => c.active_7d)) : 0
   const movers = data
     ? [...data.countries]
@@ -374,34 +382,6 @@ export default function AdminAudiencePage() {
                         </ol>
                       </div>
                     )}
-                    <div className="mt-4 border-t border-mathua-border pt-3">
-                      <div className="flex flex-wrap items-baseline justify-between gap-2">
-                        <h4 className="font-mono text-[10px] uppercase tracking-[0.12em] text-mathua-muted">Devices this week</h4>
-                        <span className="font-mono text-[10px] text-mathua-muted">One class per learner</span>
-                      </div>
-                      {data.devices.length === 0 ? (
-                        <p className="mt-2 font-mono text-[11px] text-mathua-muted">
-                          Devices are recorded from the next signed-in visit.
-                        </p>
-                      ) : (
-                        <ul className="mt-2 space-y-2">
-                          {data.devices.map((device) => (
-                            <li key={device.device}>
-                              <div className="flex items-baseline justify-between gap-2 font-mono text-[11px]">
-                                <span className="capitalize text-mathua-secondary">{device.device}</span>
-                                <span className="text-mathua-primary">{fmt(device.active_7d)}</span>
-                              </div>
-                              <div className="mt-1 h-1 w-full bg-mathua-border">
-                                <div
-                                  className="h-full bg-mathua-blue"
-                                  style={{ width: `${maxDevice > 0 ? Math.max(3, Math.round((device.active_7d / maxDevice) * 100)) : 0}%` }}
-                                />
-                              </div>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </div>
                     <div className="mt-auto border-t border-mathua-border pt-3">
                       <div className="flex items-baseline justify-between gap-2 font-mono text-[10px] uppercase tracking-[0.12em] text-mathua-muted">
                         <span>Coverage</span>
@@ -421,8 +401,8 @@ export default function AdminAudiencePage() {
                   </div>
                 </div>
 
-                <div className="mt-3 grid gap-3 lg:grid-cols-2">
-                  <div className="border border-mathua-border bg-mathua-surface p-4">
+                <div className="mt-3 grid gap-3 lg:grid-cols-5">
+                  <div className="flex flex-col border border-mathua-border bg-mathua-surface p-4 lg:col-span-2">
                     <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
                       <h3 className="font-mono text-[10px] uppercase tracking-[0.15em] text-mathua-muted">Activity, last 30 days</h3>
                       <span className="font-mono text-[10px] text-mathua-muted" title="A visit is one signed-in learner-day.">
@@ -430,19 +410,44 @@ export default function AdminAudiencePage() {
                       </span>
                     </div>
                     <Sparkline daily={data.daily} />
+                    <div className="mt-auto grid grid-cols-2 gap-3 border-t border-mathua-border pt-3">
+                      <div>
+                        <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-mathua-muted">Visits per active learner</p>
+                        <p className="mt-1 font-mono text-lg text-mathua-primary">
+                          {data.active_7d > 0 ? (data.visits_7d / data.active_7d).toFixed(1) : '—'}
+                        </p>
+                        <p className="font-mono text-[10px] text-mathua-muted">One learner-day each</p>
+                      </div>
+                      <div>
+                        <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-mathua-muted">Busiest day</p>
+                        <p className="mt-1 font-mono text-lg text-mathua-primary">
+                          {Math.max(0, ...data.daily.map((d) => d.active))}
+                        </p>
+                        <p className="font-mono text-[10px] text-mathua-muted">learners in one day</p>
+                      </div>
+                    </div>
                   </div>
 
-                  <div className="border border-mathua-border bg-mathua-surface p-4">
-                    <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
-                      <h3 className="font-mono text-[10px] uppercase tracking-[0.15em] text-mathua-muted">Devices, last 30 days</h3>
-                      <span className="font-mono text-[10px] text-mathua-muted">Distinct learners per day</span>
+                  <div className="border border-mathua-border bg-mathua-surface p-4 lg:col-span-3">
+                    <div className="mb-1 flex flex-wrap items-baseline justify-between gap-2">
+                      <h3 className="font-mono text-[10px] uppercase tracking-[0.15em] text-mathua-muted">Devices this week</h3>
+                      <span className="font-mono text-[10px] text-mathua-muted">Drag the gallery to turn it</span>
                     </div>
-                    {data.device_daily.every((d) => d.mobile + d.desktop + d.tablet === 0) ? (
-                      <p className="font-mono text-[11px] text-mathua-muted">
+                    {data.devices.length === 0 ? (
+                      <p className="mt-3 font-mono text-[11px] text-mathua-muted">
                         Devices are recorded from the next signed-in visit.
                       </p>
                     ) : (
-                      <DeviceLines daily={data.device_daily} />
+                      <>
+                        <DeviceGallery devices={data.devices} />
+                        <div className="mt-4 border-t border-mathua-border pt-3">
+                          <div className="mb-2 flex flex-wrap items-baseline justify-between gap-2">
+                            <h4 className="font-mono text-[10px] uppercase tracking-[0.12em] text-mathua-muted">Last 30 days</h4>
+                            <span className="font-mono text-[10px] text-mathua-muted">Distinct learners per day</span>
+                          </div>
+                          <DeviceLines daily={data.device_daily} />
+                        </div>
+                      </>
                     )}
                   </div>
                 </div>
