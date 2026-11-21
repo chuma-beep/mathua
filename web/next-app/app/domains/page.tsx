@@ -360,7 +360,7 @@ export default function DomainsPage() {
                         {review && (
                           <Link
                             href="/review"
-                            className="w-full sm:w-auto shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-4 py-2 font-mono text-[11px] min-h-[36px] inline-flex items-center justify-center"
+                            className="w-full sm:w-auto shrink-0 border border-mathua-blue bg-mathua-blue-faint text-mathua-blue hover:bg-mathua-blue hover:text-mathua-bg px-4 py-2 font-mono text-[11px] min-h-[36px] inline-flex items-center justify-center"
                           >
                             Review
                           </Link>
