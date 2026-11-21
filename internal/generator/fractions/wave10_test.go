@@ -361,10 +361,11 @@ func w10Recompute(kind string, kp int, f map[string]string) int {
 	case "estimate_product":
 		num, den := a*get("c"), b*get("d")
 		if kp == 1 {
-			if num*2 > den {
+			// Nearest of 0, 1/2 and 1; an exact quarter is redrawn.
+			if 4*num > 3*den {
 				return 2
 			}
-			if num*2 == den {
+			if 4*num > den {
 				return 1
 			}
 			return 0

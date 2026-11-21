@@ -48,6 +48,32 @@ func TestSeqGeomAsksBeyondPrintedTerms(t *testing.T) {
 	}
 }
 
+// Report 494: every draw had the drain faster than the fill, so the net rate
+// was negative and the tank never filled. The learner's -2/15 was right.
+func TestRationalWordDrainIsSlowerThanFill(t *testing.T) {
+	g := &algBridgeGen{kind: "rational_word"}
+	re := regexp.MustCompile(`fills a tank in (\d+) hours and a drain empties it in (\d+) hours`)
+	for i := 0; i < 500; i++ {
+		p := g.Generate(generator.GeneratorContext{KPOrdinal: 3})
+		m := re.FindStringSubmatch(p.Question)
+		if m == nil {
+			t.Fatalf("unexpected tank question: %q", p.Question)
+		}
+		fill, _ := strconv.Atoi(m[1])
+		drain, _ := strconv.Atoi(m[2])
+		if drain <= fill {
+			t.Fatalf("drain %d h is not slower than fill %d h in %q", drain, fill, p.Question)
+		}
+		if fill*drain%(drain-fill) != 0 {
+			t.Fatalf("%d and %d do not give a whole number of hours", fill, drain)
+		}
+		want := fill * drain / (drain - fill)
+		if p.Answer != strconv.Itoa(want) {
+			t.Fatalf("%q answered %s, want %d", p.Question, p.Answer, want)
+		}
+	}
+}
+
 // The printed equation and the stored answer must agree. An integer division
 // of a*x by b used to truncate, so the answer solved a different equation from
 // the one the learner could see.

@@ -320,10 +320,13 @@ func (g *algBridgeGen) Generate(ctx generator.GeneratorContext) generator.Proble
 			}
 			return algProb(o, fmt.Sprintf("The proportion x/%d = %d/%d is true. What is x? (enter a number)", a, b, c), strconv.Itoa(x), fmt.Sprintf("Cross multiply: %d x = %d x %d, so x = %d.", c, a, b, x))
 		default:
-			pairs := [][2]int{{6, 3}, {12, 4}, {20, 5}, {8, 4}, {10, 5}, {15, 5}}
+			// Report 494: every pair here had the drain faster than the fill, so
+			// the net rate was negative and the tank never filled. The drain must
+			// take longer than the fill, and each pair divides exactly.
+			pairs := [][2]int{{3, 6}, {4, 6}, {6, 8}, {4, 12}, {6, 12}, {10, 15}, {12, 20}}
 			p := pairs[rand.Intn(len(pairs))]
-			ans := p[0] * p[1] / (p[0] - p[1])
-			return algProb(o, fmt.Sprintf("A pipe fills a tank in %d hours and a drain empties it in %d hours. With both open, how many hours does the tank take to fill? (enter a number)", p[0], p[1]), strconv.Itoa(ans), fmt.Sprintf("The net rate is 1/%d - 1/%d, so the time is %d x %d / (%d - %d) = %d hours.", p[0], p[1], p[0], p[1], p[0], p[1], ans))
+			ans := p[0] * p[1] / (p[1] - p[0])
+			return algProb(o, fmt.Sprintf("A pipe fills a tank in %d hours and a drain empties it in %d hours. With both open, how many hours does the tank take to fill? (enter a number)", p[0], p[1]), strconv.Itoa(ans), fmt.Sprintf("The net rate is 1/%d - 1/%d = 1/%d of the tank per hour, so the tank takes %d hours to fill.", p[0], p[1], ans, ans))
 		}
 	case "composite_domain":
 		switch o {
