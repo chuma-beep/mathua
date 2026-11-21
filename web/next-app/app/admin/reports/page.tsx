@@ -30,6 +30,23 @@ const FILTERS: { key: string; label: string }[] = [
 
 const PAGE_SIZE = 20
 
+// Three complaints in a minute is one bad deploy; three over a month is a
+// generator that fails on a rare input. The API sends RFC 3339, which is exact
+// but unreadable at a glance, so the queue renders the moment in the reader's
+// locale and keeps the raw stamp in `title` and `dateTime` for copy and sort.
+function fmtWhen(value: string): string {
+  if (!value) return ''
+  const d = new Date(value)
+  if (Number.isNaN(d.getTime())) return value
+  return d.toLocaleString(undefined, {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  })
+}
+
 export default function AdminReportsPage() {
   const { can } = useAdminMe()
   const [filter, setFilter] = useState('open')
@@ -273,9 +290,18 @@ function ReportCard({ report, canModerate, onChanged }: { report: QuestionReport
               : report.reporter_name || report.reporter_id || '(anon)'}
           </span>
         </span>
-        <span className="flex shrink-0 items-center gap-2">
-          <StatusPill status={report.status} />
-          <span className="font-mono text-[10px] text-mathua-muted">#{report.id}</span>
+        <span className="flex shrink-0 flex-col items-end gap-1">
+          <span className="flex items-center gap-2">
+            <StatusPill status={report.status} />
+            <span className="font-mono text-[10px] text-mathua-muted">#{report.id}</span>
+          </span>
+          <time
+            dateTime={report.created_at}
+            title={report.created_at}
+            className="font-mono text-[10px] text-mathua-muted"
+          >
+            {fmtWhen(report.created_at)}
+          </time>
         </span>
       </button>
 
@@ -301,7 +327,10 @@ function ReportCard({ report, canModerate, onChanged }: { report: QuestionReport
                 )}
               </dd>
             </div>
-            <div><dt className="text-mathua-muted">When</dt><dd>{report.created_at}</dd></div>
+            <div>
+              <dt className="text-mathua-muted">When</dt>
+              <dd><time dateTime={report.created_at} title={report.created_at}>{fmtWhen(report.created_at)}</time></dd>
+            </div>
             <div><dt className="text-mathua-muted">Source</dt><dd>{report.source || ', '}</dd></div>
             <div><dt className="text-mathua-muted">Lesson</dt><dd>{report.lesson_id || ', '}</dd></div>
           </dl>
@@ -334,7 +363,7 @@ function ReportCard({ report, canModerate, onChanged }: { report: QuestionReport
 
           {report.status === 'resolved' || report.status === 'dismissed' ? (
             <p className="mt-3 font-mono text-[11px] text-mathua-muted">
-              {report.status} by {report.resolved_by || '(unknown)'} · {report.resolved_at}
+              {report.status} by {report.resolved_by || '(unknown)'} · {fmtWhen(report.resolved_at)}
               {report.resolution ? `, ${report.resolution}` : ''}
             </p>
           ) : null}
