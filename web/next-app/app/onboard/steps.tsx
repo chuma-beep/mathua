@@ -391,23 +391,31 @@ export function DiagnosticStep({
                 as the answer. The feedback above is a verdict; this is the only
                 route from it to an explanation, and it leaves the assessment
                 rather than injecting instruction into it. */}
-            {!lastResult.correct && !done && conceptId && (
-              <Link
-                href={`/learn?concept=${encodeURIComponent(conceptId)}`}
-                className="mt-3 inline-flex items-center border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-4 py-2 font-mono text-[11px] uppercase tracking-[0.18em]"
-              >
-                Learn this concept →
-              </Link>
-            )}
-            {!lastResult.correct && !done && retryAvailable && (
-              <button
-                type="button"
-                onClick={onRetryQuestion}
-                disabled={loading}
-                className="mt-2 font-mono text-[11px] text-mathua-muted hover:text-mathua-blue underline underline-offset-2 disabled:opacity-50"
-              >
-                I made a silly mistake, retry
-              </button>
+            {!lastResult.correct && !done && (conceptId || retryAvailable) && (
+              // Inline children sat on one line, so the teaching link and the
+              // retry sat against each other with only a top margin between
+              // them. Keeping both in a column makes the gap hold whichever
+              // combination is offered.
+              <div className="mt-3 flex flex-col items-center gap-2">
+                {conceptId && (
+                  <Link
+                    href={`/learn?concept=${encodeURIComponent(conceptId)}`}
+                    className="inline-flex items-center border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-4 py-2 font-mono text-[11px] uppercase tracking-[0.18em]"
+                  >
+                    Learn this concept →
+                  </Link>
+                )}
+                {retryAvailable && (
+                  <button
+                    type="button"
+                    onClick={onRetryQuestion}
+                    disabled={loading}
+                    className="font-mono text-[11px] text-mathua-muted hover:text-mathua-blue underline underline-offset-2 disabled:opacity-50"
+                  >
+                    I made a silly mistake, retry
+                  </button>
+                )}
+              </div>
             )}
           </div>
         )}
