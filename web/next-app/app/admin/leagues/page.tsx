@@ -72,12 +72,18 @@ function leagueKey(l: Pick<AdminLeague, 'tier' | 'league_no'> | Selected): strin
   return 'league_no' in l ? `${l.tier}/${l.league_no}` : `${l.tier}/${l.league}`
 }
 
+// The server stores the chosen picture as a URL, a DiceBear pick or a legacy
+// preset, and the same precedence applies here as in the account list: an
+// uploaded picture first, then the generated pick, then the initial.
+function learnerAvatarURL(
+  storedURL: string | undefined,
+  pick: { style: string; seed: string } | null | undefined,
+): string | undefined {
+  if (storedURL) return storedURL.startsWith('/') ? `${API_BASE}${storedURL}` : storedURL
+  return pick && isDicebearStyle(pick.style) ? dicebearUrl(pick.style, pick.seed) : undefined
+}
+
 function MemberAvatar({ member, tier }: { member: AdminLeagueMember; tier: string }) {
-  const pick = member.avatar_dicebear
-  const storedURL = member.avatar_url
-  const url = storedURL
-    ? (storedURL.startsWith('/') ? `${API_BASE}${storedURL}` : storedURL)
-    : (pick && isDicebearStyle(pick.style) ? dicebearUrl(pick.style, pick.seed) : undefined)
   return (
     <LeagueAvatar
       tier={tier}
@@ -85,7 +91,7 @@ function MemberAvatar({ member, tier }: { member: AdminLeagueMember; tier: strin
       seed={member.student_id}
       name={memberLabel(member)}
       size={24}
-      url={url}
+      url={learnerAvatarURL(member.avatar_url, member.avatar_dicebear)}
       preset={member.avatar_preset ?? null}
     />
   )
@@ -540,7 +546,21 @@ function RangePanel({
             {learners.map((l, i) => (
               <li key={l.student_id} className="flex items-center gap-3 px-3 py-2">
                 <span className="w-6 font-mono text-[11px] text-mathua-muted">{i + 1}</span>
-                <span className="min-w-0 flex-1 truncate font-mono text-[11px] text-mathua-primary">{l.name || l.username || l.student_id}</span>
+                <Link
+                  href={`/admin/users/detail?id=${encodeURIComponent(l.student_id)}`}
+                  className="flex min-w-0 flex-1 items-center gap-2.5 text-mathua-primary hover:text-mathua-blue"
+                >
+                  <LeagueAvatar
+                    tier={l.tier}
+                    weeklyXp={l.xp}
+                    seed={l.student_id}
+                    name={l.name || l.username || l.student_id}
+                    size={28}
+                    url={learnerAvatarURL(l.avatar_url, l.avatar_dicebear)}
+                    preset={l.avatar_preset ?? null}
+                  />
+                  <span className="truncate font-mono text-[11px] hover:underline">{l.name || l.username || l.student_id}</span>
+                </Link>
                 <span className="font-mono text-[10px] uppercase tracking-wider text-mathua-muted">{l.tier || '—'}</span>
                 <span className="w-20 text-right font-mono text-[11px] tabular-nums text-mathua-primary">{l.xp.toLocaleString()}</span>
               </li>

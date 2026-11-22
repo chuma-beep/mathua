@@ -2390,6 +2390,9 @@ const AdminLeagueRangeLearnerSchema = z.object({
 	username: z.string(),
 	xp: z.number(),
 	tier: z.string(),
+	avatar_url: z.string().optional(),
+	avatar_dicebear: z.object({ style: z.string(), seed: z.string() }).nullable().optional(),
+	avatar_preset: z.number().nullable().optional(),
 })
 
 const AdminLeagueRangeSchema = z.object({

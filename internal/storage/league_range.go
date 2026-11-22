@@ -73,7 +73,7 @@ func (s *PostgresStore) LeagueRange(from, to, group string) (*LeagueRange, error
 }
 
 func leagueRange(db *sql.DB, from, to, group string, rebind func(string) string) (*LeagueRange, error) {
-	out := &LeagueRange{From: from, To: to, Group: group, Tiers: []LeagueRangeTier{}, Buckets: []LeagueRangeBucket{}, Top: []LeagueRangeLearner{}, Latest: []LeagueRangeLearner{}, WeekKeys: []string{}}
+	out := &LeagueRange{From: from, To: to, Group: group, Tiers: []LeagueRangeTier{}, Buckets: []LeagueRangeBucket{}, Matrix: []LeagueTransition{}, Top: []LeagueRangeLearner{}, Latest: []LeagueRangeLearner{}, WeekKeys: []string{}}
 	bucketExpr := "week"
 	if group == "month" {
 		bucketExpr = "substr(week, 1, 7)"
