@@ -204,4 +204,43 @@ describe('league time scopes', () => {
     await waitFor(() => expect(mix).toHaveAttribute('aria-selected', 'true'))
     expect(mix.className).toContain('data-[state=active]:border-mathua-blue')
   })
+
+  it('shows each ranked learner picture and opens the account', async () => {
+    vi.mocked(getAdminLeagues).mockResolvedValue(pyramid)
+    vi.mocked(getAdminLeagueRange).mockResolvedValue({
+      from: thisWeek,
+      to: thisWeek,
+      group: 'week',
+      weeks: 2,
+      weeks_available: [thisWeek],
+      seats: 40,
+      unique_learners: 12,
+      promoted: 3,
+      demoted: 2,
+      stayed: 30,
+      new: 5,
+      unique_promoted: 3,
+      unique_demoted: 2,
+      left: 1,
+      matrix: [{ from: 'bronze', to: 'silver', count: 3 }],
+      tiers: [{ tier: 'bronze', leagues: 1, seats: 30, unique_learners: 10 }],
+      buckets: [{ key: thisWeek, label: thisWeek, weeks: 1, seats: 20, unique_learners: 8, promoted: 2, demoted: 1, stayed: 15, new: 2 }],
+      top_range: [{
+        student_id: 's1',
+        name: 'Ada',
+        username: 'ada',
+        xp: 120,
+        tier: 'bronze',
+        avatar_url: '/api/avatar/s1',
+        avatar_preset: null,
+      }],
+      top_latest: [],
+    })
+    render(<AdminLeaguesPage />)
+    fireEvent.click(screen.getByRole('button', { name: 'month' }))
+
+    const link = await screen.findByRole('link', { name: /Ada/ })
+    expect(link.getAttribute('href')).toBe('/admin/users/detail?id=s1')
+    expect(screen.getByAltText('Ada avatar').getAttribute('src')).toContain('/api/avatar/s1')
+  })
 })
