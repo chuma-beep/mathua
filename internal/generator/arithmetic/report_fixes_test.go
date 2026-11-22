@@ -198,3 +198,41 @@ func TestDivisorCountExplanationListsDivisors(t *testing.T) {
 		}
 	}
 }
+
+// Report 501: the pool held exactly eight primes, so a draw that took none of
+// the composites was the same eight numbers every time. Keep both kinds in
+// every draw so the set varies.
+func TestCompositeCountKeepsBothKindsInTheDraw(t *testing.T) {
+	for i := 0; i < 300; i++ {
+		p := compositeProblem()
+		n, err := strconv.Atoi(p.Answer)
+		if err != nil {
+			t.Fatalf("answer %q is not a count", p.Answer)
+		}
+		if n == 0 || n == 8 {
+			t.Fatalf("draw has no mix of primes and composites: answer %d, question %q", n, p.Question)
+		}
+	}
+}
+
+// Report 502: the third ordinal drew a four-digit factor while the lesson is
+// titled "Multiplying two three-digit numbers".
+func TestThreeByThreeStaysThreeDigits(t *testing.T) {
+	g := &w12Gen{kind: "mult_three_three"}
+	for _, kp := range []int{1, 2, 3} {
+		for i := 0; i < 100; i++ {
+			p := g.Generate(generator.GeneratorContext{KPOrdinal: kp})
+			a, errA := strconv.Atoi(p.Facts["a"])
+			b, errB := strconv.Atoi(p.Facts["b"])
+			if errA != nil || errB != nil {
+				t.Fatalf("factors are missing from facts: %+v", p.Facts)
+			}
+			if a < 100 || a > 999 || b < 100 || b > 999 {
+				t.Fatalf("kp%d drew %d x %d, which is not two three-digit numbers", kp, a, b)
+			}
+			if p.Answer != strconv.Itoa(a*b) {
+				t.Fatalf("answer %q is not %d x %d", p.Answer, a, b)
+			}
+		}
+	}
+}

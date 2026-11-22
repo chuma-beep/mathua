@@ -8,6 +8,7 @@ import (
 	"sync"
 
 	"github.com/chuma-beep/mathua/internal/generator"
+	"github.com/chuma-beep/mathua/internal/grader"
 	"github.com/chuma-beep/mathua/internal/mathutil"
 )
 
@@ -677,13 +678,43 @@ func (g *factorGCFGen) Generate(ctx generator.GeneratorContext) generator.Proble
 
 type factorTrinomialGen struct{}
 
+// Grade compares the factors the learner wrote, not their punctuation. Report
+// 500 answered "(x+6) , (x+2)": the factorisation was right, and the
+// exact-string grader rejected the comma and the space. Multiplication
+// commutes, so either order is the same factorisation.
+func (g *factorTrinomialGen) Grade(expected, userAnswer string) grader.Result {
+	want := normaliseFactors(expected)
+	got := normaliseFactors(userAnswer)
+	if got != "" && (got == want || got == swapFactorOrder(want)) {
+		return grader.Result{Correct: true, Score: 1}
+	}
+	return grader.Result{
+		Correct:  false,
+		Score:    0,
+		Feedback: "Multiply the two binomials to check that they give the original expression.",
+	}
+}
+
+func normaliseFactors(value string) string {
+	r := strings.NewReplacer(" ", "", "\t", "", ",", "", "·", "", "⋅", "", "×", "", "*", "")
+	return strings.ToLower(strings.TrimSpace(r.Replace(value)))
+}
+
+func swapFactorOrder(product string) string {
+	middle := strings.Index(product, ")(")
+	if middle < 0 || !strings.HasSuffix(product, ")") {
+		return ""
+	}
+	return product[middle+2:] + product[:middle+1]
+}
+
 func (g *factorTrinomialGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	r1 := rand.Intn(6) + 1
 	r2 := rand.Intn(6) + 1
 	b := r1 + r2
 	c := r1 * r2
 	return generator.Problem{
-		Question:    fmt.Sprintf("Factor: \\(x^{2} + %dx + %d\\)", b, c),
+		Question:    fmt.Sprintf("Factor: \\(x^{2} + %dx + %d\\). Write the product of two binomials. (enter a product)", b, c),
 		Answer:      fmt.Sprintf("(x + %d)(x + %d)", r1, r2),
 		Explanation: fmt.Sprintf("Find two numbers that multiply to %d and add to %d: %d and %d.", c, b, r1, r2),
 		Facts:       map[string]string{"q": formatQuadratic(b, c), "b": strconv.Itoa(b), "c": strconv.Itoa(c), "r1": strconv.Itoa(r1), "r2": strconv.Itoa(r2)},

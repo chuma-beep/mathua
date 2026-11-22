@@ -3,6 +3,7 @@ package prealgebra
 import (
 	"math/rand"
 	"strconv"
+	"strings"
 	"testing"
 
 	"github.com/chuma-beep/mathua/internal/generator"
@@ -57,6 +58,33 @@ func TestRatioSimplifyAcceptsSlash(t *testing.T) {
 	for _, c := range cases {
 		if got := g.Grade("2:7", c.answer).Correct; got != c.want {
 			t.Errorf("Grade(2:7, %q) = %v, want %v", c.answer, got, c.want)
+		}
+	}
+}
+
+// Report 499: the infinite-solutions wording defined only 0 and 1, then asked
+// for the code for infinitely many solutions, which is 2. Every ordinal now
+// states all three codes.
+func TestNoSolutionPromptDefinesEveryCode(t *testing.T) {
+	g := &w11bNoSolutionGen{}
+	codes := []string{
+		"Enter zero when there is no solution",
+		"one when there is exactly one solution",
+		"two when every number is a solution",
+	}
+	for _, kp := range []int{1, 2, 3} {
+		for i := 0; i < 40; i++ {
+			p := g.Generate(generator.GeneratorContext{KPOrdinal: kp})
+			for _, want := range codes {
+				if !strings.Contains(p.Question, want) {
+					t.Fatalf("kp%d question does not state %q: %q", kp, want, p.Question)
+				}
+			}
+			switch p.Answer {
+			case "0", "1", "2":
+			default:
+				t.Fatalf("kp%d answered %q, which is not one of the codes", kp, p.Answer)
+			}
 		}
 	}
 }
