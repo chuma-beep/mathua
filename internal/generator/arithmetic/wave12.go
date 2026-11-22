@@ -286,13 +286,16 @@ func w12MultPowers(kp int) generator.Problem {
 
 func w12MultThreeThree(kp int) generator.Problem {
 	var a, b int
+	// Every ordinal stays inside three digits. The lesson is titled
+	// "Multiplying two three-digit numbers" and a fourth digit contradicted it
+	// (report 502); the ordinals climb by band instead.
 	switch kp {
 	case 1:
 		a, b = w12R(100, 399), w12R(100, 399)
 	case 2:
-		a, b = w12R(400, 999), w12R(400, 999)
+		a, b = w12R(400, 699), w12R(400, 699)
 	default:
-		a, b = w12R(1000, 9999), w12R(100, 999)
+		a, b = w12R(700, 999), w12R(700, 999)
 	}
 	f := map[string]string{}
 	w12I(f, "a", a)

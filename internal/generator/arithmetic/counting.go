@@ -36,7 +36,18 @@ func countArithVerdicts(lead string, pool []arithVerdict) generator.Problem {
 	var chosen []arithVerdict
 	var question string
 	for attempt := 0; attempt < 40; attempt++ {
-		count = rand.Intn(arithDraw + 1)
+		// A draw of every true item or every false item is the same set each
+		// time the pool has exactly arithDraw entries, which a learner read as
+		// repeated questions (report 501). Keep both groups represented
+		// whenever the pool allows it.
+		lo, hi := 0, arithDraw
+		if len(yes) > 0 {
+			lo = 1
+		}
+		if len(no) > 0 {
+			hi = arithDraw - 1
+		}
+		count = lo + rand.Intn(hi-lo+1)
 		if count > len(yes) {
 			count = len(yes)
 		}

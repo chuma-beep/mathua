@@ -411,7 +411,7 @@ func (g *w11bNoSolutionGen) Generate(ctx generator.GeneratorContext) generator.P
 			b = 2 + rand.Intn(8)
 			d = 2 + rand.Intn(8)
 			ans = 1
-			q = fmt.Sprintf("How many solutions does the equation %s have? Enter 0 when there is no solution and 2 when every number is a solution, otherwise enter the exact count. (enter a number)", w11bEquation(a, b, c, d))
+			q = fmt.Sprintf("How many solutions does the equation %s have? Enter zero when there is no solution, one when there is exactly one solution and two when every number is a solution. (enter a number)", w11bEquation(a, b, c, d))
 			ex = fmt.Sprintf("Subtract %dx from both sides: (%d - %d)x = %d - %d. The coefficient of x is not zero, so there is exactly one solution.", c, a, c, d, b)
 		case 2:
 			a = 2 + rand.Intn(8)
@@ -422,7 +422,7 @@ func (g *w11bNoSolutionGen) Generate(ctx generator.GeneratorContext) generator.P
 				d = 2 + rand.Intn(8)
 			}
 			ans = 0
-			q = fmt.Sprintf("How many solutions does the equation %s have? Enter 1 when there is exactly one solution and 2 when every number is a solution, otherwise enter the number of solutions. (enter a number)", w11bEquation(a, b, c, d))
+			q = fmt.Sprintf("How many solutions does the equation %s have? Enter zero when there is no solution, one when there is exactly one solution and two when every number is a solution. (enter a number)", w11bEquation(a, b, c, d))
 			ex = fmt.Sprintf("Subtract %dx from both sides: 0 = %d - %d, which is false, so no value of x works.", c, d, b)
 		default:
 			a = 3 + rand.Intn(7)
@@ -430,7 +430,7 @@ func (g *w11bNoSolutionGen) Generate(ctx generator.GeneratorContext) generator.P
 			c = a
 			d = b
 			ans = 2
-			q = fmt.Sprintf("The equation %s is true for every value of x, so it has infinitely many solutions. In the convention where 0 means no solution and 1 means exactly one solution, how many solutions does it have? (enter a number)", w11bEquation(a, b, c, d))
+			q = fmt.Sprintf("How many solutions does the equation %s have? Enter zero when there is no solution, one when there is exactly one solution and two when every number is a solution. (enter a number)", w11bEquation(a, b, c, d))
 			ex = "Both sides are identical, so every value of x is a solution."
 		}
 		w11bI(facts, "a", a)

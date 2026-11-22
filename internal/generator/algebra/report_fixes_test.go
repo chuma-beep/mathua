@@ -1,8 +1,10 @@
 package algebra
 
 import (
+	"fmt"
 	"regexp"
 	"strconv"
+	"strings"
 	"testing"
 
 	"github.com/chuma-beep/mathua/internal/generator"
@@ -98,6 +100,35 @@ func TestEqRationalPrintedEquationMatchesAnswer(t *testing.T) {
 		}
 		if x < 2 {
 			t.Fatalf("answer %d is below the intended range for %q", x, p.Question)
+		}
+	}
+}
+
+// Report 500: the learner factored the trinomial correctly but separated the
+// two binomials with a comma and spaces, and the exact-string grader rejected
+// it. Order is irrelevant too: multiplication commutes.
+func TestFactorTrinomialGradeIgnoresSeparatorsAndOrder(t *testing.T) {
+	g := &factorTrinomialGen{}
+	for i := 0; i < 40; i++ {
+		p := g.Generate(generator.GeneratorContext{})
+		if !strings.Contains(p.Question, "product of two binomials") {
+			t.Fatalf("question does not name the expected form: %q", p.Question)
+		}
+		compact := strings.ReplaceAll(p.Answer, " ", "")
+		if compact == p.Answer {
+			t.Fatalf("answer has no spaces to vary: %q", p.Answer)
+		}
+		comma := strings.Replace(compact, ")(", ") , (", 1)
+		swapped := swapFactorOrder(compact)
+		for _, answer := range []string{compact, comma, swapped, "  " + comma + "  "} {
+			if res := g.Grade(p.Answer, answer); !res.Correct {
+				t.Fatalf("Grade(%q, %q) rejected a correct factorisation: %+v", p.Answer, answer, res)
+			}
+		}
+		r1, _ := strconv.Atoi(p.Facts["r1"])
+		wrong := fmt.Sprintf("(x + %d)(x + %d)", r1+1, r1+1)
+		if res := g.Grade(p.Answer, wrong); res.Correct {
+			t.Fatalf("Grade accepted %q for %q", wrong, p.Question)
 		}
 	}
 }
