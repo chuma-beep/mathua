@@ -471,14 +471,10 @@ export default function QuizHost() {
                   the learner had read it rather than what they knew. Instruction lives in Learn,
                   reached deliberately, one concept at a time. */}
               <KatexContent className="text-mathua-secondary text-sm">{quizLastResult.feedback}</KatexContent>
-              {!quizLastResult.correct && quizLastResult.conceptId && (
-                <Link
-                  href={`/learn?concept=${encodeURIComponent(quizLastResult.conceptId)}`}
-                  className="mt-3 inline-flex items-center border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-4 py-2 font-mono text-[11px] uppercase tracking-[0.18em]"
-                >
-                  Learn this concept →
-                </Link>
-              )}
+              {/* No Learn link between questions. The quiz is an assessment too,
+                  and the completion screen already lists the missed concepts
+                  under "Focus next in Learn". Offering the lesson here would let
+                  a learner leave the run and return with the answer. */}
               <XPAdjustmentNote
                 adjustment={quizLastResult.xpAdjustment}
                 note={quizLastResult.xpNote}

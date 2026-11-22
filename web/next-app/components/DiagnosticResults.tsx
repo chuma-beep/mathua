@@ -15,6 +15,10 @@ export default function DiagnosticResults({ plan, onStartPractice }: Props) {
   const [expanded, setExpanded] = useState<string | null>(null)
 
   const domains = new Set([...Object.keys(plan.weak_areas), ...Object.keys(plan.strong_areas)])
+  // One deliberate route into instruction. The per-question link was removed
+  // from the assessment, so the results screen has to name the first gap rather
+  // than bury every weak topic inside a collapsed domain.
+  const firstWeak = Array.from(domains).flatMap((domain) => plan.weak_areas[domain] ?? [])[0]
   const readinessPct = Math.round(plan.readiness * 100)
   const estimates = plan.completion_estimates ? Object.entries(plan.completion_estimates).sort((a, b) => Number(a[0]) - Number(b[0])) : []
 
@@ -106,11 +110,23 @@ export default function DiagnosticResults({ plan, onStartPractice }: Props) {
         })}
       </div>
 
-      {onStartPractice && (
+      {(firstWeak || onStartPractice) && (
         <div className="text-center">
-          <button type="button" onClick={onStartPractice} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-10 h-12 font-mono text-sm">
-            Start practicing →
-          </button>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            {firstWeak && (
+              <Link
+                href={`/learn?concept=${encodeURIComponent(firstWeak.id)}`}
+                className="inline-flex h-12 items-center border border-mathua-blue px-8 font-mono text-sm text-mathua-blue hover:bg-mathua-blue-faint"
+              >
+                Learn {firstWeak.label} →
+              </Link>
+            )}
+            {onStartPractice && (
+              <button type="button" onClick={onStartPractice} className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue px-10 h-12 font-mono text-sm">
+                Start practicing →
+              </button>
+            )}
+          </div>
           <div className="mt-3">
             <Link href="/history" className="font-mono text-xs text-mathua-muted hover:text-mathua-primary">
               Every question you&apos;ve answered →

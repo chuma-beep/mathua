@@ -53,4 +53,29 @@ describe('DiagnosticResults', () => {
     render(<DiagnosticResults plan={base} />)
     expect(screen.queryByText(/Start here:/)).toBeNull()
   })
+
+  it('names the first weak concept as the route into Learn', () => {
+    render(
+      <DiagnosticResults
+        plan={{
+          ...base,
+          weak_areas: { arithmetic: [{ id: 'arith.add', label: 'Adding fractions' }] },
+        }}
+        onStartPractice={() => {}}
+      />,
+    )
+    const learn = screen.getByRole('link', { name: /Learn Adding fractions/ })
+    expect(learn).toHaveAttribute('href', '/learn?concept=arith.add')
+    expect(screen.getByRole('button', { name: 'Start practicing →' })).toBeInTheDocument()
+  })
+
+  it('does not offer a lesson when nothing is weak', () => {
+    render(
+      <DiagnosticResults
+        plan={{ ...base, weak_areas: { arithmetic: [] } }}
+        onStartPractice={() => {}}
+      />,
+    )
+    expect(screen.queryByRole('link', { name: /Learn / })).toBeNull()
+  })
 })
