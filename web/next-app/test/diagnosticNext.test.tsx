@@ -439,7 +439,7 @@ describe('onboard diagnostic flow', () => {
     now.mockRestore()
   })
 
-  it('shows no solution on a wrong diagnostic answer, and routes the miss to Learn', async () => {
+  it('shows no solution on a wrong diagnostic answer, and keeps teaching out of the test', async () => {
     vi.mocked(submitGoalAnswer).mockResolvedValueOnce({
       done: false,
       correct: false,
@@ -458,7 +458,9 @@ describe('onboard diagnostic flow', () => {
     expect(await screen.findByText(/Not quite/)).toBeInTheDocument()
     expect(screen.queryByText(/count on from 2/)).toBeNull()
     expect(screen.queryByText(/one away/)).toBeNull()
-    expect(screen.getByRole('link', { name: /Learn this concept/ })).toHaveAttribute('href', '/learn?concept=c1')
+    // The verdict is assessment only. Remediation is named on the results
+    // screen, so a mid-test lesson link must not come back.
+    expect(screen.queryByRole('link', { name: /Learn this concept/ })).toBeNull()
   })
 
   it('shows the error block with Retry and Skip on submit failure', async () => {
@@ -612,7 +614,7 @@ describe('QuizHost manual advance', () => {
   // the served solution was shown on both verdicts, which meant a learner could read the answer
   // to a question they had just been measured on, and the questions after it measured whether
   // they had read rather than what they knew.
-  it('shows no solution on a wrong quiz answer, and routes the miss to Learn', async () => {
+  it('shows no solution on a wrong quiz answer, and keeps teaching out of the quiz', async () => {
     vi.mocked(submitQuizAnswer).mockResolvedValueOnce({
       done: false,
       correct: false,
@@ -635,9 +637,8 @@ describe('QuizHost manual advance', () => {
     expect(await screen.findByText('✗ Not quite')).toBeInTheDocument()
     // The verdict, and no worked solution anywhere on the page.
     expect(screen.queryByText(/start at 3 and count on 5/)).toBeNull()
-    // The one route to instruction leaves the assessment for the concept just answered.
-    const learn = screen.getByRole('link', { name: /Learn this concept/ })
-    expect(learn).toHaveAttribute('href', '/learn?concept=c1')
+    // Remediation waits for the completion screen's "Focus next in Learn" list.
+    expect(screen.queryByRole('link', { name: /Learn this concept/ })).toBeNull()
   })
 
   it('shows no solution on a correct quiz answer either', async () => {
@@ -670,7 +671,7 @@ describe('QuizHost manual advance', () => {
   // that regressed to sending `explanation` and `diagnosis` would still not put the answer on
   // screen. The response is cast past the type on purpose: the type no longer has these fields,
   // and the point is that the rendering does not depend on the type being honest.
-  it('does not render a solution even if one arrives, and routes the miss to Learn', async () => {
+  it('does not render a solution even if one arrives, and defers the lesson to the end', async () => {
     vi.mocked(submitQuizAnswer).mockResolvedValueOnce({
       done: false,
       correct: false,
@@ -695,7 +696,7 @@ describe('QuizHost manual advance', () => {
     expect(await screen.findByText('✗ Not quite')).toBeInTheDocument()
     expect(screen.queryByText(/start at 3 and count on 5/)).toBeNull()
     expect(screen.queryByText(/one away/)).toBeNull()
-    expect(screen.getByRole('link', { name: /Learn this concept/ })).toHaveAttribute('href', '/learn?concept=c1')
+    expect(screen.queryByRole('link', { name: /Learn this concept/ })).toBeNull()
   })
 
   it('QuizHost shows the error block and Skip advances without XP', async () => {

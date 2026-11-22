@@ -387,24 +387,18 @@ export function DiagnosticStep({
         {lastResult && (
           <div className={`bg-mathua-surface border rounded-none p-4 mb-4 text-center ${lastResult.correct ? 'border-mathua-green' : 'border-mathua-red'}`}>
             <KatexContent className={lastResult.correct ? 'text-mathua-green' : 'text-mathua-red'}>{lastResult.feedback}</KatexContent>
-            {/* A miss offers the teaching surface as a deliberate next step, not
-                as the answer. The feedback above is a verdict; this is the only
-                route from it to an explanation, and it leaves the assessment
-                rather than injecting instruction into it. */}
-            {!lastResult.correct && !done && conceptId && (
-              <Link
-                href={`/learn?concept=${encodeURIComponent(conceptId)}`}
-                className="mt-3 inline-flex items-center border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-4 py-2 font-mono text-[11px] uppercase tracking-[0.18em]"
-              >
-                Learn this concept →
-              </Link>
-            )}
+            {/* The verdict is an assessment action, not a teaching one. A Learn
+                link here invited the learner to leave the adaptive run, biased
+                the questions that followed if they returned, and duplicated the
+                weak-concept links DiagnosticResults already provides. The retry
+                stays because it repairs an input mistake on the same question
+                instead of changing mode. Instruction waits for the results. */}
             {!lastResult.correct && !done && retryAvailable && (
               <button
                 type="button"
                 onClick={onRetryQuestion}
                 disabled={loading}
-                className="mt-2 font-mono text-[11px] text-mathua-muted hover:text-mathua-blue underline underline-offset-2 disabled:opacity-50"
+                className="mt-3 font-mono text-[11px] text-mathua-muted hover:text-mathua-blue underline underline-offset-2 disabled:opacity-50"
               >
                 I made a silly mistake, retry
               </button>
