@@ -14,6 +14,7 @@ import { resolveAvatar } from '../lib/dicebear'
 import Avatar from './Avatar'
 import ReportUpdatesBadge from './ReportUpdatesBadge'
 import { getSettings } from '../lib/api'
+import { formatStarCount, loadGitHubStars } from '../lib/githubStars'
 import { desktopLinks, overflowLinks, type HeaderLink } from '../lib/nav'
 
 interface HeaderProps {
@@ -58,6 +59,16 @@ export default function Header({ links }: HeaderProps) {
   const sunMoonRef = useRef<IconHandle>(null)
   const githubRef = useRef<IconHandle>(null)
   const githubMenuRef = useRef<IconHandle>(null)
+  // Start empty so the server render and the first client render agree; the
+  // cached or fetched count arrives in the effect and only changes the label.
+  const [stars, setStars] = useState<number | null>(null)
+  useEffect(() => {
+    let live = true
+    void loadGitHubStars().then((count) => {
+      if (live && count !== null) setStars(count)
+    })
+    return () => { live = false }
+  }, [])
 
   function prefersReducedMotion(): boolean {
     return (
@@ -308,15 +319,21 @@ export default function Header({ links }: HeaderProps) {
                 href="https://github.com/chuma-beep/mathua"
                 target="_blank"
                 rel="noreferrer"
-                aria-label="Give us a star on GitHub"
+                aria-label="Star Mathua on GitHub"
+                title={stars !== null ? `${stars.toLocaleString()} GitHub stars` : 'Star Mathua on GitHub'}
                 onMouseEnter={() => animateGithub(githubRef)}
                 onMouseLeave={() => githubRef.current?.stopAnimation()}
                 className="group flex h-11 items-center gap-1.5 font-mono text-xs leading-none whitespace-nowrap text-mathua-muted transition-colors hover:text-mathua-blue"
               >
                 <Github ref={githubRef} size={15} isAnimated={false} />
                 <span className="relative after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-mathua-blue after:transition-transform after:duration-200 after:ease-out after:content-[''] group-hover:after:scale-x-100">
-                  Give us a star
+                  Star
                 </span>
+                {stars !== null && (
+                  <span aria-hidden="true" className="tabular-nums text-[10px] text-mathua-muted">
+                    {formatStarCount(stars)}
+                  </span>
+                )}
               </a>
               <span aria-hidden="true" className="ml-3 h-4 w-px shrink-0 self-center bg-mathua-border" />
             </span>
@@ -417,13 +434,19 @@ export default function Header({ links }: HeaderProps) {
                         role="menuitem"
                         target="_blank"
                         rel="noreferrer"
+                        aria-label="Star Mathua on GitHub"
                         onClick={() => setNavOpen(false)}
                         onMouseEnter={() => animateGithub(githubMenuRef)}
                         onMouseLeave={() => githubMenuRef.current?.stopAnimation()}
                         className="flex items-center gap-2 min-h-[44px] border-t border-mathua-border px-4 font-mono text-xs whitespace-nowrap text-mathua-muted transition-colors hover:bg-mathua-surface-elevated hover:text-mathua-blue"
                       >
                         <Github ref={githubMenuRef} size={15} isAnimated={false} />
-                        Give us a star
+                        Star
+                        {stars !== null && (
+                          <span aria-hidden="true" className="tabular-nums text-[10px] text-mathua-muted">
+                            {formatStarCount(stars)}
+                          </span>
+                        )}
                       </a>
                     </div>
                   </div>

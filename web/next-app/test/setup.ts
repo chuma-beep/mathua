@@ -68,6 +68,21 @@ if (typeof globalThis.IntersectionObserver === 'undefined') {
   })
 }
 
+// The header reads the public star count through this site's API. Tests must
+// not reach the network, so answer that one path locally and leave every other
+// fetch alone. A suite that wants a different count replaces `fetch` itself.
+const nativeFetch = globalThis.fetch
+globalThis.fetch = ((input: RequestInfo | URL, init?: RequestInit) => {
+  const url = typeof input === 'string' ? input : input instanceof URL ? input.href : input.url
+  if (url.endsWith('/api/github-stars')) {
+    return Promise.resolve({
+      ok: true,
+      json: async () => ({ count: 0 }),
+    } as unknown as Response)
+  }
+  return nativeFetch(input, init)
+}) as typeof fetch
+
 afterEach(() => {
   cleanup()
 })

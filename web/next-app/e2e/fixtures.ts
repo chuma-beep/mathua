@@ -60,6 +60,13 @@ export const test = base.extend({
     // The anonymous shell. Every page asks these three before it draws anything, and a visitor with
     // no account is the state they answer: no session, default settings, a server that is up. A
     // spec that wants a signed-in learner registers its own route and wins, because it is later.
+    // The header asks the same-origin star count so the browser never calls
+    // GitHub. The static export has no API routes, so that request would 404 and
+    // log a console error on every page, which the console-free specs treat as a
+    // failure. Production answers it through the Worker, so answer it here too.
+    await context.route('**/api/github-stars**', (route) =>
+      route.fulfill({ json: { count: 1234 } }),
+    )
     await context.route('**/api/auth/me**', (route) =>
       route.fulfill({ status: 401, json: { error: 'unauthorized' } }),
     )
