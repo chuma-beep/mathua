@@ -290,8 +290,11 @@ export default function AppShell({ children, ...overrides }: AppShellProps) {
           {/* A block child keeps page wrappers with mx-auto centred and full
               width. As flex items their auto margins would shrink-wrap them.
               It also fills the inset and pushes a direct footer to the bottom,
-              so a short page never leaves empty background under the footer. */}
-          <div className="flex w-full min-w-0 flex-1 flex-col [&>*]:w-full [&>footer]:mt-auto">{children}</div>
+              so a short page never leaves empty background under the footer.
+              The content grows, rather than the footer's margin being auto,
+              because auto margin would swallow the footer's own top margin on
+              a tall page and leave the footer touching the last section. */}
+          <div className="flex w-full min-w-0 flex-1 flex-col [&>*]:w-full [&>*:first-child:not(footer)]:grow">{children}</div>
         </SidebarInset>
       </SidebarProvider>
       <BottomTabs />

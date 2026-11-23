@@ -181,7 +181,11 @@ export default function Footer({ className = '' }: FooterProps) {
       // matching media query.
       data-tone-desktop={art.desktop.tone}
       data-tone-mobile={art.mobile.tone}
-      className={`footer relative mt-[10px] border-t border-mathua-border ${className}`}
+      // The footer is a separate region, not the last row of the page. 10px
+      // read as a collapsed border, so the gap is now a real margin that holds
+      // on every page. The shell grows the content above rather than making
+      // this margin auto, so a short page still pins the footer to the bottom.
+      className={`footer relative mt-12 border-t border-mathua-border sm:mt-16 ${className}`}
     >
       {/* Artwork and text share one grid cell. The row is max(image, content):
           the picture sets the height when it is the taller of the two, and the
