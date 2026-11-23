@@ -6,6 +6,10 @@ const sample = conceptsData as Array<{ id: string; label: string; domain: string
 
 test.beforeEach(async ({ context }) => {
   await context.route('**/api/**', route => route.fulfill({ status: 404, body: '' }))
+  // The header asks for the star count on every page. The catch-all above is
+  // registered first, so it wins unless this more specific route follows it,
+  // and the 404 would be logged by the console-free checks on this surface.
+  await context.route('**/api/github-stars**', route => route.fulfill({ json: { count: 1234 } }))
 })
 
 async function overflowPx(page: Page): Promise<number> {
