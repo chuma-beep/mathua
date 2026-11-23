@@ -32,7 +32,7 @@ describe('loadGitHubStars', () => {
 	it('reads once and serves the cached count afterwards', async () => {
 		const fetchMock = vi.fn().mockResolvedValue({
 			ok: true,
-			json: async () => ({ stargazers_count: 1234 }),
+			json: async () => ({ count: 1234 }),
 		})
 		vi.stubGlobal('fetch', fetchMock)
 

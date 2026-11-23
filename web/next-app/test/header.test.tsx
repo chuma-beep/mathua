@@ -72,7 +72,7 @@ beforeEach(() => {
   window.localStorage.clear()
   fetchMock.mockReset().mockResolvedValue({
     ok: true,
-    json: async () => ({ stargazers_count: 1234 }),
+    json: async () => ({ count: 1234 }),
   })
   vi.stubGlobal('fetch', fetchMock)
 })
@@ -325,7 +325,7 @@ describe('Header mobile nav menu', () => {
     render(<Header />)
     expect(await screen.findByText('1.2k')).toBeInTheDocument()
     expect(fetchMock).toHaveBeenCalledTimes(1)
-    expect(String(fetchMock.mock.calls[0][0])).toBe('https://api.github.com/repos/chuma-beep/mathua')
+    expect(String(fetchMock.mock.calls[0][0])).toBe('/api/github-stars')
     expect(screen.getByRole('link', { name: 'Star Mathua on GitHub' }))
       .toHaveAttribute('title', '1,234 GitHub stars')
   })

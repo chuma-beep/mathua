@@ -205,6 +205,9 @@ type Server struct {
 	// written, so the edge header and device class cost one small upsert per learner per day
 	// rather than one write on every authenticated request. See noteActivity.
 	countrySeen sync.Map
+	// stars holds the GitHub star count the header shows. It is cached here
+	// so browsers never call GitHub directly. See handleGitHubStars.
+	stars githubStarsCache
 	// turnstileSecret enables the Cloudflare Turnstile check on signup and
 	// password login. An empty value disables it, so a deployment without a
 	// widget keeps working. The URL and client are fields for tests.
@@ -680,6 +683,9 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/quiz/answer", logRequest(cors(s.optionalAuthMiddleware(s.writeLimiter.middleware(gradingTimeout(gradingDeadline, s.handleQuizAnswer))))))
 	mux.HandleFunc("/api/quiz/skip", logRequest(cors(s.optionalAuthMiddleware(s.writeLimiter.middleware(s.handleQuizSkip)))))
 	mux.HandleFunc("/api/health", logRequest(cors(getOnly(s.handleHealth))))
+	// The star count is public and read by the site header. It is cached here
+	// so the browser asks this origin rather than GitHub.
+	mux.HandleFunc("/api/github-stars", logRequest(cors(getOnly(s.handleGitHubStars))))
 	mux.HandleFunc("/api/activity", logRequest(cors(s.authMiddleware(s.handleActivity))))
 	mux.HandleFunc("/api/efficacy", logRequest(cors(s.authMiddleware(s.handleEfficacy))))
 	mux.HandleFunc("/api/efficacy/all", logRequest(cors(s.shareLimiter.middleware(s.handleEfficacyAll))))

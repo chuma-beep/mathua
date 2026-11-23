@@ -1,10 +1,8 @@
-// The star count is public data, read from GitHub in the browser. It is cached
-// for six hours because the unauthenticated API allows sixty requests an hour
-// per address, and a header that fetched on every navigation would spend that
-// budget on one reader. A failure simply leaves the label as "Star", never an
-// error in the chrome.
+// The star count is public data, proxied through this site's API so the browser
+// never calls GitHub. The server caches it for six hours; this cache keeps a
+// reader from asking on every navigation. A failure simply leaves the label as
+// "Star", never an error in the chrome.
 
-const REPO = 'chuma-beep/mathua'
 const CACHE_KEY = 'mathua:github-stars:v1'
 const MAX_AGE_MS = 6 * 60 * 60 * 1000
 
@@ -52,12 +50,10 @@ export async function loadGitHubStars(): Promise<number | null> {
 	const cached = readCached(now)
 	if (cached !== null) return cached
 	try {
-		const res = await fetch(`https://api.github.com/repos/${REPO}`, {
-			headers: { Accept: 'application/vnd.github+json' },
-		})
+		const res = await fetch('/api/github-stars')
 		if (!res.ok) return null
-		const body = (await res.json()) as { stargazers_count?: unknown }
-		const count = body.stargazers_count
+		const body = (await res.json()) as { count?: unknown }
+		const count = body.count
 		if (typeof count !== 'number' || !Number.isFinite(count)) return null
 		writeCached(count, now)
 		return count
