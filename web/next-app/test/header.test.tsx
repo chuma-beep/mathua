@@ -62,8 +62,23 @@ vi.mock('../lib/api', async importOriginal => ({
   getSettings: getSettingsMock,
 }))
 
+// The star count reads GitHub once per page load. Tests must not depend on the
+// network or on a cached value from another test, so every case gets a fresh
+// response and an empty cache.
+const fetchMock = vi.fn()
+
 beforeEach(() => {
   getSettingsMock.mockReset().mockResolvedValue({})
+  window.localStorage.clear()
+  fetchMock.mockReset().mockResolvedValue({
+    ok: true,
+    json: async () => ({ stargazers_count: 1234 }),
+  })
+  vi.stubGlobal('fetch', fetchMock)
+})
+
+afterEach(() => {
+  vi.unstubAllGlobals()
 })
 
 describe('Header mobile nav menu', () => {
@@ -158,11 +173,13 @@ describe('Header mobile nav menu', () => {
     render(<Header />)
     fireEvent.click(screen.getByRole('button', { name: 'Open navigation menu' }))
     const items = screen.getAllByRole('menuitem')
-    const labels = items.map(i => i.textContent)
+    // The star item carries a count once GitHub answers ("Star1.2k"), which is
+    // deliberately part of its text. Compare the labels, not the number.
+    const labels = items.map(i => i.textContent?.replace(/\d[\d.]*k?$/, ''))
     // Whatever is left after the tab bar is subtracted out. Domains is not here: it holds a
     // tab, having taken the slot the closed Study route occupied, so it is always one tap away
     // on mobile instead of hiding one level deep.
-    expect(labels).toEqual(['Leaderboard', 'Glossary', 'Contact', 'Login', 'Discord', 'Give us a star'])
+    expect(labels).toEqual(['Leaderboard', 'Glossary', 'Contact', 'Login', 'Discord', 'Star'])
     const hrefs = items.map(i => (i as HTMLAnchorElement).getAttribute('href'))
     expect(hrefs).toEqual(['/leaderboard', '/glossary', '/contact', '/login', 'https://discord.gg/qXPeQ2jys', 'https://github.com/chuma-beep/mathua'])
     // The invariant behind the exact list: nothing appears twice on one screen.
@@ -187,8 +204,8 @@ describe('Header mobile nav menu', () => {
     )
     fireEvent.click(screen.getByRole('button', { name: 'Open navigation menu' }))
     const menu = screen.getByRole('menu', { name: 'Site navigation' })
-    const labels = within(menu).getAllByRole('menuitem').map(i => i.textContent)
-    expect(labels).toEqual(['Graph', 'Docs', 'Architecture', 'Contributing', 'Note', 'Discord', 'Give us a star'])
+    const labels = within(menu).getAllByRole('menuitem').map(i => i.textContent?.replace(/\d[\d.]*k?$/, ''))
+    expect(labels).toEqual(['Graph', 'Docs', 'Architecture', 'Contributing', 'Note', 'Discord', 'Star'])
   })
 
   it('folds secondary signed-in destinations into a desktop More menu', () => {
@@ -297,18 +314,27 @@ describe('Header mobile nav menu', () => {
 
   it('offers the GitHub star link beside the theme control', () => {
     render(<Header />)
-    const link = screen.getByRole('link', { name: 'Give us a star on GitHub' })
+    const link = screen.getByRole('link', { name: 'Star Mathua on GitHub' })
     expect(link).toHaveAttribute('href', 'https://github.com/chuma-beep/mathua')
     expect(link).toHaveAttribute('target', '_blank')
     expect(link).toHaveAttribute('rel', 'noreferrer')
-    expect(within(link).getByText('Give us a star')).toBeInTheDocument()
+    expect(within(link).getByText('Star')).toBeInTheDocument()
+  })
+
+  it('shows the star count GitHub reports', async () => {
+    render(<Header />)
+    expect(await screen.findByText('1.2k')).toBeInTheDocument()
+    expect(fetchMock).toHaveBeenCalledTimes(1)
+    expect(String(fetchMock.mock.calls[0][0])).toBe('https://api.github.com/repos/chuma-beep/mathua')
+    expect(screen.getByRole('link', { name: 'Star Mathua on GitHub' }))
+      .toHaveAttribute('title', '1,234 GitHub stars')
   })
 
   it('offers the labelled star link from the mobile navigation menu', () => {
     render(<Header />)
     fireEvent.click(screen.getByRole('button', { name: 'Open navigation menu' }))
     const menu = screen.getByRole('menu', { name: 'Site navigation' })
-    const link = within(menu).getByRole('menuitem', { name: 'Give us a star' })
+    const link = within(menu).getByRole('menuitem', { name: 'Star Mathua on GitHub' })
     expect(link).toHaveAttribute('href', 'https://github.com/chuma-beep/mathua')
     expect(link).toHaveAttribute('target', '_blank')
     expect(link).toHaveAttribute('rel', 'noreferrer')
@@ -508,7 +534,7 @@ describe('the beta sign', () => {
     const badge = screen.getByText('beta')
     expect(badge).toBeVisible()
     expect(badge.getAttribute('title')).toMatch(/still moving/)
-    const wordmark = screen.getByRole('link', { name: /Mathua/ })
+    const wordmark = screen.getByRole('link', { name: 'λ Mathua' })
     expect(wordmark.parentElement?.contains(badge)).toBe(true)
   })
 })
