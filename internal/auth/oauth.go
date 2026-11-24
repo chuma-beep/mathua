@@ -90,27 +90,36 @@ func oauthPostForm(ctx context.Context, url string, form url.Values, out interfa
 
 // ProviderConfigured reports which OAuth providers have credentials set.
 // Used by /api/config so the frontend renders exactly those buttons.
+// ProviderConfigured reports whether the provider has everything the
+// exchange needs, not just its client id. The config endpoint uses this list
+// to decide which buttons to render, so a half-set provider (an id without a
+// secret, or Apple without its signing key) would otherwise show a button
+// that can only fail after the learner has left the site.
 func ProviderConfigured(provider string) bool {
 	switch provider {
 	case "google":
+		// Google keeps its bespoke handler; an id alone is enough for One Tap.
 		return googleClientID() != ""
 	case "github":
-		return strings.TrimSpace(os.Getenv("GITHUB_CLIENT_ID")) != ""
+		return strings.TrimSpace(os.Getenv("GITHUB_CLIENT_ID")) != "" &&
+			strings.TrimSpace(os.Getenv("GITHUB_CLIENT_SECRET")) != ""
 	case "facebook":
-		return strings.TrimSpace(os.Getenv("FACEBOOK_APP_ID")) != "" ||
-			strings.TrimSpace(os.Getenv("FACEBOOK_CLIENT_ID")) != ""
+		return facebookAppID() != "" && facebookAppSecret() != ""
 	case "microsoft":
-		return strings.TrimSpace(os.Getenv("MICROSOFT_CLIENT_ID")) != ""
-	case "apple":
-		return strings.TrimSpace(os.Getenv("APPLE_CLIENT_ID")) != ""
+		return strings.TrimSpace(os.Getenv("MICROSOFT_CLIENT_ID")) != "" &&
+			strings.TrimSpace(os.Getenv("MICROSOFT_CLIENT_SECRET")) != ""
 	}
+	// Apple is deliberately not offered: it needs a paid developer account and
+	// its button follows separate guidelines. The driver stays in the tree so
+	// the decision can be reversed without rewriting the exchange, but no
+	// credential turns it on.
 	return false
 }
 
 // ConfiguredProviders lists providers in display order.
 func ConfiguredProviders() []string {
 	var out []string
-	for _, p := range []string{"google", "github", "facebook", "microsoft", "apple"} {
+	for _, p := range []string{"google", "github", "facebook", "microsoft"} {
 		if ProviderConfigured(p) {
 			out = append(out, p)
 		}

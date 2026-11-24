@@ -244,11 +244,12 @@ describe('LoginPage', () => {
   })
 
   it('renders one button per configured non-google provider', async () => {
-    getConfigMock.mockResolvedValue({ auth_enabled: true, providers: ['google', 'github', 'apple'] })
+    getConfigMock.mockResolvedValue({ auth_enabled: true, providers: ['google', 'github', 'facebook'] })
     render(<LoginPage />)
     expect(await screen.findByRole('button', { name: 'Continue with GitHub' })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: 'Continue with Apple' })).toBeInTheDocument()
-    expect(screen.queryByRole('button', { name: 'Continue with Facebook' })).toBeNull()
+    expect(screen.getByRole('button', { name: 'Continue with Facebook' })).toBeInTheDocument()
+    // Apple is not offered, so a config that lists it still must not render it.
+    expect(screen.queryByRole('button', { name: 'Continue with Apple' })).toBeNull()
   })
 
   it('shows the reset form even when a session is already stored', async () => {

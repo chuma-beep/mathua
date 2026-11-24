@@ -141,12 +141,14 @@ func TestOAuth_CallbackURL(t *testing.T) {
 
 func TestOAuth_ConfiguredProviders(t *testing.T) {
 	// Clean all credentials
-	t.Setenv("GOOGLE_CLIENT_ID", "")
-	t.Setenv("GITHUB_CLIENT_ID", "")
-	t.Setenv("FACEBOOK_APP_ID", "")
-	t.Setenv("FACEBOOK_CLIENT_ID", "")
-	t.Setenv("MICROSOFT_CLIENT_ID", "")
-	t.Setenv("APPLE_CLIENT_ID", "")
+	for _, k := range []string{
+		"GOOGLE_CLIENT_ID", "GITHUB_CLIENT_ID", "GITHUB_CLIENT_SECRET",
+		"FACEBOOK_APP_ID", "FACEBOOK_CLIENT_ID", "FACEBOOK_APP_SECRET",
+		"FACEBOOK_CLIENT_SECRET", "MICROSOFT_CLIENT_ID", "MICROSOFT_CLIENT_SECRET",
+		"APPLE_CLIENT_ID", "APPLE_TEAM_ID", "APPLE_KEY_ID", "APPLE_PRIVATE_KEY",
+	} {
+		t.Setenv(k, "")
+	}
 
 	if len(ConfiguredProviders()) != 0 {
 		t.Errorf("expected 0 configured providers, got %v", ConfiguredProviders())
@@ -155,33 +157,52 @@ func TestOAuth_ConfiguredProviders(t *testing.T) {
 		t.Error("expected unconfigured providers to report false")
 	}
 
-	// Enable GitHub and Apple
+	// An id without its secret is not configured: the config endpoint drives
+	// the buttons, so a half-set provider must stay hidden rather than fail
+	// after the learner has been sent to the provider.
 	t.Setenv("GITHUB_CLIENT_ID", "gh-client-123")
-	t.Setenv("APPLE_CLIENT_ID", "apple-client-456")
-
+	if ProviderConfigured("github") {
+		t.Error("github with only a client id must not count as configured")
+	}
+	t.Setenv("GITHUB_CLIENT_SECRET", "gh-secret-123")
 	if !ProviderConfigured("github") {
 		t.Error("expected github configured")
 	}
-	if !ProviderConfigured("apple") {
-		t.Error("expected apple configured")
+
+	// Apple is excluded from the product even when every credential is set.
+	t.Setenv("APPLE_CLIENT_ID", "apple-client-456")
+	t.Setenv("APPLE_TEAM_ID", "team-123")
+	t.Setenv("APPLE_KEY_ID", "key-123")
+	t.Setenv("APPLE_PRIVATE_KEY", "-----BEGIN PRIVATE KEY-----")
+	if ProviderConfigured("apple") {
+		t.Error("apple must stay unadvertised")
 	}
+
 	if ProviderConfigured("microsoft") {
 		t.Error("expected microsoft unconfigured")
 	}
 
 	configured := ConfiguredProviders()
-	if len(configured) != 2 || configured[0] != "github" || configured[1] != "apple" {
-		t.Errorf("expected [github apple], got %v", configured)
+	if len(configured) != 1 || configured[0] != "github" {
+		t.Errorf("expected [github], got %v", configured)
 	}
 
-	// Enable Facebook via FACEBOOK_APP_ID
+	// Enable Facebook via FACEBOOK_APP_ID plus its secret.
 	t.Setenv("FACEBOOK_APP_ID", "fb-app-123")
+	if ProviderConfigured("facebook") {
+		t.Error("facebook with only an app id must not count as configured")
+	}
+	t.Setenv("FACEBOOK_APP_SECRET", "fb-secret-123")
 	if !ProviderConfigured("facebook") {
 		t.Error("expected facebook configured via FACEBOOK_APP_ID")
 	}
 
 	// Enable Microsoft
 	t.Setenv("MICROSOFT_CLIENT_ID", "ms-client-123")
+	if ProviderConfigured("microsoft") {
+		t.Error("microsoft with only a client id must not count as configured")
+	}
+	t.Setenv("MICROSOFT_CLIENT_SECRET", "ms-secret-123")
 	if !ProviderConfigured("microsoft") {
 		t.Error("expected microsoft configured")
 	}

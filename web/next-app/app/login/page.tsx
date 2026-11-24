@@ -181,6 +181,17 @@ const inputClassName = (hasError: boolean) =>
     hasError ? 'border-mathua-red' : 'border-mathua-border focus:border-mathua-blue'
   }`
 
+// Meta requires its own mark on the button. The generic outline is correct
+// for the other providers, but a blue "f" is what users recognise for
+// Facebook Login. Apple is deliberately not offered.
+function FacebookMark() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-[18px] w-[18px]" fill="currentColor">
+      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+    </svg>
+  )
+}
+
 function EyeIcon({ off }: { off?: boolean }) {
   return (
     <svg
@@ -267,7 +278,8 @@ function LoginInner() {
         return
       }
       if (Array.isArray(cfg.providers)) {
-        setProviders(cfg.providers.filter((p): p is OAuthProvider => p !== 'google' && p in OAUTH_LABELS))
+        // Apple is not offered; ignore it even if an older config lists it.
+        setProviders(cfg.providers.filter((p): p is OAuthProvider => p !== 'google' && p !== 'apple' && p in OAUTH_LABELS))
       }
       const cid = (cfg.google_client_id || '').trim()
       if (!cid || cancelled) return
@@ -668,16 +680,31 @@ function LoginInner() {
                   {googleLoading ? 'Connecting…' : 'Continue with Google'}
                 </button>
               )}
-              {providers.map(p => (
-                <button
-                  key={p}
-                  type="button"
-                  onClick={() => startOAuthLogin(p)}
-                  className="w-full border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue rounded-none h-12 font-medium text-sm flex items-center justify-center gap-2"
-                >
-                  Continue with {OAUTH_LABELS[p]}
-                </button>
-              ))}
+              {providers.map(p => {
+                if (p === 'facebook') {
+                  return (
+                    <button
+                      key={p}
+                      type="button"
+                      onClick={() => startOAuthLogin(p)}
+                      className="w-full rounded-none h-12 font-medium text-sm flex items-center justify-center gap-2 bg-[#1877F2] text-white hover:bg-[#166FE5]"
+                    >
+                      <FacebookMark />
+                      Continue with Facebook
+                    </button>
+                  )
+                }
+                return (
+                  <button
+                    key={p}
+                    type="button"
+                    onClick={() => startOAuthLogin(p)}
+                    className="w-full border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue rounded-none h-12 font-medium text-sm flex items-center justify-center gap-2"
+                  >
+                    Continue with {OAUTH_LABELS[p]}
+                  </button>
+                )
+              })}
               {googleError && <p className="text-mathua-red text-xs text-center">{googleError}</p>}
             </div>
             <div className="mt-3 text-center">
