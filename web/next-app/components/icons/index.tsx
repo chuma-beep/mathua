@@ -61,6 +61,9 @@ import {
   ArrowUpIcon,
   MessagesSquareIcon,
   MenuIcon,
+  ChromeIcon,
+  FacebookIcon,
+  LayoutGridIcon,
   PanelLeftIcon,
   XIcon,
 } from '@animateicons/react/lucide'
@@ -165,6 +168,13 @@ export const Check = wrap(CheckIcon as never)
 export const Search = wrap(SearchIcon as never)
 export const Ellipsis = wrap(EllipsisIcon as never)
 export const Menu = wrap(MenuIcon as never)
+// Sign-in providers. Lucide has a Chrome mark but no Google mark, and a grid
+// but no Microsoft mark; those two stand in, and the button label carries the
+// name. Keeping all four on this surface means they share one size and follow
+// the theme colour instead of each carrying its own brand fill.
+export const Chrome = wrap(ChromeIcon as never)
+export const Facebook = wrap(FacebookIcon as never)
+export const LayoutGrid = wrap(LayoutGridIcon as never)
 export const PanelLeft = wrap(PanelLeftIcon as never)
 
 // The product assistant's dock. A speech pair rather than a single bubble: the
@@ -224,4 +234,7 @@ export const ICON_NAMES = [
   'Close',
   'ArrowUp',
   'ArrowDown',
+  'Chrome',
+  'Facebook',
+  'LayoutGrid',
 ] as const
