@@ -100,6 +100,20 @@ export default function PrivacyPage() {
           leave it blank. Passwords are stored as bcrypt hashes, never as text.
         </p>
 
+        <h2 style={h2Style} id="account-deletion">Deleting your account</h2>
+        <p style={textStyle}>
+          Settings has a Delete account control. It asks you to type
+          &ldquo;delete my account&rdquo; and, for a password account, the current
+          password. It then removes the account and everything owned by it:
+          progress, attempts, sessions, quiz history, connected sign-ins,
+          settings, plans and avatars. Nothing is kept. Guest progress lives in
+          the browser and goes when you clear site data.
+        </p>
+        <p style={textStyle}>
+          If you cannot sign in, open an issue in the repository and name the
+          account to remove. That reaches the same queue as a report.
+        </p>
+
         <h2 style={h2Style}>The contact box</h2>
         <p style={textStyle}>
           The box on the contact page writes your message into the same table as a report

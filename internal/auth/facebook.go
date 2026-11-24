@@ -22,7 +22,8 @@ func facebookAppSecret() string {
 	return strings.TrimSpace(os.Getenv("FACEBOOK_CLIENT_SECRET"))
 }
 
-// FacebookLoginURL starts the Meta Login flow (email needs app review).
+// FacebookLoginURL starts the Meta Login flow. public_profile and email are
+// standard permissions, so no app review is needed for the login itself.
 func FacebookLoginURL(appID, redirectURI, state string) string {
 	q := url.Values{}
 	q.Set("client_id", appID)
