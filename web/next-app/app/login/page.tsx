@@ -9,7 +9,7 @@ import Link from 'next/link'
 import SectionHeader from '../../components/SectionHeader'
 import { signup, login, validateToken, requestPasswordReset, completePasswordReset, startOAuthLogin, googleOneTap, OAUTH_LABELS, type OAuthProvider, API_BASE, getConfig } from '../../lib/api'
 import { clearGuest, establishSession, getGuestId, isLoggedIn } from '../../lib/auth'
-import { Chrome, Facebook, Github, LayoutGrid } from '../../components/icons'
+import { Chrome, Discord, Facebook, Github, LayoutGrid } from '../../components/icons'
 import { LOGIN_HERO } from '../../lib/loginHero'
 
 // Turnstile is opt-in. An empty site key omits the widget, and the server
@@ -187,7 +187,7 @@ const inputClassName = (hasError: boolean) =>
 // outlined one reads as one control sitting on top of the other. Order is
 // fixed here rather than taken from the config endpoint: Google first, then
 // the busiest configured providers, so the grid does not shuffle per deploy.
-const PROVIDER_ORDER = ['google', 'facebook', 'github', 'microsoft'] as const
+const PROVIDER_ORDER = ['google', 'facebook', 'github', 'discord', 'microsoft'] as const
 
 function providerRank(provider: string): number {
   const i = PROVIDER_ORDER.indexOf(provider as (typeof PROVIDER_ORDER)[number])
@@ -700,6 +700,7 @@ function LoginInner() {
                     {isGoogle && <Chrome size={18} />}
                     {p === 'facebook' && <Facebook size={18} />}
                     {p === 'github' && <Github size={18} />}
+                    {p === 'discord' && <Discord size={18} />}
                     {p === 'microsoft' && <LayoutGrid size={18} />}
                     <span className="truncate">{isGoogle && googleLoading ? 'Connecting…' : OAUTH_LABELS[p]}</span>
                   </button>

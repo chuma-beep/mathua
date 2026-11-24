@@ -146,6 +146,7 @@ func TestOAuth_ConfiguredProviders(t *testing.T) {
 		"FACEBOOK_APP_ID", "FACEBOOK_CLIENT_ID", "FACEBOOK_APP_SECRET",
 		"FACEBOOK_CLIENT_SECRET", "MICROSOFT_CLIENT_ID", "MICROSOFT_CLIENT_SECRET",
 		"APPLE_CLIENT_ID", "APPLE_TEAM_ID", "APPLE_KEY_ID", "APPLE_PRIVATE_KEY",
+		"DISCORD_CLIENT_ID", "DISCORD_CLIENT_SECRET",
 	} {
 		t.Setenv(k, "")
 	}
@@ -206,11 +207,21 @@ func TestOAuth_ConfiguredProviders(t *testing.T) {
 	if !ProviderConfigured("microsoft") {
 		t.Error("expected microsoft configured")
 	}
+
+	// Discord needs both halves for the token exchange.
+	t.Setenv("DISCORD_CLIENT_ID", "discord-client-123")
+	if ProviderConfigured("discord") {
+		t.Error("discord with only a client id must not count as configured")
+	}
+	t.Setenv("DISCORD_CLIENT_SECRET", "discord-secret-123")
+	if !ProviderConfigured("discord") {
+		t.Error("expected discord configured")
+	}
 }
 
 func TestOAuth_DriversAndLoginURLs(t *testing.T) {
 	drivers := Drivers()
-	expectedDrivers := []string{"github", "facebook", "microsoft", "apple"}
+	expectedDrivers := []string{"github", "facebook", "microsoft", "apple", "discord"}
 
 	for _, name := range expectedDrivers {
 		drv, ok := drivers[name]

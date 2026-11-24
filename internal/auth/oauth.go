@@ -108,6 +108,8 @@ func ProviderConfigured(provider string) bool {
 	case "microsoft":
 		return strings.TrimSpace(os.Getenv("MICROSOFT_CLIENT_ID")) != "" &&
 			strings.TrimSpace(os.Getenv("MICROSOFT_CLIENT_SECRET")) != ""
+	case "discord":
+		return discordClientID() != "" && discordClientSecret() != ""
 	}
 	// Apple is deliberately not offered: it needs a paid developer account and
 	// its button follows separate guidelines. The driver stays in the tree so
@@ -119,7 +121,7 @@ func ProviderConfigured(provider string) bool {
 // ConfiguredProviders lists providers in display order.
 func ConfiguredProviders() []string {
 	var out []string
-	for _, p := range []string{"google", "github", "facebook", "microsoft"} {
+	for _, p := range []string{"google", "github", "facebook", "microsoft", "discord"} {
 		if ProviderConfigured(p) {
 			out = append(out, p)
 		}

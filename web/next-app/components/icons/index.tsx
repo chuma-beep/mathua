@@ -67,6 +67,7 @@ import {
   PanelLeftIcon,
   XIcon,
 } from '@animateicons/react/lucide'
+import { DiscordIcon } from '@animateicons/react/huge'
 
 /**
  * What a caller may pass. Deliberately no `color`: the wrapper owns it, because a caller who can
@@ -172,9 +173,12 @@ export const Menu = wrap(MenuIcon as never)
 // but no Microsoft mark; those two stand in, and the button label carries the
 // name. Keeping all four on this surface means they share one size and follow
 // the theme colour instead of each carrying its own brand fill.
+// Discord has no mark in the lucide set; the huge set carries the brand
+// shape, so it comes from there and goes through the same wrapper.
 export const Chrome = wrap(ChromeIcon as never)
 export const Facebook = wrap(FacebookIcon as never)
 export const LayoutGrid = wrap(LayoutGridIcon as never)
+export const Discord = wrap(DiscordIcon as never)
 export const PanelLeft = wrap(PanelLeftIcon as never)
 
 // The product assistant's dock. A speech pair rather than a single bubble: the
@@ -235,6 +239,7 @@ export const ICON_NAMES = [
   'ArrowUp',
   'ArrowDown',
   'Chrome',
+  'Discord',
   'Facebook',
   'LayoutGrid',
 ] as const
