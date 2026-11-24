@@ -220,15 +220,20 @@ function LoginInner() {
     return r && r.startsWith('/') && !r.startsWith('//') ? r : '/profile'
   })()
 
+  // A reset link must be shown even when a session already exists. Redirecting
+  // it to the profile silently discarded a valid one-hour token, so the
+  // password never changed and the learner saw a successful-looking login.
+  const resetToken = searchParams.get('reset')
+
   // Already logged in → don't show the form.
   useEffect(() => {
-    if (!isLoggedIn()) return
+    if (!isLoggedIn() || resetToken) return
     let cancelled = false
     validateToken()
       .then(v => { if (!cancelled && v.valid) push(ret) })
       .catch(() => {})
     return () => { cancelled = true }
-  }, [push, ret])
+  }, [push, ret, resetToken])
 
   // Google redirect callback: ?token=...&id=...&name=...
   useEffect(() => {
@@ -362,7 +367,6 @@ function LoginInner() {
   const [forgotId, setForgotId] = useState('')
   const [forgotBusy, setForgotBusy] = useState(false)
   const [forgotMsg, setForgotMsg] = useState('')
-  const resetToken = searchParams.get('reset')
   const [resetPw, setResetPw] = useState('')
   const [resetBusy, setResetBusy] = useState(false)
   const [resetMsg, setResetMsg] = useState('')
