@@ -243,10 +243,12 @@ describe('LoginPage', () => {
     expect(await screen.findByText(/reset link is on its way/)).toBeInTheDocument()
   })
 
-  it('renders one button per configured non-google provider', async () => {
-    getConfigMock.mockResolvedValue({ auth_enabled: true, providers: ['google', 'github', 'facebook'] })
+  it('renders one button per configured provider and hides Apple', async () => {
+    getConfigMock.mockResolvedValue({ auth_enabled: true, providers: ['google', 'github', 'facebook', 'apple'] })
     render(<LoginPage />)
-    expect(await screen.findByRole('button', { name: 'Continue with GitHub' })).toBeInTheDocument()
+    // Google shares the grid with the others; it is not a separate branch.
+    expect(await screen.findByRole('button', { name: 'Continue with Google' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Continue with GitHub' })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Continue with Facebook' })).toBeInTheDocument()
     // Apple is not offered, so a config that lists it still must not render it.
     expect(screen.queryByRole('button', { name: 'Continue with Apple' })).toBeNull()
