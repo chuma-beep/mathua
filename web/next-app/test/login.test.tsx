@@ -25,10 +25,14 @@ const getConfigMock = vi.fn()
 const requestResetMock = vi.fn()
 const completeResetMock = vi.fn()
 
+// Mutable because one test needs a `?reset=` link, and the mock factory is
+// hoisted above the test body.
+const paramsRef = vi.hoisted(() => ({ current: new URLSearchParams() }))
+
 vi.mock('next/navigation', () => ({
   useRouter: () => ({ push: pushMock }),
   usePathname: () => '/login',
-  useSearchParams: () => new URLSearchParams(),
+  useSearchParams: () => paramsRef.current,
 }))
 
 vi.mock('../lib/api', () => ({
@@ -57,6 +61,7 @@ import LoginPage from '../app/login/page'
 describe('LoginPage', () => {
   beforeEach(() => {
     localStorage.clear()
+    paramsRef.current = new URLSearchParams()
     pushMock.mockClear()
     signupMock.mockClear()
     loginMock.mockClear()
@@ -244,5 +249,17 @@ describe('LoginPage', () => {
     expect(await screen.findByRole('button', { name: 'Continue with GitHub' })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Continue with Apple' })).toBeInTheDocument()
     expect(screen.queryByRole('button', { name: 'Continue with Facebook' })).toBeNull()
+  })
+
+  it('shows the reset form even when a session is already stored', async () => {
+    // A reset link opened in a browser that already holds a token used to be
+    // redirected to the profile, leaving the password unchanged.
+    paramsRef.current = new URLSearchParams('reset=abc123')
+    localStorage.setItem('mathua_token', 'existing-session')
+    validateTokenMock.mockResolvedValue({ valid: true })
+    render(<LoginPage />)
+    expect(await screen.findByLabelText('New password')).toBeInTheDocument()
+    expect(validateTokenMock).not.toHaveBeenCalled()
+    expect(pushMock).not.toHaveBeenCalled()
   })
 })
