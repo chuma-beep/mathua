@@ -1069,7 +1069,7 @@ export async function changePassword(currentPassword: string, newPassword: strin
 	if (!res.ok) await throwWithResponse(res, `Change password failed: ${res.status}`)
 }
 
-export const OAUTH_PROVIDERS = ['google', 'github', 'facebook', 'microsoft', 'apple'] as const
+export const OAUTH_PROVIDERS = ['google', 'github', 'facebook', 'microsoft', 'discord', 'apple'] as const
 export type OAuthProvider = (typeof OAUTH_PROVIDERS)[number]
 
 export const OAUTH_LABELS: Record<OAuthProvider, string> = {
@@ -1077,6 +1077,7 @@ export const OAUTH_LABELS: Record<OAuthProvider, string> = {
 	github: 'GitHub',
 	facebook: 'Facebook',
 	microsoft: 'Microsoft',
+	discord: 'Discord',
 	apple: 'Apple',
 }
 
