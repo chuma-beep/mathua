@@ -85,6 +85,30 @@ export default function VectorFieldLab({ params, title, caption }: TemplateProps
         'Each arrow is the vector at its base. The circulation is the line integral around the red loop and the flux is the flow through it. Green\'s theorem says the circulation equals the enclosed area times the curl, and the divergence theorem says the flux equals the area times the divergence.'
       }
       onReset={reset}
+      controls={
+        <div className="grid grid-cols-1 gap-2">
+          <div className="flex items-center gap-2">
+            <label htmlFor="vector-field" className="w-20 shrink-0 font-mono text-xs text-mathua-muted">
+              Field
+            </label>
+            <select
+              id="vector-field"
+              aria-label="Field"
+              value={preset}
+              onChange={(event) => setPreset(event.target.value as VectorFieldPreset)}
+              className="h-10 min-w-0 flex-1 border border-mathua-border bg-transparent px-2 font-mono text-xs text-mathua-secondary"
+            >
+              {Object.entries(VF_NAMES).map(([value, label]) => (
+                <option key={value} value={value}>
+                  {label} — {VF_LABELS[value as VectorFieldPreset]}
+                </option>
+              ))}
+            </select>
+          </div>
+          <Slider label="Loop radius" value={radius} min={0.4} max={2} step={0.1} onChange={setRadius} />
+          <Toggle label="Show streamlines" checked={showLines} onChange={setShowLines} />
+        </div>
+      }
       readout={[
         { label: 'field', value: `${VF_NAMES[preset]} · ${VF_LABELS[preset]}` },
         { label: 'divergence', value: fmt(div, 2) },
@@ -163,29 +187,6 @@ export default function VectorFieldLab({ params, title, caption }: TemplateProps
           div {fmt(div, 2)} · curl {fmt(curl, 2)}
         </text>
       </svg>
-
-      <div className="mt-3 grid grid-cols-1 gap-2">
-        <div className="flex items-center gap-2">
-          <label htmlFor="vector-field" className="w-20 shrink-0 font-mono text-[10px] text-mathua-muted">
-            Field
-          </label>
-          <select
-            id="vector-field"
-            aria-label="Field"
-            value={preset}
-            onChange={(event) => setPreset(event.target.value as VectorFieldPreset)}
-            className="h-7 min-w-0 flex-1 border border-mathua-border bg-transparent px-1 font-mono text-[10px] text-mathua-secondary"
-          >
-            {Object.entries(VF_NAMES).map(([value, label]) => (
-              <option key={value} value={value}>
-                {label} — {VF_LABELS[value as VectorFieldPreset]}
-              </option>
-            ))}
-          </select>
-        </div>
-        <Slider label="Loop radius" value={radius} min={0.4} max={2} step={0.1} onChange={setRadius} />
-        <Toggle label="Show streamlines" checked={showLines} onChange={setShowLines} />
-      </div>
     </FigureFrame>
   )
 }

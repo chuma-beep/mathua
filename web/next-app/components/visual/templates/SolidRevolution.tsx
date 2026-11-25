@@ -143,6 +143,29 @@ export default function SolidRevolution({ params, title, caption }: TemplateProp
         'The body is swept from the drawn profile. A disk slice is a thin cylinder, a washer slice is a thin annulus and a shell slice is a thin tube. Each readout is the integral of that slice over the interval. Disks and washers share one body about the horizontal axis; the shell body is a second solid about the vertical axis, so its volume is not meant to match theirs.'
       }
       onReset={reset}
+      controls={
+        <>
+          <div className="flex items-center gap-2">
+            <label htmlFor="solid-method" className="w-20 shrink-0 font-mono text-xs text-mathua-muted">
+              Method
+            </label>
+            <select
+              id="solid-method"
+              aria-label="Method"
+              value={mode}
+              onChange={(event) => setMode(event.target.value as SolidMode)}
+              className="h-10 min-w-0 flex-1 border border-mathua-border bg-transparent px-2 font-mono text-xs text-mathua-secondary"
+            >
+              {Object.entries(SOLID_LABELS).map(([value, label]) => (
+                <option key={value} value={value}>
+                  {label}
+                </option>
+              ))}
+            </select>
+          </div>
+          <Slider label="Slice position" value={slice} min={0.1} max={2} step={0.05} onChange={setSlice} />
+        </>
+      }
       readout={[
         { label: 'method', value: SOLID_LABELS[mode] },
         { label: 'formula', value: SOLID_FORMULAS[mode] },
@@ -186,28 +209,6 @@ export default function SolidRevolution({ params, title, caption }: TemplateProp
           slice at x = {fmt(slice, 2)}
         </text>
       </svg>
-
-      <div className="mt-3 grid grid-cols-1 gap-2">
-        <div className="flex items-center gap-2">
-          <label htmlFor="solid-method" className="w-20 shrink-0 font-mono text-[10px] text-mathua-muted">
-            Method
-          </label>
-          <select
-            id="solid-method"
-            aria-label="Method"
-            value={mode}
-            onChange={(event) => setMode(event.target.value as SolidMode)}
-            className="h-7 min-w-0 flex-1 border border-mathua-border bg-transparent px-1 font-mono text-[10px] text-mathua-secondary"
-          >
-            {Object.entries(SOLID_LABELS).map(([value, label]) => (
-              <option key={value} value={value}>
-                {label}
-              </option>
-            ))}
-          </select>
-        </div>
-        <Slider label="Slice position" value={slice} min={0.1} max={2} step={0.05} onChange={setSlice} />
-      </div>
     </FigureFrame>
   )
 }

@@ -16,7 +16,7 @@ import { Select as UiSelect, SelectContent, SelectItem, SelectTrigger, SelectVal
 // fills its cell, because a fixed 64px box clipped a value like `-1.25`.
 
 const numeral =
-  'h-8 rounded-none border-mathua-border bg-mathua-code px-2 text-center font-mono text-[11px] tabular-nums text-mathua-primary focus:border-mathua-blue'
+  'h-10 rounded-none border-mathua-border bg-mathua-code px-2 text-center font-mono text-xs tabular-nums text-mathua-primary focus:border-mathua-blue'
 
 /** Hides the platform stepper in every engine; the buttons take over. */
 const noSpinner =
@@ -39,7 +39,7 @@ function StepButton({
       aria-label={label}
       onClick={onClick}
       disabled={disabled}
-      className="flex w-7 shrink-0 items-center justify-center border border-mathua-border bg-mathua-surface font-mono text-[12px] leading-none text-mathua-secondary transition-colors hover:border-mathua-blue hover:text-mathua-blue disabled:cursor-not-allowed disabled:opacity-40"
+      className="flex h-10 w-10 shrink-0 items-center justify-center border border-mathua-border bg-mathua-surface font-mono text-[13px] leading-none text-mathua-secondary transition-colors hover:border-mathua-blue hover:text-mathua-blue disabled:cursor-not-allowed disabled:opacity-40"
     >
       {children}
     </button>
@@ -122,14 +122,14 @@ export function Slider({ label, value, min, max, step = 0.1, onChange, suffix }:
     onChange(Math.min(max, Math.max(min, next)))
   }
   return (
-    // Below `sm` the label takes its own line and the range shares the next one
-    // with the stepper, because three items on one row wrap mid-control at 320px
-    // and the stepper lands under the label with nothing to align to.
-    <div className="space-y-1 sm:flex sm:items-center sm:gap-2 sm:space-y-0">
-      <label htmlFor={id} className="block shrink-0 font-mono text-[10px] text-mathua-muted sm:w-10">
+    // The label always owns its line, and the range wraps beside the stepper.
+    // A narrow figure-controls strip cannot hold all three on one row; doing so
+    // pushed the stepper's + button past the card edge.
+    <div className="space-y-1">
+      <label htmlFor={id} className="block font-mono text-[10px] text-mathua-muted">
         {label}
       </label>
-      <div className="flex items-center gap-2 sm:flex-1">
+      <div className="flex flex-wrap items-center gap-2">
         <input
           id={id}
           type="range"
@@ -138,11 +138,13 @@ export function Slider({ label, value, min, max, step = 0.1, onChange, suffix }:
           step={step}
           value={value}
           onChange={(e) => commit(Number(e.target.value))}
-          className="min-w-0 flex-1"
+          className="min-w-[8rem] flex-1"
           style={{ accentColor: 'var(--accent-blue)' }}
         />
-        <Stepper label={label} value={value} min={min} max={max} step={step} onChange={onChange} />
-        {suffix && <span className="font-mono text-[10px] text-mathua-muted">{suffix}</span>}
+        <span className="flex shrink-0 items-center gap-2">
+          <Stepper label={label} value={value} min={min} max={max} step={step} onChange={onChange} />
+          {suffix && <span className="font-mono text-[10px] text-mathua-muted">{suffix}</span>}
+        </span>
       </div>
     </div>
   )
@@ -205,8 +207,8 @@ interface ToggleProps {
 export function Toggle({ label, checked, onChange }: ToggleProps) {
   const id = useId()
   return (
-    <div className="flex items-center justify-between gap-3">
-      <label htmlFor={id} className="font-mono text-[10px] text-mathua-secondary">
+    <div className="flex min-h-11 items-center justify-between gap-3">
+      <label htmlFor={id} className="font-mono text-xs text-mathua-secondary">
         {label}
       </label>
       <Switch id={id} checked={checked} onCheckedChange={onChange} className="min-h-0" />
