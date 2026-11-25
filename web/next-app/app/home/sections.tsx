@@ -2,329 +2,456 @@
 
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { LOGIN_HERO } from '../../lib/loginHero'
-import {
-  PIPELINE_STATES,
-  conceptCount,
-  domainCounts,
-  domainLabels,
-  domainOrder,
-  levels,
-} from './data'
+import { FEATURED_FIGURES } from '../../lib/featuredFigures'
+import VisualFigure from '../../components/visual/VisualFigure'
+import { API_BASE, getConfig, googleOneTap } from '../../lib/api'
+import { establishSession } from '../../lib/auth'
+import { conceptCount, domainCounts, domainLabels, domainOrder } from './data'
 
-// The two hero actions. They are written out in full rather than composed, because
-// the ghost button used to be the primary button plus overrides and the two
-// background utilities (`bg-mathua-blue` and `bg-transparent`, `hover:bg-mathua-blue-hover`
-// and `hover:bg-white/15`) collided: same property, same specificity, so the winner was
-// whichever Tailwind emitted last and the GitHub button hovered to blue on the image.
-// Separate constants with no overlapping property cannot collide. Both actions are
-// content-width and left-aligned on phones: as full-width bars with only the page's
-// 16px gutters they read as touching the screen edges.
+// The homepage keeps the drawing and the type of the rest of the app. The
+// landing page is the one place with a painting, so the buttons on it carry a
+// white hairline and every other control keeps the themed border.
+
 const CTA_PRIMARY =
   'inline-flex min-h-[44px] items-center justify-center bg-mathua-blue px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-mathua-blue-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mathua-blue'
-// On the artwork the second action is a white hairline over a dark scrim, not the
-// themed surface border: a `mathua-border` line is tuned for the page background,
-// not for a photograph, and would disappear against the drawing.
-// Wipe-fill ghost: on hover a blue layer sweeps left to right behind the label
-// (origin-left scale-x). The fill lives on a child span, not the anchor, so the
-// anchor never carries two background utilities at once, the collision that once
-// turned this button blue. `overflow-hidden` clips the sweep; the label sits
-// `relative` above it.
-const CTA_GHOST_ON_ART =
-  'group relative inline-flex min-h-[44px] items-center justify-center overflow-hidden border border-white/45 bg-transparent px-6 py-3 text-sm font-medium text-white transition-colors hover:border-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white'
 
-export function HeroSection({ onGetStarted }: { onGetStarted: () => void }) {
+const CTA_GHOST_ON_ART =
+  'group relative inline-flex min-h-[44px] items-center justify-center overflow-hidden border border-white/45 bg-transparent px-6 py-3 text-sm font-medium text-white transition-colors hover:border-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white lg:border-mathua-border lg:text-mathua-primary lg:hover:border-mathua-blue lg:focus-visible:outline-mathua-blue'
+
+function GhostLabel({ children }: { children: React.ReactNode }) {
   return (
-    // One responsive hero, not two stacked variants. Below lg it is the full-bleed
-    // treatment (B): art behind the copy under a scrim. At lg and up it is the
-    // side-by-side panel (A): copy left, art right, scrim gone and copy back on
-    // theme tokens. A single h1 and a single img serve both, no duplicated
-    // heading, no second download.
-    //
-    // The section sits in the page's capped, padded column, so the picture is a
-    // banner aligned to the content rather than a window-wide bleed, every other
-    // section shares that column, and a hero that ignored it would be the odd one
-    // out. `isolate` keeps the background's stacking context local so it cannot
-    // paint over the sticky header.
+    <>
+      <span
+        aria-hidden="true"
+        className="absolute inset-0 origin-left scale-x-0 bg-mathua-blue transition-transform duration-300 ease-out group-hover:scale-x-100 motion-reduce:transition-none"
+      />
+      <span className="relative group-hover:text-white">{children}</span>
+    </>
+  )
+}
+
+interface GoogleAccounts {
+  initialize: (options: {
+    client_id: string
+    callback: (response: { credential?: string }) => void
+    auto_select?: boolean
+    cancel_on_tap_outside?: boolean
+  }) => void
+  prompt: () => void
+}
+
+interface GoogleWindow extends Window {
+  google?: { accounts?: { id?: GoogleAccounts } }
+}
+
+/**
+ * The Learn call to action opens this panel instead of navigating straight
+ * away. Google One Tap is destroyed by a navigation and can be suppressed by
+ * FedCM, so the prompt has to run on the page that shows it. The panel always
+ * keeps a guest link, which is the path that cannot fail.
+ */
+function StartPanel({ onClose }: { onClose: () => void }) {
+  const router = useRouter()
+  const [prompted, setPrompted] = useState(false)
+  const [busy, setBusy] = useState(false)
+  const started = useRef(false)
+
+  useEffect(() => {
+    if (started.current) return
+    started.current = true
+    let cancelled = false
+
+    async function start() {
+      try {
+        const cfg = await getConfig()
+        const clientID = (cfg?.google_client_id || '').trim()
+        if (!clientID || cancelled) return
+        const src = 'https://accounts.google.com/gsi/client'
+        if (!document.querySelector(`script[src="${src}"]`)) {
+          await new Promise<void>((resolve, reject) => {
+            const script = document.createElement('script')
+            script.src = src
+            script.async = true
+            script.defer = true
+            script.onload = () => resolve()
+            script.onerror = () => reject(new Error('gis unavailable'))
+            document.head.appendChild(script)
+          })
+        }
+        if (cancelled) return
+        const g = (window as GoogleWindow).google
+        if (!g?.accounts?.id) return
+        g.accounts.id.initialize({
+          client_id: clientID,
+          callback: async (resp) => {
+            if (!resp?.credential) return
+            setBusy(true)
+            try {
+              const data = await googleOneTap(resp.credential)
+              await establishSession(data.token, {
+                student_id: data.student_id,
+                name: data.name,
+                username: '',
+                concepts_mastered: 0,
+                current_streak: 0,
+                level: 'Novice',
+                diagnostic_completed: data.diagnostic_completed,
+              })
+              router.push('/learn')
+            } catch {
+              setBusy(false)
+            }
+          },
+          auto_select: false,
+          cancel_on_tap_outside: true,
+        })
+        g.accounts.id.prompt()
+        setPrompted(true)
+      } catch {
+        // One Tap is optional. The two links below are the working paths.
+      }
+    }
+
+    void start()
+    return () => {
+      cancelled = true
+    }
+  }, [router])
+
+  return (
+    <div className="reveal mt-6 border border-mathua-border bg-mathua-bg p-4 sm:p-5" data-testid="start-panel">
+      <p className="font-mono text-[10px] uppercase tracking-wide text-mathua-muted">Start learning</p>
+      <p className="mt-2 max-w-[52ch] text-[13px] leading-relaxed text-mathua-secondary">
+        {busy
+          ? 'Signing you in…'
+          : prompted
+            ? 'Choose an account in the Google prompt, or continue as a guest.'
+            : 'Continue with Google to keep progress across devices, or start as a guest.'}
+      </p>
+      <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-center">
+        <a
+          href={`${API_BASE}/api/auth/google/login?return=${encodeURIComponent('/learn')}`}
+          className="inline-flex min-h-[44px] items-center justify-center border border-mathua-blue px-5 text-sm font-medium text-mathua-blue transition-colors hover:bg-mathua-blue-faint"
+        >
+          Continue with Google
+        </a>
+        <Link
+          href="/learn"
+          className="inline-flex min-h-[44px] items-center justify-center px-5 text-sm font-medium text-mathua-secondary underline-offset-4 hover:text-mathua-primary hover:underline"
+        >
+          Continue as a guest
+        </Link>
+        <button
+          type="button"
+          onClick={onClose}
+          className="ml-auto min-h-[44px] px-2 font-mono text-[11px] text-mathua-muted hover:text-mathua-primary"
+        >
+          Close
+        </button>
+      </div>
+      <p className="mt-3 font-mono text-[10px] text-mathua-muted">No account needed. Progress stays on this device.</p>
+    </div>
+  )
+}
+
+export function HeroSection() {
+  const [panelOpen, setPanelOpen] = useState(false)
+  return (
     <section className="group/hero relative isolate overflow-hidden border-b border-mathua-division lg:grid lg:grid-cols-2 lg:items-stretch lg:gap-10">
-      {/* Art. Full-bleed backdrop below lg; the grid's right column at lg and up.
-          `lg:relative` re-seats it as a grid item while the img keeps filling it
-          with object-cover, and `lg:order-2` puts it right of the copy. DOM order
-          stays art-first so that on phones, where both layers are positioned, 
-          the copy paints above the picture.
-          The picture never touches the header: `top-4` holds it off the section
-          top on phones, `lg:mt-10` on desktop (`lg:top-auto lg:bottom-auto` cancel
-          the phone offsets once it is a grid item). */}
-      <div aria-hidden="true" className="hero-art-in absolute inset-x-0 bottom-0 top-4 overflow-hidden lg:relative lg:bottom-auto lg:top-auto lg:order-2 lg:mt-10 lg:min-h-[480px]">
+      <div
+        aria-hidden="true"
+        className="hero-art-in absolute inset-x-0 bottom-0 top-4 overflow-hidden lg:relative lg:bottom-auto lg:top-auto lg:order-2 lg:mt-10 lg:min-h-[480px]"
+      >
         <img
           src={LOGIN_HERO.file}
-          alt=""
           width={LOGIN_HERO.width}
           height={LOGIN_HERO.height}
           loading="eager"
           decoding="async"
           className="absolute inset-0 size-full object-cover object-center transition-transform duration-700 ease-out group-hover/hero:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover/hero:scale-100"
         />
-        {/* Phone scrim only: it darkens the text side and fades toward the art, so
-            the copy has contrast without flattening the drawing. Stronger than the
-            earlier wash, because phone copy spans the full frame. */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/35 lg:hidden" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/65 to-black/55 lg:hidden" />
       </div>
       <div className="relative max-w-[72ch] px-4 py-16 [text-shadow:0_1px_14px_rgba(0,0,0,0.45)] md:py-24 lg:order-1 lg:px-0 lg:[text-shadow:none]">
-        <div className="section-label hero-label reveal">( 01 · Title Block )</div>
+        <div className="section-label">( 01 · Title Block )</div>
         <h1
           className="reveal mt-5 max-w-[18ch] text-balance font-serif text-[clamp(2.5rem,6vw,4.5rem)] font-normal leading-[1.05] sm:leading-[0.95] tracking-tight text-white lg:text-mathua-primary"
-          style={{ animationDelay: '80ms' }}
+          style={{ transitionDelay: '80ms' }}
         >
-          Adaptive math learning platform
+          Don’t just finish mathematics. Understand it.
         </h1>
         <p
           className="reveal mt-6 max-w-[46ch] text-pretty text-base sm:text-[15px] leading-relaxed text-white/85 lg:text-mathua-secondary"
-          style={{ animationDelay: '160ms' }}
+          style={{ transitionDelay: '160ms' }}
         >
-          Mathua is an open-source adaptive math learning engine. You cannot advance until you
-          have truly mastered the prerequisite, both speed and accuracy must be proven.
+          Mathua adapts to what you know, strengthens what you don’t, and makes sure you master the foundations
+          before moving forward.
         </p>
-        <div className="reveal mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center" style={{ animationDelay: '240ms' }}>
-          <button type="button" onClick={onGetStarted} className={CTA_PRIMARY}>
-            Get started
-          </button>
-          <a
-            href="https://github.com/chuma-beep/mathua"
-            className={`${CTA_GHOST_ON_ART} lg:border-mathua-border lg:text-mathua-primary lg:hover:border-mathua-blue lg:focus-visible:outline-mathua-blue`}
+        <div className="reveal mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center" style={{ transitionDelay: '240ms' }}>
+          <button
+            type="button"
+            onClick={() => setPanelOpen((open) => !open)}
+            aria-expanded={panelOpen}
+            aria-controls="start-panel"
+            className={CTA_PRIMARY}
           >
-            <span
-              aria-hidden="true"
-              className="absolute inset-0 origin-left scale-x-0 bg-mathua-blue transition-transform duration-300 ease-out group-hover:scale-x-100 motion-reduce:transition-none"
-            />
-            <span className="relative group-hover:text-white">View on GitHub</span>
+            Start learning for free
+          </button>
+          <a href="#how-learning-works" className={CTA_GHOST_ON_ART}>
+            <GhostLabel>See how it works</GhostLabel>
           </a>
         </div>
-        <p className="reveal mt-4 font-mono text-[11px] text-mathua-blue" style={{ animationDelay: '320ms' }}>
-          No account needed. <Link href="/learn" className="underline underline-offset-4 hover:no-underline">Try the demo</Link>.
+        <p className="reveal mt-4 font-mono text-[11px] text-mathua-blue" style={{ transitionDelay: '320ms' }}>
+          No account needed. Progress stays on this device.
         </p>
-      </div>
-    </section>
-  )
-}
-
-// Counts up when the stat scrolls into view. The target is rendered first so
-// no-JS, reduced-motion, and e2e reads always see the real number; the
-// observer restarts it from 0 only once the element is (barely) on screen.
-function CountUp({ target, duration = 1200 }: { target: number; duration?: number }) {
-  const ref = useRef<HTMLSpanElement>(null)
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    let raf = 0
-    const observer = new IntersectionObserver(
-      entries => {
-        if (!entries[0]?.isIntersecting) return
-        observer.disconnect()
-        const start = performance.now()
-        const tick = (now: number) => {
-          const t = Math.min(1, (now - start) / duration)
-          const eased = 1 - Math.pow(1 - t, 3)
-          el.textContent = String(Math.round(eased * target))
-          if (t < 1) raf = requestAnimationFrame(tick)
-        }
-        raf = requestAnimationFrame(tick)
-      },
-      { threshold: 0 }
-    )
-    observer.observe(el)
-    return () => {
-      observer.disconnect()
-      cancelAnimationFrame(raf)
-    }
-  }, [target, duration])
-  return <span ref={ref}>{target}</span>
-}
-
-export function TrustSection() {
-  return (
-    <section data-reveal className="border-b border-mathua-division py-16">
-      <div className="section-label">( 02 · Why it is trusted )</div>
-      <div className="mt-5 grid gap-10 md:grid-cols-12 md:items-start">
-        <p className="max-w-[52ch] text-sm leading-relaxed text-mathua-secondary md:col-span-7">
-          Open-source under MIT. Sequencing inspired by Math Academy, with MIT OpenCourseWare and
-          Art of Problem Solving consulted for curriculum structure and problem quality. Lessons
-          build on OpenStax (CC BY-NC-SA 4.0) and Algebrica (CC BY-NC 4.0). No accounts to start,
-          no paywall on the graph.
-        </p>
-        <div className="grid grid-cols-3 divide-x divide-mathua-division border border-mathua-border md:col-span-5">
-          <div className="p-5">
-            <div className="font-serif text-3xl tracking-tight text-mathua-primary"><CountUp target={conceptCount} /></div>
-            <div className="mt-1 font-mono text-[10px] uppercase tracking-wider text-mathua-muted">worked concepts</div>
-          </div>
-          <div className="p-5">
-            <div className="font-serif text-3xl tracking-tight text-mathua-primary">∞</div>
-            <div className="mt-1 font-mono text-[10px] uppercase tracking-wider text-mathua-muted">generated problems</div>
-          </div>
-          <div className="p-5">
-            <div className="font-serif text-3xl tracking-tight text-mathua-primary">5</div>
-            <div className="mt-1 font-mono text-[10px] uppercase tracking-wider text-mathua-muted">questions per check</div>
-          </div>
+        <div id="start-panel">
+          {panelOpen && <StartPanel onClose={() => setPanelOpen(false)} />}
         </div>
       </div>
     </section>
   )
 }
 
-const FEATURES = [
+const PRACTICE = {
+  question: 'What is 7 × 8?',
+  options: [54, 56, 58, 64],
+  answer: 56,
+  working: '7 × 8 = 56. The multiplication table row for 7 lands on 56 at the eighth step.',
+}
+
+/** A real question, answered locally, in the same markup as a lesson card. */
+export function PracticePreview() {
+  const [picked, setPicked] = useState<number | null>(null)
+  const correct = picked === PRACTICE.answer
+  return (
+    <section data-reveal className="border-b border-mathua-division py-16" aria-labelledby="practice-heading">
+      <div className="section-label">( 02 · A session, not a screenshot )</div>
+      <div className="mt-4 grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_260px] lg:gap-10">
+        <div className="border border-mathua-border bg-mathua-surface p-5 sm:p-6">
+          <div className="flex items-center justify-between gap-3 font-mono text-[10px] uppercase text-mathua-muted">
+            <span>Practice · arithmetic</span>
+            <span>Example</span>
+          </div>
+          <h2 id="practice-heading" className="mt-3 font-serif text-xl text-mathua-primary sm:text-2xl">
+            {PRACTICE.question}
+          </h2>
+          <div className="mt-4 grid grid-cols-2 gap-2">
+            {PRACTICE.options.map((option) => {
+              const chosen = picked === option
+              const isAnswer = option === PRACTICE.answer
+              return (
+                <button
+                  key={option}
+                  type="button"
+                  onClick={() => setPicked(option)}
+                  className={
+                    'min-h-[44px] border px-4 font-mono text-sm transition-colors ' +
+                    (picked === null
+                      ? 'border-mathua-border text-mathua-primary hover:border-mathua-blue hover:text-mathua-blue'
+                      : chosen && isAnswer
+                        ? 'border-mathua-blue bg-mathua-blue-faint text-mathua-blue'
+                        : chosen
+                          ? 'border-mathua-red text-mathua-red'
+                          : isAnswer
+                            ? 'border-mathua-blue text-mathua-blue'
+                            : 'border-mathua-border text-mathua-muted')
+                  }
+                >
+                  {option}
+                </button>
+              )
+            })}
+          </div>
+          <div aria-live="polite" className="mt-4 min-h-[48px]">
+            {picked !== null && (
+              <p className={'text-[13px] leading-relaxed ' + (correct ? 'text-mathua-primary' : 'text-mathua-secondary')}>
+                <span className="font-mono text-[10px] uppercase text-mathua-muted">{correct ? 'Correct · ' : 'Not yet · '}</span>
+                {PRACTICE.working}
+              </p>
+            )}
+          </div>
+        </div>
+        <div className="border border-mathua-border bg-mathua-surface p-5">
+          <p className="font-mono text-[10px] uppercase text-mathua-muted">Concept progress</p>
+          <p className="mt-2 text-sm text-mathua-primary">Multiplication facts</p>
+          <div className="mt-4 h-1.5 w-full bg-mathua-division" role="img" aria-label="Mastery 4 of 5 checks">
+            <div
+              className={'h-full bg-mathua-blue transition-[width] duration-300 ' + (correct ? 'w-full' : 'w-4/5')}
+            />
+          </div>
+          <p className="mt-2 font-mono text-[10px] text-mathua-muted">{correct ? '5 of 5 checks' : '4 of 5 checks'}</p>
+          <p className="mt-4 text-[12px] leading-relaxed text-mathua-secondary">
+            A concept is mastered from recent evidence: accuracy, speed, variety and time since the last attempt.
+          </p>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+const STEPS = [
+  { title: 'Learn', body: 'A short lesson introduces the idea and works one example. The figure and the algebra stay on the same screen.' },
+  { title: 'Practice', body: 'Problems are generated for the concept, so you cannot memorise one set of answers and move on.' },
+  { title: 'Master', body: 'Mastery needs a run of correct answers at the target speed, across different forms of the same idea.' },
+  { title: 'Review', body: 'What you mastered comes back on a schedule, before it fades, rather than all at once.' },
+]
+
+export function StepsSection() {
+  return (
+    <section id="how-learning-works" data-reveal className="border-b border-mathua-division py-16">
+      <div className="section-label">( 03 · How learning works )</div>
+      <div className="mt-4 grid gap-px border border-mathua-division bg-mathua-division sm:grid-cols-2 lg:grid-cols-4">
+        {STEPS.map((step, index) => (
+          <div key={step.title} className="bg-mathua-bg p-6">
+            <span className="font-mono text-xs text-mathua-blue">{String(index + 1).padStart(2, '0')}</span>
+            <h2 className="mt-3 font-serif text-lg text-mathua-primary">{step.title}</h2>
+            <p className="mt-2 text-[13px] leading-relaxed text-mathua-secondary">{step.body}</p>
+          </div>
+        ))}
+      </div>
+      <Link href="/how-it-works" className="mt-4 inline-block font-mono text-[11px] text-mathua-muted hover:text-mathua-blue">
+        How the engine decides →
+      </Link>
+    </section>
+  )
+}
+
+export function FiguresSection() {
+  return (
+    <section data-reveal className="border-b border-mathua-division py-16">
+      <div className="section-label">( 04 · Interactive mathematics )</div>
+      <p className="mt-3 max-w-[62ch] text-[15px] leading-relaxed text-mathua-secondary">
+        Some ideas are easier to see than to read. Change the angle, the field or the slice and the result follows.
+      </p>
+      <div className="mt-6 grid gap-4 lg:grid-cols-3">
+        {FEATURED_FIGURES.map((figure) => (
+          <article key={figure.type} className="flex flex-col border border-mathua-border bg-mathua-surface p-4">
+            <h2 className="font-serif text-lg text-mathua-primary">{figure.title}</h2>
+            <p className="mt-1 text-[12px] leading-relaxed text-mathua-secondary">{figure.caption}</p>
+            <div className="mt-3">
+              <VisualFigure visual={figure} />
+            </div>
+          </article>
+        ))}
+      </div>
+      <Link href="/announcements" className="mt-4 inline-block font-mono text-[11px] text-mathua-muted hover:text-mathua-blue">
+        More about the interactive figures →
+      </Link>
+    </section>
+  )
+}
+
+const ADAPTIVE = [
   {
-    numeral: 'I.',
-    title: 'Mastery gating',
-    body: 'You cannot advance until your streak and response time both meet the threshold. Knowing the answer is not enough; you must know it fast.',
+    title: 'Prerequisites are enforced',
+    body: 'A concept unlocks only when the ideas under it are mastered. The map is a check, not a suggestion.',
   },
   {
-    numeral: 'II.',
-    title: 'Concept graph',
-    body: 'Every concept is a node with explicit prerequisites. Mathua reads the graph and your progress together, and picks what you see next from the two.',
+    title: 'Mastery is evidence',
+    body: 'Correctness alone is not enough. Speed, variety across question forms and the time since the last attempt all count.',
   },
   {
-    numeral: 'III.',
-    title: 'Spaced repetition',
-    body: 'Concepts you master resurface automatically before they decay. Reviews are woven into your session; there is no separate review mode.',
+    title: 'Review is scheduled',
+    body: 'Mastered ideas return on a spacing schedule built from how quickly each one was answered.',
   },
 ]
 
-export function FeaturesSection() {
+export function AdaptiveSection() {
   return (
     <section data-reveal className="border-b border-mathua-division py-16">
-      <div className="section-label">( 03 · 3 Main Features )</div>
-      <div className="mt-6 grid gap-px border border-mathua-division bg-mathua-division md:grid-cols-3">
-        {FEATURES.map(f => (
-          <div key={f.title} className="bg-mathua-bg p-6">
-            <div className="font-mono text-xs text-mathua-blue">{f.numeral}</div>
-            <h4 className="mt-3 font-serif text-lg text-mathua-primary">{f.title}</h4>
-            <p className="mt-2 text-[13px] leading-relaxed text-mathua-secondary">{f.body}</p>
+      <div className="section-label">( 05 · Adaptive learning )</div>
+      <div className="mt-4 grid gap-px border border-mathua-division bg-mathua-division md:grid-cols-3">
+        {ADAPTIVE.map((item) => (
+          <div key={item.title} className="bg-mathua-bg p-6">
+            <h2 className="font-serif text-lg text-mathua-primary">{item.title}</h2>
+            <p className="mt-2 text-[13px] leading-relaxed text-mathua-secondary">{item.body}</p>
           </div>
         ))}
       </div>
     </section>
-  )
-}
-
-const chipClass = (status: string) => {
-  if (status === 'mastered') return 'border border-mathua-blue bg-mathua-blue text-mathua-bg'
-  if (status === 'decaying') return 'border border-dashed border-mathua-border text-mathua-primary'
-  return 'border border-mathua-border text-mathua-primary'
-}
-
-export function StatesSection() {
-  return (
-    <section data-reveal className="border-b border-mathua-division py-16">
-      <div className="section-label">( 04 · The States )</div>
-      <div className="mt-6 flex flex-wrap items-center gap-2 font-mono text-xs">
-        {PIPELINE_STATES.map((s, i) => (
-          <span key={s.label} className="flex items-center gap-2">
-            {i > 0 && <span className="text-mathua-muted">→</span>}
-            <span className={`px-3 py-1.5 ${chipClass(s.status)}`}>{s.label}</span>
-          </span>
-        ))}
-      </div>
-      <p className="mt-4 font-mono text-[11px] text-mathua-muted">
-        example · <span className="text-mathua-blue">arith.add.single</span> · 10 correct in a row at ≤8s → MASTERED
-      </p>
-      <div className="mt-6 overflow-x-auto border border-mathua-border bg-mathua-primary p-8 font-mono text-[13px] leading-loose text-mathua-bg dark:bg-mathua-code dark:text-mathua-primary">
-        <span className="opacity-40">priority</span> = (0.7 × days_since_last_seen)
-        <br />
-        <span className="pl-20">+ (0.3 × (1 − mastery))</span>
-        <br />
-        <span className="pl-20">
-          + 5.0{' '}
-          <span className="underline decoration-mathua-blue decoration-2 underline-offset-2">if DECAYING</span>
-        </span>
-        <br />
-        <span className="pl-20">
-          + 2.0{' '}
-          <span className="underline decoration-mathua-blue decoration-2 underline-offset-2">if newly_unlocked</span>
-        </span>
-      </div>
-      <p className="mt-4 max-w-[60ch] text-[13px] leading-relaxed text-mathua-secondary">
-        The scheduler enforces three hard rules: prerequisites must be mastered before a concept
-        unlocks, the same concept never appears twice in a row and roughly 70% of each session
-        is new material.
-      </p>
-    </section>
-  )
-}
-
-function DomainTable({ rows }: { rows: [string, number][] }) {
-  return (
-    <table className="w-full font-mono text-xs">
-      <tbody className="[&_td]:border-b [&_td]:border-mathua-division [&_td]:py-1.5">
-        {rows.map(([domain, count]) => (
-          <tr key={domain}>
-            <td className="text-mathua-secondary">{domain}</td>
-            <td className="text-right text-mathua-primary">{count}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
   )
 }
 
 export function CoverageSection() {
-  const rows: [string, number][] = domainOrder.map(d => [domainLabels[d], domainCounts[d]])
-  const half = Math.ceil(rows.length / 2)
   return (
     <section data-reveal className="border-b border-mathua-division py-16">
-      <div className="flex flex-wrap items-end justify-between gap-2">
-        <div className="section-label">( 05 · What Mathua covers )</div>
-        <Link
-          href="/domains"
-          className="font-mono text-[11px] text-mathua-muted transition-colors hover:text-mathua-blue"
-        >
+      <div className="flex flex-wrap items-baseline justify-between gap-3">
+        <div className="section-label">( 06 · What Mathua covers )</div>
+        <Link href="/domains" className="font-mono text-[11px] text-mathua-muted hover:text-mathua-blue">
           All {conceptCount} concepts by subject →
         </Link>
       </div>
-      <div className="mt-6 grid gap-x-12 gap-y-6 md:grid-cols-2">
-        <DomainTable rows={rows.slice(0, half)} />
-        <DomainTable rows={rows.slice(half)} />
+      <div className="mt-4 grid gap-px border border-mathua-division bg-mathua-division sm:grid-cols-2 lg:grid-cols-3">
+        {domainOrder.map((domain) => (
+          <Link
+            key={domain}
+            href="/domains"
+            className="group flex items-baseline justify-between gap-3 bg-mathua-bg px-4 py-3 transition-colors hover:bg-mathua-surface"
+          >
+            <span className="text-sm text-mathua-secondary group-hover:text-mathua-primary">{domainLabels[domain]}</span>
+            <span className="font-mono text-xs text-mathua-muted">{domainCounts[domain]}</span>
+          </Link>
+        ))}
       </div>
-      <p className="mt-4 font-mono text-[11px] text-mathua-muted">
-        Problems are generated on demand, never stored. There is nothing to memorise.
+      <p className="mt-4 max-w-[62ch] text-[12px] leading-relaxed text-mathua-muted">
+        Every concept has a lesson and generated problems. Nothing is a fixed answer key.
       </p>
     </section>
   )
 }
 
-export function RankingSection() {
+export function OpenSourceSection() {
   return (
     <section data-reveal className="border-b border-mathua-division py-16">
-      <div className="section-label">( 06 · Ranking System )</div>
-      <p className="mt-4 max-w-[52ch] text-sm text-mathua-secondary">
-        The leaderboard resets every Monday at 00:00 UTC. Your score is calculated from three
-        components:
-      </p>
-      <div className="mt-4 overflow-x-auto border border-mathua-border bg-mathua-primary p-6 font-mono text-[13px] leading-loose text-mathua-bg dark:bg-mathua-code dark:text-mathua-primary">
-        <span className="opacity-40">score</span> = (mastered_count × 100)
-        <br />
-        <span className="pl-6">+ speed_bonus</span>
-        <br />
-        <span className="pl-6">+ (current_streak × 10)</span>
+      <div className="section-label">( 07 · Open source )</div>
+      <div className="mt-4 grid gap-6 md:grid-cols-2">
+        <p className="max-w-[52ch] text-[14px] leading-relaxed text-mathua-secondary">
+          Mathua is MIT licensed. Lessons draw on OpenStax (CC BY-NC-SA 4.0) and Algebrica (CC BY-NC 4.0), and the
+          engine, generators and interface are in one repository. You can read it, run it, or change it.
+        </p>
+        <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+          <a
+            href="https://github.com/chuma-beep/mathua"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex min-h-[44px] items-center border border-mathua-border px-5 text-sm text-mathua-primary transition-colors hover:border-mathua-blue hover:text-mathua-blue"
+          >
+            View on GitHub
+          </a>
+          <Link href="/docs/contributing" className="font-mono text-[11px] text-mathua-muted hover:text-mathua-blue">
+            Read the contributing guide →
+          </Link>
+        </div>
       </div>
-      <div className="mt-8 font-mono text-[10px] uppercase tracking-[0.2em] text-mathua-muted">
-        Levels of mastery
-      </div>
-      <div className="mt-3 grid grid-cols-3 gap-px border border-mathua-division bg-mathua-division md:grid-cols-9">
-        {levels.map(l => {
-          const elite = 'elite' in l && l.elite
-          return (
-            <div key={l.name} className={elite ? 'bg-mathua-primary p-3 text-mathua-bg dark:bg-mathua-code dark:text-mathua-primary' : 'bg-mathua-bg p-3'}>
-              <div className={elite ? 'font-mono text-[10px] opacity-50' : 'font-mono text-[10px] text-mathua-muted'}>
-                {l.num}
-              </div>
-              <div className={`mt-1 font-serif text-[13px] ${elite ? '' : 'text-mathua-primary'}`}>{l.name}</div>
-              <div className={elite ? 'mt-1 font-mono text-[10px] opacity-50' : 'mt-1 font-mono text-[10px] text-mathua-muted'}>
-                {l.range}
-              </div>
-            </div>
-          )
-        })}
+    </section>
+  )
+}
+
+export function ClosingCta() {
+  return (
+    <section data-reveal className="border-b border-mathua-division py-16">
+      <div className="border border-mathua-border bg-mathua-primary p-8 text-mathua-bg dark:bg-mathua-code dark:text-mathua-primary">
+        <div className="section-label text-mathua-bg/60 dark:text-mathua-muted">( 08 · Start here )</div>
+        <h2 className="mt-3 font-serif text-2xl sm:text-3xl">Start with what you know.</h2>
+        <p className="mt-2 max-w-[52ch] text-[14px] leading-relaxed opacity-80">
+          A short diagnostic finds the edge of what you can do, and the plan starts there.
+        </p>
+        <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+          <Link
+            href="/learn"
+            className="inline-flex min-h-[44px] items-center justify-center bg-mathua-blue px-6 text-sm font-medium text-white transition-colors hover:bg-mathua-blue-hover"
+          >
+            Start learning for free
+          </Link>
+          <Link
+            href="/login"
+            className="inline-flex min-h-[44px] items-center justify-center border border-mathua-bg/40 px-6 text-sm font-medium transition-colors hover:border-mathua-bg dark:border-mathua-border dark:hover:border-mathua-primary"
+          >
+            Create an account
+          </Link>
+        </div>
       </div>
     </section>
   )
@@ -332,66 +459,35 @@ export function RankingSection() {
 
 const FAQS = [
   {
-    q: 'Do I need an account to start?',
-    a: 'No. Begin studying immediately, accounts are optional and only needed to sync progress across devices.',
+    q: 'Do I need an account?',
+    a: 'No. Guest practice works in the browser. An account keeps progress across devices and lets reminders reach you.',
   },
   {
-    q: 'Why does speed matter, not just accuracy?',
-    a: 'Fluency requires retrieval under time pressure. Knowing the answer is not enough; you must know it fast, or the foundation will not hold the next concept.',
+    q: 'Why does speed count?',
+    a: 'A mastered fact is one you can use without stopping to rebuild it. The check measures a run of correct answers at a target pace, not a single lucky answer.',
   },
   {
-    q: 'When does a mastery check appear?',
-    a: 'After enough learning XP. The short check verifies what you have learned; concepts you have already mastered return through spaced review instead.',
-  },
-  {
-    q: 'Is Mathua free and open-source?',
-    a: 'Yes, MIT licensed, with no paywall on the graph. Every concept and generator is in the repository.',
+    q: 'Is it free?',
+    a: 'Yes. Mathua is MIT licensed and has no paywall. You can also self-host it.',
   },
 ]
 
 export function FaqSection() {
   return (
-    <section data-reveal className="grid gap-10 py-16 md:grid-cols-2">
-      <div className="min-w-0">
-        <div className="section-label">( 07 · Questions, answered. )</div>
-        <div className="mt-5 divide-y divide-mathua-division border-y border-mathua-division">
-          {FAQS.map(f => (
-            <details key={f.q} className="group py-3">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-3 font-serif text-[15px] text-mathua-primary">
-                <span>{f.q}</span>
-                <span className="font-mono text-mathua-muted transition-transform group-open:rotate-45">+</span>
-              </summary>
-              <p className="mt-2 text-[13px] leading-relaxed text-mathua-secondary">{f.a}</p>
-            </details>
-          ))}
-        </div>
-      </div>
-      <div className="min-w-0">
-        <div className="section-label">( 08 · How it is extended. )</div>
-        <p className="mt-4 text-[13px] leading-relaxed text-mathua-secondary">
-          Every concept is a JSON node. Every problem is a Go generator function. Every
-          contribution goes through a graph validator that rejects cycles and orphaned nodes
-          automatically.
-        </p>
-        <pre className="mt-4 overflow-x-auto overscroll-x-contain whitespace-pre border border-mathua-border bg-mathua-primary p-4 font-mono text-[11px] leading-relaxed text-mathua-bg sm:p-5 dark:bg-mathua-code dark:text-mathua-primary">
-{`{
-  "id":                "arith.add.multi",
-  "label":             "Multi-digit addition",
-  "domain":            "arithmetic",
-  "prerequisites":     ["arith.add.single",
-                        "arith.add.carry"],
-  "mastery_threshold": {
-    "streak":          5,
-    "avg_time_seconds": 8
-  }
-}`}
-        </pre>
-        <Link
-          href="/docs/contributing"
-          className="mt-4 inline-block font-mono text-[11px] text-mathua-muted transition-colors hover:text-mathua-blue"
-        >
-          Read the contributing guide →
-        </Link>
+    <section data-reveal className="py-16">
+      <div className="section-label">( 09 · Questions, answered. )</div>
+      <div className="mt-4 max-w-[72ch]">
+        {FAQS.map((item) => (
+          <details key={item.q} className="group border-b border-mathua-division py-3">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-3 font-serif text-[15px] text-mathua-primary">
+              {item.q}
+              <span aria-hidden="true" className="font-mono text-lg text-mathua-muted transition-transform group-open:rotate-45">
+                +
+              </span>
+            </summary>
+            <p className="mt-2 text-[13px] leading-relaxed text-mathua-secondary">{item.a}</p>
+          </details>
+        ))}
       </div>
     </section>
   )

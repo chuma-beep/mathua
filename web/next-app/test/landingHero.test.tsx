@@ -21,10 +21,11 @@ vi.mock('../lib/auth', async (importOriginal) => {
   }
 })
 
-// The hero's "Get started" is the most prominent action on the marketing page.
-// It used to send a signed-out visitor to /profile, an empty dashboard with a
+// The hero's primary action opens the start panel rather than navigating.
+// A signed-out visitor used to land on /profile, an empty dashboard with a
 // zeroed heatmap and no question anywhere on it, which is a poor first
-// experience and the opposite of Learn being the primary destination.
+// experience and the opposite of Learn being the primary destination. The
+// panel keeps the click for One Tap while always offering the guest path.
 describe('landing hero', () => {
   beforeEach(() => {
     localStorage.clear()
@@ -34,21 +35,22 @@ describe('landing hero', () => {
     vi.mocked(ensureGuestId).mockClear()
   })
 
-  it('sends "Get started" to Login', async () => {
+  it('opens the start panel instead of leaving the page', async () => {
     render(<HomePage />)
-    const cta = await screen.findByRole('button', { name: 'Get started' })
+    const cta = await screen.findByRole('button', { name: 'Start learning for free' })
     cta.click()
-    await waitFor(() => expect(pushMock).toHaveBeenCalledWith('/login'))
-    expect(pushMock).not.toHaveBeenCalledWith('/profile')
+    expect(await screen.findByTestId('start-panel')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Continue as a guest' })).toHaveAttribute('href', '/learn')
+    expect(pushMock).not.toHaveBeenCalled()
   })
 
-  it('does not mint a guest identity when opening Login', async () => {
+  it('does not mint a guest identity when the start panel opens', async () => {
     render(<HomePage />)
-    ;(await screen.findByRole('button', { name: 'Get started' })).click()
-    await waitFor(() => expect(pushMock).toHaveBeenCalledWith('/login'))
+    ;(await screen.findByRole('button', { name: 'Start learning for free' })).click()
+    await screen.findByTestId('start-panel')
     // The anchor that grades the first answer is keyed by student, and the
     // practice endpoint only resolves one from a bearer token, so the guest
-    // id and token have to exist before /learn fetches anything.
+    // id and token are minted by /learn, not by the landing page.
     expect(ensureGuestId).not.toHaveBeenCalled()
     expect(ensureGuestToken).not.toHaveBeenCalled()
   })
@@ -61,8 +63,8 @@ describe('landing hero', () => {
 
   it('keeps the two hero actions on separate, non-conflicting backgrounds', async () => {
     render(<HomePage />)
-    const primary = await screen.findByRole('button', { name: 'Get started' })
-    const ghost = await screen.findByRole('link', { name: 'View on GitHub' })
+    const primary = await screen.findByRole('button', { name: 'Start learning for free' })
+    const ghost = await screen.findByRole('link', { name: 'See how it works' })
     // The ghost button was once the primary button plus overrides, so both
     // `bg-mathua-blue` and `bg-transparent` (and both hover backgrounds) sat on one
     // element. Same property, same specificity: Tailwind's emitted order decided the
