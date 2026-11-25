@@ -141,6 +141,7 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
   const [shelfProgress, setShelfProgress] = useState<Record<string, ConceptProgress>>({})
   const nextFetchedRef = useRef(false)
   const seenRef = useRef<string[]>([])
+  const practiceEpochRef = useRef(0)
   const bottomRef = useRef<HTMLDivElement>(null)
   const questionCardRef = useRef<HTMLDivElement>(null)
   const answerFormRef = useRef<HTMLFormElement>(null)
@@ -205,18 +206,19 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
     target?.scrollIntoView(options)
   }, [lastEntryKey, lastEntryKind])
 
-  const refill = useCallback(async (diff: number, exclude: string[]): Promise<PracticeQuestion[]> => {
-    const pr = await getLessonPractice(conceptId, 3, { seed: Date.now() % 100000, exclude, difficulty: diff, kp_ordinal: kpIndex + 1 })
+  const refill = useCallback(async (diff: number, exclude: string[], kpOrdinal: number, epoch: number): Promise<PracticeQuestion[]> => {
+    const pr = await getLessonPractice(conceptId, 3, { seed: Date.now() % 100000, exclude, difficulty: diff, kp_ordinal: kpOrdinal })
     const fresh = pr.questions.filter(q => !exclude.includes(q.question))
     const answerable = fresh.length > 0 ? fresh : pr.questions
     const first = answerable[0]
-    if (first?.answer_hint) {
+    if (first?.answer_hint && practiceEpochRef.current === epoch) {
       setServedFormat({ hint: first.answer_hint, inputMode: first.answer_input_mode === 'numeric' ? 'numeric' : 'text' })
     }
     return answerable
-  }, [conceptId, kpIndex])
+  }, [conceptId])
 
   const load = useCallback(async () => {
+    practiceEpochRef.current += 1
     practiceStartedRef.current = false
     setStartingPractice(false)
     setLoading(true)
@@ -336,7 +338,9 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
       const [head, ...rest] = buffer
       setBuffer(rest)
       if (rest.length < 2) {
-        refill(diff, seenRef.current).then(fresh => {
+        const epoch = practiceEpochRef.current
+        refill(diff, seenRef.current, kpIndex + 1, epoch).then(fresh => {
+          if (practiceEpochRef.current !== epoch) return
           seenRef.current = [...seenRef.current, ...fresh.map(q => q.question)].slice(-20)
           setBuffer(prev => [...prev, ...fresh].slice(0, 6))
         }).catch(() => {})
@@ -344,7 +348,9 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
       return head
     }
     try {
-      const fresh = await refill(diff, seenRef.current)
+      const epoch = practiceEpochRef.current
+      const fresh = await refill(diff, seenRef.current, kpIndex + 1, epoch)
+      if (practiceEpochRef.current !== epoch) return null
       seenRef.current = [...seenRef.current, ...fresh.map(q => q.question)].slice(-20)
       const [head, ...rest] = fresh
       setBuffer(rest)
@@ -394,14 +400,25 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
       return
     }
     const ni = from.kpIndex + 1
+    const epoch = practiceEpochRef.current + 1
+    practiceEpochRef.current = epoch
     setKpIndex(ni)
     setConsecutive(0)
     setMisses(0)
     setDifficulty(0.4)
-    // Ask for the next section's question before announcing the section, so a concept with
-    // nothing left anywhere goes straight to the completion card instead of showing a
-    // heading and then nothing under it.
-    const nq = await takeNext(0.4)
+    // The old buffer belongs to the previous worked example. Fetch the new section
+    // before announcing it, so a concept with nothing left anywhere goes straight to
+    // the completion card instead of showing a heading and then nothing under it.
+    setBuffer([])
+    let fresh: PracticeQuestion[] = []
+    try {
+      fresh = await refill(0.4, seenRef.current, ni + 1, epoch)
+      if (practiceEpochRef.current !== epoch) return
+      seenRef.current = [...seenRef.current, ...fresh.map(q => q.question)].slice(-20)
+    } catch {}
+    if (practiceEpochRef.current !== epoch) return
+    const [nq, ...rest] = fresh
+    setBuffer(rest)
     setEntries(prev => [...prev, { key: nextKey(), kind: 'kpdiv', kpIndex: ni }])
     if (nq) {
       setEntries(prev => [
@@ -554,7 +571,9 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
       // the answer.
       if (getErrorStatus(e) === 409) {
         try {
-          const fresh = await refill(difficulty, seenRef.current)
+          const epoch = practiceEpochRef.current
+          const fresh = await refill(difficulty, seenRef.current, kpIndex + 1, epoch)
+          if (practiceEpochRef.current !== epoch) return
           if (fresh.length > 0) {
             seenRef.current = [...seenRef.current, fresh[0].question].slice(-20)
             setEntry(key, { q: fresh[0], answer: '', servedAt: Date.now(), error: 'That question could not be graded. Here is a fresh one. Enter your answer and press Check.' })

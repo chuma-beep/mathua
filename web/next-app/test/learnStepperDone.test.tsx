@@ -498,6 +498,76 @@ describe('LearnStepper question exhaustion', () => {
   })
 })
 
+// A prefetch belongs to the worked example that is on screen when it is requested.
+//
+// Clearing the buffer on a section advance is not enough. The old section can have an
+// in-flight prefetch, and a late answer can write its questions back into the new
+// section's buffer. The epoch below makes that late answer stale before it returns.
+describe('LearnStepper section prefetch', () => {
+  it('moves to the next section with questions fetched for that section and no stale prefetch', async () => {
+    const sectionOneQuestions = [
+      { question: '2 + 3 = ?', answer_hint: 'ones' },
+      { question: '4 + 1 = ?', answer_hint: 'ones' },
+    ]
+    const sectionTwoQuestions = [
+      { question: '7 + 5 = ?', answer_hint: 'cross ten' },
+      { question: '8 + 6 = ?', answer_hint: 'cross ten' },
+    ]
+    const answers = new Map([
+      ['2 + 3 = ?', '5'],
+      ['4 + 1 = ?', '5'],
+      ['7 + 5 = ?', '12'],
+      ['8 + 6 = ?', '14'],
+    ])
+
+    vi.mocked(getLessonKPs).mockResolvedValue({
+      concept_id: CID,
+      kps: [
+        { label: 'KP one', subgoals: [], worked_example: '2 + 3 = 5' },
+        { label: 'KP two', subgoals: [], worked_example: '7 + 5 = 12' },
+      ],
+    })
+    vi.mocked(submitStudyAnswer).mockImplementation(async (_cid, answer, _elapsed, question) => ({
+      correct: answer.trim() === answers.get(question),
+      feedback: 'Correct!',
+      explanation: '',
+      expected_answer: answers.get(question) ?? '',
+      xp: 1,
+    }))
+    vi.mocked(getLessonPractice).mockImplementation(async (_cid, _count, opts) => {
+      const wanted = opts?.kp_ordinal === 2 ? sectionTwoQuestions : sectionOneQuestions
+      const questions = wanted.filter(q => !opts?.exclude?.includes(q.question))
+      return { questions, concept_id: CID }
+    })
+
+    render(<LearnStepper conceptId={CID} />)
+    fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
+    expect(await screen.findByText('2 + 3 = ?', undefined, { timeout: 4000 })).toBeTruthy()
+    await answerCurrent('5')
+    expect(await screen.findByText('4 + 1 = ?', undefined, { timeout: 4000 })).toBeTruthy()
+    await answerCurrent('5')
+
+    // The section heading and the first question both name the second worked example.
+    expect(await screen.findByText('Next: KP two (worked example)', undefined, { timeout: 4000 })).toBeTruthy()
+    expect(await screen.findByText('7 + 5 = ?', undefined, { timeout: 4000 })).toBeTruthy()
+    expect(screen.queryByText('8 + 6 = ?')).toBeNull()
+
+    const ordinalCalls = vi.mocked(getLessonPractice).mock.calls.map(([, , opts]) => opts?.kp_ordinal)
+    expect(ordinalCalls).toContain(1)
+    expect(ordinalCalls).toContain(2)
+    expect(vi.mocked(getLessonPractice).mock.calls.some((call) => {
+      const opts = call[2]
+      return opts?.kp_ordinal === 1 && opts?.exclude?.includes('7 + 5 = ?')
+    })).toBe(false)
+
+    vi.mocked(getLessonPractice).mockReset()
+    vi.mocked(getLessonPractice).mockResolvedValue({
+      questions: QS.map(({ answer: _answer, explanation: _explanation, ...q }) => q),
+      concept_id: CID,
+    })
+  })
+})
+
 // The header's count and XP must describe the same span.
 //
 // The count used to reset on every knowledge-point advance while the XP summed every card
@@ -505,13 +575,33 @@ describe('LearnStepper question exhaustion', () => {
 // "+3 XP", two scopes on one line, and the count was the one that read as wrong.
 describe('LearnStepper header tally', () => {
   it('counts every answer in the concept, not just the current section', async () => {
+    const questionsByOrdinal = new Map([
+      [1, [{ question: '2 + 3 = ?' }, { question: '4 + 1 = ?' }]],
+      [2, [{ question: '3 + 4 = ?' }]],
+    ])
+    const answers = new Map([
+      ['2 + 3 = ?', '5'],
+      ['4 + 1 = ?', '5'],
+      ['3 + 4 = ?', '7'],
+    ])
     vi.mocked(getLessonKPs).mockResolvedValue({
       concept_id: CID,
       kps: [
         { label: 'KP one', subgoals: [], worked_example: '2 + 3 = 5' },
-        { label: 'KP two', subgoals: [], worked_example: '4 + 1 = 5' },
+        { label: 'KP two', subgoals: [], worked_example: '3 + 4 = 7' },
       ],
     })
+    vi.mocked(getLessonPractice).mockImplementation(async (_cid, _count, opts) => ({
+      questions: questionsByOrdinal.get(opts?.kp_ordinal ?? 1) ?? [],
+      concept_id: CID,
+    }))
+    vi.mocked(submitStudyAnswer).mockImplementation(async (_cid, answer, _elapsed, question) => ({
+      correct: answer.trim() === answers.get(question),
+      feedback: 'Correct!',
+      explanation: '',
+      expected_answer: answers.get(question) ?? '',
+      xp: 1,
+    }))
     render(<LearnStepper conceptId={CID} />)
     fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
     await screen.findByText('2 + 3 = ?', {}, { timeout: 4000 })
@@ -522,10 +612,10 @@ describe('LearnStepper header tally', () => {
     await answerCurrent('5')
     expect(await screen.findByText('4 + 1 = ?', {}, { timeout: 4000 })).toBeTruthy()
 
-    // Two in a row advances to the second KP, the point at which the old tally reset. The
-    // third served question is `1 + 6 = ?`, whose answer is 7.
+    // Two in a row advances to the second KP, the point at which the old tally reset.
+    // The third question must come from the second section's practice set.
     await answerCurrent('5')
-    expect(await screen.findByText('1 + 6 = ?', {}, { timeout: 4000 })).toBeTruthy()
+    expect(await screen.findByText('3 + 4 = ?', {}, { timeout: 4000 })).toBeTruthy()
 
     // 3 answered, 3 correct across the concept. Under the old per-section tally this read
     // "0/1 correct" for the section the learner had just moved into.
