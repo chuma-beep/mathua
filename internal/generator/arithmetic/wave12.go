@@ -385,12 +385,19 @@ func w12EstimateCompatible(kp int) generator.Problem {
 		divisor = friendly + 1
 	}
 	dividend := friendly * q
+	// Show the division a learner can do in their head. "Since 740 / 20 = 37"
+	// assumes exactly the step being asked for; cancelling the same zeros from
+	// both numbers makes it visible.
+	scale := 10
+	if friendly >= 100 {
+		scale = 100
+	}
 	f := map[string]string{}
 	w12I(f, "dividend", dividend)
 	w12I(f, "divisor", divisor)
 	w12I(f, "friendly", friendly)
 	return w12P(kp, fmt.Sprintf("Estimate %d / %d by using the compatible number %d. What is the estimated quotient? (enter a number)", dividend, divisor, friendly),
-		strconv.Itoa(q), fmt.Sprintf("Treat the divisor as %d. Since %d / %d = %d, the estimate is %d.", friendly, dividend, friendly, q, q), f)
+		strconv.Itoa(q), fmt.Sprintf("Treat the divisor as %d. %d / %d is the same as %d / %d, which is %d, so the estimate is %d.", friendly, dividend, friendly, dividend/scale, friendly/scale, q, q), f)
 }
 
 func w12EstimateReason(kp int) generator.Problem {
@@ -518,7 +525,7 @@ func w12OrderNegatives(kp int) generator.Problem {
 	switch kp {
 	case 1:
 		answer = -a + b*c - d
-		q = fmt.Sprintf("What is -%d + %d x %d - %d? (enter a number)", a, b, c, d)
+		q = fmt.Sprintf("What is -%d + %d x %d - %d? Use the order of operations. (enter a number)", a, b, c, d)
 		ex = fmt.Sprintf("Multiply first: %d x %d = %d. Then -%d + %d - %d = %d.", b, c, b*c, a, b*c, d, answer)
 	case 2:
 		answer = (a-b)*c + d

@@ -236,3 +236,93 @@ func TestThreeByThreeStaysThreeDigits(t *testing.T) {
 		}
 	}
 }
+
+func TestOrderOfOperationsNegativesNamesTheRule(t *testing.T) {
+	// Report 506: the learner asked where the brackets are. There are none by
+	// design, because precedence is what the lesson teaches, so the prompt has
+	// to name the rule instead of leaving it implicit.
+	g := &w12Gen{kind: "order_negatives"}
+	re := regexp.MustCompile(`What is -(\d+) \+ (\d+) x (\d+) - (\d+)\?`)
+	for i := 0; i < 100; i++ {
+		p := g.Generate(generator.GeneratorContext{KPOrdinal: 1})
+		if !strings.Contains(p.Question, "order of operations") {
+			t.Fatalf("prompt does not name the rule: %q", p.Question)
+		}
+		m := re.FindStringSubmatch(p.Question)
+		if m == nil {
+			t.Fatalf("question does not match the shape: %q", p.Question)
+		}
+		nums := make([]int, 4)
+		for j := range nums {
+			nums[j], _ = strconv.Atoi(m[j+1])
+		}
+		want := -nums[0] + nums[1]*nums[2] - nums[3]
+		got, err := strconv.Atoi(p.Answer)
+		if err != nil {
+			t.Fatalf("answer %q is not an integer", p.Answer)
+		}
+		if got != want {
+			t.Fatalf("%s = %d, want %d", p.Question, got, want)
+		}
+	}
+}
+
+func TestEstimateCompatibleShowsTheCancelledDivision(t *testing.T) {
+	// Report 507: the explanation said "since 2040 / 30 = 68", which is the
+	// step the learner could not do. It has to show the zeros coming out.
+	g := &w12Gen{kind: "estimate_compatible"}
+	re := regexp.MustCompile(`Estimate (\d+) / (\d+) by using the compatible number (\d+)`)
+	for _, kp := range []int{1, 2, 3} {
+		for i := 0; i < 100; i++ {
+			p := g.Generate(generator.GeneratorContext{KPOrdinal: kp})
+			m := re.FindStringSubmatch(p.Question)
+			if m == nil {
+				t.Fatalf("question does not match the shape: %q", p.Question)
+			}
+			dividend, _ := strconv.Atoi(m[1])
+			friendly, _ := strconv.Atoi(m[3])
+			scale := 10
+			if friendly >= 100 {
+				scale = 100
+			}
+			want := dividend / friendly
+			got, err := strconv.Atoi(p.Answer)
+			if err != nil {
+				t.Fatalf("answer %q is not an integer", p.Answer)
+			}
+			if got != want {
+				t.Fatalf("%s = %d, want %d", p.Question, got, want)
+			}
+			cancelled := fmt.Sprintf("%d / %d", dividend/scale, friendly/scale)
+			if !strings.Contains(p.Explanation, cancelled) {
+				t.Fatalf("explanation hides the mental step %q: %q", cancelled, p.Explanation)
+			}
+		}
+	}
+}
+
+func TestCompensationAlwaysLeavesSomethingToSubtract(t *testing.T) {
+	// Report 508: when the drawn addend was 10 the prompt read "add 10 ... first
+	// add 10", the answer was zero and there was nothing to compensate.
+	g := &w8ArithRemainingGen{kind: "compensation"}
+	re := regexp.MustCompile(`To add (\d+) to (\d+) by compensation`)
+	for i := 0; i < 300; i++ {
+		p := g.Generate(generator.GeneratorContext{KPOrdinal: 1})
+		m := re.FindStringSubmatch(p.Question)
+		if m == nil {
+			t.Fatalf("question does not match the shape: %q", p.Question)
+		}
+		addend, _ := strconv.Atoi(m[1])
+		if addend >= 10 {
+			t.Fatalf("adding %d leaves nothing to compensate: %q", addend, p.Question)
+		}
+		want := 10 - addend
+		got, err := strconv.Atoi(p.Answer)
+		if err != nil {
+			t.Fatalf("answer %q is not an integer", p.Answer)
+		}
+		if got != want || got < 1 || got > 3 {
+			t.Fatalf("%s = %d, want %d between 1 and 3", p.Question, got, want)
+		}
+	}
+}
