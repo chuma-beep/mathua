@@ -49,5 +49,12 @@ func Drivers() map[string]Driver {
 				return ExchangeAppleCode(ctx, code, redirectURI, userJSON)
 			},
 		},
+		"discord": {
+			ClientID: discordClientID,
+			LoginURL: DiscordLoginURL,
+			Exchange: func(ctx context.Context, code, redirectURI string, _ *http.Request) (OAuthProfile, error) {
+				return ExchangeDiscordCode(ctx, code, redirectURI)
+			},
+		},
 	}
 }

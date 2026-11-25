@@ -12,6 +12,9 @@ interface FigureFrameProps {
    *  text inside the drawing scales with it and collided with the plot. */
   hint?: string
   onReset?: () => void
+  /** Control row rendered outside the bordered figure, so the drawing box stays
+   *  a drawing and the buttons can take a full touch target on a phone. */
+  controls?: ReactNode
   children: ReactNode
 }
 
@@ -24,9 +27,10 @@ interface FigureFrameProps {
  * with the keyboard hears the new value. It is never the only place a value
  * appears: every control carries its own visible output.
  */
-export default function FigureFrame({ title, caption, readout, hint, onReset, children }: FigureFrameProps) {
+export default function FigureFrame({ title, caption, readout, hint, onReset, controls, children }: FigureFrameProps) {
   const predict = usePredict()
   return (
+    <>
     <figure className="mt-5 border border-mathua-border bg-mathua-bg">
       <div className="flex items-center justify-between gap-3 border-b border-mathua-border px-3 py-2">
         {/* No `uppercase` on a title or a label: CSS case folding rewrites the mathematics.
@@ -37,7 +41,7 @@ export default function FigureFrame({ title, caption, readout, hint, onReset, ch
           <button
             type="button"
             onClick={onReset}
-            className="border border-mathua-border px-2 py-0.5 font-mono text-[10px] text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue"
+            className="inline-flex h-9 items-center border border-mathua-border px-3 font-mono text-xs text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue"
           >
             Reset
           </button>
@@ -75,5 +79,11 @@ export default function FigureFrame({ title, caption, readout, hint, onReset, ch
         </figcaption>
       )}
     </figure>
+    {controls && (
+      <div data-testid="figure-controls" className="mt-2 border border-mathua-border bg-mathua-surface p-3">
+        {controls}
+      </div>
+    )}
+    </>
   )
 }

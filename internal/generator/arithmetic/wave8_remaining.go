@@ -229,7 +229,10 @@ func w8DoublingHalving(kp int) generator.Problem {
 
 func w8Compensation(kp int) generator.Problem {
 	a := w8RR(20, 90)
-	delta := w8RR(7, 10)
+	// The question asks what to subtract after deliberately adding 10, so the
+	// amount being added must be below 10: at 10 there is nothing to
+	// compensate and the answer would be zero, which is not the strategy.
+	delta := w8RR(7, 9)
 	f := map[string]string{}
 	w8RI(f, "a", a)
 	w8RI(f, "delta", delta)

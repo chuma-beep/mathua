@@ -42,7 +42,7 @@ vi.mock('../lib/api', () => ({
   requestPasswordReset: (...a: unknown[]) => requestResetMock(...a),
   completePasswordReset: (...a: unknown[]) => completeResetMock(...a),
   startOAuthLogin: vi.fn(),
-  OAUTH_LABELS: { google: 'Google', github: 'GitHub', facebook: 'Facebook', microsoft: 'Microsoft', apple: 'Apple' },
+  OAUTH_LABELS: { google: 'Google', github: 'GitHub', facebook: 'Facebook', microsoft: 'Microsoft', discord: 'Discord', apple: 'Apple' },
   getConfig: (...a: unknown[]) => getConfigMock(...a),
   // BottomTabs (rendered by the page) pulls these via lib/dicebear.
   getSettings: vi.fn(() => Promise.resolve({})),
@@ -244,12 +244,13 @@ describe('LoginPage', () => {
   })
 
   it('renders one button per configured provider and hides Apple', async () => {
-    getConfigMock.mockResolvedValue({ auth_enabled: true, providers: ['google', 'github', 'facebook', 'apple'] })
+    getConfigMock.mockResolvedValue({ auth_enabled: true, providers: ['google', 'github', 'facebook', 'discord', 'apple'] })
     render(<LoginPage />)
     // Google shares the grid with the others; it is not a separate branch.
     expect(await screen.findByRole('button', { name: 'Continue with Google' })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Continue with GitHub' })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Continue with Facebook' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Continue with Discord' })).toBeInTheDocument()
     // Apple is not offered, so a config that lists it still must not render it.
     expect(screen.queryByRole('button', { name: 'Continue with Apple' })).toBeNull()
   })

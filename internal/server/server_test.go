@@ -913,6 +913,19 @@ func TestIdentitiesEndpoints(t *testing.T) {
 	if grec.Code != 500 {
 		t.Errorf("expected 500 unconfigured github, got %d", grec.Code)
 	}
+	// Discord shipped a driver and a login button but no routes, so its button
+	// answered 404. A configured provider must reach the redirect instead.
+	t.Setenv("DISCORD_CLIENT_ID", "discord-client")
+	t.Setenv("DISCORD_CLIENT_SECRET", "discord-secret")
+	grec = httptest.NewRecorder()
+	mux.ServeHTTP(grec, httptest.NewRequest("GET", "/api/auth/discord/login", nil))
+	if grec.Code != http.StatusFound {
+		t.Fatalf("expected 302 for configured discord, got %d: %s", grec.Code, grec.Body.String())
+	}
+	redirect := grec.Header().Get("Location")
+	if !strings.Contains(redirect, "discord.com/oauth2/authorize") || !strings.Contains(redirect, "scope=identify+email") {
+		t.Errorf("unexpected discord redirect: %s", redirect)
+	}
 	// Email verify round trip via seeded token.
 	if err := store.SetEmail(st.ID, "ida@example.com"); err != nil {
 		t.Fatal(err)

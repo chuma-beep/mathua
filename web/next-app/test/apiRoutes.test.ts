@@ -58,19 +58,21 @@ describe('every API route has a caller', () => {
       ['/api/avatar/u/', 'avatar URL is built server-side and fetched as given'],
       ['/api/efficacy/all', 'fetched by the efficacy page'],
       ['/api/efficacy/trend', 'fetched by the efficacy page'],
-      // OAuth providers: the login page offers Google only, but the server
-      // registers drivers for all five. Registered and tested server-side,
-      // unreachable from the product, a deliberate-looking gap, not an
-      // oversight, so it is recorded rather than deleted here.
-      ['/api/auth/google/connect', 'server registers 5 providers; the login page offers Google only'],
-      ['/api/auth/github/login', 'server registers 5 providers; the login page offers Google only'],
-      ['/api/auth/github/callback', 'server registers 5 providers; the login page offers Google only'],
-      ['/api/auth/facebook/login', 'server registers 5 providers; the login page offers Google only'],
-      ['/api/auth/facebook/callback', 'server registers 5 providers; the login page offers Google only'],
-      ['/api/auth/microsoft/login', 'server registers 5 providers; the login page offers Google only'],
-      ['/api/auth/microsoft/callback', 'server registers 5 providers; the login page offers Google only'],
-      ['/api/auth/apple/login', 'server registers 5 providers; the login page offers Google only'],
-      ['/api/auth/apple/callback', 'server registers 5 providers; the login page offers Google only'],
+      // OAuth providers: the login page builds a button per configured
+      // provider, but the login and callback are browser redirects, not
+      // fetch()ed. Discord is listed here too; its routes exist now, and the
+      // server test follows the redirect so a missing pair fails there.
+      ['/api/auth/google/connect', 'browser redirect, not fetch()ed'],
+      ['/api/auth/github/login', 'browser redirect, not fetch()ed'],
+      ['/api/auth/github/callback', 'browser redirect, not fetch()ed'],
+      ['/api/auth/facebook/login', 'browser redirect, not fetch()ed'],
+      ['/api/auth/facebook/callback', 'browser redirect, not fetch()ed'],
+      ['/api/auth/microsoft/login', 'browser redirect, not fetch()ed'],
+      ['/api/auth/microsoft/callback', 'browser redirect, not fetch()ed'],
+      ['/api/auth/apple/login', 'browser redirect, not fetch()ed'],
+      ['/api/auth/apple/callback', 'browser redirect, not fetch()ed'],
+      ['/api/auth/discord/login', 'browser redirect, not fetch()ed'],
+      ['/api/auth/discord/callback', 'browser redirect, not fetch()ed'],
       // Course browsing: the frontend reads /api/transcript (getTranscript),
       // which itself has no caller. The e2e specs still mock /api/courses,
       // which no page requests. Same shape as the session routes this replaced.
