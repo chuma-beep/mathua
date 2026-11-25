@@ -508,7 +508,11 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/auth/google/login", logRequest(cors(s.authLimiter.middleware(s.handleGoogleLogin))))
 	mux.HandleFunc("/api/auth/google/callback", logRequest(cors(s.authLimiter.middleware(s.handleGoogleCallback))))
 	mux.HandleFunc("/api/auth/google/connect", logRequest(cors(s.authLimiter.middleware(s.authMiddleware(s.handleGoogleConnect)))))
-	// Generic OAuth providers (github/facebook/microsoft/apple).
+	// Generic OAuth providers. Both routes are written out per provider rather
+	// than built in a loop because the frontend route audit reads these
+	// literals from this file. Discord once shipped with a driver and a login
+	// button but no routes, so the button answered 404; the server test now
+	// follows the Discord login URL, so a missing pair fails there.
 	mux.HandleFunc("/api/auth/github/login", logRequest(cors(s.authLimiter.middleware(s.handleOAuthLogin))))
 	mux.HandleFunc("/api/auth/github/callback", logRequest(cors(s.authLimiter.middleware(s.handleOAuthCallback))))
 	mux.HandleFunc("/api/auth/facebook/login", logRequest(cors(s.authLimiter.middleware(s.handleOAuthLogin))))
@@ -517,6 +521,8 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/auth/microsoft/callback", logRequest(cors(s.authLimiter.middleware(s.handleOAuthCallback))))
 	mux.HandleFunc("/api/auth/apple/login", logRequest(cors(s.authLimiter.middleware(s.handleOAuthLogin))))
 	mux.HandleFunc("/api/auth/apple/callback", logRequest(cors(s.authLimiter.middleware(s.handleOAuthCallback))))
+	mux.HandleFunc("/api/auth/discord/login", logRequest(cors(s.authLimiter.middleware(s.handleOAuthLogin))))
+	mux.HandleFunc("/api/auth/discord/callback", logRequest(cors(s.authLimiter.middleware(s.handleOAuthCallback))))
 	mux.HandleFunc("/api/auth/link-token", logRequest(cors(s.authMiddleware(s.handleLinkToken))))
 	mux.HandleFunc("/api/auth/identities", logRequest(cors(s.authMiddleware(s.handleIdentities))))
 	mux.HandleFunc("/api/auth/identities/", logRequest(cors(s.authMiddleware(s.handleIdentityDelete))))
