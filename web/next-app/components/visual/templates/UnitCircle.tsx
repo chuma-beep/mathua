@@ -96,6 +96,36 @@ export default function UnitCircle({ params, title, caption }: TemplateProps) {
         'A point on the unit circle has coordinates (cos θ, sin θ). The angle turns counterclockwise from the positive x-axis, and the same angle marks the sine and cosine values on the graph below. Adding 360° returns to the same point.'
       }
       onReset={reset}
+      controls={
+        <div className="space-y-2">
+          <Slider label="Angle" value={angle} min={-360} max={360} step={1} onChange={setAngle} suffix="°" />
+          <div className="flex items-center gap-2">
+            <label htmlFor="unit-circle-common-angle" className="shrink-0 font-mono text-xs text-mathua-muted">
+              Common angle
+            </label>
+            <select
+              id="unit-circle-common-angle"
+              aria-label="Common angle"
+              value={selectedAngle === undefined ? '' : String(selectedAngle)}
+              onChange={(event) => {
+                if (event.target.value !== '') setAngle(Number(event.target.value))
+              }}
+              className="h-10 min-w-0 border border-mathua-border bg-transparent px-2 font-mono text-xs text-mathua-secondary"
+            >
+              {selectedAngle === undefined && <option value="">Custom</option>}
+              {COMMON_ANGLES.map((value) => (
+                <option key={value} value={value}>
+                  {value}°
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            <Toggle label="Show sine" checked={showSin} onChange={setShowSin} />
+            <Toggle label="Show cosine" checked={showCos} onChange={setShowCos} />
+          </div>
+        </div>
+      }
       readout={[
         { label: 'angle', value: angleLabel(angle) },
         { label: 'angle on circle', value: angleLabel(normalizedDegrees) },
@@ -264,34 +294,6 @@ export default function UnitCircle({ params, title, caption }: TemplateProps) {
         </text>
       </svg>
 
-      <div className="mt-3 space-y-2">
-        <Slider label="Angle" value={angle} min={-360} max={360} step={1} onChange={setAngle} suffix="°" />
-        <div className="flex items-center gap-2">
-          <label htmlFor="unit-circle-common-angle" className="shrink-0 font-mono text-[10px] text-mathua-muted">
-            Common angle
-          </label>
-          <select
-            id="unit-circle-common-angle"
-            aria-label="Common angle"
-            value={selectedAngle === undefined ? '' : String(selectedAngle)}
-            onChange={(event) => {
-              if (event.target.value !== '') setAngle(Number(event.target.value))
-            }}
-            className="h-7 min-w-0 border border-mathua-border bg-transparent px-1 font-mono text-[10px] text-mathua-secondary"
-          >
-            {selectedAngle === undefined && <option value="">Custom</option>}
-            {COMMON_ANGLES.map((value) => (
-              <option key={value} value={value}>
-                {value}°
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="grid grid-cols-2 gap-2">
-          <Toggle label="Show sine" checked={showSin} onChange={setShowSin} />
-          <Toggle label="Show cosine" checked={showCos} onChange={setShowCos} />
-        </div>
-      </div>
     </FigureFrame>
   )
 }
