@@ -508,15 +508,13 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/auth/google/login", logRequest(cors(s.authLimiter.middleware(s.handleGoogleLogin))))
 	mux.HandleFunc("/api/auth/google/callback", logRequest(cors(s.authLimiter.middleware(s.handleGoogleCallback))))
 	mux.HandleFunc("/api/auth/google/connect", logRequest(cors(s.authLimiter.middleware(s.authMiddleware(s.handleGoogleConnect)))))
-	// Generic OAuth providers (github/facebook/microsoft/apple).
-	mux.HandleFunc("/api/auth/github/login", logRequest(cors(s.authLimiter.middleware(s.handleOAuthLogin))))
-	mux.HandleFunc("/api/auth/github/callback", logRequest(cors(s.authLimiter.middleware(s.handleOAuthCallback))))
-	mux.HandleFunc("/api/auth/facebook/login", logRequest(cors(s.authLimiter.middleware(s.handleOAuthLogin))))
-	mux.HandleFunc("/api/auth/facebook/callback", logRequest(cors(s.authLimiter.middleware(s.handleOAuthCallback))))
-	mux.HandleFunc("/api/auth/microsoft/login", logRequest(cors(s.authLimiter.middleware(s.handleOAuthLogin))))
-	mux.HandleFunc("/api/auth/microsoft/callback", logRequest(cors(s.authLimiter.middleware(s.handleOAuthCallback))))
-	mux.HandleFunc("/api/auth/apple/login", logRequest(cors(s.authLimiter.middleware(s.handleOAuthLogin))))
-	mux.HandleFunc("/api/auth/apple/callback", logRequest(cors(s.authLimiter.middleware(s.handleOAuthCallback))))
+	// Generic OAuth providers. Registering from one list keeps the routes and
+	// the drivers in step: Discord shipped with a driver and a login button but
+	// no routes of its own, so the button answered 404.
+	for _, provider := range []string{"github", "facebook", "microsoft", "apple", "discord"} {
+		mux.HandleFunc("/api/auth/"+provider+"/login", logRequest(cors(s.authLimiter.middleware(s.handleOAuthLogin))))
+		mux.HandleFunc("/api/auth/"+provider+"/callback", logRequest(cors(s.authLimiter.middleware(s.handleOAuthCallback))))
+	}
 	mux.HandleFunc("/api/auth/link-token", logRequest(cors(s.authMiddleware(s.handleLinkToken))))
 	mux.HandleFunc("/api/auth/identities", logRequest(cors(s.authMiddleware(s.handleIdentities))))
 	mux.HandleFunc("/api/auth/identities/", logRequest(cors(s.authMiddleware(s.handleIdentityDelete))))
