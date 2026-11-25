@@ -433,7 +433,7 @@ export function ClosingCta() {
   return (
     <section data-reveal className="border-b border-mathua-division py-16">
       <div className="border border-mathua-border bg-mathua-primary p-8 text-mathua-bg dark:bg-mathua-code dark:text-mathua-primary">
-        <div className="section-label text-mathua-bg/60 dark:text-mathua-muted">( 08 · Start here )</div>
+        <div className="section-label text-mathua-bg dark:text-mathua-muted">( 08 · Start here )</div>
         <h2 className="mt-3 font-serif text-2xl sm:text-3xl">Start with what you know.</h2>
         <p className="mt-2 max-w-[52ch] text-[14px] leading-relaxed opacity-80">
           A short diagnostic finds the edge of what you can do, and the plan starts there.
@@ -447,7 +447,7 @@ export function ClosingCta() {
           </Link>
           <Link
             href="/login"
-            className="inline-flex min-h-[44px] items-center justify-center border border-mathua-bg/40 px-6 text-sm font-medium transition-colors hover:border-mathua-bg dark:border-mathua-border dark:hover:border-mathua-primary"
+            className="inline-flex min-h-[44px] items-center justify-center border border-mathua-bg px-6 text-sm font-medium transition-colors dark:border-mathua-border dark:hover:border-mathua-primary"
           >
             Create an account
           </Link>
