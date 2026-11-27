@@ -76,30 +76,100 @@ func w8BinaryString(n int) string {
 }
 
 func w8Binary(kp int) generator.Problem {
-	n := w8AR(5, 255)
-	bin := w8BinaryString(n)
-	f := map[string]string{"binary": bin}
-	w8AI(f, "n", n)
 	switch kp {
 	case 1:
-		return w8A(kp, fmt.Sprintf("What is the binary numeral \\(%s_2\\) in decimal? (enter a number)", bin), strconv.Itoa(n),
-			fmt.Sprintf("The place values from the left are powers of two. The digits of %s add to %d.", bin, n), f)
+		// Converting a numeral (4-bit range: place values 1, 2, 4, 8)
+		n := w8AR(3, 15)
+		bin := w8BinaryString(n)
+		f := map[string]string{"binary": bin}
+		w8AI(f, "n", n)
+
+		var steps []string
+		var values []string
+		for power := 0; power < len(bin); power++ {
+			idx := len(bin) - 1 - power
+			bit := int(bin[idx] - '0')
+			val := bit * (1 << power)
+			steps = append(steps, fmt.Sprintf("\\(%d \\times 2^{%d} = %d\\)", bit, power, val))
+			values = append(values, strconv.Itoa(val))
+		}
+
+		explanation := fmt.Sprintf(
+			"Reading from right to left: %s. Adding the results gives \\(%s = %d\\).",
+			strings.Join(steps, ", "),
+			strings.Join(values, " + "),
+			n,
+		)
+
+		return w8A(
+			kp,
+			fmt.Sprintf("What is the binary numeral \\(%s_2\\) in decimal? (enter a number)", bin),
+			strconv.Itoa(n),
+			explanation,
+			f,
+		)
+
 	case 2:
+		// Powers of two as places (up to 5-bit range: powers 1, 2, 4, 8, 16)
+		n := w8AR(5, 31)
+		bin := w8BinaryString(n)
+		f := map[string]string{"binary": bin}
+		w8AI(f, "n", n)
+
 		p := 1
-		for p<<1 <= n {
+		var seq []string
+		for p <= n {
+			seq = append(seq, strconv.Itoa(p))
 			p <<= 1
 		}
-		w8AI(f, "power", p)
-		return w8A(kp, fmt.Sprintf("What is the largest power of two that is at most %d? (enter a number)", n), strconv.Itoa(p),
-			fmt.Sprintf("Double 1 until the next double would exceed %d. The largest power is %d.", n, p), f)
+		ans := p >> 1
+		seq = append(seq, strconv.Itoa(p))
+		w8AI(f, "power", ans)
+
+		explanation := fmt.Sprintf(
+			"Double 1 repeatedly: \\(%s\\). Since \\(%d \\le %d\\) and \\(%d > %d\\), the largest power of two is %d.",
+			strings.Join(seq, ", "),
+			ans, n, p, n, ans,
+		)
+
+		return w8A(
+			kp,
+			fmt.Sprintf("What is the largest power of two that is at most %d? (enter a number)", n),
+			strconv.Itoa(ans),
+			explanation,
+			f,
+		)
+
 	default:
+		// Counting one bits (up to 5-bit range)
+		n := w8AR(5, 31)
+		bin := w8BinaryString(n)
+		f := map[string]string{"binary": bin}
+		w8AI(f, "n", n)
+
 		bits := 0
+		var divSteps []string
 		for m := n; m > 0; m >>= 1 {
-			bits += m & 1
+			rem := m & 1
+			bits += rem
+			divSteps = append(divSteps, fmt.Sprintf("\\(%d \\div 2 = %d\\) remainder %d", m, m>>1, rem))
 		}
 		w8AI(f, "ones", bits)
-		return w8A(kp, fmt.Sprintf("How many 1 bits are in the binary expansion of %d? (enter a number)", n), strconv.Itoa(bits),
-			fmt.Sprintf("The binary expansion is %s, which contains %d ones.", bin, bits), f)
+
+		explanation := fmt.Sprintf(
+			"Halve repeatedly: %s. Reading the remainders from bottom to top gives \\(%s_2\\), which has %d ones.",
+			strings.Join(divSteps, "; "),
+			bin,
+			bits,
+		)
+
+		return w8A(
+			kp,
+			fmt.Sprintf("How many 1 bits are in the binary expansion of %d? (enter a number)", n),
+			strconv.Itoa(bits),
+			explanation,
+			f,
+		)
 	}
 }
 
