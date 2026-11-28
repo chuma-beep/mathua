@@ -78,7 +78,7 @@ func w8BinaryString(n int) string {
 func w8Binary(kp int) generator.Problem {
 	switch kp {
 
-case 1:
+	case 1:
 		// Converting a numeral (4-bit range: place values 1, 2, 4, 8)
 		n := w8AR(3, 15)
 		bin := w8BinaryString(n)
