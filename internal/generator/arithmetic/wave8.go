@@ -77,7 +77,8 @@ func w8BinaryString(n int) string {
 
 func w8Binary(kp int) generator.Problem {
 	switch kp {
-	case 1:
+
+case 1:
 		// Converting a numeral (4-bit range: place values 1, 2, 4, 8)
 		n := w8AR(3, 15)
 		bin := w8BinaryString(n)
@@ -86,9 +87,8 @@ func w8Binary(kp int) generator.Problem {
 
 		var steps []string
 		var values []string
-		for power := 0; power < len(bin); power++ {
-			idx := len(bin) - 1 - power
-			bit := int(bin[idx] - '0')
+		for power, m := 0, n; m > 0; power, m = power+1, m>>1 {
+			bit := m & 1
 			val := bit * (1 << power)
 			steps = append(steps, fmt.Sprintf("\\(%d \\times 2^{%d} = %d\\)", bit, power, val))
 			values = append(values, strconv.Itoa(val))
